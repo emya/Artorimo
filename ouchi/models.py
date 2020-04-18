@@ -1,0 +1,83 @@
+from django.db import models
+from django.utils.translation import gettext as _
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
+from django.utils import timezone
+
+import uuid
+
+# Create your models here.
+class UserManager(BaseUserManager):
+    use_in_migrations = True
+
+    def _create_user(self, first_name, last_name, email, password, **extra_fields):
+        """
+        Create and save a user with the given username, email, and password.
+        """
+        if not email:
+            raise ValueError('The given email must be set')
+        now = timezone.now()
+        email = self.normalize_email(email)
+        user = self.model(
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            is_active=True,
+            last_login=now,
+            date_joined=now,
+            **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, first_name, last_name, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(first_name, last_name, email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(max_length=254, null=True, blank=True)
+    last_name = models.CharField(max_length=254, null=True, blank=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    last_login = models.DateTimeField(null=True, blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    terms_version = models.IntegerField(default=0)
+
+    facebook_id = models.CharField(max_length=200, unique=True, null=True, blank=True)
+
+    stripe_user_id = models.CharField(max_length=100, null=True, blank=True)
+    stripe_access_token = models.CharField(max_length=100, null=True, blank=True)
+    stripe_refresh_token = models.CharField(max_length=100, null=True, blank=True)
+    stripe_connect_created_at = models.DateTimeField(null=True)
+
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.email
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    residence = models.CharField(max_length=100, blank=True)
+    style = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=100, blank=True, null=True)
+    birth_date = models.DateField(null=True, blank=True)
+    image = models.CharField(max_length=200, null=True)
