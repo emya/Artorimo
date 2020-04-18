@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
+import auth from "./auth";
 
 
-const tennisApp = combineReducers({
+const artorimoApp = combineReducers({
+  auth
 })
 
-export default tennisApp;
+export default artorimoApp;
