@@ -6,7 +6,8 @@ html {
 }
 
 body {
-  color: #1B435D;
+  color: #4A4A4A;
+  font-size: 1.5rem;
   text-align: center;
   font-family: 'Lexend Deca', sans-serif;
   font-family: 'DM Serif Text', serif;
@@ -36,8 +37,41 @@ a:link, a:visited, a:hover, a:active {
   font-weight: bold;
 }
 
+h2 {
+  color: #6E7071;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  // font-family: 'Abril Fatface';
+  font-size: 4rem;
+  font-weight: normal;
+  line-height: 100%;
+}
+
+h2 {
+  @media (max-width: 767px) {
+    font-size: 3rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+      }}
+
+
+h3 {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  color:#999999;
+  font-size: 2.2rem;
+  font-weight: normal;
+}
+
+h3 {
+  @media (max-width: 767px) {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }}
+
 .heading {
-  font-family: 'Abril Fatface';
+  // font-family: 'Abril Fatface';
   font-weight: normal;
   font-size: 4rem;
   margin-top: 20px;
@@ -150,7 +184,7 @@ a:link, a:visited, a:hover, a:active {
 
 .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
   display: inline-block;
-  color: #1B435D;
+  color: #4A4A4A;
   text-decoration: none;
   margin: 30px 40px;
   font-weight: bold;
@@ -191,7 +225,7 @@ a:link, a:visited, a:hover, a:active {
 
 .catch2 {
   // font-family: baskerville;
-  // color: black;
+  color: white;
   position: absolute;
   bottom: 40px;
   left: 38%;
@@ -202,7 +236,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .catch h1, .catch2 h1 {
-  font-family: 'Abril Fatface';
+  // font-family: 'Abril Fatface';
   font-weight: normal;
   font-size: 6rem;
   line-height: 150%;
@@ -262,7 +296,7 @@ a:link, a:visited, a:hover, a:active {
   position: relative;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
+  opacity: 0.6;
   // background-color: gray;
   padding-top: 0;
 }
@@ -412,8 +446,8 @@ a:link, a:visited, a:hover, a:active {
   width: 70%;
   margin: 30px auto 80px;
   font-size: 1.4em;
-  line-height: 1.5;
-  color: #9dc3c3;
+  line-height: 2;
+  color: #75a1a1;
 }
 
 .bold {
@@ -586,12 +620,6 @@ a:link, a:visited, a:hover, a:active {
   width: 64px;
   height: 64px;
   margin-bottom: 30px;
-  // border: 4px solid;
-  // border-radius: 50%;
-  background-color: #4a4a4a!important;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
   font-size: 9rem;
   line-height: 142px;
 }
@@ -982,4 +1010,164 @@ footer li {
 
 .start-link {
   color: #f17816!important;
+}
+
+// table
+
+.table-data {
+  width: 90%;
+  // color: #1B435D;
+  border-collapse: collapse;
+  margin: 20px auto 50px;
+}
+
+.table-data {
+  @media (max-width: 767px) {
+    table-layout: fixed;
+    width: 100%;
+    font-size: 1.2rem;
+    line-height: 15px;
+  }}
+
+.table-heading td:nth-child(3),
+.table-heading td:nth-child(4),
+.table-heading td:nth-child(5),
+.transaction-data td:nth-child(3),
+.transaction-data td:nth-child(4),
+.transaction-data td:nth-child(5) {
+  @media (max-width: 767px) {
+    display: none;
+  }}
+
+.table-data td {
+  padding: 10px 3px;
+  border-bottom: 1px solid #BBBBBB;
+}
+
+.table-data td:nth-child(4) {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table-data a.user-link {
+  color: black;
+}
+
+// topbar-contents
+
+.topbar-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFB23B;
+  height: 80px;
+  width: 100%;
+  padding: 1% 5%;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.logo-link {
+  width: 15%;
+  height: auto;
+}
+
+.login {
+  width: 40%;
+}
+
+.signin, .register {
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-right: 20px;
+}
+
+.register {
+  display: inline-block;
+  border: 2px solid #fff;
+  border-radius: 7px;
+  width: 40%;
+}
+
+#terms, .agree {
+  display: inline-block;
+  text-align: left;
+  width: auto;
+}
+
+#terms {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.topbar-contents {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+// .mobile-topbar-contents {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   background-color: #78BBE6;
+//   height: 80px;
+//   width: 100%;
+//   padding: 1% 5%;
+// }
+
+.mobile-menu-icon {
+  font-size: 5rem;
+  color: black;
+}
+
+.mobile-topbar-contents {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+// About Us
+
+.about-us {
+  text-align: left;
+  width: 80%;
+  margin: 100px auto 100px;
+}
+
+.member {
+  display: inline-block;
+  width: 40%;
+  background: #ecf5f5;
+  margin: 30px 2%;
+  padding: 3% 5%;
+  border-radius: 10px;
+  height: 450px;
+  vertical-align: top;
+}
+
+.member {
+  @media (max-width: 767px) {
+    display: block;
+    width: 100%;
+    margin: 40px auto;
+  }}
+
+
+.member-title {
+  font-style: italic;
+  color: #0AbAb5;
+}
+
+.us-picture {
+  width: 30%;
+  max-width: 30%;
+  height: auto;
 }

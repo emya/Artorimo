@@ -28,7 +28,7 @@ class Landing extends Component {
     </div>
 
     <section class="how">
-      <p class="how-intro">スモールビジネス・個人のクリエイターに対するニーズは年々増加。<br/>[弊社]はフリーランスイラストレーターが<span class="bold">好きなことを仕事にする</span>お手伝いをします。</p>
+      <p class="how-intro">国内外のスモールビジネス・個人の、クリエイターに対するニーズは年々増加。<br/><br/>OhChi Studio（オウチスタジオ）は、フリーランスイラストレーターが<br/><span class="bold">好きなことを仕事に、グローバルに活躍する</span><br/>ためのお手伝いをします。</p>
       <h2 class="heading-h">サービスの流れ</h2>
       <img class="lp-how" src={require('../img/howitworksnew.png')}/>
       <div class="how-container">
@@ -54,22 +54,22 @@ class Landing extends Component {
       <h2 class="heading s">サービス内容</h2>
       <div class="wrapper-service">
       <div class="service-box">
-      <img class="service-icon" src={require('../img/shopping-cart.png')} />
-      <div class="service-title">アートディレクション</div>
-      <p class="service-text">対海外のクライアントでも、弊社の日英バイリンガルがクライアントのニーズを適切に理解・サポートします。</p>
+      <img class="service-icon" src={require('../img/earth.png')} />
+      <div class="service-title">言語対応</div>
+      <p class="service-text">海外のクライアントに対し、弊社の日英バイリンガルがクライアントのニーズを適切に理解・サポートします。</p>
       </div>
       <div class="service-box">
-      <img class="service-icon" src={require('../img/globe.png')} />
-      <div class="service-title">報酬交渉</div>
+      <img class="service-icon" src={require('../img/meeting.png')} />
+      <div class="service-title">依頼内容・報酬交渉</div>
       <p class="service-text">ケースバイケースである相場を把握し、個人間ではやりづらい報酬交渉をクリエーターとクライアントの間に立って行います。</p>
       </div>
       <div class="service-box">
-      <img class="service-icon" src={require('../img/traveler.png')} />
+      <img class="service-icon" src={require('../img/group.png')} />
       <div class="service-title">コミュニティ</div>
       <p class="service-text">クリエイターによる絵のフィードバックや悩み相談まで、フリーランス同士が交流できる会員専用ページを用意しています。（coming soon!）</p>
       </div>
       <div class="service-box">
-      <img class="service-icon" src={require('../img/pay.png')} />
+      <img class="service-icon" src={require('../img/card.png')} />
       <div class="service-title">報酬の管理</div>
       <p class="service-text">クリエーターが作業する前にクライアントからの仮入金管理とその保管を行い、お金のトラブルを防ぎます。</p>
       </div>
@@ -86,6 +86,10 @@ class Landing extends Component {
         <tr>
           <td>Youtubeのサムネイルイラスト</td>
           <td>9,000円</td>
+        </tr>
+        <tr>
+          <td>海外アパレルの販促キャンペーン用イラスト</td>
+          <td>35,000円</td>
         </tr>
         <tr>
           <td>Instagramアイコン作成</td>
