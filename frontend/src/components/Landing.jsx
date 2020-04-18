@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {auth} from "../actions";
 import Header from './Header';
 import Footer from './Footer';
 
