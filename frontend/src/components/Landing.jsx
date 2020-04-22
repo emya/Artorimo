@@ -29,13 +29,15 @@ class Landing extends Component {
     </div>
 
     <section class="how">
-      <p class="how-intro">国内外のスモールビジネス・個人の、クリエイターに対するニーズは年々増加。<br/><br/>OhChi Studio（オウチスタジオ）は、フリーランスイラストレーターが<br/><span class="bold">好きなことを仕事に、グローバルに活躍する</span><br/>ためのお手伝いをします。</p>
+      <p class="how-intro">国内外のスモールビジネス・個人の、クリエイターに対するニーズは年々増加。<br/><br/>Ohchee Studio（オウチスタジオ）は、フリーランスイラストレーターが<br/><span class="bold">好きなことを仕事に、グローバルに活躍する</span>ためのお手伝いをします。</p>
+      <br/><br/><br/>
+
       <h2 class="heading-h">サービスの流れ</h2>
       <img class="lp-how" src={require('../img/howitworksnew.png')}/>
       <div class="how-container">
         <p class="how-1">国内・海外から仕事を受注</p>
-        <p class="how-2">[弊社]が報酬交渉＆<br/>依頼内容確認。<br/>クライアントによる仮入金</p>
-        <p class="how-3">クリエーターによる<br/>依頼物の作成・納品。<br/>[弊社]が修正依頼もサポート</p>
+        <p class="how-2">弊社が報酬交渉＆<br/>依頼内容確認。<br/>クライアントによる仮入金</p>
+        <p class="how-3">クリエーターによる<br/>依頼物の作成・納品。<br/>修正依頼もサポート</p>
         <p class="how-4">クリエーターへ報酬を入金</p>
       </div>
       <div class="how-container-mobile">
@@ -62,11 +64,11 @@ class Landing extends Component {
       <div class="service-box">
       <img class="service-icon" src={require('../img/meeting.png')} />
       <div class="service-title">依頼内容・報酬交渉</div>
-      <p class="service-text">ケースバイケースである相場を把握し、個人間ではやりづらい報酬交渉をクリエーターとクライアントの間に立って行います。</p>
+      <p class="service-text">ケースバイケースである相場を把握し、個人間では行いづらい報酬交渉をクリエーターとクライアントの間に立って行います。</p>
       </div>
       <div class="service-box">
       <img class="service-icon" src={require('../img/group.png')} />
-      <div class="service-title">コミュニティ</div>
+      <div class="service-title">コミュニティ提供</div>
       <p class="service-text">クリエイターによる絵のフィードバックや悩み相談まで、フリーランス同士が交流できる会員専用ページを用意しています。（coming soon!）</p>
       </div>
       <div class="service-box">
@@ -103,23 +105,23 @@ class Landing extends Component {
       </table>
       <br/>
       <br/>
-      <h3>主な依頼カテゴリー</h3>
+      <h3>依頼カテゴリー例</h3>
       <div class="popular-country">
         <div class="popular-country-example">
-          <p class="country-name">イラスト</p>
-          <img src={require('../img/japan.png')}/>
+          <p class="country-name">SNSアイコン</p>
+          <img src={require('../img/sns.png')}/>
         </div>
         <div class="popular-country-example">
-          <p class="country-name">ロゴ作成</p>
-          <img src={require('../img/italy.png')}/>
+          <p class="country-name">雑誌カット</p>
+          <img src={require('../img/magazine.png')}/>
         </div>
         <div class="popular-country-example">
-          <p class="country-name">キャラデザ</p>
-          <img src={require('../img/uk.png')}/>
+          <p class="country-name">ヘッダー</p>
+          <img src={require('../img/header.png')}/>
         </div>
         <div class="popular-country-example">
           <p class="country-name">似顔絵</p>
-          <img src={require('../img/france.png')}/>
+          <img src={require('../img/portrait.png')}/>
         </div>
       </div>
 

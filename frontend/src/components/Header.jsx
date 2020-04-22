@@ -7,7 +7,7 @@ render() {
   <div>
     <header class="header">
       <div class="topbar-contents">
-        <a href="/" class="logo-link"><img class="logo" src={require('../img/Torimo_new.png')} /></a>
+        <a href="/" class="logo-link">Ohchee Studio</a>
       </div>
 
       <div class="mobile-topbar-contents">
