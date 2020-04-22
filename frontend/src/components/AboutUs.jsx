@@ -11,15 +11,41 @@ class AboutUs extends Component {
       <Header />
       <h2>About Us</h2>
 
-      <div class="about-us">
+      <div class="page">
 
-        <h3>Story Behind Torimo</h3>
+      <h3>Company Overview</h3>
 
-        <p>Torimo is a web platform which matches NY-based users who want to purchase items from abroad (“Requester”), with someone traveling to or from the destination where the items can be purchased (“Traveler”).
-        <br/><br/>Our goal is to lower the cost for the international shopping and make the world's best products accessible to everyone, while helping travelers cover their trip cost by making extra money with Torimo.
-        <br/><br/>Our cofounders met in high school in Japan and moved to the United States around the same time, which was when they started building the app.
-        <br/>Both living away from their home country, they always felt frustrated by the high premiums on imported items, not to mention that a lot of their favorites brands are not available on existing marketplaces.
-        <br/><br/>They wanted to build a platform to solve this problem and to create a win-win situation where Travelers can use a corner of their suitcases to subsidize their costly international trips.</p>
+        <table class="table-data">
+          <tr>
+            <td>運営会社</td>
+            <td>TORIMO LLC</td>
+          </tr>
+          <tr>
+            <td>設立</td>
+            <td>2019年11月</td>
+          </tr>
+          <tr>
+            <td>事業概要</td>
+            <td>Webサービス企画・制作・管理・運営</td>
+          </tr>
+          <tr>
+          <td>電話番号</td>
+          <td>‪1-(425)-310-5359‬</td>
+          </tr>
+          <tr>
+          <td>e-mail</td>
+          <td>‪<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a></td>
+          </tr>
+        </table>
+
+
+        <h3>Story Behind Ohchee Studio</h3>
+
+        <p>Ohchee Studio（オウチスタジオ）は日本のクリエイターが海外で活躍出来るように、エージェントサービスおよび専用プラットフォームを提供しています。
+        <br/><br/>私たちのゴールは、すべてのクリエイターが「世界中どこからでも、好きなことを仕事にし、適性な対価を得る」ことです。
+        <br/><br/>オウチスタジオのサービスは、クリエーターとしても活動しているファウンダーが、業界の慣習や相場が何も分からず、仕事を逃したり、思い通りの報酬を得られなかった経験が出発点になっています。
+        <br/><br/>弊社サービスのファウンダーは海外在住ですが、日本では可能だけど海外ではできないこと、またその逆のパターンを数多く目にします。
+        <br/><br/>オウチスタジオも、そんな各国間のギャップを取り去るサービスのひとつとして、ユーザーの皆様と一緒に成長していきたいと思っています。</p>
 
 
         <h3>Our Team</h3>
@@ -29,7 +55,7 @@ class AboutUs extends Component {
           <img class="us-picture" src={require('../img/Chiaki.png')}/>
           <p><strong>Chiaki Ikuyama</strong></p>
           <p class="member-title">Cofounder & CEO</p>
-          <p>Chiaki is originally from Japan and studied in Minnesota,USA. Prior to Torimo, she worked as a USCPA at Deloitte, as well as an investment banker at Citigroup. She is passionate about web design, digital art, fashion, and traveling.
+          <p>香川県出身。高校時代に渡米。起業前は外資系投資銀行で勤務。ウェブデザイン、デジタルアート、ファッション、旅行が趣味。フリーのイラストレーターとしても活動。
           <br/></p>
         </div>
 

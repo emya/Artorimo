@@ -9,8 +9,8 @@ body {
   color: #4A4A4A;
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'Lexend Deca', sans-serif;
   font-family: 'DM Serif Text', serif;
+  font-family: 'Lexend Deca', 'Hiragino Sans', sans-serif;
 }
 
 *, *::after, *::before {
@@ -24,7 +24,7 @@ body {
 }
 
 a:link, a:visited, a:hover, a:active {
-  color: #fff;
+  color: #0abab5;
   text-decoration: none;
   cursor: pointer;
 }
@@ -57,10 +57,10 @@ h2 {
 
 
 h3 {
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin-top: 100px;
+  margin-bottom: 50px;
   color:#999999;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: normal;
 }
 
@@ -84,6 +84,33 @@ h3 {
     font-size: 3rem;
   }}
 
+ul li, ol li {
+  padding-left: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+
+.btn {
+  background-color: #0abab5;
+  font-family: 'Lexend Deca', sans-serif;
+  display: block;
+  width: 300px;
+  height: 40px;
+  margin: 30px auto;
+  line-height: 40px;
+  border-radius: 7px;
+  box: none;
+  color: white;
+  border-style: none;
+}
+
+.btn {
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 40px auto;
+    }
+}
 
 /* topbar */
 
@@ -561,7 +588,7 @@ h3 {
   // font-weight: bold;
   // border: 2px solid #FFF;
   border-radius: 7px;
-  color: #FFF;
+  color: #FFF!important;
   background-color: #0abab5 ;
   width: 300px;
   height: 50px;
@@ -952,6 +979,12 @@ footer li {
   margin-right: 10px;
 }
 
+footer a:link,footer a:visited,footer a:hover,footer a:active {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* Others */
 
 .how-title, .person-title, .service-title {
@@ -1068,13 +1101,21 @@ footer li {
 }
 
 .logo {
-  width: 100%;
+  width: 150%;
   height: auto;
 }
 
 .logo-link {
   width: 15%;
   height: auto;
+  font-size: 1.5em;
+  color: white;
+}
+
+.logo-link a:link, a:visited, a:hover, a:active {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .login {
@@ -1136,7 +1177,7 @@ footer li {
 
 // About Us
 
-.about-us {
+.page {
   text-align: left;
   width: 80%;
   margin: 100px auto 100px;
@@ -1352,3 +1393,128 @@ footer li {
 .table-data a.user-link {
   color: black;
 }}
+
+// profile
+
+
+.profile {
+  float: right;
+  // height: 1000px;
+  width: 75%;
+  background-color: white;
+  padding: 0 1% 100px 1%;
+}
+
+.profile {
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+    padding: 0 3% 10px 3%;
+  }
+}
+
+.profile-left {
+  @media (min-width: 767px) {
+    float: left;
+    width: 50%;
+  }
+}
+
+.profile-right {
+  @media (min-width: 767px) {
+    float: right;
+    width: 50%;
+  }
+}
+
+
+.profile img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  margin: 60px auto 0;
+  border: 1px solid grey;
+}
+
+.picture-upload {
+  display: block;
+  margin: 5px auto 30px;
+  padding: 1px;
+  width: 200px!important;
+  background-color: transparent!important;
+  border: none!important;
+}
+
+.profile p {
+  margin-top: 10px;
+}
+
+.fab {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.sns:link, .sns:visited, .sns:hover, .sns:active {
+  color: #78BBE6;
+}
+
+.user-name {
+  font-size: 2rem;
+  margin: 40px 0 50px!important;
+  // color: #1B435D;
+  // width: 30%;
+  font-weight: bold;
+}
+
+.user-data {
+  // font-size: 2rem;
+  width: 80%;
+  // text-align: center;
+}
+
+.user-data {
+  @media (max-width: 767px) {
+    width: 100%;
+  }}
+
+.sc-bZQynM.bpzdHV {
+  display: inline-block;
+  position: relative;
+}
+
+.user-data.resi {
+  position: absolute;
+  right: -51%;
+  bottom: -100%;
+  display: block;
+  margin: 5px auto 5px;
+  text-align: left;
+  width: 201%;
+}
+
+.user-data.resi {
+  @media (max-width: 767px) {
+    width: 100%;
+    position: static;
+  }}
+
+.active-info {
+  margin-bottom: 40px;
+  // color: #1B435D;
+}
+
+.object {
+  color: #999999;
+}
+
+.btn.savep {
+  line-height: 10px!important;
+  width: 30%;
+  margin-top: 80px;
+}
+
+.btn.savep {
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
