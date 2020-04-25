@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
 import Header from './Header';
+import {auth} from "../actions";
 import '../css/style.scss';
 
 class Login extends Component {
@@ -44,7 +45,7 @@ class Login extends Component {
       return;
     }
 
-    //this.props.register(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
+    this.props.register(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
   }
 
   componentClicked = () => {
@@ -52,6 +53,10 @@ class Login extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to='/myprofile' />
+    }
+
     const errors = this.state.errors;
 
     return (
@@ -115,4 +120,24 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  let errors = [];
+  if (state.auth.errors) {
+    errors = Object.keys(state.auth.errors).map(field => {
+      return {field, message: state.auth.errors[field]};
+    });
+  }
+  return {
+    errors,
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    register: (first_name, last_name, email, password) => dispatch(auth.register(first_name, last_name, email, password)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

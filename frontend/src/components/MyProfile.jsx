@@ -5,25 +5,31 @@ import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import Header from './Header';
+import SideMenu from './SideMenu';
 import Footer from './Footer';
+import {profile, auth} from "../actions";
 
 library.add(faIgloo)
 
 class MyProfile extends Component {
+  componentDidMount() {
+    this.props.fetchProfile(this.props.user.id);
+  }
+
   state = {
-    bio: null,
     residence: null,
-    residence_search: "",
-    occupation: null,
-    gender: null,
+    style: null,
+    work_process: null,
+    employment_type: null,
+    availability: null,
+    payment_method: null,
     image: null,
     isChanged: false,
     errors: []
   }
 
   resetForm = () => {
-    //this.setState({bio: "", residence: "", occupation: "", gender: ""});
-    this.setState({isChanged:false})
+    this.setState({isChanged: false})
   }
 
   handleImageChange = (e) => {
@@ -47,35 +53,22 @@ class MyProfile extends Component {
       return;
     }
 
-    /*
     this.props.updateProfile(
-      this.props.profile[0].id, this.state.bio, this.state.residence,
-      this.state.occupation, this.state.gender, this.state.image
+      this.props.profile[0].id, this.state.residence, this.state.style,
+      this.state.work_process, this.state.employment_type,
+      this.state.availability, this.state.payment_method,
+      this.state.image
     ).then(this.resetForm);
-    */
   }
 
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
     this.setState({
-      bio: profile.bio, residence: profile.residence,
-      occupation: profile.occupation, gender: profile.gender,
+      residence: profile.residence, style: profile.style,
+      work_process: profile.work_process, employment_type: profile.employment_type,
+      availability: profile.availability, payment_method: profile.payment_method,
       isChanged: true
     });
-  }
-
-  handleResidenceChange(propertyName, profile, event) {
-    profile[propertyName] = event.target.value;
-    this.setState({
-      residence_search: event.target.value, residence: event.target.value, isChanged: true
-    })
-  }
-
-  handleSelectResidenceSuggest(profile, suggest) {
-    profile["residence"] = suggest.formatted_address;
-    this.setState({
-      residence_search: "", residence: suggest.formatted_address, isChanged: true
-    })
   }
 
   validateForm = (image) => {
@@ -91,6 +84,7 @@ class MyProfile extends Component {
 
   render() {
     const errors = this.state.errors;
+    console.log(this.props);
     return (
   <div>
     <Header />
@@ -98,42 +92,45 @@ class MyProfile extends Component {
     <div class="wrapper clearfix">
       <div class="profile">
       <h2>My Profile</h2>
-          <form onSubmit={this.submitProfile}>
-            {errors.map(error => (
-               <p class="error-heading" key={error}>Error: {error}</p>
-            ))}
+        <form onSubmit={this.submitProfile}>
+          {errors.map(error => (
+            <p class="error-heading" key={error}>Error: {error}</p>
+          ))}
+          {this.props.profile.map((profile) => (
             <div class="wrapper clearfix">
+              <SideMenu />
               <div class="profile-left">
-                <img src={require('../img/default.png')} />
-
+                {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
+                {!this.state.image && profile.image && (
+                  <img src={require('../img/default.png')} />
+                 )}
+                {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
 
                 <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
               </div>
 
               <div class="profile-right">
-                <p class="user-name"> first_name last_name </p>
+                <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
 
                 <p class="object">居住地</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
                 <p class="object">スタイル</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'style', profile)} value={profile.style}/>
                 <p class="object">作業の進め方</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'work_process', profile)} value={profile.work_process}/>
                 <p class="object">フリーランス・副業</p>
-                <input type="text" class="user-data" />
-                <p class="object">作業可能曜日・時間</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'employment_type', profile)} value={profile.employment_type}/>
                 <p class="object">週あたり稼働時間</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
                 <p class="object">可能入金方法</p>
-                <input type="text" class="user-data" />
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'payment_method', profile)} value={profile.payment_method}/>
               </div>
             </div>
+          ))}
+          <input class="btn savep" type="submit" value="Save Profile" />
 
-            <input class="btn savep" type="submit" value="Save Profile" />
-
-          </form>
+        </form>
       </div>
     </div>
 
@@ -144,4 +141,27 @@ class MyProfile extends Component {
   }
 }
 
-export default MyProfile;
+const mapStateToProps = state => {
+  return {
+    profile: state.profile,
+    user: state.auth.user,
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProfile: (userId) => {
+      dispatch(profile.fetchProfile(userId));
+    },
+    updateProfile: (id, residence, style, work_process, employment_type, availability, payment_method, img) => {
+      return dispatch(
+        profile.updateProfile(id, residence, style, work_process, employment_type, availability, payment_method, img)
+      );
+    },
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

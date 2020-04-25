@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 import {auth} from "../actions";
 import Header from './Header';
@@ -9,6 +10,8 @@ import '../css/style.scss';
 class Landing extends Component {
 
   render() {
+    console.log(this.state);
+    console.log(this.props);
     return (
   <div>
     <Header />
@@ -41,13 +44,6 @@ class Landing extends Component {
         <p class="how-4">クリエーターへ報酬を入金</p>
       </div>
       <div class="how-container-mobile">
-      <img class="lp-how-mobile" src={require('../img/how-mobile.png')}/>
-      <div class="how-description">
-        <p class="how-1">Requester requests item<br/> & pays</p>
-        <p class="how-2">Traveler purchases item</p>
-        <p class="how-3">Requester meets Traveler<br/> & receives item</p>
-        <p class="how-4">Traveler gets paid!</p>
-      </div>
       </div>
       <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">無料会員登録</a>
     </section>
@@ -134,5 +130,18 @@ class Landing extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  }
+}
 
-export default Landing;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

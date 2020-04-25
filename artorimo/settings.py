@@ -42,8 +42,13 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'knox',
+    'rest_framework.authtoken',
     'ouchi',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

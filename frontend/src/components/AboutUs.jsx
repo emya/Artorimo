@@ -63,7 +63,7 @@ class AboutUs extends Component {
           <img class="us-picture" src={require('../img/Emi.png')}/>
           <p><strong>Emi Ayada</strong></p>
           <p class="member-title">Cofounder & CTO</p>
-          <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>
+          <p>香川県出身。東京大学大学院でコンピュータ科学の修士号を取得後、渡米しソフトウェアエンジニアとして主にスタートアップの会社に勤務。テニス、旅行が趣味。</p>
         </div>
       </div>
       <Footer />

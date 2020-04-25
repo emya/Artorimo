@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import {auth} from "../actions";
+
 class Header extends Component {
 render() {
     return (
@@ -8,6 +10,16 @@ render() {
     <header class="header">
       <div class="topbar-contents">
         <a href="/" class="logo-link">Ohchee Studio</a>
+        { !this.props.user && (
+          <div class="login">
+            <a class="signin" href="/login">ログイン</a>
+          </div>
+        )}
+        { this.props.user && (
+          <div class="login">
+            <a class="signin" href="/myprofile">マイページ</a>
+          </div>
+        )}
       </div>
 
       <div class="mobile-topbar-contents">
@@ -22,13 +34,21 @@ render() {
 
       </div>
 
-      <div class="menu">
-        <a href="/search">Request Item</a>
-        <a href="/how-it-works">How it works</a>
-      </div>
     </header>
   </div>
   )}
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import (
+from .models import (
     User, Profile
 )
 
@@ -40,7 +40,6 @@ class LoginUserSerializer(serializers.Serializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
