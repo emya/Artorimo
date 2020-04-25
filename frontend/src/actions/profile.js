@@ -33,8 +33,6 @@ export const updateProfile = (
   id, residence, style, work_process, employment_type, availability, payment_method, img
   ) => {
   return (dispatch, getState) => {
-    console.log("update", getState());
-
     const formData = new FormData();
 
     let headers = {};

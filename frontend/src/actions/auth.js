@@ -2,7 +2,6 @@ export const loadUser = () => {
   return (dispatch, getState) => {
     dispatch({type: "USER_LOADING"});
 
-    console.log("auth", getState());
     const token = getState().auth.token;
 
     let headers = {
@@ -97,7 +96,6 @@ export const login = (email, password) => {
         }
       })
       .then(res => {
-        console.log("res", res);
         if (res.status === 200) {
           dispatch({type: 'LOGIN_SUCCESSFUL', data: res.data });
           return res.data;
