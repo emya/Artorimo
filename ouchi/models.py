@@ -58,13 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     terms_version = models.IntegerField(default=0)
 
-    facebook_id = models.CharField(max_length=200, unique=True, null=True, blank=True)
-
-    stripe_user_id = models.CharField(max_length=100, null=True, blank=True)
-    stripe_access_token = models.CharField(max_length=100, null=True, blank=True)
-    stripe_refresh_token = models.CharField(max_length=100, null=True, blank=True)
-    stripe_connect_created_at = models.DateTimeField(null=True)
-
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -78,6 +71,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     residence = models.CharField(max_length=100, blank=True)
     style = models.CharField(max_length=100, blank=True)
-    gender = models.CharField(max_length=100, blank=True, null=True)
-    birth_date = models.DateField(null=True, blank=True)
+    work_process = models.CharField(max_length=100, blank=True)
+    employment_type = models.CharField(max_length=100, blank=True)
+    availability = models.CharField(max_length=100, blank=True)
+    payment_method = models.CharField(max_length=100, blank=True)
     image = models.CharField(max_length=200, null=True)
