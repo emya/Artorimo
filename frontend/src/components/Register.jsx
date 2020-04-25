@@ -75,25 +75,25 @@ class Login extends Component {
              <p class="error-heading" key={error}>Error: {error}</p>
           ))}
           <p>
-            <label class="start" htmlFor="first_name">First Name</label>
-            <input
-              type="text" id="first_name"
-              onChange={e => this.setState({first_name: e.target.value})} required/>
-          </p>
-          <p>
-            <label class="start" htmlFor="first_name">Last Name</label>
+            <label class="start" htmlFor="first_name">姓</label>
             <input
               type="text" id="last_name"
               onChange={e => this.setState({last_name: e.target.value})} required/>
           </p>
           <p>
-            <label class="start" htmlFor="email">Email</label>
+            <label class="start" htmlFor="first_name">名</label>
+            <input
+              type="text" id="first_name"
+              onChange={e => this.setState({first_name: e.target.value})} required/>
+          </p>
+          <p>
+            <label class="start" htmlFor="email">メールアドレス</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} required/>
           </p>
           <p>
-            <label class="start" htmlFor="password">Password</label>
+            <label class="start" htmlFor="password">パスワード</label>
             <input
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} required/>
@@ -101,11 +101,11 @@ class Login extends Component {
           <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
           <p class="agree">I have read and agree to <a href="/terms-conditions" class="start-link">the Terms</a></p>
           <p>
-            <button class="btn start-page" type="submit">Register</button>
+            <button class="btn start-page" type="submit">サインアップ</button>
           </p>
 
           <p>
-            Already have an account? <a class="start-link" href="/login" style={{color: "black"}}>Login</a>
+            すでにアカウントをお持ちの方はこちら <a class="start-link" href="/login" style={{color: "black"}}>ログイン</a>
           </p>
         </fieldset>
       </form>

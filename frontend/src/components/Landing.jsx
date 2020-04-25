@@ -10,8 +10,6 @@ import '../css/style.scss';
 class Landing extends Component {
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
   <div>
     <Header />

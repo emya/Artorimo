@@ -20,9 +20,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log("state", this.state);
-    console.log("props", this.props);
-
     if (this.props.isAuthenticated) {
       return <Redirect to='/myprofile' />
     }
@@ -44,23 +41,23 @@ class Login extends Component {
           )}
 
           <p>
-            <label class="start" htmlFor="email">Email</label>
+            <label class="start" htmlFor="email">メールアドレス</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} required/>
           </p>
           <p>
-            <label class="start" htmlFor="password">Password</label>
+            <label class="start" htmlFor="password">パスワード</label>
             <input
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
           <p>
-            <button class="btn start-page" type="submit">Login</button>
+            <button class="btn start-page" type="submit">ログイン</button>
           </p>
 
           <p>
-            Don't have an account? <a class="start-link" href="/register" style={{color: "black"}}>Register</a>
+            新規登録の方はこちら <a class="start-link" href="/register" style={{color: "black"}}>サインアップ</a>
           </p>
         </fieldset>
       </form>
