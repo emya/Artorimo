@@ -40,19 +40,20 @@ a:link, a:visited, a:hover, a:active {
 h2 {
   color: #6E7071;
   margin-top: 70px;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   letter-spacing: 2px;
   // font-family: 'Abril Fatface';
   font-size: 4rem;
   font-weight: normal;
   line-height: 100%;
+  text-align: center;
 }
 
 h2 {
   @media (max-width: 767px) {
     font-size: 3rem;
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
       }}
 
 
@@ -66,8 +67,8 @@ h3 {
 
 h3 {
   @media (max-width: 767px) {
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 100px;
+    margin-bottom: 40px;
   }}
 
 header {
@@ -114,6 +115,26 @@ ul li, ol li {
     width: 100%;
     margin: 40px auto;
     }
+}
+
+.wrapper {
+  overflow:hidden;
+  min-height: 500px;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #EEEEEE;
+  height: 30px;
+  padding: 10px;
+  // font-family: 'Lexend'
 }
 
 /* topbar */
@@ -168,15 +189,10 @@ ul li, ol li {
 
 .mobile-signin {
   justify-content: flex-end;
-  height: 100%;
-  width: 150px;
-  vertical-align: middle;
+  height: 100px;
+  width: 70px;
   margin-left: 10px;
-}
-
-.mobile-header-link {
-  margin: 20px 0;
-  vertical-align: middle;
+  line-height: 100px;
 }
 
 .mobile-topbar-contents {
@@ -214,7 +230,7 @@ ul li, ol li {
 }
 
 .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
-  display: inline-block;
+  display: inline-block!important;
   color: #4A4A4A;
   text-decoration: none;
   margin: 30px 40px;
@@ -222,11 +238,21 @@ ul li, ol li {
   letter-spacing: 3px;
 }
 
-// .menu, .menu a {
-//   @media (max-width: 767px) {
-//     display: none;
-//   }
-// }
+.menu, .menu a {
+  @media (max-width: 767px) {
+    height: auto;
+    display: block;
+    padding: 3px 3%;
+  }
+}
+
+.menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
+  @media (max-width: 767px) {
+    margin: 10px;
+    display: block!important;
+  }
+}
+
 
 /* catchcopy */
 
@@ -237,7 +263,7 @@ ul li, ol li {
 
 .catchcopy.clearfix {
   @media (max-width: 767px) {
-    height: 400px;
+    height: 250px;
   }}
 
 .catch {
@@ -288,7 +314,7 @@ ul li, ol li {
     margin: auto;
     width: 100%;
     padding: 0 10px;
-    bottom:  30px;
+    bottom:  50px;
     left: 0;
   }}
 
@@ -327,7 +353,7 @@ ul li, ol li {
   position: relative;
   width: 100%;
   height: 100%;
-  opacity: 0.6;
+  opacity: 0.8;
   // background-color: gray;
   padding-top: 0;
 }
@@ -359,7 +385,7 @@ ul li, ol li {
 .how {
   @media (max-width: 767px) {
     // height: 800px;
-    padding: 30px 7%;
+    padding: 30px 7% 100px;
   }}
 
 .heading-h {
@@ -472,6 +498,11 @@ ul li, ol li {
     height: 25%;
   }}
 
+.how-4 {
+  @media (max-width: 767px) {
+    margin-top: 30px;
+  }}
+
 .how-intro {
   display: inline-block;
   width: 70%;
@@ -488,6 +519,7 @@ ul li, ol li {
 .how-intro {
   @media (max-width: 767px) {
     width: 80%;
+    font-size: 1.3em;
   }}
 
 
@@ -681,7 +713,7 @@ ul li, ol li {
 
 .destination {
   @media (max-width: 767px) {
-    padding: 30px 7%;
+    padding: 30px 7% 100px;
   }}
 
 .popular-country {
@@ -1116,14 +1148,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   color: white;
 }
 
-.logo-link a:link, a:visited, a:hover, a:active {
+.logo-link a:link, a:visited,.logo-link a:hover,.logo-link a:active {
   color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
 .login {
-  width: 40%;
+  width: 20%;
 }
 
 .signin, .register {
@@ -1158,15 +1190,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
-// .mobile-topbar-contents {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   background-color: #78BBE6;
-//   height: 80px;
-//   width: 100%;
-//   padding: 1% 5%;
-// }
+.mobile-topbar-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  padding: 1% 5%;
+}
 
 .mobile-menu-icon {
   font-size: 5rem;
@@ -1187,6 +1218,11 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   margin: 100px auto 100px;
 }
 
+.page {
+  @media (max-width: 767px) {
+    margin: 50px auto 50px;
+  }}
+
 .member {
   display: inline-block;
   width: 40%;
@@ -1194,7 +1230,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   margin: 30px 2%;
   padding: 3% 5%;
   border-radius: 10px;
-  height: 450px;
+  // height: 450px;
   vertical-align: top;
 }
 
@@ -1203,6 +1239,8 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
     display: block;
     width: 100%;
     margin: 40px auto;
+    height: auto;
+    padding: 30px 20px
   }}
 
 

@@ -29,44 +29,52 @@ class Login extends Component {
     return (
     <div>
       <Header />
-      <form onSubmit={this.onSubmit}>
-        <fieldset class="signin-box">
-          <legend>Login</legend>
-          {this.props.errors.length > 0 && (
-            <div>
-              {this.props.errors.map(error => (
-                <p class="start-error" key={error.field}>{error.message}</p>
-              ))}
-            </div>
-          )}
 
-          <p>
-            <label class="start" htmlFor="email">メールアドレス</label>
-            <input
-              type="email" id="email"
-              onChange={e => this.setState({email: e.target.value})} required/>
-          </p>
-          <p>
-            <label class="start" htmlFor="password">パスワード</label>
-            <input
-              type="password" id="password"
-              onChange={e => this.setState({password: e.target.value})} required/>
-          </p>
-          <p>
-            <button class="btn start-page" type="submit">ログイン</button>
-          </p>
-
-          <p>
-            新規登録の方はこちら <a class="start-link" href="/register" style={{color: "black"}}>サインアップ</a>
-          </p>
-        </fieldset>
-      </form>
-
-      <div class="fb-login-button" data-width="" data-size="large"
-        data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true">
+      <div class="menu">
+        <a href="/how-it-works">How It Works</a>
+        <a href="/about">About Us</a>
+        <a href="/contact-us">Contact Us</a>
       </div>
 
+    <div class="wrapper clearfix">
+        <form onSubmit={this.onSubmit}>
+          <fieldset class="signin-box">
+            <legend>Login</legend>
+            {this.props.errors.length > 0 && (
+              <div>
+                {this.props.errors.map(error => (
+                  <p class="start-error" key={error.field}>{error.message}</p>
+                ))}
+              </div>
+            )}
 
+            <p>
+              <label class="start" htmlFor="email">e-mail</label>
+              <input
+                type="email" id="email"
+                onChange={e => this.setState({email: e.target.value})} required/>
+            </p>
+            <p>
+              <label class="start" htmlFor="password">パスワード</label>
+              <input
+                type="password" id="password"
+                onChange={e => this.setState({password: e.target.value})} required/>
+            </p>
+            <p>
+              <button class="btn start-page" type="submit">ログイン</button>
+            </p>
+
+            <p>
+              新規登録の方はこちら <a href="/register">サインアップ</a>
+            </p>
+          </fieldset>
+        </form>
+
+        <div class="fb-login-button" data-width="" data-size="large"
+          data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true">
+        </div>
+
+      </div>
     </div>
     )
   }

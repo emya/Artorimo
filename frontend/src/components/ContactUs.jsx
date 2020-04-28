@@ -14,18 +14,21 @@ class ContactUs extends Component {
     return (
     <div>
       <Header />
-
       <div class="wrapper clearfix">
+
         { this.props.user && (
           <SideMenu />
         )}
 
+        <div class="page wrapper clearfix">
         <h2>Contact Us</h2>
-        <div class="page">
-          ご質問やご要望などあれば以下にお気軽にご連絡ください。
+          <p>ご質問やご要望がございましたら下記の宛先までお気軽にご連絡ください。</p>
+          <br/>
+          <a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>
         </div>
-
       </div>
+
+
       <Footer />
     </div>
     )

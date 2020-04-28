@@ -15,16 +15,10 @@ class HowItWorks extends Component {
   <div>
     <Header />
 
-    <div class="menu">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/about">About Us</a>
-      <a href="/contact-us">Contact Us</a>
-    </div>
+    <div class="wrapper clearfix">
+    <div class="page wrapper clearfix">
 
     <h2>How It Works</h2>
-
-    <div class="page">
-
       <h3>サービスの流れ</h3>
 
       <ol>
@@ -59,6 +53,7 @@ class HowItWorks extends Component {
 
 
 
+    </div>
     </div>
 
     <Footer />

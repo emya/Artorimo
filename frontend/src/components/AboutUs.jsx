@@ -9,9 +9,11 @@ class AboutUs extends Component {
     return (
   <div>
       <Header />
-      <h2>About Us</h2>
+      <div class="wrapper clearfix">
 
-      <div class="page">
+      <div class="page wrapper clearfix">
+
+      <h2>About Us</h2>
 
       <h3>Company Overview</h3>
 
@@ -65,6 +67,7 @@ class AboutUs extends Component {
           <p class="member-title">Cofounder & CTO</p>
           <p>香川県出身。東京大学大学院でコンピュータ科学の修士号を取得後、渡米しソフトウェアエンジニアとして主にスタートアップの会社に勤務。テニス、旅行が趣味。</p>
         </div>
+      </div>
       </div>
       <Footer />
   </div>

@@ -42,6 +42,13 @@ class Landing extends Component {
         <p class="how-4">クリエーターへ報酬を入金</p>
       </div>
       <div class="how-container-mobile">
+        <img class="lp-how-mobile" src={require('../img/how-mobile.png')}/>
+        <div class="how-description">
+          <p class="how-1">国内・海外から仕事を受注</p>
+          <p class="how-2">弊社が報酬交渉＆<br/>依頼内容確認。<br/>クライアントによる仮入金</p>
+          <p class="how-3">クリエーターによる<br/>依頼物の作成・納品。<br/>修正依頼もサポート</p>
+          <p class="how-4">クリエーターへ報酬を入金</p>
+        </div>
       </div>
       <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">無料会員登録</a>
     </section>

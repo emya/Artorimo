@@ -24,13 +24,9 @@ render() {
 
       <div class="mobile-topbar-contents">
 
-        <a href="#"><img class="logo-mobile" src={require('../img/Torimo_new.png')} /></a>
-        <a href="/register" class="mobile-signin" onClick="ga('send', 'event', 'link', 'click', 'register3')">
-          <p class="mobile-header-link">Register</p>
-        </a>
-        <a href="/login" class="mobile-signin" onClick="ga('send', 'event', 'link', 'click', 'signin')">
-          <p class="mobile-header-link">Sign in</p>
-        </a>
+        <a href="/" class="logo-link">Ohchee Studio</a>
+
+        <a href="/login" class="mobile-signin" onClick="ga('send', 'event', 'link', 'click', 'signin')">ログイン</a>
 
       </div>
 
