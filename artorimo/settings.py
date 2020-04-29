@@ -27,7 +27,7 @@ SECRET_KEY = 'u$bib9c)%)2_0tadsttmzd-5wc+brqg^&nnio-(=tfdosrskd3'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "ohcheestudio.com"]
 
 
 # Application definition
