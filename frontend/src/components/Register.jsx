@@ -62,8 +62,18 @@ class Login extends Component {
     return (
     <div>
       <Header />
+
+      <div class="menu">
+        <a href="/how-it-works">How It Works</a>
+        <a href="/about">About Us</a>
+        <a href="/contact-us">Contact Us</a>
+      </div>
+
+      <div class="wrapper clearfix">
+
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
+          <legend>新規会員登録</legend>
           {errors.length > 0 && (
             <div>
               {errors.map(error => (
@@ -87,7 +97,7 @@ class Login extends Component {
               onChange={e => this.setState({first_name: e.target.value})} required/>
           </p>
           <p>
-            <label class="start" htmlFor="email">メールアドレス</label>
+            <label class="start" htmlFor="email">e-mail</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} required/>
@@ -99,13 +109,13 @@ class Login extends Component {
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
           <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
-          <p class="agree">I have read and agree to <a href="/terms-conditions" class="start-link">the Terms</a></p>
+          <p class="agree"><a href="/terms-conditions" >利用規約</a>に同意します</p>
           <p>
-            <button class="btn start-page" type="submit">サインアップ</button>
+            <button class="btn start-page" type="submit">登録</button>
           </p>
 
           <p>
-            すでにアカウントをお持ちの方はこちら <a class="start-link" href="/login" style={{color: "black"}}>ログイン</a>
+            すでにアカウントをお持ちの方はこちら<br/> <a href="/login">ログイン</a>
           </p>
         </fieldset>
       </form>
@@ -115,6 +125,7 @@ class Login extends Component {
       </div>
 
 
+    </div>
     </div>
     )
   }

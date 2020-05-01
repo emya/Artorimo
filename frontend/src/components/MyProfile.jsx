@@ -88,7 +88,16 @@ class MyProfile extends Component {
   <div>
     <Header />
 
+    <div class="menu">
+      <a href="/how-it-works">How It Works</a>
+      <a href="/about">About Us</a>
+      <a href="/contact-us">Contact Us</a>
+    </div>
+
     <div class="wrapper clearfix">
+
+    <SideMenu />
+
       <div class="profile">
       <h2>My Profile</h2>
         <form onSubmit={this.submitProfile}>
@@ -97,7 +106,6 @@ class MyProfile extends Component {
           ))}
           {this.props.profile.map((profile) => (
             <div class="wrapper clearfix">
-              <SideMenu />
               <div class="profile-left">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
@@ -112,18 +120,18 @@ class MyProfile extends Component {
               <div class="profile-right">
                 <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
 
-                <p class="object">居住地</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
-                <p class="object">スタイル</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'style', profile)} value={profile.style}/>
+                <p class="object">都市</p>
+                <input placeholder="例：東京"　type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
+                <p class="object">イラストスタイル</p>
+                <input placeholder="例：アニメ、実写風、ファッション" type="text" class="user-data" onChange={this.handleChange.bind(this, 'style', profile)} value={profile.style}/>
                 <p class="object">作業の進め方</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'work_process', profile)} value={profile.work_process}/>
-                <p class="object">フリーランス・副業</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'employment_type', profile)} value={profile.employment_type}/>
+                <input placeholder="例：ラフとカラーの後にそれぞれクライアントチェック" type="text" class="user-data" onChange={this.handleChange.bind(this, 'work_process', profile)} value={profile.work_process}/>
+                <p class="object">活動形態</p>
+                <input placeholder="例：フリーランス、副業" type="text" class="user-data" onChange={this.handleChange.bind(this, 'employment_type', profile)} value={profile.employment_type}/>
                 <p class="object">週あたり稼働時間</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
+                <input placeholder="例：10時間" type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
                 <p class="object">可能入金方法</p>
-                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'payment_method', profile)} value={profile.payment_method}/>
+                <input placeholder="例：銀行振り込み、PayPay、Paypal" type="text" class="user-data" onChange={this.handleChange.bind(this, 'payment_method', profile)} value={profile.payment_method}/>
               </div>
             </div>
           ))}

@@ -1045,7 +1045,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 .signin-box {
   width: 35%;
-  margin: 20px auto;
+  margin: 40px auto;
   color: #4A4A4A;
   // text-align: left;
   padding: 20px 10px;
@@ -1148,8 +1148,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   color: white;
 }
 
-.logo-link a:link, a:visited,.logo-link a:hover,.logo-link a:active {
-  color: white;
+.topbar-contents a:link,.topbar-contents a:visited,.topbar-contents a:hover,.topbar-contents a:active {
+  color: white!important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mobile-topbar-contents a:link,.mobile-topbar-contents a:visited,.mobile-topbar-contents a:hover,.mobile-topbar-contents a:active {
+  color: white!important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -1466,7 +1472,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   float: left;
   // height: 1300px;
   width: 25%;
-  background-color: #4A4A4A;
+  background-color: #ecf5f5;
   // letter-spacing: 3px;
   padding-bottom: 10000px;
   margin-bottom: -10000px;
@@ -1487,7 +1493,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 .sidemenu .logout {
-  color: white;
+  color: #0abab5;
 }
 
 .sidemenu-mobile {
@@ -1548,14 +1554,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .profile-left {
   @media (min-width: 767px) {
     float: left;
-    width: 50%;
+    width: 35%;
   }
 }
 
 .profile-right {
   @media (min-width: 767px) {
     float: right;
-    width: 50%;
+    width: 65%;
   }
 }
 
@@ -1566,6 +1572,12 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   width: 200px;
   margin: 60px auto 0;
   border: 1px solid grey;
+}
+
+.profile img {
+  @media (max-width: 767px) {
+    margin-top: 0;
+  }
 }
 
 .picture-upload {
@@ -1602,6 +1614,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   // font-size: 2rem;
   width: 80%;
   // text-align: center;
+  margin: 0 0 20px;
 }
 
 .user-data {
