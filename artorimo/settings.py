@@ -142,3 +142,21 @@ USE_TZ = True
 STATIC_URL = os.path.join(BASE_DIR, 'templates/')
 STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ohcheestudio@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# REDIS related settings for Celery
+# Local
+REDIS_HOST = 'localhost'
+
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

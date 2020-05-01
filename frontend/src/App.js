@@ -12,6 +12,7 @@ import SideMenu from "./components/SideMenu";
 import MyProfile from "./components/MyProfile";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 import {auth} from "./actions";
 import artorimoApp from "./reducers";
@@ -52,6 +53,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
+                    <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                     <PrivateRoute  exact path="/myprofile" component={MyProfile} />
                 </Switch>
             </BrowserRouter>

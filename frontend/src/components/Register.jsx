@@ -109,7 +109,7 @@ class Login extends Component {
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
           <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
-          <p class="agree"><a href="/terms-conditions" >利用規約</a>に同意します</p>
+          <p class="agree"><a href="/privacy-policy" >個人情報保護方針</a>に同意します</p>
           <p>
             <button class="btn start-page" type="submit">登録</button>
           </p>
