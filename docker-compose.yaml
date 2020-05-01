@@ -9,7 +9,7 @@ services:
     expose:
       - 8000
     volumes:
-      - ./static:/static
+      - ./assets:/static
   nginx:
     build:
       context: .
@@ -21,7 +21,7 @@ services:
       - /docker/letsencrypt-docker-nginx/src/production/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
       - /docker-volumes/etc/letsencrypt/live/ohcheestudio.com/fullchain.pem:/etc/letsencrypt/live/ohcheestudio.com/fullchain.pem
       - /docker-volumes/etc/letsencrypt/live/ohcheestudio.com/privkey.pem:/etc/letsencrypt/live/ohcheestudio.com/privkey.pem
-      - ./static:/static
+      - ./assets:/static
       - /docker-volumes/data/letsencrypt:/data/letsencrypt
       - /var/www/html/blog:/usr/share/nginx/html/blog
     depends_on:
