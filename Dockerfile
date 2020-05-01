@@ -1,7 +1,7 @@
 FROM python:3.6
 
 RUN mkdir -p /opt
-COPY artotimo /opt/artorimo
+COPY artorimo /opt/artorimo
 COPY ouchi /opt/ouchi
 COPY templates /opt/templates
 COPY requirements.txt /opt/
