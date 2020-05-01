@@ -1,0 +1,14 @@
+FROM python:3.6
+
+RUN mkdir -p /opt
+COPY artorimo /opt/artorimo
+COPY ouchi /opt/ouchi
+COPY requirements.txt /opt/
+
+RUN set -ex; \
+    pip install --upgrade pip;
+
+WORKDIR /opt
+RUN pip install -r requirements.txt
+
+ENTRYPOINT celery worker -A ouchi --loglevel=debug

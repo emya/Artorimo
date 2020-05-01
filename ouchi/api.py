@@ -21,6 +21,8 @@ from .serializers import (
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
+from .tasks import send_email
+
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
 
@@ -29,10 +31,10 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         Profile.objects.create(user=user)
-
         _, token = AuthToken.objects.create(user)
-        #html_message = render_to_string('email-signup.html', {'user': user})
-        #send_email.delay("Welcome to Torimo!", "Thank you for joining us!", html_message, [user.email])
+
+        html_message = render_to_string('email-signup.html', {'user': user})
+        send_email.delay("Welcome to OhcheeStudio!", "Thank you for joining us!", html_message, [user.email])
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
