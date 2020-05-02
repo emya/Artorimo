@@ -10,7 +10,6 @@ render() {
       <div class="footer-item">
         <ul>
           <li><a href="/about">About Us</a></li>
-          <li><a href="/terms-conditions">Terms of Services</a></li>
           <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
