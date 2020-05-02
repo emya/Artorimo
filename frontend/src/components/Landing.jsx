@@ -42,7 +42,7 @@ class Landing extends Component {
         <p class="how-4">クリエーターへ報酬を入金</p>
       </div>
       <div class="how-container-mobile">
-        <img class="lp-how-mobile" src={require('../img/how-mobile.png')}/>
+        <img class="lp-how-mobile" src={require('../img/how-mobile2.png')}/>
         <div class="how-description">
           <p class="how-1">国内・海外から仕事を受注</p>
           <p class="how-2">弊社が報酬交渉＆<br/>依頼内容確認。<br/>クライアントによる仮入金</p>
