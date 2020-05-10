@@ -106,6 +106,7 @@ class MyProfile extends Component {
           ))}
           {this.props.profile.map((profile) => (
             <div class="wrapper clearfix">
+            <div class="wrapper clearfix">
               <div class="profile-left">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
@@ -115,23 +116,63 @@ class MyProfile extends Component {
 
                 <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
-              </div>
+            </div>
 
-              <div class="profile-right">
-                <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+            <div class="profile-right">
+              <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+              <p>Illustrator</p>
+            </div>
+            </div>
+
+              <div class="profile-detail">
 
                 <p class="object">都市</p>
                 <input placeholder="例：東京"　type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
+                <p class="object">活動形態</p>
+                <div class="checkbox-outline">
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">フリーランス／フルタイム</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">副業／パートタイム</p>
+                </div>
                 <p class="object">イラストスタイル</p>
-                <input placeholder="例：アニメ、実写風、ファッション" type="text" class="user-data" onChange={this.handleChange.bind(this, 'style', profile)} value={profile.style}/>
+                <div class="checkbox-outline">
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">キャラクター</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">ファッション</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">絵本系</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">リアル</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">コミック・漫画</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">ゲーム</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">ポップ</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">和風</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">水彩</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">墨絵</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">線画</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">アート</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">3D／CG</p>
+                </div>
+                <p class="object">稼働時間／週</p>
+                <input placeholder="例：10" type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
                 <p class="object">作業の進め方</p>
                 <input placeholder="例：ラフとカラーの後にそれぞれクライアントチェック" type="text" class="user-data" onChange={this.handleChange.bind(this, 'work_process', profile)} value={profile.work_process}/>
-                <p class="object">活動形態</p>
-                <input placeholder="例：フリーランス、副業" type="text" class="user-data" onChange={this.handleChange.bind(this, 'employment_type', profile)} value={profile.employment_type}/>
-                <p class="object">週あたり稼働時間</p>
-                <input placeholder="例：10時間" type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
-                <p class="object">可能入金方法</p>
-                <input placeholder="例：銀行振り込み、PayPay、Paypal" type="text" class="user-data" onChange={this.handleChange.bind(this, 'payment_method', profile)} value={profile.payment_method}/>
+                <p class="object">経歴・仕事実績</p>
+                <textarea class="user-data"></textarea>
+                <p class="object">使用ツール</p>
+                <div class="checkbox-outline">
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Adobe Illustrator</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Adobe Photoshop</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Adobe InDesign</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Clip Studio</p>
+                </div>
+                <p class="object">その他使用ツール・スキル</p>
+                <input class="user-data" placeholder="例：キャラクターデザイン, アニメーション"></input>
+                <p class="object">可能報酬入金方法</p>
+                <div class="checkbox-outline">
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">LINE Pay</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">PayPay</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Pay-easy</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">Paypal</p>
+                  <input type="checkbox" class="checkbox"/><p class="checkbox-selection">銀行振り込み</p>
+                </div>
+
               </div>
             </div>
           ))}
