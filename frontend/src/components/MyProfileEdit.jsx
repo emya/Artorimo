@@ -192,16 +192,16 @@ class MyProfileEdit extends Component {
                 <p class="object">活動形態</p>
                 <div class="checkbox-outline">
                   {profile.employment_type === 0 ? (
-                    <input type="radio" name="employment_type" value="0" onChange={this.handleEmploymentChange.bind(this, profile)} checked/>
+                    <input class="checkbox" type="radio" name="employment_type" value="0" onChange={this.handleEmploymentChange.bind(this, profile)} checked/>
                   ): (
-                    <input type="radio" name="employment_type" value="0" onChange={this.handleEmploymentChange.bind(this, profile)} />
+                    <input class="checkbox" type="radio" name="employment_type" value="0" onChange={this.handleEmploymentChange.bind(this, profile)} />
                   )}
                   <label for="0">フリーランス／フルタイム</label><br/>
 
                   {profile.employment_type === 1 ? (
-                    <input type="radio" name="employment_type" value="1" onChange={this.handleEmploymentChange.bind(this, profile)} checked/>
+                    <input class="checkbox" type="radio" name="employment_type" value="1" onChange={this.handleEmploymentChange.bind(this, profile)} checked/>
                   ): (
-                    <input type="radio" name="employment_type" value="1" onChange={this.handleEmploymentChange.bind(this, profile)} />
+                    <input class="checkbox" type="radio" name="employment_type" value="1" onChange={this.handleEmploymentChange.bind(this, profile)} />
                   )}
                   <label for="1">副業／パートタイム</label><br/>
                 </div>
