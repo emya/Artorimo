@@ -30,7 +30,8 @@ export const fetchProfile = userId => {
 }
 
 export const updateProfile = (
-  id, residence, style, work_process, employment_type, availability, payment_method, img
+  id, residence, style, work_process, employment_type, availability,
+  tools, skills, achievement, payment_method, img
   ) => {
   return (dispatch, getState) => {
     const formData = new FormData();
@@ -56,6 +57,15 @@ export const updateProfile = (
     }
     if (availability !== null) {
       formData.append('availability', availability);
+    }
+    if (tools !== null) {
+      formData.append('tools', tools);
+    }
+    if (skills !== null) {
+      formData.append('skills', skills);
+    }
+    if (achievement !== null) {
+      formData.append('achievement', achievement);
     }
     if (payment_method !== null) {
       formData.append('payment_method', payment_method);

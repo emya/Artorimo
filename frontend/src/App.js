@@ -10,6 +10,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import SideMenu from "./components/SideMenu";
 import MyProfile from "./components/MyProfile";
+import MyProfileEdit from "./components/MyProfileEdit";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -54,7 +55,8 @@ class RootContainerComponent extends Component {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-                    <PrivateRoute  exact path="/myprofile" component={MyProfile} />
+                    <PrivateRoute exact path="/myprofile" component={MyProfile} />
+                    <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
                 </Switch>
             </BrowserRouter>
         );
