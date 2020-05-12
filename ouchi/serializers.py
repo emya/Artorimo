@@ -54,7 +54,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         tools_val = data.get('tools')
         style_val = data.get('style')
         payment_val = data.get('payment_method')
-        print("tools_val", tools_val)
 
         if tools_val:
             tools_val = self.clear_val_to_list(tools_val)
@@ -80,7 +79,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         output['tools'] = tools_val
         output['style'] = style_val
         output['payment_method'] = payment_val
-        print(output)
         return output
 
     class Meta:
