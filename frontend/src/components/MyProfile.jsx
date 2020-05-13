@@ -9,6 +9,8 @@ import SideMenu from './SideMenu';
 import Footer from './Footer';
 import {profile, auth} from "../actions";
 
+import { keys } from '../keys.js';
+
 library.add(faIgloo)
 
 class MyProfile extends Component {
@@ -36,7 +38,9 @@ class MyProfile extends Component {
         {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
           <div class="wrapper clearfix">
             <div class="profile-left">
-              {profile.image && (<img src={URL.createObjectURL(profile.image)} />)}
+              {profile.image && (
+                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
+              )}
               {!profile.image && (<img src={require('../img/default.png')} />)}
 
             </div>
