@@ -8,7 +8,12 @@ from rest_framework.parsers import (
     MultiPartParser, FormParser, FileUploadParser, FormParser
 )
 from django.template.loader import render_to_string
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.conf import settings
+
 from knox.models import AuthToken
+
+import boto3
 
 from .models import (
     User, Profile
@@ -75,21 +80,19 @@ class ProfileViewSet(viewsets.ModelViewSet):
         img = data.pop('image')
         is_upload_image = False
 
-        """
         if img:
             image = img[0]
             if isinstance(image, InMemoryUploadedFile):
                 data['image'] = image.name
                 is_upload_image = True
-        """
 
         serializer = self.serializer_class(instance, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        """
+
         if is_upload_image:
             upload_to_s3(image, f'profiles/{request.user.id}/{image.name}')
-        """
+
         return Response(serializer.data)
 
     def get_queryset(self):
@@ -112,3 +115,13 @@ class ProfileViewSet(viewsets.ModelViewSet):
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+def upload_to_s3(image, key):
+    client = boto3.client(
+        "s3",
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name=settings.AWS_REGION
+    )
+
+    client.put_object(Bucket=settings.AWS_BUCKET_NAME, Key=key, Body=image)
