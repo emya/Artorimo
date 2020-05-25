@@ -57,7 +57,8 @@ class MyProfile extends Component {
               </div>
               <p class="object">活動形態</p>
               <div class="checkbox-outline">
-                <p>フリーランス／フルタイム</p>
+                {profile.employment_type === 0 && (<p>フリーランス／フルタイム</p>)}
+                {profile.employment_type === 1 && (<p>副業／パートタイム</p>)}
               </div>
               <p class="object">イラストスタイル</p>
               <div class="checkbox-outline">

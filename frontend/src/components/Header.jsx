@@ -26,7 +26,7 @@ render() {
 
         <a href="/" class="logo-link">Ohchee Studio</a>
 
-        <a href="/login" class="mobile-signin" onClick="ga('send', 'event', 'link', 'click', 'signin')">ログイン</a>
+        <a href="/login" class="mobile-signin">ログイン</a>
 
       </div>
 
