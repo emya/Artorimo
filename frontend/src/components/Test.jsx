@@ -11,11 +11,10 @@ class Test extends Component {
 
   render() {
     return (
-  <div>
-    <Header />
+      <div>
 
-    <Footer />
-  </div>
+        <Footer />
+      </div>
     )
   }
 }

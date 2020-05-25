@@ -266,19 +266,6 @@ input {
     height: 250px;
   }}
 
-.catch {
-  // font-family: baskerville;
-  position: absolute;
-  top: 110px;
-  right: 38%;
-  color: white;
-  // font-size: 6rem;
-  // line-height: 80px;
-  width: 55%;
-  // padding: 0 30px;
-  // margin: 10px 30% 70px 2%;
-  // letter-spacing: 2px;
-}
 
 .catch2 {
   // font-family: baskerville;
@@ -300,14 +287,6 @@ input {
   margin-bottom: 30px;
 }
 
-.catch {
-  @media (max-width: 767px) {
-    margin: auto;
-    padding: 0 10px;
-    width: 100%;
-    top:  30px;
-    right: 0;
-  }}
 
 .catch2 {
   @media (max-width: 767px) {
@@ -1718,3 +1697,142 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     width: 100%;
   }}
+
+// English landing page
+
+
+.lpimage.englishlp {
+  opacity: 40%;
+}
+
+.catch-english {
+  // font-family: baskerville;
+  color: #6e7071;
+  // color: white;
+  position: absolute;
+  bottom: 100px;
+  left: 22%;
+  // font-size: 6rem;
+  width: 55%;
+  // padding: 0 30px;
+  // margin: 10% 40% 30% 2%;
+}
+
+.catch-english .button {
+  margin-top: 10px;
+}
+
+.catch-english h1 {
+  // font-family: 'Abril Fatface';
+  font-weight: normal;
+  font-size: 3rem;
+  line-height: 150%;
+  margin-bottom: 30px;
+}
+
+
+.catch-english {
+  @media (max-width: 767px) {
+    margin: auto;
+    width: 100%;
+    padding: 0 10px;
+    bottom:  50px;
+    left: 0;
+  }}
+
+  .catch-english h1 {
+    @media (max-width: 767px) {
+      font-size: 3rem;
+    }}
+
+.how-intro.english-intro {
+  margin-bottom: 5px
+}
+
+.illustrator-sort {
+  background-color: #ecf5f5;
+  margin: 60px 100px 10px;
+  text-align: left;
+  padding: 30px;
+}
+
+.illustrator-sort ul {
+  list-style: none;
+}
+
+.illustrator-sort ul li {
+  display: inline-block;
+}
+
+.search {
+  display: inline-block;
+  margin-top: 5px;
+  width: 50%;
+}
+
+.searchbox {
+  width: 70%;
+  margin-right: 10px;
+}
+
+.search-title {
+  margin-right: 20px;
+  width: 20%;
+}
+
+.search-title.bottom {
+  display: inline-block;
+}
+
+.button.searchbtn {
+  margin: 30px auto 0;
+  text-align: center;
+  // width: 100px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+
+.illustrator-list {
+  // background-color: grey;
+  margin: 10px 100px;
+  padding: 20px;
+}
+
+.illustrator-list ul {
+  list-style: none;
+  width: 100%;
+  overflow: hidden;
+}
+
+.illustrator-list ul li{
+  float: left;
+  margin-right: 20px;
+  padding-bottom: 20px;
+  width: 30%;
+}
+
+.illustrator-list ul li:hover {
+  opacity: 70%;
+}
+
+.illustrator {
+  // width: 50%;
+  // height: 230px;
+  // background-color: blue;
+  // margin: 10px;
+  display: inline-block;
+}
+
+.illustrator img {
+  width: 300px;
+  height: 300px;
+}
+
+.illustrator-username {
+  // background-color: green;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+}
