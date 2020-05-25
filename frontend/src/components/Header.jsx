@@ -12,7 +12,7 @@ render() {
         <a href="/" class="logo-link">Ohchee Studio</a>
         { !this.props.user && (
           <div class="login">
-            <a class="signin" href="/login">ログイン</a>
+            <a class="signin" href="/login">Login</a>
           </div>
         )}
         { this.props.user && (
