@@ -51,6 +51,10 @@ class MyProfile extends Component {
             </div>
 
             <div class="profile-detail">
+              <p class="object">アーティスト名</p>
+              <div class="checkbox-outline">
+                <p> {profile.user_name} </p>
+              </div>
               <p class="object">都市</p>
               <div class="checkbox-outline">
                 <p> {profile.residence} </p>

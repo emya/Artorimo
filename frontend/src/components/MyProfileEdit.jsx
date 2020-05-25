@@ -18,6 +18,7 @@ class MyProfileEdit extends Component {
   }
 
   state = {
+    user_name: null,
     residence: null,
     style: null,
     work_process: null,
@@ -58,8 +59,9 @@ class MyProfileEdit extends Component {
     }
 
     this.props.updateProfile(
-      this.props.profile.myprofile[0].id, this.state.residence, this.state.style,
-      this.state.work_process, this.state.employment_type, this.state.availability,
+      this.props.profile.myprofile[0].id, this.state.user_name,
+      this.state.residence, this.state.style, this.state.work_process,
+      this.state.employment_type, this.state.availability,
       this.state.tools, this.state.skills, this.state.achievement,
       this.state.payment_method, this.state.image
     ).then(this.resetForm);
@@ -125,7 +127,7 @@ class MyProfileEdit extends Component {
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
     this.setState({
-      residence: profile.residence, style: profile.style,
+      user_name: profile.user_name, residence: profile.residence, style: profile.style,
       work_process: profile.work_process, employment_type: profile.employment_type,
       availability: profile.availability, achievement: profile.achievement,
       payment_method: profile.payment_method, isChanged: true
@@ -187,6 +189,8 @@ class MyProfileEdit extends Component {
               </div>
 
               <div class="profile-detail">
+                <p class="object">アーティスト名</p>
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'user_name', profile)} value={profile.user_name}/>
                 <p class="object">都市</p>
                 <input placeholder="例：東京"　type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
                 <p class="object">活動形態</p>
@@ -405,13 +409,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(profile.fetchProfile(userId));
     },
     updateProfile: (
-      id, residence, style, work_process, employment_type, availability,
-      tools, skills, achievement, payment_method, img
+      id, user_name, residence, style, work_process, employment_type,
+      availability, tools, skills, achievement, payment_method, img
       ) => {
       return dispatch(
         profile.updateProfile(
-          id, residence, style, work_process, employment_type, availability,
-          tools, skills, achievement, payment_method, img)
+          id, user_name, residence, style, work_process, employment_type,
+          availability, tools, skills, achievement, payment_method, img)
       );
     },
     logout: () => dispatch(auth.logout()),
