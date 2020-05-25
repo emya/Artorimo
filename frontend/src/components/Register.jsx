@@ -111,9 +111,14 @@ class Login extends Component {
           <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
           <p class="agree"><a href="/privacy-policy" >個人情報保護方針</a>に同意します</p>
           <p>
-            <button class="btn start-page" type="submit" onClick="ga(‘send’, ‘event’, ‘tel’, ‘tap’, ‘reservation’);">登録</button>
+            <button
+              class="btn start-page" type="submit"
+              onclick="gtag('event', 'Register', {'event_category': 'register', 'event_label': 'register1'});">
+              登録
+            </button>
           </p>
 
+          <a href="#" onclick="gtag('event', 'xyz');">Click Test</a>
           <p>
             すでにアカウントをお持ちの方はこちら<br/> <a href="/login">ログイン</a>
           </p>

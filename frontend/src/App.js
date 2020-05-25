@@ -14,6 +14,7 @@ import MyProfileEdit from "./components/MyProfileEdit";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import Test from "./components/Test";
 
 import {auth} from "./actions";
 import artorimoApp from "./reducers";
@@ -55,6 +56,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                    <Route exact path="/test" component={Test} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
                 </Switch>
