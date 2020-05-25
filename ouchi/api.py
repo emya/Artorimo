@@ -73,8 +73,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def partial_update(self, request, *args, **kwargs):
-        print("partial update", request.user)
-
         instance = self.get_object()
         data = request.data.copy()
         img = data.pop('image')

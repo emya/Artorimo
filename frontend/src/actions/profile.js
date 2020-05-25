@@ -30,8 +30,8 @@ export const fetchProfile = userId => {
 }
 
 export const updateProfile = (
-  id, residence, style, work_process, employment_type, availability,
-  tools, skills, achievement, payment_method, img
+  id, user_name, residence, style, work_process, employment_type,
+  availability, tools, skills, achievement, payment_method, img
   ) => {
   return (dispatch, getState) => {
     const formData = new FormData();
@@ -43,6 +43,9 @@ export const updateProfile = (
       headers["Authorization"] = `Token ${token}`;
     }
 
+    if (user_name !== null) {
+      formData.append('user_name', user_name);
+    }
     if (residence !== null) {
       formData.append('residence', residence);
     }

@@ -69,6 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    user_name = models.CharField(max_length=100, blank=True)
     residence = models.CharField(max_length=100, blank=True)
     # style
     # 0: character, 1: fashion, 2: books, 3: real, 4: comic, 5: games, 6: pop
