@@ -5,6 +5,7 @@ import './App.css';
 
 import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import Landing from "./components/Landing";
+import ClientLanding from "./components/ClientLanding";
 import AboutUs from "./components/AboutUs";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -50,6 +51,7 @@ class RootContainerComponent extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Landing} />
+                    <Route exact path="/artists" component={ClientLanding} />
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/how-it-works" component={HowItWorks} />
                     <Route exact path="/register" component={Register} />
