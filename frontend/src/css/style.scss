@@ -137,6 +137,16 @@ input {
   // font-family: 'Lexend'
 }
 
+.placeholder {
+  padding: 0 1% 100px 1%!important;
+}
+
+.placeholder {
+  @media (max-width: 767px) {
+    padding: 0 1% 100px 1%!important;
+  }
+}
+
 /* topbar */
 
 
@@ -1835,4 +1845,61 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   display: block;
   height: 20px;
   line-height: 20px;
+}
+
+// portfolio
+
+.port {
+  width: 75%;
+  float: right;
+  display: block;
+  margin: 0;
+}
+
+.port {
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+    padding: 0 3% 10px 3%;
+  }
+}
+
+.portfolio-pic {
+  display: block;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto 0;
+  border: 1px solid grey;
+}
+
+.port-list {
+  margin-top: 350px;
+}
+
+.port-list {
+  @media (max-width: 767px) {
+    margin-top: 50px;
+    padding: 0;
+  }
+}
+
+.illustrator-list ul li {
+  @media (max-width: 767px) {
+    width: 30%;
+    height: auto;
+    margin-right: 5px;
+    padding: 9px;
+  }
+}
+
+.illustrator-list ul li img {
+  @media (max-width: 767px) {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+
+.port ul li:hover {
+  opacity: 100%;
 }
