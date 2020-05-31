@@ -122,6 +122,7 @@ class Login extends Component {
           <p>
             すでにアカウントをお持ちの方はこちら<br/> <a href="/login">ログイン</a>
           </p>
+
         </fieldset>
       </form>
 

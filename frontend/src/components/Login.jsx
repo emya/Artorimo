@@ -67,6 +67,9 @@ class Login extends Component {
             <p>
               新規登録の方はこちら <a href="/register">サインアップ</a>
             </p>
+            <p>
+              <a href="/reset/password"> パスワードを忘れた方はこちら </a>
+            </p>
           </fieldset>
         </form>
 
