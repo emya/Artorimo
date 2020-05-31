@@ -7,9 +7,11 @@ from rest_framework.response import Response
 from rest_framework.parsers import (
     MultiPartParser, FormParser, FileUploadParser, FormParser
 )
+from django_rest_passwordreset.signals import reset_password_token_created
 from django.template.loader import render_to_string
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.conf import settings
+from django.dispatch import receiver
 
 from knox.models import AuthToken
 
@@ -113,6 +115,32 @@ class ProfileViewSet(viewsets.ModelViewSet):
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+class CustomPasswordResetView:
+    @receiver(reset_password_token_created)
+    def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
+        """
+          Handles password reset tokens
+          When a token is created, an e-mail needs to be sent to the user
+        """
+        site_name = "OhcheeStudio"
+        site_url = settings.SITE_URL
+
+        # send an e-mail to the user
+        context = {
+            'current_user': reset_password_token.user,
+            'email': reset_password_token.user.email,
+            'reset_password_url': f"{site_url}/reset/password/{reset_password_token.key}",
+            'site_name': site_name,
+            'site_domain': site_url
+        }
+
+        # render email text
+        html_message = render_to_string('email-forgotpswd.html', context)
+        #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
+
+        send_email.delay("Forgot Password?", "Forgot Password?", html_message, [reset_password_token.user.email])
+
 
 def upload_to_s3(image, key):
     client = boto3.client(

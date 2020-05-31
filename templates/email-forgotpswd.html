@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+  <head>
+    <meta charsset="UTF-8">
+    <title>Transaction Status</title>
+    <style>
+      .email-background {
+        border-radius: 7px;
+        margin:10px auto;
+        padding: 30px;
+        width: 90%;
+      }
+
+      .email-header {
+        background-color: #6e7071;
+      }
+
+      .logo-link {
+        width: 50%;
+        height: auto;
+        font-size: 1.5em;
+        color: white;
+        padding: 20px;
+      }
+
+      .email-body {
+        padding: 20px;
+      }
+
+      .email-greeting {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 40px;
+      }
+
+      .email-closing {
+        font-weight: bold;
+      }
+
+      .btn {
+        background-color: #0abab5;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="email-background">
+      <div class="email-header">
+        <div class="logo-link">OucheeStudio</div>
+      </div>
+
+      <div class="email-body">
+        <div class="email-greeting">
+          パスワードリセットの通知
+        </div>
+
+        <p>OhcheeStudioのアカウントパスワードをリセットするには、次のリンクをクリックしてください。<br><br></p>
+        <a class="btn" href={{reset_password_url}}>Reset Password</a>
+
+        <p>
+          上記のリンクの有効期限は、メールが送信されてから２４時間です。
+        </p>
+
+        <p>
+          このメールに心当たりがない場合、他の方がパスワードをリセットする際に誤ってお客様のメールアドレスを入力した可能性があります。
+          リクエストした覚えがない場合は、何も行わずにこのメールを破棄してください。
+        </p>
+
+        <p>
+          海外のクライアントからの問い合わせ等、弊社の仲介が必要な際は、ohcheestudio@gmail.comまでメール・もしくはSNSのDM内容をご転送下さい。<br><br>
+        <p>そのほか何かご質問またはご要望がございましたら、お気軽にご連絡下さい。<br><br><br>
+
+        ohcheestudio@gmail.com<br><br>
+        <span class="email-closing">Team OucheeStudio</span></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,8 @@
 const initialState = {
   token: localStorage.getItem("token"),
+  isPasswordUpdated: null,
+  isValidToken: null,
+  isForgotEmailSent: null,
   isAuthenticated: null,
   isLoading: true,
   user: null,
@@ -29,6 +32,18 @@ export default function auth(state=initialState, action) {
         localStorage.removeItem("token");
         return {...state, errors: action.data, token: null, user: null,
             isAuthenticated: false, isLoading: false};
+
+    case 'VALIDATE_TOKEN_SUCCESSFUL':
+        return {...state, isValidToken: true};
+
+    case 'FORGOT_PASSWORD_SUCCESSFUL':
+        return {...state, isForgotEmailSent: true};
+
+    case 'UPDATE_PASSWORD_SUCCESSFUL':
+        return {...state, isPasswordUpdated: true};
+
+    case 'UPDATE_PASSWORD_ERROR':
+        return {...state, errors: action.data};
 
     case 'VALIDATE_TOKEN_SUCCESSFUL':
         return {...state, isValidToken: true};

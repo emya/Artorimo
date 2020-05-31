@@ -15,6 +15,8 @@ import MyProfileEdit from "./components/MyProfileEdit";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -59,6 +61,8 @@ class RootContainerComponent extends Component {
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                     <Route exact path="/test" component={Test} />
+                    <Route exact path="/reset/password" component={ForgotPassword} />
+                    <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
                 </Switch>
