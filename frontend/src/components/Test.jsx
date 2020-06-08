@@ -22,50 +22,29 @@ class Test extends Component {
     </div>
 
     <div class="wrapper clearfix">
-      <SideMenu />
 
-      <div class="illustrator-list port placeholder">
-      <h2>My Portfolio</h2>
+      <div class="placeholder">
+      <h2 class="thankyou">ご登録ありがとうございます！</h2>
 
-      <div class="profile-left">
-          <img class="portfolio-pic" src={require('../img/portrait.png')}/>
+      <h3 class="next">NEXT STEP</h3>
+      <div class="next-step">
+        <ol>
+          <li><span class="todo">ポートフォリオを登録する</span>
+            <ul>
+              <li>次のページで、お気に入りの作品をアップロードしましょう！<br/>
+              海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
+            </ul>
+          </li>
+          <li><span class="todo">メールで仲介依頼をする</span>
+            <ul>
+              <li><span class="red">「海外クライアントからの仕事依頼が来たので対応して欲しい」「海外の企業やギャラリーに作品を売り込みたいので手伝って欲しい」</span>
+              <br/>そんな時は、<a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までまずはご連絡ください！（ご相談は全て無料）</li>
+              <li>1案件のみのご利用でももちろんOKです。</li>
+            </ul>
+          </li>
+        </ol>
       </div>
 
-      <div class="profile-right">
-        <p class="user-name">Chiaki Takahashi</p>
-        <p>Illustrator</p>
-      </div>
-
-        <ul class="port-list">
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-          <li><div class="illustrator">
-            <img src={require('../img/portrait.png')}/>
-            </div></li>
-
-        </ul>
       </div>
 
     </div>
