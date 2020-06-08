@@ -1903,3 +1903,49 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .port ul li:hover {
   opacity: 100%;
 }
+
+
+// registration screen
+
+.next-step {
+  text-align: left;
+}
+
+.next-step {
+  @media (min-width: 767px) {
+    width: 80%;
+    margin: 0 auto;
+    // text-align: left;
+  }
+}
+
+.todo {
+  font-size: 2rem;
+  font-weight: bold;
+  // color: red;
+}
+
+.next-step li {
+  margin: 10px;
+}
+
+.next-step ol {
+  padding-left: 15px;
+}
+
+.red {
+  color: #CC3300;
+}
+
+.next-step ul {
+  padding-left: 5px;
+}
+
+.thankyou {
+  width: 70%;
+  margin: 100px auto 20px;
+}
+
+.next {
+  margin: 60px auto 30px;
+}
