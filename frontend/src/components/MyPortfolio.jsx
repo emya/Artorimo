@@ -14,7 +14,6 @@ class MyPortfolio extends Component {
 
   componentDidMount() {
     this.props.fetchPortfolio(this.props.user.id);
-    console.log(this.props)
   }
 
   render() {

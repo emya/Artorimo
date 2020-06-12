@@ -163,10 +163,9 @@ class PortfolioViewSet(viewsets.ModelViewSet):
         if user_id:
             user = User.objects.get(pk=user_id)
             queryset = queryset.filter(user=user)
-            print(queryset.count())
+
             if user and queryset.count() == 0:
                 p = Portfolio.objects.create(user=user)
-                print(p)
                 return [p]
             return queryset
         if all:
