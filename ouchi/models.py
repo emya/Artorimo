@@ -90,3 +90,15 @@ class Profile(models.Model):
     # 0: Line pay 1: PayPay 2: Pay-easy 3: Paypal 4: Bank
     payment_method = models.CharField(max_length=100, blank=True)
     image = models.CharField(max_length=200, null=True)
+
+class Portfolio(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="portfolio")
+    image0 = models.CharField(max_length=200, null=True)
+    image1 = models.CharField(max_length=200, null=True)
+    image2 = models.CharField(max_length=200, null=True)
+    image3 = models.CharField(max_length=200, null=True)
+    image4 = models.CharField(max_length=200, null=True)
+    image5 = models.CharField(max_length=200, null=True)
+    image6 = models.CharField(max_length=200, null=True)
+    image7 = models.CharField(max_length=200, null=True)
+    image8 = models.CharField(max_length=200, null=True)

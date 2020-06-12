@@ -12,6 +12,8 @@ import Login from "./components/Login";
 import SideMenu from "./components/SideMenu";
 import MyProfile from "./components/MyProfile";
 import MyProfileEdit from "./components/MyProfileEdit";
+import MyPortfolio from "./components/MyPortfolio";
+import MyPortfolioEdit from "./components/MyPortfolioEdit";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -65,6 +67,8 @@ class RootContainerComponent extends Component {
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
+                    <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
+                    <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                 </Switch>
             </BrowserRouter>
         );

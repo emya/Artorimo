@@ -5,13 +5,15 @@ from .api import (
     RegistrationAPI,
     LoginAPI,
     UserAPI,
-    ProfileViewSet
+    ProfileViewSet,
+    PortfolioViewSet,
 )
 
 #from .views import ListNote
 
 router = routers.DefaultRouter()
 router.register('profiles', ProfileViewSet, 'profiles')
+router.register('portfolios', PortfolioViewSet, 'portfolios')
 
 urlpatterns = [
     url("^", include(router.urls)),

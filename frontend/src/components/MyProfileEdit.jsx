@@ -10,6 +10,8 @@ import SideMenu from './SideMenu';
 import Footer from './Footer';
 import {profile, auth} from "../actions";
 
+import { keys } from '../keys.js';
+
 library.add(faIgloo)
 
 class MyProfileEdit extends Component {
@@ -154,12 +156,6 @@ class MyProfileEdit extends Component {
   <div>
     <Header />
 
-    <div class="menu">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/about">About Us</a>
-      <a href="/contact-us">Contact Us</a>
-    </div>
-
     <div class="wrapper clearfix">
 
     <SideMenu />
@@ -175,7 +171,7 @@ class MyProfileEdit extends Component {
               <div class="profile-left">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
-                  <img src={require('../img/default.png')} />
+                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
                  )}
                 {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    User, Profile
+    User, Profile, Portfolio
 )
 
 from django.contrib.auth import authenticate
@@ -85,3 +85,15 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = '__all__'
 
+class PortfolioSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    profile = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Portfolio
+        fields = '__all__'
+        extra_fields = ['profile']
+
+    def get_profile(self, instance):
+        profile = Profile.objects.get(user=instance.user)
+        return ProfileSerializer(profile, read_only=True).data

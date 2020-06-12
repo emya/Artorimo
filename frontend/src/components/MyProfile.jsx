@@ -23,12 +23,6 @@ class MyProfile extends Component {
   <div>
     <Header />
 
-    <div class="menu">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/about">About Us</a>
-      <a href="/contact-us">Contact Us</a>
-    </div>
-
     <div class="wrapper clearfix">
 
       <SideMenu />
