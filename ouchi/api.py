@@ -18,13 +18,14 @@ from knox.models import AuthToken
 import boto3
 
 from .models import (
-    User, Profile
+    User, Profile, Portfolio
 )
 from .serializers import (
     UserSerializer,
     CreateUserSerializer,
     LoginUserSerializer,
-    ProfileSerializer
+    ProfileSerializer,
+    PortfolioSerializer
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
@@ -38,6 +39,7 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         Profile.objects.create(user=user)
+        Portfolio.objects.create(user=user)
         _, token = AuthToken.objects.create(user)
 
         html_message = render_to_string('email-signup.html', {'user': user})
@@ -68,6 +70,115 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class PortfolioViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseUserPermissions, ]
+    parser_classes = [MultiPartParser, FormParser, ]
+    serializer_class = PortfolioSerializer
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data.copy()
+        img0 = data.pop('image0')
+        img1 = data.pop('image1')
+        img2 = data.pop('image2')
+        img3 = data.pop('image3')
+        img4 = data.pop('image4')
+        img5 = data.pop('image5')
+        img6 = data.pop('image6')
+        img7 = data.pop('image7')
+        img8 = data.pop('image8')
+
+        is_upload_images = {}
+
+        if img0:
+            image = img0[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image0'] = image.name
+                is_upload_images['image0'] = image
+        if img1:
+            image = img1[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image1'] = image.name
+                is_upload_images['image1'] = image
+        if img2:
+            image = img2[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image2'] = image.name
+                is_upload_images['image2'] = image
+
+        if img3:
+            image = img3[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image3'] = image.name
+                is_upload_images['image3'] = image
+
+        if img4:
+            image = img4[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image4'] = image.name
+                is_upload_images['image4'] = image
+
+        if img5:
+            image = img5[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image5'] = image.name
+                is_upload_images['image5'] = image
+
+        if img6:
+            image = img6[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image6'] = image.name
+                is_upload_images['image6'] = image
+
+        if img7:
+            image = img7[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image7'] = image.name
+                is_upload_images['image7'] = image
+
+        if img8:
+            image = img8[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image8'] = image.name
+                is_upload_images['image8'] = image
+
+        serializer = self.serializer_class(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        if is_upload_images:
+            for k, v in is_upload_images.items():
+                upload_to_s3(v, f'portfolios/{request.user.id}/{v.name}')
+
+        return Response(serializer.data)
+
+    def get_queryset(self):
+        all = self.request.GET.get('all')
+        others = self.request.GET.get('others')
+        user_id = self.request.GET.get('userId')
+
+        queryset = Portfolio.objects.all()
+
+        if user_id:
+            user = User.objects.get(pk=user_id)
+            queryset = queryset.filter(user=user)
+            print(queryset.count())
+            if user and queryset.count() == 0:
+                p = Portfolio.objects.create(user=user)
+                print(p)
+                return [p]
+            return queryset
+        if all:
+            return queryset
+        if others:
+            queryset = queryset.exclude(user=self.request.user)
+            return queryset
+
+        # TODO: handle exception
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]

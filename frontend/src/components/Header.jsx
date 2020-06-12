@@ -17,7 +17,7 @@ render() {
         )}
         { this.props.user && (
           <div class="login">
-            <a class="signin" href="/myprofile">マイページ</a>
+            <a class="signin" href="/myportfolio">マイページ</a>
           </div>
         )}
       </div>
