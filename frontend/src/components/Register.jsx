@@ -118,7 +118,6 @@ class Login extends Component {
             </button>
           </p>
 
-          <a href="#" onclick="gtag('event', 'xyz');">Click Test</a>
           <p>
             すでにアカウントをお持ちの方はこちら<br/> <a href="/login">ログイン</a>
           </p>
