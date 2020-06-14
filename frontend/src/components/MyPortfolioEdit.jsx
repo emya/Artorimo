@@ -114,11 +114,12 @@ class MyPortfolioEdit extends Component {
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
         <div class="illustrator-list port placeholder">
           <h2>My Portfolio</h2>
+          <p>お気に入りの作品を9枚アップロードしましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
           <form onSubmit={this.submitPortfolio}>
             {errors.map(error => (
               <p class="error-heading" key={error}>Error: {error}</p>
             ))}
-            <ul class="port-list">
+            <ul class="port-list port-edit">
               <li><div class="illustrator">
                 {this.state.image0 && (<img src={URL.createObjectURL(this.state.image0)} />)}
                 {!this.state.image0 && portfolio.image0 && (
@@ -126,7 +127,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image0 && !portfolio.image0 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image0')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image0')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -136,7 +137,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image1 && !portfolio.image1 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image1')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image1')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -146,7 +147,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image2 && !portfolio.image2 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image2')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image2')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -156,7 +157,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image3 && !portfolio.image3 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image3')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image3')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -166,7 +167,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image4 && !portfolio.image4 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image4')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image4')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -176,7 +177,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image5 && !portfolio.image5 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image5')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image5')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -186,7 +187,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image6 && !portfolio.image6 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image6')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image6')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -196,7 +197,7 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image7 && !portfolio.image7 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image7')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image7')} />
               </div></li>
 
               <li><div class="illustrator">
@@ -206,10 +207,10 @@ class MyPortfolioEdit extends Component {
                  )}
                 {!this.state.image8 && !portfolio.image8 && (<img src={require('../img/portrait.png')} />)}
 
-                <input class="picture-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image8')} />
+                <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image8')} />
               </div></li>
             </ul>
-            <input class="btn savep" type="submit" value="Save Portfolio" />
+            <input class="btn savep" type="submit" value="変更を保存" />
           </form>
         </div>
       ))}

@@ -7,9 +7,10 @@ render() {
     return (
       <div class="sidemenu">
         <ul>
+          <li><a href={'/contact-us'} class="contact-us-sidebar">仲介を相談する</a></li>
+          <li><a href={'/myportfolio'}>My Portfolio</a></li>
           <li><a href={'/myprofile'}>My Profile</a></li>
           <li><a href={'/how-it-works'}>How It Works</a></li>
-          <li><a href={'/contact-us'}>Contact Us</a></li>
           <li><a class="logout" onClick={this.props.logout}>Logout</a></li>
         </ul>
       </div>

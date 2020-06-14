@@ -378,7 +378,7 @@ class MyProfileEdit extends Component {
               </div>
             </div>
           ))}
-          <input class="btn savep" type="submit" value="Save Profile" />
+          <input class="btn savep" type="submit" value="変更を保存" />
 
         </form>
       </div>
