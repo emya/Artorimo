@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
 import Header from './Header';
+import Footer from './Footer';
 import {auth} from "../actions";
 import '../css/style.scss';
 
@@ -53,6 +54,41 @@ class Login extends Component {
   }
 
   render() {
+    if (this.props.isRegistered) {
+      return (
+  <div>
+    <Header />
+    <div class="wrapper clearfix">
+
+      <div class="placeholder">
+        <h2 class="thankyou">ご登録ありがとうございます！</h2>
+
+        <h3 class="next">NEXT STEP</h3>
+        <div class="next-step">
+          <ol>
+            <li><span class="todo">ポートフォリオを登録する</span>
+              <ul>
+                <li><a href="/myportfolio">次のページ</a>で、お気に入りの作品をアップロードしましょう！<br/>
+                海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
+              </ul>
+            </li>
+            <li><span class="todo">メールで仲介依頼をする</span>
+              <ul>
+                <li><span class="red">「海外クライアントからの仕事依頼が来たので対応して欲しい」「海外の企業やギャラリーに作品を売り込みたいので手伝って欲しい」</span>
+                <br/>そんな時は、<a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までまずはご連絡ください！（ご相談は全て無料）</li>
+                <li>1案件のみのご利用でももちろんOKです。</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <a class="btn savep" href="/myportfolio/edit">作品をアップロード</a>
+    <Footer />
+  </div>
+      )
+    }
+
     if (this.props.isAuthenticated) {
       return <Redirect to='/myprofile' />
     }
@@ -62,12 +98,6 @@ class Login extends Component {
     return (
     <div>
       <Header />
-
-      <div class="menu">
-        <a href="/how-it-works">How It Works</a>
-        <a href="/about">About Us</a>
-        <a href="/contact-us">Contact Us</a>
-      </div>
 
       <div class="wrapper clearfix">
 
@@ -146,6 +176,7 @@ const mapStateToProps = state => {
   return {
     errors,
     isAuthenticated: state.auth.isAuthenticated,
+    isRegistered: state.auth.isRegistered,
     user: state.auth.user
   };
 }

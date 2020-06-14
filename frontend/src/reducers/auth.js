@@ -3,6 +3,7 @@ const initialState = {
   isPasswordUpdated: null,
   isValidToken: null,
   isForgotEmailSent: null,
+  isRegistered: null,
   isAuthenticated: null,
   isLoading: true,
   user: null,
@@ -23,7 +24,7 @@ export default function auth(state=initialState, action) {
     case 'LOGIN_SUCCESSFUL':
     case 'REGISTRATION_SUCCESSFUL':
         localStorage.setItem("token", action.data.token);
-        return {...state, ...action.data, isAuthenticated: true, isLoading: false, errors: null};
+        return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, errors: null};
 
     case 'AUTHENTICATION_ERROR':
     case 'LOGIN_FAILED':
