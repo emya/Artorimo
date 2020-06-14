@@ -13,7 +13,7 @@ class Landing extends Component {
     return (
   <div>
     <Header />
-    <header class="header">
+    <header >
       <div class="catchcopy clearfix">
         <img class="lpimage" src={require('../img/newlp.jpg')}/>
         <img class="lpimage-mobile" src={require('../img/newlp.jpg')}/>

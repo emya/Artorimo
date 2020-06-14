@@ -28,6 +28,7 @@ class MyProfile extends Component {
       <SideMenu />
 
       <div class="profile">
+      <div class="button fixed-btn">仲介の相談</div>
       <h2>My Profile</h2>
         {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
           <div class="wrapper clearfix">
@@ -109,7 +110,7 @@ class MyProfile extends Component {
             </div>
           </div>
           ))}
-          <a class="btn savep" href="/myprofile/edit">Edit Profile</a>
+          <a class="btn savep" href="/myprofile/edit">プロフィールを編集</a>
       </div>
     </div>
 
