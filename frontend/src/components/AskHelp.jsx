@@ -61,7 +61,6 @@ class AskHelp extends Component {
       )
     }
 
-    console.log(this.props.user);
     const errors = this.state.errors;
     return (
     <div>

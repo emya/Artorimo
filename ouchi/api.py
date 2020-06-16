@@ -247,8 +247,6 @@ class AskHelpAPI(generics.GenericAPIView):
 
         return Response({})
 
-    def get_object(self):
-        return self.request.user
 
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)
