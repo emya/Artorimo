@@ -14,6 +14,7 @@ import MyProfile from "./components/MyProfile";
 import MyProfileEdit from "./components/MyProfileEdit";
 import MyPortfolio from "./components/MyPortfolio";
 import MyPortfolioEdit from "./components/MyPortfolioEdit";
+import AskHelp from "./components/AskHelp";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -69,6 +70,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
+                    <PrivateRoute exact path="/ask/help" component={AskHelp} />
                 </Switch>
             </BrowserRouter>
         );

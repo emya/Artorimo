@@ -5,6 +5,7 @@ from .api import (
     RegistrationAPI,
     LoginAPI,
     UserAPI,
+    AskHelpAPI,
     ProfileViewSet,
     PortfolioViewSet,
 )
@@ -20,6 +21,7 @@ urlpatterns = [
     url("^auth/register/$", RegistrationAPI.as_view()),
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
+    url("^ask/help/$", AskHelpAPI.as_view()),
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 
