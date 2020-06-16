@@ -7,7 +7,7 @@ render() {
     return (
       <div class="sidemenu">
         <ul>
-          <li><a href={'/contact-us'} class="contact-us-sidebar">仲介を相談する</a></li>
+          <li><a href={'/ask/help'} class="contact-us-sidebar">仲介を相談する</a></li>
           <li><a href={'/myportfolio'}>My Portfolio</a></li>
           <li><a href={'/myprofile'}>My Profile</a></li>
           <li><a href={'/how-it-works'}>How It Works</a></li>

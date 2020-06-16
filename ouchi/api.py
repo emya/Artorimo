@@ -226,6 +226,30 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
+class AskHelpAPI(generics.GenericAPIView):
+
+    def post(self, request):
+        data = request.data
+        user = request.user
+
+        # Notify User
+        html_message = render_to_string('email-askhelp-confirmed.html',
+                                        {'user': user, 'message': data['message']})
+
+        send_email.delay("仲介相談受付のお知らせ", "仲介相談受付のお知らせ", html_message, [data['email']])
+
+
+        # Notify Ohchee Team
+        html_message = render_to_string('email-askhelp-received.html',
+                                        {'user': user, 'email': data['email'], 'message': data['message']})
+
+        send_email.delay("[Action Required] 仲介の相談", "仲介の相談", html_message, [settings.EMAIL_HOST_USER])
+
+        return Response({})
+
+    def get_object(self):
+        return self.request.user
+
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)
     def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
