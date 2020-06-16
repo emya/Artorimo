@@ -26,7 +26,7 @@ class MyPortfolio extends Component {
 
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
         <div class="illustrator-list port placeholder">
-        <div class="button fixed-btn">仲介の相談</div>
+        <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
           <h2>My Portfolio</h2>
 
 
