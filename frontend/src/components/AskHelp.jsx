@@ -71,19 +71,26 @@ class AskHelp extends Component {
 
         <form class="form">
 
-          <h2>仲介を相談する</h2>
+          <h2>仲介依頼・ご相談</h2>
+
+            <p class="contact-form-intro">
+            仲介をご希望の際は、以下のフォームを送信いただき、クライアントからのメールを<br/>弊社アドレス<a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご転送ください。<br/><br/>
+            弊社サービスは完全成功報酬制のため、<span class="red">ご相談はすべて無料</span>です。<br/>
+            また、仲介のご相談以外についてもお気軽にご連絡ください。
+            </p>
+
           <div class="form-wrapper">
             <div class="form-section">
               {errors.map(error => (
                 <p key={error}>Error: {error}</p>
               ))}
-              <p class="form-heading">Ohchee Studioとの連絡で使いたいメールアドレス<span class="asterisk">*</span></p><br/>
+              <p class="form-heading">Ohchee Studioとの連絡用メールアドレス<span class="asterisk"> *</span></p><br/>
               <input type="email" maxLength="200" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} required /><br/>
 
-              <p class="form-heading">案件依頼<span class="asterisk">*</span></p><br/>
+              <p class="form-heading">ご相談内容<span class="asterisk"> *</span></p><br/>
               <input type="textarea" class="contact-message" maxLength="300" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}  required /><br/>
             </div>
-            <button class="form-send-btn btn" onClick={this.sendAskHelp}>Submit</button>
+            <button class="form-send-btn btn" onClick={this.sendAskHelp}>送信</button>
           </div>
         </form>
       </div>

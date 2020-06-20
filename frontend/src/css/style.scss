@@ -148,6 +148,16 @@ input {
   }
 }
 
+.form-section input {
+  width: 97%;
+  margin: 10px 0 30px 5px;
+}
+
+.form-section input {
+  @media (max-width: 767px) {
+    width: 93%;
+  }}
+
 /* topbar */
 
 
@@ -2014,3 +2024,94 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .next {
   margin: 60px auto 30px;
 }
+
+// form
+
+.form {
+  display: block;
+  float: right;
+  width: 75%;
+  background-color: #EEEEEE;
+  padding-bottom: 70px;
+}
+
+.form {
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 10px 3%;
+  }}
+
+
+.form-wrapper {
+  text-align: left;
+}
+
+.form-section {
+  display: block;
+  background-color: white;
+  width: 80%;
+  border-radius: 7px;
+  margin: 30px auto 0px;
+  padding: 50px;
+  text-align: left;
+}
+
+.form-section {
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 10px auto 0px;
+    padding: 20px;
+  }}
+
+
+.form-section.first {
+  margin-top: 70px;
+}
+
+.form-heading {
+  display: inline-block;
+  margin: 0 0 0 0;
+  font-weight: bold;
+}
+
+.form-data {
+  display: inline-block;
+  margin: 10px 0 30px 0;
+  text-align: left;
+  word-break: break-all;
+}
+
+.form-data img{
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+
+}
+
+
+.form-send-btn {
+  color: white;
+  // background-color: #1B435D;
+  // display: block;
+  width: 50%;
+  height: 50px;
+  // line-height: 30px;
+  // border-radius: 10px;
+  margin-top: 50px;
+}
+
+.form-send-btn {
+  @media (max-width: 767px) {
+    width: 100%;
+    // margin: 0;
+  }}
+
+  .contact-message {
+    height: 300px;
+    vertical-align: top;
+  }
+
+  .contact-form-intro {
+    width: 90%;
+    margin: 70px auto;
+  }
