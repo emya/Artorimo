@@ -129,10 +129,7 @@ class MyProfileEdit extends Component {
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
     this.setState({
-      user_name: profile.user_name, residence: profile.residence, style: profile.style,
-      work_process: profile.work_process, employment_type: profile.employment_type,
-      availability: profile.availability, achievement: profile.achievement,
-      payment_method: profile.payment_method, isChanged: true
+      [propertyName]: event.target.value, isChanged: true
     });
   }
 
