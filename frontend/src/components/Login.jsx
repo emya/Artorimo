@@ -21,7 +21,7 @@ class Login extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to='/myprofile' />
+      return <Redirect to='/myportfolio' />
     }
 
     const errors = this.state.errors;

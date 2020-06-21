@@ -88,7 +88,7 @@ class AskHelp extends Component {
               <input type="email" maxLength="200" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} required /><br/>
 
               <p class="form-heading">ご相談内容<span class="asterisk"> *</span></p><br/>
-              <input type="textarea" class="contact-message" maxLength="300" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}  required /><br/>
+              <textarea class="contact-message" maxLength="300" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}  required /><br/>
             </div>
             <button class="form-send-btn btn" onClick={this.sendAskHelp}>送信</button>
           </div>
