@@ -15,6 +15,7 @@ import MyProfileEdit from "./components/MyProfileEdit";
 import MyPortfolio from "./components/MyPortfolio";
 import MyPortfolioEdit from "./components/MyPortfolioEdit";
 import AskHelp from "./components/AskHelp";
+import AdminLogin from "./components/AdminLogin";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -49,6 +50,18 @@ class RootContainerComponent extends Component {
         }} />
     }
 
+    SuperUserRoute = ({component: ChildComponent, ...rest}) => {
+        return <Route {...rest} render={props => {
+            if (this.props.auth.isLoading) {
+                return <em>Loading...</em>;
+            } else if (!this.props.auth.isSuperuser) {
+                return <Redirect to="/" />;
+            } else {
+                return <ChildComponent {...props} />
+            }
+        }} />
+    }
+
     render() {
         let {PrivateRoute} = this;
 
@@ -71,6 +84,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
+                    <PrivateRoute exact path="/ohcheeadmin" component={AdminLogin} />
                 </Switch>
             </BrowserRouter>
         );

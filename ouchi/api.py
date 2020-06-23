@@ -247,6 +247,17 @@ class AskHelpAPI(generics.GenericAPIView):
 
         return Response({})
 
+class AdminLoginAPI(generics.GenericAPIView):
+    # Check if a user is superuser
+    def get(self, request):
+        is_superuser = request.user.is_superuser
+        print(is_superuser)
+        return Response({"is_superuser": is_superuser})
+
+    def post(self, request):
+        data = request.data
+        user = request.user
+
 
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)
