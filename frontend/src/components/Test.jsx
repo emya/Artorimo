@@ -33,6 +33,7 @@ class Test extends Component {
             <ul>
               <li>次のページで、お気に入りの作品をアップロードしましょう！<br/>
               海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
+              <li>あわせて、海外クライアント向けに、<span class="red">弊社メールアドレスを皆様のSNSやHPに直接ご掲載</span>ください！（文面の例：For overseas clients, e-mail <a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a> for any inquiries!）先方がスムーズに連絡し易くなります。</li>
             </ul>
           </li>
           <li><span class="todo">メールで仲介依頼をする</span>
