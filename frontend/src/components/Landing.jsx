@@ -26,7 +26,6 @@ class Landing extends Component {
     <div class="menu">
       <a href="/how-it-works">How It Works</a>
       <a href="/about">About Us</a>
-      <a href="/artists">Artists</a>
       <a href="/contact-us">Contact Us</a>
     </div>
 
