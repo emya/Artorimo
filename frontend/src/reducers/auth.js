@@ -6,6 +6,7 @@ const initialState = {
   isRegistered: null,
   isAuthenticated: null,
   isLoading: true,
+  isSuperuser: null,
   user: null,
   errors: {},
 };
@@ -25,6 +26,16 @@ export default function auth(state=initialState, action) {
     case 'REGISTRATION_SUCCESSFUL':
         localStorage.setItem("token", action.data.token);
         return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, errors: null};
+
+    case 'SUPERUSER_LOGIN_SUCCESSFUL':
+        console.log("SUPERUSER_LOGIN_SUCCESSFUL");
+        //localStorage.setItem("token", action.data.token);
+        return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, isSuperuser: true, errors: null};
+
+    case 'SUPERUSER_LOGIN_FAILED':
+        console.log("SUPERUSER_LOGIN_FAILED");
+        //localStorage.setItem("token", action.data.token);
+        return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, isSuperuser: false, errors: null};
 
     case 'AUTHENTICATION_ERROR':
     case 'LOGIN_FAILED':
