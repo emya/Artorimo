@@ -165,6 +165,7 @@ class MyProfileEdit extends Component {
           ))}
           {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
             <div class="wrapper clearfix">
+            <div class="profile-top">
               <div class="profile-left">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
@@ -180,9 +181,10 @@ class MyProfileEdit extends Component {
                 <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
                 <p>Illustrator</p>
               </div>
+            </div>
 
               <div class="profile-detail">
-                <p class="object">アーティスト名</p>
+                <p class="object">アーティスト名<br/>（このお名前のみ、ポートフォリオ上で公開されます）</p>
                 <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'user_name', profile)} value={profile.user_name}/>
                 <p class="object">都市</p>
                 <input placeholder="例：東京"　type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>

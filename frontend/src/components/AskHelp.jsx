@@ -50,8 +50,9 @@ class AskHelp extends Component {
 
         <div class="wrapper clearfix">
           <SideMenu />
-          <div class="request-conf">
-            <p>ご依頼・ご相談を受け付けました。２日以内にご入力されたメールアドレスにご連絡致します。</p>
+          <div class="placeholder">
+            <p>ご依頼・ご相談を受け付けました。<br/>２営業日以内にご入力されたメールアドレスにご連絡致します。</p>
+            <a class="btn savep" href="/myportfolio">マイページに戻る</a>
           </div>
         </div>
 
