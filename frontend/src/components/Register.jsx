@@ -81,9 +81,9 @@ class Login extends Component {
             </li>
           </ol>
         </div>
+        <a class="btn savep" href="/myportfolio/edit">作品をアップロード</a>
       </div>
     </div>
-    <a class="btn savep" href="/myportfolio/edit">作品をアップロード</a>
     <Footer />
   </div>
       )

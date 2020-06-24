@@ -1612,6 +1612,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .object {
   @media (max-width: 767px) {
     margin-left: 0;
+    width: 100%;
   }}
 
 .fab {
@@ -1690,11 +1691,17 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 .profile-detail {
-  margin: 100px auto 100px;
+  margin: 70px auto 70px;
 }
 
 .profile-detail p, .profile-detail .checkbox{
     text-align: left;
+}
+
+.profile-top {
+  margin-bottom: 30px;
+  display: block;
+  height: 200px;
 }
 
 .checkbox {
@@ -2109,6 +2116,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   .contact-message {
     height: 300px;
     vertical-align: top;
+    width: 100%;
   }
 
   .contact-form-intro {
