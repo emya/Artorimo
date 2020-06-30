@@ -10,7 +10,6 @@ import '../css/style.scss';
 class AdminLogin extends Component {
   componentDidMount() {
     this.props.checkAdmin();
-    console.log(this.props.isSuperuser);
   }
 
   state = {
@@ -20,13 +19,16 @@ class AdminLogin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.login(this.state.email, this.state.password);
+    this.props.login(this.state.username, this.state.password);
   }
 
   render() {
-    console.log(this.props.isSuperuser);
-
     const errors = this.state.errors;
+
+    if (this.props.isAdmin) {
+      return <Redirect to="/admin/users" />;
+    }
+
     if (this.props.isSuperuser === null) {
       return null
     }
@@ -92,6 +94,7 @@ const mapStateToProps = state => {
     errors,
     isAuthenticated: state.auth.isAuthenticated,
     isSuperuser: state.auth.isSuperuser,
+    isAdmin: state.auth.isAdmin,
     user: state.auth.user
   };
 }
@@ -101,8 +104,8 @@ const mapDispatchToProps = dispatch => {
     checkAdmin: () => {
       return dispatch(auth.checkAdmin());
     },
-    login: (email, password) => {
-      return dispatch(auth.login(email, password));
+    login: (username, password) => {
+      return dispatch(auth.adminLogin(username, password));
     }
   };
 }

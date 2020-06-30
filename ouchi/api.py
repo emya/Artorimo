@@ -27,7 +27,7 @@ from .serializers import (
     ProfileSerializer,
     PortfolioSerializer
 )
-from .permissions import BaseUserPermissions, BaseTransactionPermissions
+from .permissions import BaseUserPermissions, SuperUserPermissions
 
 from .tasks import send_email
 
@@ -248,15 +248,23 @@ class AskHelpAPI(generics.GenericAPIView):
         return Response({})
 
 class AdminLoginAPI(generics.GenericAPIView):
+    serializer_class = LoginUserSerializer
+    permission_classes = [SuperUserPermissions, ]
+
     # Check if a user is superuser
     def get(self, request):
         is_superuser = request.user.is_superuser
-        print(is_superuser)
         return Response({"is_superuser": is_superuser})
 
     def post(self, request):
         data = request.data
-        user = request.user
+        admin_user = User.objects.get(email=settings.EMAIL_HOST_USER)
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        if admin_user == user:
+            return Response({})
+        raise Exception
 
 
 class CustomPasswordResetView:

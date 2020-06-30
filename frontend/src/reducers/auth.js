@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: null,
   isLoading: true,
   isSuperuser: null,
+  isAdmin: null,
   user: null,
   errors: {},
 };
@@ -37,13 +38,16 @@ export default function auth(state=initialState, action) {
         //localStorage.setItem("token", action.data.token);
         return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, isSuperuser: false, errors: null};
 
+    case 'ADMIN_LOGIN_SUCCESSFUL':
+        return {...state, ...action.data, isRegistered: true, isAuthenticated: true, isLoading: false, isSuperuser: true, isAdmin: true, errors: null};
+
     case 'AUTHENTICATION_ERROR':
     case 'LOGIN_FAILED':
     case 'REGISTRATION_FAILED':
     case 'LOGOUT_SUCCESSFUL':
         localStorage.removeItem("token");
         return {...state, errors: action.data, token: null, user: null,
-            isAuthenticated: false, isLoading: false};
+            isAuthenticated: false, isSuperuser: false, isAdmin: false, isLoading: false};
 
     case 'VALIDATE_TOKEN_SUCCESSFUL':
         return {...state, isValidToken: true};
