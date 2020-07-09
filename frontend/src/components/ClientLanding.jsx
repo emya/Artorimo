@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 import '../css/style.scss';
+import { keys } from '../keys.js';
 
 class ClientLanding extends Component {
   state = {
@@ -107,8 +108,12 @@ class ClientLanding extends Component {
           {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
             <li>
               <div class="illustrator">
-                <img src={require('../img/portrait.png')}/>
-                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>{artist.user_name}</a>
+                {artist.image0 ? (
+                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
+                  ) : (
+                 <img src={require('../img/portrait.png')}/>
+                )}
+                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>{artist.profile.user_name}</a>
               </div>
             </li>
           ))}
