@@ -14,6 +14,8 @@ import MyProfile from "./components/MyProfile";
 import MyProfileEdit from "./components/MyProfileEdit";
 import MyPortfolio from "./components/MyPortfolio";
 import MyPortfolioEdit from "./components/MyPortfolioEdit";
+import Portfolio from "./components/Portfolio";
+import Profile from "./components/Profile";
 import AskHelp from "./components/AskHelp";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
@@ -49,14 +51,28 @@ class RootContainerComponent extends Component {
         }} />
     }
 
+    StaffRoute = ({component: ChildComponent, ...rest}) => {
+        return <Route {...rest} render={props => {
+            if (this.props.auth.isLoading) {
+                return <em>Loading...</em>;
+            } else if (!this.props.auth.isAuthenticated || !this.props.auth.user.is_staff) {
+                return <Redirect to="/" />;
+            } else {
+                return <ChildComponent {...props} />
+            }
+        }} />
+    }
+
     render() {
         let {PrivateRoute} = this;
+        let {StaffRoute} = this;
 
         return (
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/artists" component={ClientLanding} />
+                    <Route exact path="/artists/portfolio/:userId" component={Portfolio} />
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/how-it-works" component={HowItWorks} />
                     <Route exact path="/register" component={Register} />
@@ -71,6 +87,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
+                    <StaffRoute exact path="/profile/:userId" component={Profile} />
                 </Switch>
             </BrowserRouter>
         );

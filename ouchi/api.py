@@ -71,6 +71,29 @@ class UserAPI(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
+class ArtistAPI(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+
+    def get(self, request):
+        styles = request.GET.get("styles")
+
+        queryset = Profile.objects.all()
+        queryset = queryset.filter(user__is_staff=False)
+
+        profiles_to_remove = []
+        if styles:
+            styles = styles.split(",")
+            for q in queryset:
+                q_styles = q.style.split(",")
+                intersections = list(set(styles) & set(q_styles))
+
+                if len(intersections) == 0:
+                    profiles_to_remove.append(q.id)
+
+            queryset = queryset.exclude(id__in=profiles_to_remove)
+
+        return Response({"artists": self.serializer_class(queryset, many=True).data})
+
 class PortfolioViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
     parser_classes = [MultiPartParser, FormParser, ]
