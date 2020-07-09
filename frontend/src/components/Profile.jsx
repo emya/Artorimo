@@ -13,9 +13,9 @@ import { keys } from '../keys.js';
 
 library.add(faIgloo)
 
-class MyProfile extends Component {
+class Profile extends Component {
   componentDidMount() {
-    this.props.fetchProfile(this.props.user.id);
+    this.props.fetchProfile(this.props.match.params.userId);
   }
 
   render() {
@@ -28,7 +28,6 @@ class MyProfile extends Component {
       <SideMenu />
 
       <div class="profile">
-      <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
       <h2>My Profile</h2>
         {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
           <div class="wrapper clearfix">
@@ -110,7 +109,6 @@ class MyProfile extends Component {
             </div>
           </div>
           ))}
-          <a class="btn savep" href="/myprofile/edit">プロフィールを編集</a>
       </div>
     </div>
 
@@ -138,4 +136,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

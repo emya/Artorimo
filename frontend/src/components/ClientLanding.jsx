@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import {auth} from "../actions";
+import {auth, artists} from "../actions";
 import Header from './Header';
 import Footer from './Footer';
 
 import '../css/style.scss';
 
 class ClientLanding extends Component {
+  state = {
+    style: null,
+    isChanged: false,
+    errors: []
+  }
+
+  handleStyleChange = (event) => {
+    const checked = event.target.checked;
+    const name = event.target.name;
+    const style = this.state.style;
+
+    if (checked) {
+      if (style === null) {
+        this.setState({style: [name], isChanged: true});
+      }
+      else if (style.indexOf(name) === -1){
+        style.push(name);
+        this.setState({style: style, isChanged: true});
+      }
+    } else{
+      var ind = style.indexOf(name);
+      if (ind !== -1) {
+        style.splice(ind, 1);
+        this.setState({style: style, isChanged: true});
+      }
+    }
+  }
+
+  fetchArtists = () => {
+    this.props.fetchArtists(this.state.style);
+  }
 
   render() {
     return (
       <div>
         <Header />
-        <header class="header">
+        <header>
           <div class="catchcopy clearfix">
             <img class="lpimage englishlp" src={require('../img/lp-english.jpg')}/>
             <img class="lpimage-mobile" src={require('../img/lp-english.jpg')}/>
@@ -30,28 +61,24 @@ class ClientLanding extends Component {
           <a href="/contact-us">Contact Us</a>
         </div>
 
-        {/* Use this once we support search function
         <div class="illustrator-sort">
           <div class="search-title">Style</div>
           <ul>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
-            <li><input type="checkbox" class="checkbox" />Character</li>
+            <li><input type="checkbox" class="checkbox" name="0" onChange={this.handleStyleChange} />Character</li>
+            <li><input type="checkbox" class="checkbox" name="1" onChange={this.handleStyleChange} />Fashion</li>
+            <li><input type="checkbox" class="checkbox" name="2" onChange={this.handleStyleChange} />Books</li>
+            <li><input type="checkbox" class="checkbox" name="3" onChange={this.handleStyleChange} />Real</li>
+            <li><input type="checkbox" class="checkbox" name="4" onChange={this.handleStyleChange} />Comic/Anime</li>
+            <li><input type="checkbox" class="checkbox" name="5" onChange={this.handleStyleChange} />Games</li>
+            <li><input type="checkbox" class="checkbox" name="6" onChange={this.handleStyleChange} />Pop</li>
+            <li><input type="checkbox" class="checkbox" name="7" onChange={this.handleStyleChange} />Japanese</li>
+            <li><input type="checkbox" class="checkbox" name="8" onChange={this.handleStyleChange} />Watercolor</li>
+            <li><input type="checkbox" class="checkbox" name="9" onChange={this.handleStyleChange} />Sumie</li>
+            <li><input type="checkbox" class="checkbox" name="10" onChange={this.handleStyleChange} />Line Drawing</li>
+            <li><input type="checkbox" class="checkbox" name="11" onChange={this.handleStyleChange} />Arts</li>
+            <li><input type="checkbox" class="checkbox" name="12" onChange={this.handleStyleChange} />3D</li>
           </ul>
+          {/*
           <div class="search">
             <div class="search-title bottom">Free Search</div>
             <input type="text" class="searchbox" />
@@ -60,10 +87,11 @@ class ClientLanding extends Component {
             <div class="search-title bottom">Artist Name</div>
             <input type="text" class="searchbox" />
           </div>
-          <div class="button searchbtn">Search</div>
+          */}
+          <button class="button searchbtn" onClick={this.fetchArtists}>Search</button>
         </div>
-        */}
 
+        {/*}
         <script src="https://snapwidget.com/js/snapwidget.js"></script>
         <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
         <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
@@ -72,41 +100,25 @@ class ClientLanding extends Component {
           allowtransparency="true" frameborder="0" scrolling="no"
           style={{border:'none', overflow:'hidden',  width:'100%', height:'300px'}}>
         </iframe>
+        */}
 
-        {/* Use this once we get portfolio page
         <div class="illustrator-list">
           <ul>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
-            <li><div class="illustrator">
-              <img src={require('../img/portrait.png')}/>
-              <div class="illustrator-username">Chloe Takahashi</div>
-            </div></li>
+          {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
+            <li>
+              <div class="illustrator">
+                <img src={require('../img/portrait.png')}/>
+                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>{artist.user_name}</a>
+              </div>
+            </li>
+          ))}
+          {this.props.artists && this.props.artists.artists && this.props.artists.artists.length === 0 && (
+            <div>
+              No Artists Found
+            </div>
+          )}
           </ul>
         </div>
-        */}
 
     <Footer />
   </div>
@@ -114,4 +126,21 @@ class ClientLanding extends Component {
   }
 }
 
-export default ClientLanding;
+const mapStateToProps = state => {
+  return {
+    artists: state.artists,
+    user: state.auth.user,
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchArtists: (style) => {
+      dispatch(artists.fetchArtists(style));
+    },
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientLanding);
