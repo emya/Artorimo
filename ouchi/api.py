@@ -83,12 +83,16 @@ class ArtistAPI(generics.RetrieveAPIView):
 
         if styles:
             styles = styles.split(",")
+            portfolios_to_removed = []
             for p in portfolios:
                 p_styles = p['profile']['style']
-
                 intersections = list(set(styles) & set(p_styles))
+
                 if len(intersections) == 0:
-                    portfolios.remove(p)
+                    portfolios_to_removed.append(p)
+
+            for p in portfolios_to_removed:
+                portfolios.remove(p)
 
         return Response({"artists": portfolios})
 
