@@ -67,6 +67,63 @@ class AboutUs extends Component {
           <p class="member-title">Cofounder & CTO</p>
           <p>香川県出身。東京大学大学院でコンピュータ科学の修士号を取得後、渡米しソフトウェアエンジニアとして主にスタートアップの会社に勤務。テニス、旅行が趣味。</p>
         </div>
+
+        <h2>About Us</h2>
+
+        <h3>Company Overview</h3>
+
+          <table class="table-data">
+            <tr>
+              <td>Company</td>
+              <td>TORIMO LLC</td>
+            </tr>
+            <tr>
+              <td>Start Date</td>
+              <td>November 2019</td>
+            </tr>
+            <tr>
+              <td>Company overview</td>
+              <td>Design and operation of web services</td>
+            </tr>
+            <tr>
+            <td>Phone Nuumber</td>
+            <td>‪1-(425)-310-5359‬</td>
+            </tr>
+            <tr>
+            <td>E-mail</td>
+            <td>‪<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a></td>
+            </tr>
+          </table>
+
+
+          <h3>Story Behind Ohchee Studio</h3>
+
+          <p>Ohchee Studio provides an agency service and a digital platform for talented Japanese creators to reach the global market.
+          <br/><br/>Ohchee Studio's goal is for all the creators to "make a living from what they love doing, from anywhere in the world".
+          <br/><br/>Two co-founders started this service from their experiences as a freelance illustrator. Chiaki had difficulties securing commission works or getting properly compensated as the Japanese market is saturated, and she was unfamiliar with the overseas market.
+          <br/><br/>Coming from Japan, our founders recognize many things that can be easily done in Japan but not overseas, and vice versa.
+          <br/><br/>Ohchee Studio strives to become a service that can eliminate such gaps between countries, and grow together with talented artists.</p>
+
+
+          <h3>Our Team</h3>
+
+
+          <div class="member">
+            <img class="us-picture" src={require('../img/Chiaki.png')}/>
+            <p><strong>Chiaki Ikuyama</strong></p>
+            <p class="member-title">Cofounder & CEO</p>
+            <p>Chiaki is originally from Japan and studied in Minnesota,USA. Prior to Torimo, she worked as a USCPA at Deloitte, as well as an investment banker at Citigroup. She is also a freelance illustrator and passionate about web design, digital art, fashion, and traveling.
+            <br/></p>
+          </div>
+
+          <div class="member">
+            <img class="us-picture" src={require('../img/Emi.png')}/>
+            <p><strong>Emi Ayada</strong></p>
+            <p class="member-title">Cofounder & CTO</p>
+            <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>
+          </div>
+
+
       </div>
       </div>
       <Footer />

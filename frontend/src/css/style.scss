@@ -1317,13 +1317,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 
-.profile img {
-  display: block;
-  height: 200px;
-  width: 200px;
-  margin: 60px auto 0;
-  border: 1px solid grey;
-}
+// .profile img {
+//   display: block;
+//   height: 200px;
+//   width: 200px;
+//   margin: 60px auto 0;
+//   border: 1px solid grey;
+// }
+
 
 .picture-upload {
   display: block;
@@ -1555,6 +1556,10 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 .profile-left {
+  height: 300px;
+}
+
+.profile-left {
   @media (min-width: 767px) {
     float: left;
     width: 50%;
@@ -1570,6 +1575,18 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
+.profile-right {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.profile-right-mobile {
+  @media (min-width: 767px) {
+    display: none;
+  }
+}
+
 .profile-right p {
   @media (min-width: 767px) {
     text-align: left!important;
@@ -1577,13 +1594,13 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 
-.profile img {
-  display: block;
-  height: 150px;
-  width: 150px;
-  margin: 0 auto 0;
-  border: 1px solid grey;
-}
+// .profile img {
+//   display: block;
+//   height: 150px;
+//   width: 150px;
+//   margin: 0 auto 0;
+//   border: 1px solid grey;
+// }
 
 .profile img {
   @media (max-width: 767px) {
@@ -1593,14 +1610,47 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
+.trim-wrap{
+  position:relative;
+  width:150px;
+  height:0;
+  padding-bottom:150px;/* 幅に対する縦のサイズ */
+  overflow:hidden;
+  background-color:#ccc;
+  margin: 23px 0 0 100px;
+}
+.trim-wrap>img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:auto;
+  height:auto;
+  max-width:179%;/* 横向き16:9の画像が表示エリア一杯になるように指定 */
+  max-height:initial;
+}
+
+.trim-wrap {
+  @media (max-width: 767px) {
+    margin: 0 auto;
+  }
+}
+
 .picture-upload {
   display: block;
-  margin: 5px auto 30px;
+  margin: 5px 0 30px 100px;
   padding: 1px;
   width: 200px!important;
   background-color: transparent!important;
   border: none!important;
 }
+
+.picture-upload {
+  @media (max-width: 767px) {
+    margin: 0 auto;
+  }
+}
+
 
 .object {
   margin: 35px auto 10px;
@@ -1701,7 +1751,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .profile-top {
   margin-bottom: 30px;
   display: block;
-  height: 200px;
+  height: 250px;
 }
 
 .checkbox {

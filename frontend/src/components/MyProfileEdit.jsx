@@ -167,13 +167,21 @@ class MyProfileEdit extends Component {
             <div class="wrapper clearfix">
             <div class="profile-top">
               <div class="profile-left">
+
+              <div class="trim-wrap">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
                   <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
                  )}
                 {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
+              </div>
 
                 <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+
+                <div class="profile-right-mobile">
+                  <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+                  <p>Illustrator</p>
+                </div>
 
               </div>
 
