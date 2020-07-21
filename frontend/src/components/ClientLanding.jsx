@@ -15,6 +15,10 @@ class ClientLanding extends Component {
     errors: []
   }
 
+  componentDidMount() {
+    this.props.fetchArtists(null);
+  }
+
   handleStyleChange = (event) => {
     const checked = event.target.checked;
     const name = event.target.name;
@@ -113,7 +117,13 @@ class ClientLanding extends Component {
                   ) : (
                  <img src={require('../img/portrait.png')}/>
                 )}
-                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>{artist.profile.user_name}</a>
+                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
+                {artist.profile.user_name ? (
+                  <p> {artist.profile.user_name} </p>
+                ) :(
+                  <p> Artist </p>
+                )}
+                </a>
               </div>
             </li>
           ))}
