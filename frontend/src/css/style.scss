@@ -1637,6 +1637,33 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
+// .trim-wrap-portfolio{
+//   position:relative;
+//   width:300px;
+//   height:0;
+//   padding-bottom:300px;/* 幅に対する縦のサイズ */
+//   overflow:hidden;
+//   background-color:#ccc;
+//   margin: 23px 0 0 100px;
+// }
+//
+// .trim-wrap-portfolio>img{
+//   position:absolute;
+//   top:50%;
+//   left:50%;
+//   transform:translate(-50%,-50%);
+//   width:auto;
+//   height:auto;
+//   max-width:179%;/* 横向き16:9の画像が表示エリア一杯になるように指定 */
+//   max-height:initial;
+// }
+//
+// .trim-wrap-portfolio {
+//   @media (max-width: 767px) {
+//     margin: 0 auto;
+//   }
+// }
+
 .picture-upload {
   display: block;
   margin: 5px 0 30px 100px;
@@ -1789,18 +1816,32 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   opacity: 40%;
 }
 
+.lpimage-mobile.englishlp {
+  opacity: 40%;
+}
+
+.lpimage.englishlp {
+  @media (max-width: 767px) {
+    opacity: 40%;
+  }}
+
+.lpbody {
+  padding: 10px 10px 50px;
+}
+
 .catch-english {
   // font-family: baskerville;
   color: #6e7071;
   // color: white;
   position: absolute;
-  bottom: 100px;
+  bottom: 140px;
   left: 22%;
   // font-size: 6rem;
   width: 55%;
   // padding: 0 30px;
   // margin: 10% 40% 30% 2%;
 }
+
 
 .catch-english .button {
   margin-top: 10px;
@@ -1820,13 +1861,15 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
     margin: auto;
     width: 100%;
     padding: 0 10px;
-    bottom:  50px;
+    bottom:  35px;
     left: 0;
+    font-size: 0.1rem;
   }}
 
   .catch-english h1 {
     @media (max-width: 767px) {
-      font-size: 3rem;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
     }}
 
 .how-intro.english-intro {
@@ -1839,6 +1882,11 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   text-align: left;
   padding: 30px;
 }
+
+.illustrator-sort {
+  @media (max-width: 767px) {
+    margin: 30px 0 0 0;
+  }}
 
 .illustrator-sort ul {
   list-style: none;
@@ -1873,9 +1921,10 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   text-align: center;
   // width: 100px;
   display: block;
-  height: 40px;
+  // height: 40px;
   line-height: 40px;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
+  border: none;
 }
 
 .illustrator-list {
@@ -1884,11 +1933,24 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   padding: 20px;
 }
 
+.illustrator-list {
+  @media (max-width: 767px) {
+    margin: 30px 0 0 0;
+    padding: 0;
+  }}
+
 .illustrator-list ul {
   list-style: none;
   width: 100%;
   overflow: hidden;
 }
+
+.illustrator-list ul {
+  @media (max-width: 767px) {
+    margin: 0;
+    padding: 0;
+  }}
+
 
 .illustrator-list ul li{
   float: left;
@@ -1920,6 +1982,13 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   height: 20px;
   line-height: 20px;
 }
+
+.lp-artistname {
+  @media (max-width: 767px) {
+    margin: 0px;
+  }
+}
+
 
 // portfolio
 
