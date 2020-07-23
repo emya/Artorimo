@@ -121,12 +121,11 @@ class MyPortfolioEdit extends Component {
             ))}
             <ul class="port-list port-edit">
               <li><div class="illustrator">
-                {this.state.image0 && (<img src={URL.createObjectURL(this.state.image0)} />)}
-                {!this.state.image0 && portfolio.image0 && (
-                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
-                 )}
-                {!this.state.image0 && !portfolio.image0 && (<img src={require('../img/portrait.png')} />)}
-
+                  {this.state.image0 && (<img src={URL.createObjectURL(this.state.image0)} />)}
+                  {!this.state.image0 && portfolio.image0 && (
+                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
+                   )}
+                  {!this.state.image0 && !portfolio.image0 && (<img src={require('../img/portrait.png')} />)}
                 <input class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg" onChange={this.handleImageChange.bind(this, 'image0')} />
               </div></li>
 

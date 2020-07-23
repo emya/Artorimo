@@ -52,7 +52,7 @@ class ClientLanding extends Component {
         <header>
           <div class="catchcopy clearfix">
             <img class="lpimage englishlp" src={require('../img/lp-english.jpg')}/>
-            <img class="lpimage-mobile" src={require('../img/lp-english.jpg')}/>
+            <img class="lpimage-mobile englishlp" src={require('../img/lp-english.jpg')}/>
               <div class="catch-english">
                 <h1 class="site-title2">Looking to work with a<span class="bold"> Japanese Illustrator</span>?<br/><br/>Ohchee Studio is here to help you <span class="bold">from initial search to delivering a finished piece.</span></h1>
                 <a class="button" href="mailto:ohcheestudio@gmail.com"> Contact Us</a>
@@ -66,73 +66,76 @@ class ClientLanding extends Component {
           <a href="/contact-us">Contact Us</a>
         </div>
 
-        <div class="illustrator-sort">
-          <div class="search-title">Style</div>
-          <ul>
-            <li><input type="checkbox" class="checkbox" name="0" onChange={this.handleStyleChange} />Character</li>
-            <li><input type="checkbox" class="checkbox" name="1" onChange={this.handleStyleChange} />Fashion</li>
-            <li><input type="checkbox" class="checkbox" name="2" onChange={this.handleStyleChange} />Books</li>
-            <li><input type="checkbox" class="checkbox" name="3" onChange={this.handleStyleChange} />Real</li>
-            <li><input type="checkbox" class="checkbox" name="4" onChange={this.handleStyleChange} />Comic/Anime</li>
-            <li><input type="checkbox" class="checkbox" name="5" onChange={this.handleStyleChange} />Games</li>
-            <li><input type="checkbox" class="checkbox" name="6" onChange={this.handleStyleChange} />Pop</li>
-            <li><input type="checkbox" class="checkbox" name="7" onChange={this.handleStyleChange} />Japanese</li>
-            <li><input type="checkbox" class="checkbox" name="8" onChange={this.handleStyleChange} />Watercolor</li>
-            <li><input type="checkbox" class="checkbox" name="9" onChange={this.handleStyleChange} />Sumie</li>
-            <li><input type="checkbox" class="checkbox" name="10" onChange={this.handleStyleChange} />Line Drawing</li>
-            <li><input type="checkbox" class="checkbox" name="11" onChange={this.handleStyleChange} />Arts</li>
-            <li><input type="checkbox" class="checkbox" name="12" onChange={this.handleStyleChange} />3D</li>
-          </ul>
-          {/*
-          <div class="search">
-            <div class="search-title bottom">Free Search</div>
-            <input type="text" class="searchbox" />
-          </div>
-          <div class="search">
-            <div class="search-title bottom">Artist Name</div>
-            <input type="text" class="searchbox" />
-          </div>
-          */}
-          <button class="button searchbtn" onClick={this.fetchArtists}>Search</button>
-        </div>
+        <div class="lpbody">
 
-        {/*}
-        <script src="https://snapwidget.com/js/snapwidget.js"></script>
-        <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
-        <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
-        <iframe
-          src="https://snapwidget.com/embed/831134" class="snapwidget-widget"
-          allowtransparency="true" frameborder="0" scrolling="no"
-          style={{border:'none', overflow:'hidden',  width:'100%', height:'300px'}}>
-        </iframe>
-        */}
-
-        <div class="illustrator-list">
-          <ul>
-          {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
-            <li>
-              <div class="illustrator">
-                {artist.image0 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
-                  ) : (
-                 <img src={require('../img/portrait.png')}/>
-                )}
-                <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
-                {artist.profile.user_name ? (
-                  <p> {artist.profile.user_name} </p>
-                ) :(
-                  <p> Artist </p>
-                )}
-                </a>
-              </div>
-            </li>
-          ))}
-          {this.props.artists && this.props.artists.artists && this.props.artists.artists.length === 0 && (
-            <div>
-              No Artists Found
+          <div class="illustrator-sort">
+            <div class="search-title">Style</div>
+            <ul>
+              <li><input type="checkbox" class="checkbox" name="0" onChange={this.handleStyleChange} />Character</li>
+              <li><input type="checkbox" class="checkbox" name="1" onChange={this.handleStyleChange} />Fashion</li>
+              <li><input type="checkbox" class="checkbox" name="2" onChange={this.handleStyleChange} />Books</li>
+              <li><input type="checkbox" class="checkbox" name="3" onChange={this.handleStyleChange} />Real</li>
+              <li><input type="checkbox" class="checkbox" name="4" onChange={this.handleStyleChange} />Comic/Anime</li>
+              <li><input type="checkbox" class="checkbox" name="5" onChange={this.handleStyleChange} />Games</li>
+              <li><input type="checkbox" class="checkbox" name="6" onChange={this.handleStyleChange} />Pop</li>
+              <li><input type="checkbox" class="checkbox" name="7" onChange={this.handleStyleChange} />Japanese</li>
+              <li><input type="checkbox" class="checkbox" name="8" onChange={this.handleStyleChange} />Watercolor</li>
+              <li><input type="checkbox" class="checkbox" name="9" onChange={this.handleStyleChange} />Sumie</li>
+              <li><input type="checkbox" class="checkbox" name="10" onChange={this.handleStyleChange} />Line Drawing</li>
+              <li><input type="checkbox" class="checkbox" name="11" onChange={this.handleStyleChange} />Arts</li>
+              <li><input type="checkbox" class="checkbox" name="12" onChange={this.handleStyleChange} />3D</li>
+            </ul>
+            {/*
+            <div class="search">
+              <div class="search-title bottom">Free Search</div>
+              <input type="text" class="searchbox" />
             </div>
-          )}
-          </ul>
+            <div class="search">
+              <div class="search-title bottom">Artist Name</div>
+              <input type="text" class="searchbox" />
+            </div>
+            */}
+            <button class="button searchbtn" onClick={this.fetchArtists}>Search</button>
+          </div>
+
+          {/*}
+          <script src="https://snapwidget.com/js/snapwidget.js"></script>
+          <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
+          <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
+          <iframe
+            src="https://snapwidget.com/embed/831134" class="snapwidget-widget"
+            allowtransparency="true" frameborder="0" scrolling="no"
+            style={{border:'none', overflow:'hidden',  width:'100%', height:'300px'}}>
+          </iframe>
+          */}
+
+          <div class="illustrator-list">
+            <ul>
+            {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
+              <li>
+                <div class="illustrator">
+                  {artist.image0 ? (
+                   <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
+                    ) : (
+                   <img src={require('../img/portrait.png')}/>
+                  )}
+                  <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
+                  {artist.profile.user_name ? (
+                    <p> {artist.profile.user_name} </p>
+                  ) :(
+                    <p class="lp-artistname"> Artist </p>
+                  )}
+                  </a>
+                </div>
+              </li>
+            ))}
+            {this.props.artists && this.props.artists.artists && this.props.artists.artists.length === 0 && (
+              <div>
+                No Artists Found
+              </div>
+            )}
+            </ul>
+          </div>
         </div>
 
     <Footer />
