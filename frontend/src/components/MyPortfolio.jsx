@@ -30,17 +30,21 @@ class MyPortfolio extends Component {
           <h2>My Portfolio</h2>
 
 
-          <div class="profile-left">
-            {portfolio.profile.image && (
-                <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
-              )}
-            {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
-          </div>
+          <div class="profile-top">
+            <div class="profile-left">
+            <div class="trim-wrap">
+              {portfolio.profile.image && (
+                  <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
+                )}
+              {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
+            </div>
+            </div>
 
-          <div class="profile-right">
-            {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
-            {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
-            <p>Illustrator</p>
+            <div class="profile-right">
+              {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
+              {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
+              <p>Illustrator</p>
+            </div>
           </div>
 
 

@@ -32,18 +32,23 @@ class MyProfile extends Component {
       <h2>My Profile</h2>
         {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
           <div class="wrapper clearfix">
-            <div class="profile-left">
-              {profile.image && (
-                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
-              )}
-              {!profile.image && (<img src={require('../img/default.png')} />)}
+          <div class="profile-top">
+            <div class="profile-left profilepage">
+              <div class="trim-wrap">
+                {profile.image && (
+                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
+                )}
+                {!profile.image && (<img src={require('../img/default.png')} />)}
+             </div>
+
 
             </div>
 
             <div class="profile-right">
-              <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
-              <p>Illustrator</p>
+            <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+            <p>Illustrator</p>
             </div>
+          </div>
 
             <div class="profile-detail">
               <p class="object">アーティスト名</p>
