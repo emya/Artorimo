@@ -22,6 +22,7 @@ import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import Users from "./components/Users";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -88,6 +89,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
+                    <StaffRoute exact path="/all/users" component={Users} />
                 </Switch>
             </BrowserRouter>
         );
