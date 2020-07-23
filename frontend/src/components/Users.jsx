@@ -52,7 +52,7 @@ class Users extends Component {
 
         <div class="illustrator-list">
           {this.props.artists && this.props.artists.artists && (
-            <p> The number of Users: {this.props.artists.length}</p>
+            <p> The number of Users: {this.props.artists.artists.length}</p>
           )}
           <ul>
           {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
@@ -63,13 +63,20 @@ class Users extends Component {
                   ) : (
                  <img src={require('../img/portrait.png')}/>
                 )}
+                <a class="illustrator-username" href={`/profile/${artist.user.id}`}>
+                  Profile
+                </a>
                 <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
+                  Portfolio
+                </a>
+
                 {artist.profile.user_name ? (
                   <p> {artist.profile.user_name} </p>
                 ) :(
                   <p> Artist </p>
                 )}
-                </a>
+                <p> {artist.user.first_name} {artist.user.last_name}</p>
+                <p> {artist.user.email} </p>
               </div>
             </li>
           ))}
