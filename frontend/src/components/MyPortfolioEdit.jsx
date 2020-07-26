@@ -117,20 +117,10 @@ class MyPortfolioEdit extends Component {
     filename8: null,
     croppedImage8: null,
 
-    image0: null,
-    image1: null,
-    image2: null,
-    image3: null,
-    image4: null,
-    image5: null,
-    image6: null,
-    image7: null,
-    image8: null,
     isChanged: false,
     errors: []
   }
 
-  // --- From Here
   onSelectFile = (src, filename, e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
@@ -160,7 +150,6 @@ class MyPortfolioEdit extends Component {
     const croppedImageUrl = this.getCroppedImg(this.state[imageRef], crop, croppedImageName, cropName, filename)
   }
 
-  //onCropChange = crop => {
   onCropChange = (cropName, crop) => {
     this.setState({ crop })
     this.setState({ [cropName]: crop })
@@ -207,14 +196,6 @@ class MyPortfolioEdit extends Component {
     }
     let croppedImage = new File([u8arr], filename, {type:mime});
     this.setState({[croppedImageName]: croppedImage })
-  }
-  // --- To Here
-
-  handleImageChange = (propertyName, e) => {
-    this.setState({
-      [propertyName]: e.target.files[0],
-      isChanged: true
-    })
   }
 
   resetForm = () => {
