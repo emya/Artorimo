@@ -69,12 +69,12 @@ class ClientLanding extends Component {
         <div class="lpbody">
 
           <div class="illustrator-sort">
-            <div class="search-title">Style</div>
+            <div class="search-title">Illustration Style</div>
             <ul>
               <li><input type="checkbox" class="checkbox" name="0" onChange={this.handleStyleChange} />Character</li>
               <li><input type="checkbox" class="checkbox" name="1" onChange={this.handleStyleChange} />Fashion</li>
-              <li><input type="checkbox" class="checkbox" name="2" onChange={this.handleStyleChange} />Books</li>
-              <li><input type="checkbox" class="checkbox" name="3" onChange={this.handleStyleChange} />Real</li>
+              <li><input type="checkbox" class="checkbox" name="2" onChange={this.handleStyleChange} />Picture Books</li>
+              <li><input type="checkbox" class="checkbox" name="3" onChange={this.handleStyleChange} />Realistic</li>
               <li><input type="checkbox" class="checkbox" name="4" onChange={this.handleStyleChange} />Comic/Anime</li>
               <li><input type="checkbox" class="checkbox" name="5" onChange={this.handleStyleChange} />Games</li>
               <li><input type="checkbox" class="checkbox" name="6" onChange={this.handleStyleChange} />Pop</li>

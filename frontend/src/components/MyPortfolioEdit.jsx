@@ -283,7 +283,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src0 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src0}
                       crop={this.state.crop0}
@@ -317,7 +317,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src1 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src1}
                       crop={this.state.crop1}
@@ -351,7 +351,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src2 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src2}
                       crop={this.state.crop2}
@@ -385,7 +385,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src3 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src3}
                       crop={this.state.crop3}
@@ -419,7 +419,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src4 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src4}
                       crop={this.state.crop4}
@@ -453,7 +453,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src5 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src5}
                       crop={this.state.crop5}
@@ -487,7 +487,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src6 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src6}
                       crop={this.state.crop6}
@@ -521,7 +521,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src7 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src7}
                       crop={this.state.crop7}
@@ -555,7 +555,7 @@ class MyPortfolioEdit extends Component {
               <li>
                 {this.state.src8 && (
                   <div>
-                    <p>※画像をトリミングしてから「変更を保存」を押してください</p>
+                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
                     <ReactCrop
                       src={this.state.src8}
                       crop={this.state.crop8}
@@ -587,8 +587,8 @@ class MyPortfolioEdit extends Component {
               </li>
 
             </ul>
-            <input class="btn savep" type="submit" value="変更を保存" />
-            <button class="btn savep">戻る</button>
+            <input class="btn savep two-btn" type="submit" value="変更を保存" />
+            <button class="btn savep two-btn right-btn">戻る</button>
           </form>
         </div>
       ))}
