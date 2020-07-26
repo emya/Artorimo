@@ -192,7 +192,7 @@ class MyProfileEdit extends Component {
             </div>
 
               <div class="profile-detail">
-                <p class="object">アーティスト名<br/>（このお名前のみ、ポートフォリオ上で公開されます）</p>
+                <p class="object">アーティスト名<br/>（このお名前情報のみ、ポートフォリオ上で公開されます）</p>
                 <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'user_name', profile)} value={profile.user_name}/>
                 <p class="object">都市</p>
                 <input placeholder="例：東京"　type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
@@ -385,7 +385,8 @@ class MyProfileEdit extends Component {
               </div>
             </div>
           ))}
-          <input class="btn savep" type="submit" value="変更を保存" />
+          <input class="btn savep two-btn" type="submit" value="変更を保存" />
+          <button class="btn savep two-btn right-btn">戻る</button>
 
         </form>
       </div>

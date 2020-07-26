@@ -1298,7 +1298,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     width: 100%;
     height: auto;
-    padding: 0 3% 10px 3%;
+    padding: 0 3% 100px 3%;
   }
 }
 
@@ -1552,7 +1552,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     width: 100%;
     height: auto;
-    padding: 0 3% 10px 3%;
+    padding: 0 3% 100px 3%;
   }
 }
 
@@ -1673,6 +1673,8 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   border: none!important;
 }
 
+
+
 .picture-upload {
   @media (max-width: 767px) {
     margin: 0 auto;
@@ -1760,6 +1762,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   color: white;
   height: 40px;
   padding: 0!important;
+  font-size: 1.5rem;
 }
 
 .btn.savep {
@@ -1992,6 +1995,11 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 // portfolio
 
+.trimming {
+  color: red;
+  font-size: 0.65em;
+}
+
 .port {
   width: 75%;
   float: right;
@@ -2024,6 +2032,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     margin-top: 50px;
     padding: 0;
+    margin-bottom: 40px!important;
   }
 }
 
@@ -2093,11 +2102,16 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 .portfolio-upload {
   width: 100%!important;
+  margin-left: 0px;
 }
 
 .two-btn {
   display: inline-block;
   margin: 60px 10px 60px;
+}
+
+.right-btn {
+  background-color: #6e7071;
 }
 
 .two-btn {
