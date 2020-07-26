@@ -53,7 +53,7 @@ class MyPortfolio extends Component {
               {portfolio.image0 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -61,7 +61,7 @@ class MyPortfolio extends Component {
               {portfolio.image1 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -69,7 +69,7 @@ class MyPortfolio extends Component {
               {portfolio.image2 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -77,7 +77,7 @@ class MyPortfolio extends Component {
               {portfolio.image3 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -85,7 +85,7 @@ class MyPortfolio extends Component {
               {portfolio.image4 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -93,7 +93,7 @@ class MyPortfolio extends Component {
               {portfolio.image5 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -101,7 +101,7 @@ class MyPortfolio extends Component {
               {portfolio.image6 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -109,7 +109,7 @@ class MyPortfolio extends Component {
               {portfolio.image7 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
 
@@ -117,7 +117,7 @@ class MyPortfolio extends Component {
               {portfolio.image8 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image8}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img src={require('../img/default.png')}/>
               )}
             </div></li>
           </ul>

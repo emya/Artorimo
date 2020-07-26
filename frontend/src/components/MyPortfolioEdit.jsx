@@ -306,7 +306,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src0 && !portfolio.image0 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src0', 'filename0')} />
@@ -340,7 +340,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src1 && !portfolio.image1 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src1', 'filename1')} />
@@ -374,7 +374,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src2 && !portfolio.image2 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src2', 'filename2')} />
@@ -408,7 +408,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src3 && !portfolio.image3 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src3', 'filename3')} />
@@ -442,7 +442,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src4 && !portfolio.image4 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src4', 'filename4')} />
@@ -476,7 +476,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src5 && !portfolio.image5 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src5', 'filename5')} />
@@ -510,7 +510,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src6 && !portfolio.image6 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src6', 'filename6')} />
@@ -544,7 +544,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src7 && !portfolio.image7 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src7', 'filename7')} />
@@ -578,7 +578,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src8 && !portfolio.image8 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src8', 'filename8')} />

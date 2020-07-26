@@ -61,7 +61,6 @@ class ClientLanding extends Component {
         </header>
 
         <div class="menu">
-          <a href="/how-it-works">How It Works</a>
           <a href="/about">About Us</a>
           <a href="/contact-us">Contact Us</a>
         </div>
@@ -117,7 +116,7 @@ class ClientLanding extends Component {
                   {artist.image0 ? (
                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
                     ) : (
-                   <img src={require('../img/portrait.png')}/>
+                   <img src={require('../img/default.png')}/>
                   )}
                   <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
                   {artist.profile.user_name ? (
