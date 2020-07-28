@@ -179,7 +179,7 @@ class MyPortfolioEdit extends Component {
     canvas.toBlob(blob => {
         reader.readAsDataURL(blob)
         reader.onloadend = () => {
-            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}.jpg`, croppedImageName)
+            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}_${cropName}.jpg`, croppedImageName)
         }
     })
   }
