@@ -2048,7 +2048,8 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .illustrator-list ul li img {
   @media (max-width: 767px) {
     width: 110px;
-    height: 110px;
+    height: auto;
+    //height: 110px;
   }
 }
 

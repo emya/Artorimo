@@ -144,6 +144,7 @@ class MyPortfolioEdit extends Component {
     this.setState({
       [imageRef]: image
     })
+    return false;
   }
 
   onCropComplete = (croppedImageName, imageRef, cropName, filename, crop) => {
@@ -159,8 +160,9 @@ class MyPortfolioEdit extends Component {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
+
+    canvas.width = Math.ceil(crop.width*scaleX);
+    canvas.height = Math.ceil(crop.height*scaleY);
     const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
@@ -171,17 +173,19 @@ class MyPortfolioEdit extends Component {
         crop.height * scaleY,
         0,
         0,
-        crop.width,
-        crop.height
-     )
+        crop.width * scaleX,
+        crop.height * scaleY,
+    )
 
     const reader = new FileReader()
     canvas.toBlob(blob => {
         reader.readAsDataURL(blob)
         reader.onloadend = () => {
-            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}.jpg`, croppedImageName)
+            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}_${cropName}.jpeg`, croppedImageName)
         }
-    })
+    },
+    'image/jpeg',1
+    )
   }
 
   dataURLtoFile(dataurl, filename, croppedImageName) {
@@ -306,7 +310,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src0 && !portfolio.image0 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src0', 'filename0')} />
@@ -340,7 +344,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src1 && !portfolio.image1 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src1', 'filename1')} />
@@ -374,7 +378,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src2 && !portfolio.image2 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src2', 'filename2')} />
@@ -408,7 +412,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src3 && !portfolio.image3 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src3', 'filename3')} />
@@ -442,7 +446,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src4 && !portfolio.image4 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src4', 'filename4')} />
@@ -476,7 +480,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src5 && !portfolio.image5 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src5', 'filename5')} />
@@ -510,7 +514,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src6 && !portfolio.image6 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src6', 'filename6')} />
@@ -544,7 +548,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src7 && !portfolio.image7 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src7', 'filename7')} />
@@ -578,7 +582,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src8 && !portfolio.image8 && (
                   <div class="illustrator">
-                    <img src={require('../img/portrait.png')} />
+                    <img src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src8', 'filename8')} />
