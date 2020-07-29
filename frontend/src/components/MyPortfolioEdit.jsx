@@ -592,7 +592,7 @@ class MyPortfolioEdit extends Component {
 
             </ul>
             <input class="btn savep two-btn" type="submit" value="変更を保存" />
-            <button class="btn savep two-btn right-btn">戻る</button>
+            <a href="/myportfolio" class="btn savep two-btn right-btn">戻る</a>
           </form>
         </div>
       ))}
