@@ -144,6 +144,7 @@ class MyPortfolioEdit extends Component {
     this.setState({
       [imageRef]: image
     })
+    return false;
   }
 
   onCropComplete = (croppedImageName, imageRef, cropName, filename, crop) => {
@@ -159,8 +160,9 @@ class MyPortfolioEdit extends Component {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
+
+    canvas.width = Math.ceil(crop.width*scaleX);
+    canvas.height = Math.ceil(crop.height*scaleY);
     const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
@@ -171,17 +173,19 @@ class MyPortfolioEdit extends Component {
         crop.height * scaleY,
         0,
         0,
-        crop.width,
-        crop.height
-     )
+        crop.width * scaleX,
+        crop.height * scaleY,
+    )
 
     const reader = new FileReader()
     canvas.toBlob(blob => {
         reader.readAsDataURL(blob)
         reader.onloadend = () => {
-            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}_${cropName}.jpg`, croppedImageName)
+            this.dataURLtoFile(reader.result, `cropped_${this.state[filename]}_${cropName}.jpeg`, croppedImageName)
         }
-    })
+    },
+    'image/jpeg',1
+    )
   }
 
   dataURLtoFile(dataurl, filename, croppedImageName) {
