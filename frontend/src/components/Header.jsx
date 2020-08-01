@@ -1,10 +1,34 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 import {auth} from "../actions";
 
 class Header extends Component {
-render() {
+  state = {
+    selectedOption: null,
+  }
+
+  handleChange = selectedOption => {
+    this.setState({selectedOption})
+  };
+
+  render() {
+    if (this.state.selectedOption !== null){
+      this.setState({selectedOption: null})
+      return <Redirect to={this.state.selectedOption.value} />;
+    }
+
+    const options = [
+      { value: '/myportfolio', label: 'My Portfolio' },
+      { value: '/myprofile', label: 'My Profile' },
+    ];
+
+    const defaultOption = options[0];
+
     return (
   <div>
     <header class="header">
@@ -22,12 +46,17 @@ render() {
         )}
       </div>
 
+
       <div class="mobile-topbar-contents">
 
         <a href="/" class="logo-link">Ohchee Studio</a>
 
-        <a href="/login" class="mobile-signin">ログイン</a>
-
+        { !this.props.user && (
+          <a href="/login" class="mobile-signin">ログイン</a>
+        )}
+        { this.props.user && (
+          <Dropdown options={options} onChange={this.handleChange} value={defaultOption} placeholder="Select an option" />
+        )}
       </div>
 
     </header>
