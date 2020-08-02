@@ -25,7 +25,8 @@ class MyPortfolio extends Component {
       <SideMenu />
 
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
-        <div class="illustrator-list port placeholder">
+        <div class="portfolio placeholder">
+        <div class="port-list ">
         <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
           <h2>My Portfolio</h2>
 
@@ -123,6 +124,7 @@ class MyPortfolio extends Component {
           </ul>
           <a class="btn savep two-btn" href="/myprofile/edit">アーティスト名を編集</a>
           <a class="btn savep two-btn" href="/myportfolio/edit">ポートフォリオを編集</a><br/>
+        </div>
         </div>
       ))}
     </div>
