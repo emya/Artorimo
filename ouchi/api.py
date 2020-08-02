@@ -29,7 +29,7 @@ from .serializers import (
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
-from .tasks import send_email
+from .tasks import send_email, send_bcc_email
 
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
@@ -250,6 +250,29 @@ class ProfileViewSet(viewsets.ModelViewSet):
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+class NotifyUsersAPI(generics.GenericAPIView):
+
+    def post(self, request):
+        data = request.data
+        print(data)
+        email = data['email']
+        subject = data['subject']
+        message = data['message']
+
+        # Notify User
+        html_message = render_to_string('email-general-notification.html',
+                                        {'message': message})
+
+        to_email = []
+        if email.capitalize() == "All":
+            users = User.objects.all()
+            for u in users:
+                to_email.append(u.email)
+
+        send_bcc_email.delay(subject, subject, html_message, to_email)
+
+        return Response({})
 
 class AskHelpAPI(generics.GenericAPIView):
 

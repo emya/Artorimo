@@ -6,6 +6,7 @@ import './App.css';
 import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import Landing from "./components/Landing";
 import ClientLanding from "./components/ClientLanding";
+import StaffLanding from "./components/StaffLanding";
 import AboutUs from "./components/AboutUs";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -23,6 +24,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Users from "./components/Users";
+import SendEmails from "./components/SendEmails";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -88,8 +90,10 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
+                    <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />
+                    <StaffRoute exact path="/send/emails" component={SendEmails} />
                 </Switch>
             </BrowserRouter>
         );
