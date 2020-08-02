@@ -255,7 +255,6 @@ class NotifyUsersAPI(generics.GenericAPIView):
 
     def post(self, request):
         data = request.data
-        print(data)
         email = data['email']
         subject = data['subject']
         message = data['message']
