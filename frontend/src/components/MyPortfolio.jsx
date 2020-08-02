@@ -28,6 +28,7 @@ class MyPortfolio extends Component {
         <div class="portfolio placeholder">
         <div class="port-list ">
         <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
+        <a class="button fixed-btn-mobile" href="/ask/help">仲介の相談</a>
           <h2>My Portfolio</h2>
 
 
@@ -46,81 +47,75 @@ class MyPortfolio extends Component {
               {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
               <p>Illustrator</p>
             </div>
+
           </div>
 
 
           <ul class="port-list">
-            <li><div class="illustrator">
+            <li >
               {portfolio.image0 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+          </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image1 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+            </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image2 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+          </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image3 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+            </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image4 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+            </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image5 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+            </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image6 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+            </li>
 
-            <li><div class="illustrator">
+            <li>
               {portfolio.image7 ? (
                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
                   ) : (
                  <img src={require('../img/default.png')}/>
               )}
-            </div></li>
+          </li>
 
-            <li><div class="illustrator">
-              {portfolio.image8 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image8}`} />
-                  ) : (
-                 <img src={require('../img/default.png')}/>
-              )}
-            </div></li>
           </ul>
           <a class="btn savep two-btn" href="/myprofile/edit">アーティスト名を編集</a>
           <a class="btn savep two-btn" href="/myportfolio/edit">ポートフォリオを編集</a><br/>

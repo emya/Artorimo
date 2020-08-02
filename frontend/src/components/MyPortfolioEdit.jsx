@@ -276,9 +276,10 @@ class MyPortfolioEdit extends Component {
       <SideMenu />
 
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
-        <div class="illustrator-list port placeholder">
+        <div class="portfolio placeholder">
+        <div class="port-list">
           <h2>My Portfolio</h2>
-          <p>お気に入りの作品を9枚アップロードしましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
+          <p>お気に入りの作品をアップロードしましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
           <form onSubmit={this.submitPortfolio}>
             {errors.map(error => (
               <p class="error-heading" key={error}>Error: {error}</p>
@@ -556,44 +557,13 @@ class MyPortfolioEdit extends Component {
                 )}
               </li>
 
-              <li>
-                {this.state.src8 && (
-                  <div>
-                    <p class="trimming">※画像をトリミングしてから「変更を保存」を押してください</p>
-                    <ReactCrop
-                      src={this.state.src8}
-                      crop={this.state.crop8}
-                      onImageLoaded={this.onImageLoaded.bind(this, 'imageRef8')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage8', 'imageRef8', 'crop8', 'filename8')}
-                      onChange={this.onCropChange.bind(this, 'crop8')}
-                    />
-                    <input
-                      class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
-                      onChange={this.onSelectFile.bind(this, 'src8', 'filename8')} />
-                  </div>
-                )}
-                {!this.state.src8 && portfolio.image8 && (
-                  <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image8}`} />
-                    <input
-                      class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
-                      onChange={this.onSelectFile.bind(this, 'src8', 'filename8')} />
-                  </div>
-                )}
-                {!this.state.src8 && !portfolio.image8 && (
-                  <div class="illustrator">
-                    <img src={require('../img/default.png')} />
-                    <input
-                      class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
-                      onChange={this.onSelectFile.bind(this, 'src8', 'filename8')} />
-                  </div>
-                )}
-              </li>
+
 
             </ul>
             <input class="btn savep two-btn" type="submit" value="変更を保存" />
             <a href="/myportfolio" class="btn savep two-btn right-btn">戻る</a>
           </form>
+        </div>
         </div>
       ))}
     </div>

@@ -179,14 +179,14 @@ class MyProfileEdit extends Component {
                 <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
                 <div class="profile-right-mobile">
-                  <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+                  <p class="user-name"> {profile.user_name} </p>
                   <p>Illustrator</p>
                 </div>
 
               </div>
 
               <div class="profile-right">
-                <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+                <p class="user-name"> {profile.user_name}</p>
                 <p>Illustrator</p>
               </div>
             </div>
