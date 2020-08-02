@@ -29,6 +29,7 @@ class MyProfile extends Component {
 
       <div class="profile">
       <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
+      <a class="button fixed-btn-mobile" href="/ask/help">仲介の相談</a>
       <h2>My Profile</h2>
         {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
           <div class="wrapper clearfix">
@@ -41,11 +42,16 @@ class MyProfile extends Component {
                 {!profile.image && (<img src={require('../img/default.png')} />)}
              </div>
 
+             <div class="profile-right-mobile">
+               <p class="user-name"> {profile.user_name} </p>
+               <p>Illustrator</p>
+             </div>
+
 
             </div>
 
             <div class="profile-right">
-            <p class="user-name"> {profile.user.last_name} {profile.user.first_name} </p>
+            <p class="user-name"> {profile.user_name} </p>
             <p>Illustrator</p>
             </div>
           </div>
