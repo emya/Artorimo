@@ -251,6 +251,33 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
+class EmailMagazinesAPI(generics.GenericAPIView):
+
+    def get(self, request):
+        from os import listdir
+        from os.path import isfile, join
+        files = [f for f in listdir('templates') if isfile(join('templates', f)) and f.startswith("email-magazine-")]
+        return Response({"emagazines": files})
+
+    def post(self, request):
+        data = request.data
+        email = data['email']
+        subject = data['subject']
+        template = data['template']
+
+        # Notify User
+        html_message = render_to_string(template)
+
+        to_email = []
+        if email.capitalize() == "All":
+            users = User.objects.all()
+            for u in users:
+                to_email.append(u.email)
+
+        send_bcc_email.delay(subject, subject, html_message, to_email)
+
+        return Response({})
+
 class NotifyUsersAPI(generics.GenericAPIView):
 
     def post(self, request):
