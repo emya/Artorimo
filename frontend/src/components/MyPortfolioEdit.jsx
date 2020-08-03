@@ -21,6 +21,9 @@ class MyPortfolioEdit extends Component {
   }
 
   state = {
+    ig: null,
+    twitter: null,
+
     crop: {
       unit: "%",
       width: 30,
@@ -121,6 +124,13 @@ class MyPortfolioEdit extends Component {
     errors: []
   }
 
+  handleChange = (propertyName, portfolio, event) => {
+    portfolio[propertyName] = event.target.value;
+    this.setState({
+      [propertyName]: event.target.value, isChanged: true
+    });
+  }
+
   onSelectFile = (src, filename, e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
@@ -211,6 +221,14 @@ class MyPortfolioEdit extends Component {
     // in a signle array
     const errors = [];
 
+    if (this.state.ig && this.state.ig.includes("@")) {
+      errors.push("@ is included in your Instagram account. @はインスタグラムのアカウント名に含まないでください。");
+    }
+
+    if (this.state.twitter && this.state.twitter.includes("@")) {
+      errors.push("@ is included in your Twitter account. @はツイッターのアカウント名に含まないでください。");
+    }
+
     if (
       (this.state.croppedImage0 && this.state.croppedImage0.size > 3145728) ||
       (this.state.croppedImage1 && this.state.croppedImage1.size > 3145728) ||
@@ -256,6 +274,7 @@ class MyPortfolioEdit extends Component {
 
     this.props.updatePortfolio(
       this.props.portfolio.myportfolio[0].id,
+      this.state.ig, this.state.twitter,
       this.state.croppedImage0, this.state.croppedImage1, this.state.croppedImage2,
       this.state.croppedImage3, this.state.croppedImage4, this.state.croppedImage5,
       this.state.croppedImage6, this.state.croppedImage7, this.state.croppedImage8,
@@ -284,6 +303,12 @@ class MyPortfolioEdit extends Component {
             {errors.map(error => (
               <p class="error-heading" key={error}>Error: {error}</p>
             ))}
+
+            <p class="object">Instagram のアカウント名<br/>（@は含めない）</p>
+            <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'ig', portfolio)} value={portfolio.ig}/>
+            <p class="object">Twitter のアカウント名<br/>（@は含めない）</p>
+            <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'twitter', portfolio)} value={portfolio.twitter}/>
+
             <ul class="port-list port-edit">
               <li>
                 {this.state.src0 && (
@@ -587,11 +612,11 @@ const mapDispatchToProps = dispatch => {
       dispatch(portfolio.fetchPortfolio(userId));
     },
     updatePortfolio: (
-      id, img0, img1, img2, img3, img4, img5, img6, img7, img8
+      id, ig, twitter, img0, img1, img2, img3, img4, img5, img6, img7, img8
       ) => {
       return dispatch(
         portfolio.updatePortfolio(
-          id, img0, img1, img2, img3, img4, img5, img6, img7, img8
+          id, ig, twitter, img0, img1, img2, img3, img4, img5, img6, img7, img8
         )
       );
     },
