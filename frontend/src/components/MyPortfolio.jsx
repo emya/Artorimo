@@ -40,14 +40,19 @@ class MyPortfolio extends Component {
                 )}
               {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
             </div>
+
+            <div class="profile-right-mobile">
+            {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
+            {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
+              <p>Illustrator</p>
+            </div>
+
             </div>
 
             <div class="profile-right">
               {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
               {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
               <p>Illustrator</p>
-              {portfolio.ig && (<p><a href={`https://www.instagram.com/${portfolio.ig}/`}>IG</a></p>)}
-              {portfolio.twitter && (<p><a href={`https://twitter.com/${portfolio.twitter}/`}>Twitter</a></p>)}
             </div>
 
           </div>
