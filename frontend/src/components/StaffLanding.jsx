@@ -25,6 +25,7 @@ class StaffLanding extends Component {
         <ul>
           <li><a href={'/all/users'}>Check All Users</a></li>
           <li><a href={'/send/emails'}>Send users emails</a></li>
+          <li><a href={'/send/emagazines'}>Send users emagazines</a></li>
         </ul>
       </div>
 
