@@ -93,6 +93,8 @@ class Profile(models.Model):
 
 class Portfolio(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="portfolio")
+    ig = models.CharField(max_length=100, blank=True)
+    twitter = models.CharField(max_length=100, blank=True)
     image0 = models.CharField(max_length=200, null=True)
     image1 = models.CharField(max_length=200, null=True)
     image2 = models.CharField(max_length=200, null=True)

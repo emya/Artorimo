@@ -30,7 +30,7 @@ export const fetchPortfolio = userId => {
 }
 
 export const updatePortfolio = (
-  id, img0, img1, img2, img3, img4, img5, img6, img7, img8
+  id, ig, twitter, img0, img1, img2, img3, img4, img5, img6, img7, img8
   ) => {
   return (dispatch, getState) => {
     const formData = new FormData();
@@ -42,6 +42,12 @@ export const updatePortfolio = (
       headers["Authorization"] = `Token ${token}`;
     }
 
+    if (ig){
+      formData.append('ig', ig);
+    }
+    if (twitter){
+      formData.append('twitter', twitter);
+    }
     formData.append('image0', img0);
     formData.append('image1', img1);
     formData.append('image2', img2);
