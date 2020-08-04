@@ -120,7 +120,7 @@ class ClientLanding extends Component {
                   )}
                   <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
                   {artist.profile.user_name ? (
-                    <p> {artist.profile.user_name} </p>
+                    <p class="lp-artistname"> {artist.profile.user_name} </p>
                   ) :(
                     <p class="lp-artistname"> Artist </p>
                   )}
