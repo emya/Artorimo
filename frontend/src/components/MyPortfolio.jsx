@@ -45,8 +45,8 @@ class MyPortfolio extends Component {
               {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
               {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
               <p>Illustrator</p>
-              {portfolio.ig && (<p><a href={`https://www.instagram.com/${portfolio.ig}/`}>IG</a></p>)}
-              {portfolio.twitter && (<p><a href={`https://twitter.com/${portfolio.twitter}/`}>Twitter</a></p>)}
+              {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
+              {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
             </div>
 
             </div>
@@ -55,8 +55,8 @@ class MyPortfolio extends Component {
               {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
               {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
               <p>Illustrator</p>
-              {portfolio.ig && (<p><a href={`https://www.instagram.com/${portfolio.ig}/`}>IG</a></p>)}
-              {portfolio.twitter && (<p><a href={`https://twitter.com/${portfolio.twitter}/`}>Twitter</a></p>)}
+              {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
+              {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
             </div>
 
           </div>

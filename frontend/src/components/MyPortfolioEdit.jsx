@@ -298,15 +298,15 @@ class MyPortfolioEdit extends Component {
         <div class="portfolio placeholder">
         <div class="port-list">
           <h2>My Portfolio</h2>
-          <p>お気に入りの作品をアップロードしましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
+          <p>お気に入りの作品をアップロード&SNSアカウントを登録しましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
           <form onSubmit={this.submitPortfolio}>
             {errors.map(error => (
               <p class="error-heading" key={error}>Error: {error}</p>
             ))}
 
-            <p class="object">Instagram のアカウント名<br/>（@は含めない）</p>
+            <p class="object">Instagram のユーザーネーム<br/>(@は含めない)</p>
             <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'ig', portfolio)} value={portfolio.ig}/>
-            <p class="object">Twitter のアカウント名<br/>（@は含めない）</p>
+            <p class="object">Twitter のユーザーネーム<br/>(@は含めない)</p>
             <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'twitter', portfolio)} value={portfolio.twitter}/>
 
             <ul class="port-list port-edit">
