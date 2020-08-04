@@ -2067,7 +2067,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 .port-list {
   @media (max-width: 767px) {
-    margin: 30px 0 30px 0;
+    margin: 70px 0 30px 0;
   }}
 
 .port-list ul {
@@ -2128,7 +2128,8 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
-.illustrator-list ul li img {
+.i
+llustrator-list ul li img {
   @media (max-width: 767px) {
     width: 160px;
     height: 160px;
@@ -2395,3 +2396,20 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   // border: none;
   background-color: #6e7071;
 }
+
+.ig {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+
+.ig:hover {
+  opacity: 0.6;
+}
+
+.ig {
+  @media (max-width: 767px) {
+    float: none;
+  }}
