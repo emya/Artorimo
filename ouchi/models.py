@@ -104,3 +104,8 @@ class Portfolio(models.Model):
     image6 = models.CharField(max_length=200, null=True)
     image7 = models.CharField(max_length=200, null=True)
     image8 = models.CharField(max_length=200, null=True)
+
+class CommunityPost(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="community_post")
+    message = models.CharField(max_length=200, blank=True)

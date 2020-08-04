@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    User, Profile, Portfolio
+    User, Profile, Portfolio, CommunityPost
 )
 
 from django.contrib.auth import authenticate
@@ -97,3 +97,11 @@ class PortfolioSerializer(serializers.ModelSerializer):
     def get_profile(self, instance):
         profile = Profile.objects.get(user=instance.user)
         return ProfileSerializer(profile, read_only=True).data
+
+class CommunityPostSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    community = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CommunityPost
+        fields = '__all__'

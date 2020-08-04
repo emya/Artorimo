@@ -18,14 +18,15 @@ from knox.models import AuthToken
 import boto3
 
 from .models import (
-    User, Profile, Portfolio
+    User, Profile, Portfolio, CommunityPost
 )
 from .serializers import (
     UserSerializer,
     CreateUserSerializer,
     LoginUserSerializer,
     ProfileSerializer,
-    PortfolioSerializer
+    PortfolioSerializer,
+    CommunityPostSerializer,
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
@@ -347,6 +348,13 @@ class CustomPasswordResetView:
 
         send_email.delay("Forgot Password?", "Forgot Password?", html_message, [reset_password_token.user.email])
 
+class CommunityPostViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseUserPermissions, ]
+    parser_classes = [MultiPartParser, FormParser, ]
+    serializer_class = CommunityPostSerializer
+
+    def get_queryset(self):
+        queryset = CommunityPost.objects.all()
 
 def upload_to_s3(image, key):
     client = boto3.client(
