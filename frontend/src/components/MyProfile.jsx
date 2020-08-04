@@ -121,7 +121,8 @@ class MyProfile extends Component {
             </div>
           </div>
           ))}
-          <a class="btn savep" href="/myprofile/edit">プロフィールを編集</a>
+          <a class="btn savep two-btn" href="/myprofile/edit">プロフィールを編集</a>
+          <a class="btn savep two-btn" href="/myportfolio/edit">ポートフォリオを編集</a><br/>
       </div>
     </div>
 

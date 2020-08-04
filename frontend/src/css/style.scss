@@ -1946,7 +1946,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .illustrator-list {
   @media (max-width: 767px) {
     margin: 30px 0 0 0;
-    padding: 0;
+    padding: 0 0 0 10px;
   }}
 
 .illustrator-list ul {
@@ -1984,6 +1984,20 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .illustrator img {
   width: 200px;
   height: 200px;
+}
+
+.illustrator img {
+  @media (max-width: 767px) {
+    width: 150px;
+    height: 150px;
+}}
+
+.illustrator-list ul li img {
+  @media (max-width: 320px) {
+    width: 130px;
+    height: 130px;
+    //height: 110px;
+  }
 }
 
 .illustrator-username {
@@ -2103,7 +2117,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 .port-list ul li img {
   width: 250px;
-  height: auto;
+  height: 250px;
   // margin: auto;
 }
 
@@ -2111,6 +2125,14 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     width: 150px;
     height: 150px;
+    //height: 110px;
+  }
+}
+
+.port-list ul li img {
+  @media (max-width: 320px) {
+    width: 130px;
+    height: 130px;
     //height: 110px;
   }
 }
@@ -2127,24 +2149,6 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
     padding: 9px;
   }
 }
-
-.i
-llustrator-list ul li img {
-  @media (max-width: 767px) {
-    width: 160px;
-    height: 160px;
-    //height: 110px;
-  }
-}
-
-.illustrator-list ul li img {
-  @media (max-width: 320px) {
-    width: 130px;
-    height: auto;
-    //height: 110px;
-  }
-}
-
 
 .port ul li:hover {
   opacity: 100%;
