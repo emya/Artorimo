@@ -62,65 +62,65 @@ class Portfolio extends Component {
           <ul class="port-list">
             <li>
               {portfolio.image0 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image1 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image2 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image3 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image4 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image5 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image6 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 
             <li>
               {portfolio.image7 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
                   ) : (
-                 <img src={require('../img/default.png')}/>
+                 <img class="cropped" src={require('../img/default.png')}/>
               )}
             </li>
 

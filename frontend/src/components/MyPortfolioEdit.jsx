@@ -24,17 +24,14 @@ class MyPortfolioEdit extends Component {
     ig: null,
     twitter: null,
 
-    crop: {
-      unit: "%",
-      width: 30,
-      aspect: 1 / 1
-    },
-
     imageRef0: null,
     src0: null,
     crop0: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename0: null,
@@ -45,6 +42,9 @@ class MyPortfolioEdit extends Component {
     crop1: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename1: null,
@@ -55,6 +55,9 @@ class MyPortfolioEdit extends Component {
     crop2: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename2: null,
@@ -65,6 +68,9 @@ class MyPortfolioEdit extends Component {
     crop3: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename3: null,
@@ -75,6 +81,9 @@ class MyPortfolioEdit extends Component {
     crop4: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename4: null,
@@ -85,6 +94,9 @@ class MyPortfolioEdit extends Component {
     crop5: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename5: null,
@@ -95,6 +107,9 @@ class MyPortfolioEdit extends Component {
     crop6: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename6: null,
@@ -105,6 +120,9 @@ class MyPortfolioEdit extends Component {
     crop7: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename7: null,
@@ -115,6 +133,9 @@ class MyPortfolioEdit extends Component {
     crop8: {
       unit: "%",
       width: 30,
+      height: 30,
+      x: 0,
+      y: 0,
       aspect: 1 / 1
     },
     filename8: null,
@@ -154,15 +175,23 @@ class MyPortfolioEdit extends Component {
     this.setState({
       [imageRef]: image
     })
+
+    const num = imageRef.slice(-1);
+
+    this.onCropComplete(`croppedImage${num}`, `imageRef${num}`, `crop${num}`, `filename${num}`, image=image, this.state[`crop${num}`])
     return false;
   }
 
-  onCropComplete = (croppedImageName, imageRef, cropName, filename, crop) => {
-    const croppedImageUrl = this.getCroppedImg(this.state[imageRef], crop, croppedImageName, cropName, filename)
+  onCropComplete = (croppedImageName, imageRef, cropName, filename, image=null, crop) => {
+    if (image !== null) {
+      const croppedImageUrl = this.getCroppedImg(image, crop, croppedImageName, cropName, filename)
+    }
+    else{
+      const croppedImageUrl = this.getCroppedImg(this.state[imageRef], crop, croppedImageName, cropName, filename)
+    }
   }
 
   onCropChange = (cropName, crop) => {
-    this.setState({ crop })
     this.setState({ [cropName]: crop })
   }
 
@@ -318,7 +347,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src0}
                       crop={this.state.crop0}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef0')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage0', 'imageRef0', 'crop0', 'filename0')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage0', 'imageRef0', 'crop0', 'filename0', null)}
                       onChange={this.onCropChange.bind(this, 'crop0')}
                     />
                     <input
@@ -328,7 +357,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src0 && portfolio.image0 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src0', 'filename0')} />
@@ -336,7 +365,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src0 && !portfolio.image0 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src0', 'filename0')} />
@@ -352,7 +381,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src1}
                       crop={this.state.crop1}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef1')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage1', 'imageRef1', 'crop1', 'filename1')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage1', 'imageRef1', 'crop1', 'filename1', null)}
                       onChange={this.onCropChange.bind(this, 'crop1')}
                     />
                     <input
@@ -362,7 +391,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src1 && portfolio.image1 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src1', 'filename1')} />
@@ -370,7 +399,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src1 && !portfolio.image1 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src1', 'filename1')} />
@@ -386,7 +415,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src2}
                       crop={this.state.crop2}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef2')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage2', 'imageRef2', 'crop2', 'filename2')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage2', 'imageRef2', 'crop2', 'filename2', null)}
                       onChange={this.onCropChange.bind(this, 'crop2')}
                     />
                     <input
@@ -396,7 +425,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src2 && portfolio.image2 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src2', 'filename2')} />
@@ -404,7 +433,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src2 && !portfolio.image2 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src2', 'filename2')} />
@@ -420,7 +449,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src3}
                       crop={this.state.crop3}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef3')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage3', 'imageRef3', 'crop3', 'filename3')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage3', 'imageRef3', 'crop3', 'filename3', null)}
                       onChange={this.onCropChange.bind(this, 'crop3')}
                     />
                     <input
@@ -430,7 +459,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src3 && portfolio.image3 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src3', 'filename3')} />
@@ -438,7 +467,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src3 && !portfolio.image3 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src3', 'filename3')} />
@@ -454,7 +483,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src4}
                       crop={this.state.crop4}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef4')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage4', 'imageRef4', 'crop4', 'filename4')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage4', 'imageRef4', 'crop4', 'filename4', null)}
                       onChange={this.onCropChange.bind(this, 'crop4')}
                     />
                     <input
@@ -464,7 +493,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src4 && portfolio.image4 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src4', 'filename4')} />
@@ -472,7 +501,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src4 && !portfolio.image4 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src4', 'filename4')} />
@@ -488,7 +517,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src5}
                       crop={this.state.crop5}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef5')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage5', 'imageRef5', 'crop5', 'filename5')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage5', 'imageRef5', 'crop5', 'filename5', null)}
                       onChange={this.onCropChange.bind(this, 'crop5')}
                     />
                     <input
@@ -498,7 +527,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src5 && portfolio.image5 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src5', 'filename5')} />
@@ -506,7 +535,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src5 && !portfolio.image5 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src5', 'filename5')} />
@@ -522,7 +551,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src6}
                       crop={this.state.crop6}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef6')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage6', 'imageRef6', 'crop6', 'filename6')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage6', 'imageRef6', 'crop6', 'filename6', null)}
                       onChange={this.onCropChange.bind(this, 'crop6')}
                     />
                     <input
@@ -532,7 +561,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src6 && portfolio.image6 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src6', 'filename6')} />
@@ -540,7 +569,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src6 && !portfolio.image6 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src6', 'filename6')} />
@@ -556,7 +585,7 @@ class MyPortfolioEdit extends Component {
                       src={this.state.src7}
                       crop={this.state.crop7}
                       onImageLoaded={this.onImageLoaded.bind(this, 'imageRef7')}
-                      onComplete={this.onCropComplete.bind(this, 'croppedImage7', 'imageRef7', 'crop7', 'filename7')}
+                      onComplete={this.onCropComplete.bind(this, 'croppedImage7', 'imageRef7', 'crop7', 'filename7', null)}
                       onChange={this.onCropChange.bind(this, 'crop7')}
                     />
                     <input
@@ -566,7 +595,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src7 && portfolio.image7 && (
                   <div class="illustrator">
-                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
+                    <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src7', 'filename7')} />
@@ -574,7 +603,7 @@ class MyPortfolioEdit extends Component {
                 )}
                 {!this.state.src7 && !portfolio.image7 && (
                   <div class="illustrator">
-                    <img src={require('../img/default.png')} />
+                    <img class="cropped" src={require('../img/default.png')} />
                     <input
                       class="picture-upload portfolio-upload" type="file" accept="image/png, image/jpeg"
                       onChange={this.onSelectFile.bind(this, 'src7', 'filename7')} />

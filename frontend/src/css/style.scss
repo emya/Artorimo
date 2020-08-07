@@ -2115,13 +2115,13 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   margin-bottom: 5px;
 }
 
-.port-list ul li img {
+.port-list ul li .cropped {
   width: 250px;
   height: 250px;
   // margin: auto;
 }
 
-.port-list ul li img {
+.port-list ul li .cropped {
   @media (max-width: 767px) {
     width: 150px;
     height: 150px;
@@ -2129,10 +2129,32 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   }
 }
 
-.port-list ul li img {
+.port-list ul li .cropped {
   @media (max-width: 320px) {
     width: 130px;
     height: 130px;
+    //height: 110px;
+  }
+}
+
+.port-list ul li .ReactCrop__image {
+  width: 250px;
+  height: auto;
+  // margin: auto;
+}
+
+.port-list ul li .ReactCrop__image {
+  @media (max-width: 767px) {
+    width: 150px;
+    height: auto;
+    //height: 110px;
+  }
+}
+
+.port-list ul li .ReactCrop__image {
+  @media (max-width: 320px) {
+    width: 130px;
+    height: auto;
     //height: 110px;
   }
 }
