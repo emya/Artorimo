@@ -269,7 +269,7 @@ class MyPortfolioEdit extends Component {
       (this.state.croppedImage7 && this.state.croppedImage7.size > 3145728) ||
       (this.state.croppedImage8 && this.state.croppedImage8.size > 3145728)
     ){
-      errors.push("Please Select an image smaller than 3 MB. 3MB以下の写真を選択してください。");
+      errors.push("3MB以下の写真を選択してください / Please Select an image smaller than 3 MB. ");
     }
 
     if (
@@ -327,16 +327,18 @@ class MyPortfolioEdit extends Component {
         <div class="portfolio placeholder">
         <div class="port-list">
           <h2>My Portfolio</h2>
-          <p>お気に入りの作品をアップロード&SNSアカウントを登録しましょう！<br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
+          <p>お気に入りの作品をアップロードし、SNSアカウントを登録しましょう！<br/>（ファイルサイズの上限：3MB、ファイル名上限：200文字）<br/><br/>ポートフォリオはアーティストページで海外クライアント向けに紹介されます。</p>
           <form onSubmit={this.submitPortfolio}>
-            {errors.map(error => (
-              <p class="error-heading" key={error}>Error: {error}</p>
-            ))}
 
             <p class="object">Instagram のユーザーネーム<br/>(@は含めない)</p>
             <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'ig', portfolio)} value={portfolio.ig}/>
             <p class="object">Twitter のユーザーネーム<br/>(@は含めない)</p>
             <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'twitter', portfolio)} value={portfolio.twitter}/>
+
+            {errors.map(error => (
+              <p class="error-heading" key={error}>エラー: {error}</p>
+            ))}
+
 
             <ul class="port-list port-edit">
               <li>
@@ -611,6 +613,9 @@ class MyPortfolioEdit extends Component {
                 )}
               </li>
 
+              {errors.map(error => (
+                <p class="error-heading" key={error}>エラー: {error}</p>
+              ))}
 
 
             </ul>
