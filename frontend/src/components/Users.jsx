@@ -59,9 +59,9 @@ class Users extends Component {
             <li>
               <div class="illustrator">
                 {artist.image0 ? (
-                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
+                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
                   ) : (
-                 <img src={require('../img/portrait.png')}/>
+                 <img class="cropped" src={require('../img/portrait.png')}/>
                 )}
                 <a class="illustrator-username" href={`/profile/${artist.user.id}`}>
                   Profile
