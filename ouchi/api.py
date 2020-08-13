@@ -18,14 +18,16 @@ from knox.models import AuthToken
 import boto3
 
 from .models import (
-    User, Profile, Portfolio
+    User, Profile, Portfolio, CommunityPost, CommunityReply
 )
 from .serializers import (
     UserSerializer,
     CreateUserSerializer,
     LoginUserSerializer,
     ProfileSerializer,
-    PortfolioSerializer
+    PortfolioSerializer,
+    CommunityPostSerializer,
+    CommunityReplySerializer,
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
@@ -347,6 +349,35 @@ class CustomPasswordResetView:
 
         send_email.delay("Forgot Password?", "Forgot Password?", html_message, [reset_password_token.user.email])
 
+class CommunityPostViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseUserPermissions, ]
+    #parser_classes = [FormParser, ]
+    serializer_class = CommunityPostSerializer
+
+    def get_queryset(self):
+        category = self.request.GET.get("category")
+        if category:
+            queryset = CommunityPost.objects.all().filter(category=category).order_by('-posted_time')
+        else:
+            queryset = CommunityPost.objects.all().order_by('-posted_time')
+        return queryset
+
+    def create(self, request):
+        body = request.data.pop("msg")
+        request.data["body"] = body
+        community_post = CommunityPost.objects.create(user=request.user, **request.data)
+        serializer = self.serializer_class(community_post)
+        return Response(serializer.data)
+
+class CommunityReplyViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseUserPermissions, ]
+    #parser_classes = [FormParser, ]
+    serializer_class = CommunityReplySerializer
+
+    def create(self, request):
+        community_reply = CommunityReply.objects.create(user=request.user, **request.data)
+        serializer = self.serializer_class(community_reply)
+        return Response(serializer.data)
 
 def upload_to_s3(image, key):
     client = boto3.client(

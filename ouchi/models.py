@@ -104,3 +104,19 @@ class Portfolio(models.Model):
     image6 = models.CharField(max_length=200, null=True)
     image7 = models.CharField(max_length=200, null=True)
     image8 = models.CharField(max_length=200, null=True)
+
+class CommunityPost(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # 0: worry as an illustrator, 1: opinion on illustration
+    category = models.IntegerField()
+    title = models.CharField(max_length=50)
+    body = models.CharField(max_length=200)
+    posted_time = models.DateTimeField(auto_now_add=True)
+
+class CommunityReply(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    post_id = models.ForeignKey(CommunityPost, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(max_length=200, blank=True)
+    posted_time = models.DateTimeField(auto_now_add=True)

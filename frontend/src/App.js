@@ -26,6 +26,10 @@ import ResetPassword from "./components/ResetPassword";
 import Users from "./components/Users";
 import SendEmails from "./components/SendEmails";
 import SendEmailMagazines from "./components/SendEmailMagazines";
+import Community from "./components/Community";
+import CommunityCategories from "./components/CommunityCategories";
+import CommunityPosts from "./components/CommunityPosts";
+import MakeCommunityPost from "./components/MakeCommunityPost";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -95,7 +99,9 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />
                     <StaffRoute exact path="/send/emails" component={SendEmails} />
-                    <StaffRoute exact path="/send/emagazines" component={SendEmailMagazines} />
+                    <StaffRoute exact path="/community/categories" component={CommunityCategories} />
+                    <StaffRoute exact path="/community/posts/:category" component={CommunityPosts} />
+                    <StaffRoute exact path="/community/make/post" component={MakeCommunityPost} />
                 </Switch>
             </BrowserRouter>
         );
