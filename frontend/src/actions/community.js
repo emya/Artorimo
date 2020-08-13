@@ -7,7 +7,6 @@ export const fetchCommunityPosts = (category = null) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(category);
     var query = "";
     if (category !== null) {
       query = `category=${category}`;
@@ -46,8 +45,6 @@ export const postCommunity = (title, msg, category) => {
     }
 
     let body = JSON.stringify({title, msg, category});
-
-    console.log(body, category);
 
     return fetch("/api/community/post/", {headers, body, method: "POST"})
       .then(res => {

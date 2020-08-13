@@ -14,7 +14,6 @@ import '../css/style.scss';
 class Community extends Component {
 
   componentDidMount() {
-    console.log(this.props.match.params.category);
     this.props.fetchCommunityPosts(this.props.match.params.category);
   }
 
