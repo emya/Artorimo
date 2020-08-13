@@ -14,40 +14,11 @@ import '../css/style.scss';
 class Community extends Component {
 
   componentDidMount() {
-    this.props.fetchCommunityPosts();
-  }
-
-  state = {
-    post: "",
-    reply: "",
-    errors: []
-  }
-
-  validatePostForm = () => {
-    // we are going to store errors for all fields
-    // in a signle array
-    const errors = [];
-
-    if(this.state.post.length === 0) {
-      errors.push("入力してください。No Input Found");
-    }
-    return errors;
-  }
-
-  validateReplyForm = () => {
-    // we are going to store errors for all fields
-    // in a signle array
-    const errors = [];
-
-    if(this.state.reply.length === 0) {
-      errors.push("入力してください。No Input Found");
-    }
-    return errors;
+    console.log(this.props.match.params.category);
+    this.props.fetchCommunityPosts(this.props.match.params.category);
   }
 
   render() {
-    const errors = this.state.errors;
-
     return (
   <div>
     <Header />
@@ -83,8 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCommunityPosts: () => {
-      dispatch(community.fetchCommunityPosts());
+    fetchCommunityPosts: (category) => {
+      dispatch(community.fetchCommunityPosts(category));
     },
     postCommunity: (message)  => {
       return dispatch(

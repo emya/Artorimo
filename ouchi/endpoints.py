@@ -11,6 +11,7 @@ from .api import (
     ArtistAPI,
     ProfileViewSet,
     PortfolioViewSet,
+    CommunityPostViewSet,
 )
 
 #from .views import ListNote
@@ -18,6 +19,7 @@ from .api import (
 router = routers.DefaultRouter()
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('portfolios', PortfolioViewSet, 'portfolios')
+router.register('community/post', CommunityPostViewSet, 'community_post')
 
 urlpatterns = [
     url("^", include(router.urls)),
