@@ -29,6 +29,7 @@ import SendEmailMagazines from "./components/SendEmailMagazines";
 import Community from "./components/Community";
 import CommunityCategories from "./components/CommunityCategories";
 import CommunityPosts from "./components/CommunityPosts";
+import CommunityPost from "./components/CommunityPost";
 import MakeCommunityPost from "./components/MakeCommunityPost";
 import Test from "./components/Test";
 
@@ -102,6 +103,7 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/community/categories" component={CommunityCategories} />
                     <StaffRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <StaffRoute exact path="/community/make/post" component={MakeCommunityPost} />
+                    <StaffRoute exact path="/community/post/:postId" component={CommunityPost} />
                 </Switch>
             </BrowserRouter>
         );

@@ -12,6 +12,7 @@ from .api import (
     ProfileViewSet,
     PortfolioViewSet,
     CommunityPostViewSet,
+    CommunityReplyViewSet,
 )
 
 #from .views import ListNote
@@ -20,6 +21,7 @@ router = routers.DefaultRouter()
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('portfolios', PortfolioViewSet, 'portfolios')
 router.register('community/post', CommunityPostViewSet, 'community_post')
+router.register('community/reply', CommunityReplyViewSet, 'community_reply')
 
 urlpatterns = [
     url("^", include(router.urls)),

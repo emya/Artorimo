@@ -353,14 +353,29 @@ class CommunityPostViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
     #parser_classes = [FormParser, ]
     serializer_class = CommunityPostSerializer
+    queryset = CommunityPost.objects.all()
 
-    def get_queryset(self):
-        category = self.request.GET.get("category")
+    def list(self, request):
+    #def get_queryset(self):
+        post_id = request.GET.get("postId")
+        if post_id:
+            community_post = CommunityPost.objects.get(pk=post_id)
+            community_replies = CommunityReply.objects.filter(community_post=post_id).order_by('posted_time')
+
+            custom_data = {
+                'community_post': self.serializer_class(community_post).data,
+                'replies': CommunityReplySerializer(community_replies, many=True).data,
+            }
+            return Response(custom_data)
+
+        category = request.GET.get("category")
         if category:
-            queryset = CommunityPost.objects.all().filter(category=category).order_by('-posted_time')
+            queryset = CommunityPost.objects.filter(category=category).order_by('-posted_time')
         else:
-            queryset = CommunityPost.objects.all().order_by('-posted_time')
-        return queryset
+            queryset = CommunityPost.objects.order_by('-posted_time')
+
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
     def create(self, request):
         body = request.data.pop("msg")
@@ -375,7 +390,11 @@ class CommunityReplyViewSet(viewsets.ModelViewSet):
     serializer_class = CommunityReplySerializer
 
     def create(self, request):
-        community_reply = CommunityReply.objects.create(user=request.user, **request.data)
+        post_id = request.data.pop("post_id")
+        community_post = CommunityPost.objects.get(pk=post_id)
+        body = request.data.pop("msg")
+        request.data["body"] = body
+        community_reply = CommunityReply.objects.create(user=request.user, community_post=community_post, **request.data)
         serializer = self.serializer_class(community_reply)
         return Response(serializer.data)
 
