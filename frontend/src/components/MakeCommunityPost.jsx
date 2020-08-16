@@ -66,9 +66,9 @@ class MakeCommunityPost extends Component {
 
         <div class="wrapper clearfix">
           <SideMenu />
-          <div class="placeholder">
-            <p>投稿されました</p>
-            <a class="btn savep" href="/community/categories">コミュニティトップページに戻る</a>
+          <div class="community">
+            <p class="post-done">投稿が完了しました！</p>
+            <a class="btn savep" href="/community/categories">コミュニティTOPに戻る</a>
           </div>
         </div>
 
@@ -91,21 +91,20 @@ class MakeCommunityPost extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div class="profile">
-        <h2>Community</h2>
+      <div class="community">
+        <h2>New Topic</h2>
         <form onSubmit={this.submitCommunityPost}>
           {errors.map(error => (
             <p class="error-heading" key={error}>Error: {error}</p>
           ))}
 
-          <p class="object">Post</p>
-          <p> Title </p>
+          <p>タイトル</p>
           <input type="text" class="user-data" placeholder="50字以内" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})} />
-          <p> Body </p>
+          <p>本文</p>
           <input type="text" class="user-data" placeholder="200字以内" value={this.state.body} onChange={(e) => this.setState({body: e.target.value})} />
-          <p> Category </p>
+          <p>カテゴリー</p>
           <Dropdown options={categories} onChange={this.handleChange} value={this.state.selectedCategory} placeholder="カテゴリを選択してください" />
-          <input class="btn savep two-btn" type="submit" value="Post" />
+          <input class="btn savep" type="submit" value="トピックを作成する" />
         </form>
       </div>
     </div>
