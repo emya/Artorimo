@@ -116,7 +116,7 @@ class CommunityPost(models.Model):
 
 class CommunityReply(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    post_id = models.ForeignKey(CommunityPost, on_delete=models.CASCADE)
+    community_post = models.ForeignKey(CommunityPost, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=200, blank=True)
+    body = models.CharField(max_length=200, blank=True)
     posted_time = models.DateTimeField(auto_now_add=True)
