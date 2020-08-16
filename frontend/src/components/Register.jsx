@@ -68,7 +68,7 @@ class Login extends Component {
           <ol>
             <li><span class="todo">ポートフォリオを登録する</span>
               <ul>
-                <li><a href="/myportfolio">次のページ</a>で、お気に入りの作品をアップロードしましょう！<br/>
+                <li><a href="/myportfolio">次のページ</a>で、お気に入りの作品をアップロードし、SNSアカウントを連携しましょう！<br/>
                 海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
               </ul>
             </li>

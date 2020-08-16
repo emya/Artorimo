@@ -24,9 +24,11 @@ class Community extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div class="profile">
-        <h2>Community</h2>
-        <a href="/community/make/post">投稿する</a>
+      <div class="community">
+        <h2>Topics</h2>
+        <a class="btn savep" href="/community/make/post">新規トピックを作成</a>
+
+        <div class="topic-list">
 
         {this.props.community && this.props.community.communityPosts && this.props.community.communityPosts.map((post) => (
           <div>
@@ -34,6 +36,8 @@ class Community extends Component {
             <p> {post.title} </p>
           </div>
         ))}
+
+        </div>
       </div>
 
     </div>

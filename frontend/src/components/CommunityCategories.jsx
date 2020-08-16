@@ -20,10 +20,11 @@ class CommunityCategories extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div class="profile">
+      <div class="community">
+
         <h2>Community</h2>
         <ul>
-          <li><a href="/community/posts/0">フリーランス悩み</a></li>
+          <li><a href="/community/posts/0">フリーランス悩み相談</a></li>
           <li><a href="/community/posts/1">イラスト批評</a></li>
         </ul>
       </div>
