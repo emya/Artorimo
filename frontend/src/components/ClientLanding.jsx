@@ -113,18 +113,26 @@ class ClientLanding extends Component {
             {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
               <li>
                 <div class="illustrator">
-                  {artist.image0 ? (
+                  {artist.image0 && (
                    <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
-                    ) : (
-                   <img src={require('../img/default.png')}/>
                   )}
-                  <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
-                  {artist.profile.user_name ? (
-                    <p class="lp-artistname"> {artist.profile.user_name} </p>
-                  ) :(
-                    <p class="lp-artistname"> Artist </p>
+
+                  {!artist.image0 && artist.profile.image && (
+                   <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${artist.user.id}/${artist.profile.image}`} />
                   )}
-                  </a>
+
+                  {(artist.image0 || artist.profile.image ) && artist.profile.user_name && (
+                    <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
+                      <p class="lp-artistname"> {artist.profile.user_name} </p>
+                    </a>
+                  )}
+
+                  {(artist.image0 || artist.profile.image ) && !artist.profile.user_name && (
+                    <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
+                      <p class="lp-artistname"> Artist </p>
+                    </a>
+                  )}
+
                 </div>
               </li>
             ))}
