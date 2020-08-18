@@ -46,8 +46,6 @@ class ClientLanding extends Component {
   }
 
   render() {
-    console.log(this.props.artists);
-
     return (
       <div>
         <Header />
