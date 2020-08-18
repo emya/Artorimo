@@ -24,20 +24,17 @@ class Community extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div class="community">
-        <h2>Topics</h2>
-        <a class="btn savep" href="/community/make/post">新規トピックを作成</a>
-
-        <div class="topic-list">
+      <div class="profile">
+        <h2>Community</h2>
+        <a href="/community/make/post">投稿する</a>
 
         {this.props.community && this.props.community.communityPosts && this.props.community.communityPosts.map((post) => (
           <div>
             <p>{post.posted_time && moment(post.posted_time, "YYYY-MM-DD HH:mm:ss").format("YYYY/MM/DD")} </p>
             <p> {post.title} </p>
+            <a href={`/community/post/${post.id}`}> Detail </a>
           </div>
         ))}
-
-        </div>
       </div>
 
     </div>

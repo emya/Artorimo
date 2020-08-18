@@ -356,7 +356,6 @@ class CommunityPostViewSet(viewsets.ModelViewSet):
     queryset = CommunityPost.objects.all()
 
     def list(self, request):
-    #def get_queryset(self):
         post_id = request.GET.get("postId")
         if post_id:
             community_post = CommunityPost.objects.get(pk=post_id)
