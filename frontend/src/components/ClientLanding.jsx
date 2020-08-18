@@ -45,6 +45,59 @@ class ClientLanding extends Component {
     this.props.fetchArtists(this.state.style);
   }
 
+  filterArtists = (artists) => {
+    let filteredArtists = []
+
+    if (!artists) {
+      return filteredArtists;
+    }
+
+    artists.forEach(function (artist) {
+      if (artist.image0 && artist.profile.user_name) {
+        filteredArtists.push(
+          <li>
+            <div class="illustrator">
+              <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
+              <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}><p class="lp-artistname"> {artist.profile.user_name} </p></a>
+            </div>
+          </li>
+        )
+      }
+      if (artist.image0 && !artist.profile.user_name) {
+        filteredArtists.push(
+          <li>
+            <div class="illustrator">
+              <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
+              <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}><p class="lp-artistname"> Artist </p></a>
+            </div>
+          </li>
+        )
+      }
+      if (!artist.image0 && artist.profile.image && artist.profile.user_name) {
+        filteredArtists.push(
+          <li>
+            <div class="illustrator">
+              <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${artist.user.id}/${artist.profile.image}`} />
+              <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}><p class="lp-artistname"> {artist.profile.user_name} </p></a>
+            </div>
+          </li>
+        )
+      }
+      if (!artist.image0 && artist.profile.image && !artist.profile.user_name) {
+        filteredArtists.push(
+          <li>
+            <div class="illustrator">
+              <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${artist.user.id}/${artist.profile.image}`} />
+              <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}><p class="lp-artistname"> Artist </p></a>
+            </div>
+          </li>
+        )
+      }
+    });
+
+    return filteredArtists
+  }
+
   render() {
     return (
       <div>
@@ -110,32 +163,8 @@ class ClientLanding extends Component {
 
           <div class="illustrator-list">
             <ul>
-            {this.props.artists && this.props.artists.artists && this.props.artists.artists.map((artist) => (
-              <li>
-                <div class="illustrator">
-                  {artist.image0 && (
-                   <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${artist.user.id}/${artist.image0}`} />
-                  )}
+            {this.filterArtists(this.props.artists.artists)}
 
-                  {!artist.image0 && artist.profile.image && (
-                   <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${artist.user.id}/${artist.profile.image}`} />
-                  )}
-
-                  {(artist.image0 || artist.profile.image ) && artist.profile.user_name && (
-                    <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
-                      <p class="lp-artistname"> {artist.profile.user_name} </p>
-                    </a>
-                  )}
-
-                  {(artist.image0 || artist.profile.image ) && !artist.profile.user_name && (
-                    <a class="illustrator-username" href={`/artists/portfolio/${artist.user.id}`}>
-                      <p class="lp-artistname"> Artist </p>
-                    </a>
-                  )}
-
-                </div>
-              </li>
-            ))}
             {this.props.artists && this.props.artists.artists && this.props.artists.artists.length === 0 && (
               <div>
                 No Artists Found
