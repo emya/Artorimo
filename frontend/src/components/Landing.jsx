@@ -82,27 +82,35 @@ class Landing extends Component {
     </section>
 
     <section class="destination">
-      <h2 class="heading s">過去のサポート例</h2>
+      <h2 class="heading s">直近のサポート例</h2>
       <table class="table-data">
         <tr class="table-heading-upcoming">
           <td>依頼内容</td>
           <td>報酬</td>
         </tr>
         <tr>
-          <td>Youtubeのサムネイルイラスト</td>
-          <td>9,000円</td>
-        </tr>
-        <tr>
-          <td>海外アパレルの販促キャンペーン用イラスト</td>
-          <td>35,000円</td>
-        </tr>
-        <tr>
           <td>Instagramアイコン作成</td>
-          <td>5,000円</td>
+          <td>20,000円</td>
         </tr>
         <tr>
-          <td>ウェルカムボード作成</td>
-          <td>15,000円</td>
+          <td>コスメパッケージ用イラスト</td>
+          <td>50,000円</td>
+        </tr>
+        <tr>
+          <td>海外音楽レーベルのジャケット</td>
+          <td>55,000円</td>
+        </tr>
+        <tr>
+          <td>アパレル用イラスト</td>
+          <td>60,000円</td>
+        </tr>
+        <tr>
+          <td>有名海外雑誌カット</td>
+          <td>50,000円</td>
+        </tr>
+        <tr>
+        <td>海外個展への出展</td>
+        <td>N/A</td>
         </tr>
       </table>
       <br/>

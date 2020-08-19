@@ -68,7 +68,7 @@ class MakeCommunityPost extends Component {
           <SideMenu />
           <div class="community">
             <p class="post-done">投稿が完了しました！</p>
-            <a class="btn savep" href="/community/categories">コミュニティTOPに戻る</a>
+            <a class="btn savep" href="/community/categories">トピック一覧に戻る</a>
           </div>
         </div>
 

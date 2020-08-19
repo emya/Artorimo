@@ -39,8 +39,8 @@ a:link, a:visited, a:hover, a:active {
 
 h2 {
   color: #6E7071;
-  margin-top: 70px;
-  margin-bottom: 100px;
+  margin-top: 80px;
+  margin-bottom: 80px;
   letter-spacing: 2px;
   // font-family: 'Abril Fatface';
   font-size: 4rem;
@@ -52,14 +52,14 @@ h2 {
 h2 {
   @media (max-width: 767px) {
     font-size: 3rem;
-    margin-top: 40px;
-    margin-bottom: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
 }
 
 
 h3 {
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 50px;
   color:#999999;
   font-size: 2.4rem;
@@ -68,7 +68,7 @@ h3 {
 
 h3 {
   @media (max-width: 767px) {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 40px;
   }}
 
@@ -2468,9 +2468,35 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 .community li {
+  // padding: 0px;
+  // margin: 0px auto 30px;
+}
+
+.category-box {
   list-style: none;
+  border: 1px solid;
+  display: inline-block;
+  width: 40%;
+  height: 60px;
+  margin: 0px 5px;
+  line-height: 60px;
   padding: 0px;
-  margin: 0px auto 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+.category-box {
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 10px 0px;
+    padding: 0px;
+  }
+}
+
+.category-name:hover {
+  color: #6E7071;
 }
 
 .community .Dropdown-control {
@@ -2497,9 +2523,50 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 }
 
 .topic-list {
-  margin: 100px auto;
+  margin: 30px auto 100px;
+  border-top: 1px dashed #6e7071;
 }
 
 .post-done {
   margin-top: 100px;
+}
+
+.topic-component {
+  border-bottom: 1px dashed #6e7071;
+  // margin: 10px auto;
+  padding: 10px;
+}
+
+.topic-component p {
+  word-break: break-all;
+}
+
+.topic-list .topic-component:hover {
+  color: #6E7071;
+}
+
+.topic-title {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.comment {
+  // border: 1px solid #6E7071;
+  // width: 70%;
+  padding: 30px;
+  margin: 50px auto;
+  border-radius: 5px;
+  background-color: #EEEEEE;
+}
+
+.comment .user-data {
+  margin-bottom: 20px;
+}
+
+.comment .btn.savep.two-btn {
+  margin-bottom: 0px;
+}
+
+.comment p {
+  margin-top: 0px;
 }
