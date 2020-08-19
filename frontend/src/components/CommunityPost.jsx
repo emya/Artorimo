@@ -54,25 +54,26 @@ class CommunityPost extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div class="profile">
+      <div class="community">
         <h2>Community</h2>
-        <a href="/community/make/post">投稿する</a>
 
         {this.props.community && this.props.community.communityPost && (
-          <div>
+          <div class="topic-component">
             <p>{this.props.community.communityPost.posted_time && moment(this.props.community.communityPost.posted_time, "YYYY-MM-DD HH:mm:ss").format("YYYY/MM/DD")} </p>
-            <p> {this.props.community.communityPost.title} </p>
+            <p class="topic-title"> {this.props.community.communityPost.title} </p>
             <p> {this.props.community.communityPost.body} </p>
-            <form onSubmit={this.submitReply}>
-              <p> Body </p>
-              <input type="text" class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
-              <input class="btn savep two-btn" type="submit" value="Reply" />
-            </form>
+            <div class="comment">
+              <p>コメント</p>
+              <form onSubmit={this.submitReply}>
+                <input type="text" class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
+                <input class="btn savep two-btn" type="submit" value="投稿する" />
+              </form>
+            </div>
           </div>
         )}
 
         {this.props.community && this.props.community.communityReplies && this.props.community.communityReplies.map((reply) => (
-          <div>
+          <div class="topic-component">
             <p>{reply.posted_time && moment(reply.posted_time, "YYYY-MM-DD HH:mm:ss").format("YYYY/MM/DD")} </p>
             <p>{reply.body}</p>
           </div>

@@ -23,10 +23,13 @@ class CommunityCategories extends Component {
       <div class="community">
 
         <h2>Community</h2>
+        <h3>カテゴリ</h3>
         <ul>
-          <li><a href="/community/posts/0">フリーランス悩み相談</a></li>
-          <li><a href="/community/posts/1">イラスト批評</a></li>
+          <a class="category-name" href="/community/posts/0"><li class="category-box">フリーランス悩み相談</li></a>
+          <a class="category-name" href="/community/posts/1"><li class="category-box">イラスト批評</li></a>
         </ul>
+        <h3>最新の投稿</h3>
+        <p>memo: 最近書き込まれたトピックを出す</p>
       </div>
 
     </div>
