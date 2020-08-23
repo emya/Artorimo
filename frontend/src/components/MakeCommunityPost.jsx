@@ -101,7 +101,7 @@ class MakeCommunityPost extends Component {
           <p>タイトル</p>
           <input type="text" class="user-data" placeholder="50字以内" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})} />
           <p>本文</p>
-          <input type="text" class="user-data" placeholder="200字以内" value={this.state.body} onChange={(e) => this.setState({body: e.target.value})} />
+          <textarea class="user-data" placeholder="200字以内" value={this.state.body} onChange={(e) => this.setState({body: e.target.value})} />
           <p>カテゴリー</p>
           <Dropdown options={categories} onChange={this.handleChange} value={this.state.selectedCategory} placeholder="カテゴリを選択してください" />
           <input class="btn savep" type="submit" value="トピックを作成する" />
