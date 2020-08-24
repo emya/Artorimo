@@ -63,7 +63,7 @@ class CommunityPost extends Component {
             <p class="topic-title"> {this.props.community.communityPost.title} </p>
             <p> {this.props.community.communityPost.body} </p>
             <div class="comment">
-              <p>コメント</p>
+              <p class="bold">コメント（匿名）</p>
               <form onSubmit={this.submitReply}>
                 <input type="text" class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
                 <input class="btn savep two-btn" type="submit" value="投稿する" />
