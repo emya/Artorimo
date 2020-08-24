@@ -25,7 +25,16 @@ class Community extends Component {
     <div class="wrapper clearfix">
       <SideMenu />
       <div class="community">
+
+      <div class="ad-community">
+        <a href="https://px.a8.net/svt/ejp?a8mat=3BK37G+B89EUI+2PEO+6VRR5" rel="nofollow">
+        <img border="0" width="320" height="50" alt="" src="https://www29.a8.net/svt/bgt?aid=200811580679&wid=004&eno=01&mid=s00000012624001156000&mc=1"/>
+        </a>
+        <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=3BK37G+B89EUI+2PEO+6VRR5" alt=""/>
+      </div>
+
         <h2>Community</h2>
+        <div class="breadcrumbs"><a href="#">カテゴリ一覧</a> ＞ <a href="#">フリーランス相談</a></div>
         <a class="btn savep" href="/community/make/post">新規トピックを作成</a>
         <div class="topic-list">
 

@@ -13,17 +13,10 @@ class Test extends Component {
   render() {
     return (
   <div>
-    <Header />
+  <Header />
+  <div class="wrapper clearfix">
 
-    <div class="menu">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/about">About Us</a>
-      <a href="/contact-us">Contact Us</a>
-    </div>
-
-    <div class="wrapper clearfix">
-
-      <div class="placeholder">
+    <div class="placeholder">
       <h2 class="thankyou">ご登録ありがとうございます！</h2>
 
       <h3 class="next">NEXT STEP</h3>
@@ -31,9 +24,8 @@ class Test extends Component {
         <ol>
           <li><span class="todo">ポートフォリオを登録する</span>
             <ul>
-              <li>次のページで、お気に入りの作品をアップロードしましょう！<br/>
+              <li><a href="/myportfolio">次のページ</a>で、お気に入りの作品をアップロードし、SNSアカウントを連携しましょう！<br/>
               海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
-              <li>あわせて、海外クライアント向けに、<span class="red">弊社メールアドレスを皆様のSNSやHPに直接ご掲載</span>ください！（文面の例：For overseas clients, e-mail <a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a> for any inquiries!）先方がスムーズに連絡し易くなります。</li>
             </ul>
           </li>
           <li><span class="todo">メールで仲介依頼をする</span>
@@ -44,13 +36,22 @@ class Test extends Component {
             </ul>
           </li>
         </ol>
+        <div class="shop-survey">
+          <p><span class="bold">※海外向けグッズ販売にご興味はおありですか？</span></p>
+            <div class="yesno">
+              <input type="checkbox" class="yesnocheckbox" />
+              <p class="yesno-yes">はい</p>
+            </div>
+            <div class="yesno">
+              <input type="checkbox" class="yesnocheckbox" />
+              <p class="yesno-yes">いいえ</p>
+            </div>
+        </div>
       </div>
-
-      </div>
-
+      <a class="btn savep" href="/myportfolio/edit">ポートフォリオページへ</a>
     </div>
-
-    <Footer />
+  </div>
+  <Footer />
   </div>
     )
   }
