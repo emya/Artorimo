@@ -275,6 +275,8 @@ class EmailMagazinesAPI(generics.GenericAPIView):
             users = User.objects.all()
             for u in users:
                 to_email.append(u.email)
+        else:
+            to_email = email.strip(" ").replace(" ", "").split(",")
 
         send_bcc_email.delay(subject, subject, html_message, to_email)
 
@@ -297,6 +299,8 @@ class NotifyUsersAPI(generics.GenericAPIView):
             users = User.objects.all()
             for u in users:
                 to_email.append(u.email)
+        else:
+            to_email = email.strip(" ").replace(" ", "").split(",")
 
         send_bcc_email.delay(subject, subject, html_message, to_email)
 
