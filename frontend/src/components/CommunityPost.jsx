@@ -70,6 +70,11 @@ class CommunityPost extends Component {
             <p>{this.props.community.communityPost.posted_time && moment(this.props.community.communityPost.posted_time, "YYYY-MM-DD HH:mm:ss").format("YYYY/MM/DD")} </p>
             <p class="topic-title"> {this.props.community.communityPost.title} </p>
             <p> {this.props.community.communityPost.body} </p>
+            {this.props.community.communityPost.image && (
+              <div class="trim-wrap">
+                <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/communities/${this.props.community.communityPost.id}/${this.props.community.communityPost.image}`} />
+              </div>
+            )}
             <div class="comment">
               <p class="bold">コメント（匿名）</p>
               <form onSubmit={this.submitReply}>

@@ -34,7 +34,10 @@ class Community extends Component {
       </div>
 
         <h2>Community</h2>
-        <div class="breadcrumbs"><a href="#">カテゴリ一覧</a> ＞ <a href="#">フリーランス相談</a></div>
+        <div class="breadcrumbs"><a href="/community">カテゴリ一覧</a> ＞
+          {this.props.match.params.category === "0" && (<a href="#">フリーランス相談</a>)}
+          {this.props.match.params.category === "1" && (<a href="#">イラスト批評</a>)}
+        </div>
         <a class="btn savep" href="/community/make/post">新規トピックを作成</a>
         <div class="topic-list">
 

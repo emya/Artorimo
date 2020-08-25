@@ -67,18 +67,22 @@ export const fetchCommunityPost = (post_id) => {
   }
 }
 
-export const postCommunity = (title, msg, category) => {
+export const postCommunity = (title, body, image, category) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
-    let headers = {"Content-Type": "application/json"};
+    let headers = {};
 
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let body = JSON.stringify({title, msg, category});
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('body', body);
+    formData.append('image', image);
+    formData.append('category', category);
 
-    return fetch("/api/community/post/", {headers, body, method: "POST"})
+    return fetch("/api/community/post/", {headers, body: formData, method: "POST"})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

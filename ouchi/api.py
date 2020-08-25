@@ -356,6 +356,7 @@ class CustomPasswordResetView:
 class CommunityPostViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
     #parser_classes = [FormParser, ]
+    parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = CommunityPostSerializer
     queryset = CommunityPost.objects.all()
 
@@ -381,10 +382,25 @@ class CommunityPostViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        body = request.data.pop("msg")
-        request.data["body"] = body
-        community_post = CommunityPost.objects.create(user=request.user, **request.data)
+        is_upload_image = False
+        image = request.data.get('image')
+        image_name = None
+        if image:
+            if isinstance(image, InMemoryUploadedFile):
+                image_name = image.name
+                is_upload_image = True
+
+        category = request.data.get("category")[0]
+        title = request.data["title"]
+        body = request.data["body"]
+
+        community_post = CommunityPost.objects.create(
+            user=request.user, category=category, image=image_name, title=title, body=body)
         serializer = self.serializer_class(community_post)
+
+        if is_upload_image:
+            upload_to_s3(image, f'communities/{community_post.id}/{image_name}')
+
         return Response(serializer.data)
 
 class CommunityReplyViewSet(viewsets.ModelViewSet):

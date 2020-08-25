@@ -112,6 +112,7 @@ class CommunityPost(models.Model):
     category = models.IntegerField()
     title = models.CharField(max_length=50)
     body = models.CharField(max_length=200)
+    image = models.CharField(max_length=200, null=True, blank=True)
     posted_time = models.DateTimeField(auto_now_add=True)
 
 class CommunityReply(models.Model):
