@@ -19,6 +19,7 @@ class MakeCommunityPost extends Component {
   state = {
     title: "",
     body: "",
+    image: null,
     selectedCategory: null,
     errors: []
   }
@@ -26,6 +27,12 @@ class MakeCommunityPost extends Component {
   handleChange = selectedCategory => {
     this.setState({selectedCategory})
   };
+
+  handleImageChange = (e) => {
+    this.setState({
+      image: e.target.files[0],
+    })
+  }
 
   validatePostForm = () => {
     // we are going to store errors for all fields
@@ -53,7 +60,7 @@ class MakeCommunityPost extends Component {
       return;
     }
 
-    this.props.postCommunity(this.state.title, this.state.body, this.state.selectedCategory.value);
+    this.props.postCommunity(this.state.title, this.state.body, this.state.image, this.state.selectedCategory.value);
     this.setState({ body: "" });
   }
 
@@ -68,7 +75,7 @@ class MakeCommunityPost extends Component {
           <SideMenu />
           <div class="community">
             <p class="post-done">投稿が完了しました！</p>
-            <a class="btn savep" href="/community/categories">トピック一覧に戻る</a>
+            <a class="btn savep" href="/community">トピック一覧に戻る</a>
           </div>
         </div>
 
@@ -102,6 +109,11 @@ class MakeCommunityPost extends Component {
           <input type="text" class="user-data" placeholder="50字以内" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})} />
           <p class="bold">本文</p>
           <textarea class="user-data" placeholder="200字以内" value={this.state.body} onChange={(e) => this.setState({body: e.target.value})} />
+
+          <p class="bold">画像</p>
+          {this.state.image && ( <div class="trim-wrap"> <img src={URL.createObjectURL(this.state.image)} /> </div>)}
+          <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+
           <p class="bold">ユーザー名</p>
           <p>匿名</p>
           <p class="bold">カテゴリー</p>
@@ -127,9 +139,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postCommunity: (title, body, category)  => {
+    postCommunity: (title, body, image, category)  => {
       return dispatch(
-        community.postCommunity(title, body, category)
+        community.postCommunity(title, body, image, category)
       );
     },
   }
