@@ -38,6 +38,7 @@ class Login extends Component {
     if (this.state.isGoodsChecked === "1"){
       this.props.askGoods();
     }
+    return false;
   }
 
   validateForm = (isAgreed) => {
