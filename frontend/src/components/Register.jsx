@@ -5,7 +5,7 @@ import {Link, Redirect} from "react-router-dom";
 
 import Header from './Header';
 import Footer from './Footer';
-import {auth} from "../actions";
+import {auth, contact} from "../actions";
 import '../css/style.scss';
 
 class Login extends Component {
@@ -16,6 +16,7 @@ class Login extends Component {
     email: "",
     password: "",
     isAgreed: false,
+    isGoodsChecked: false,
     errors: [],
   }
 
@@ -23,6 +24,20 @@ class Login extends Component {
     this.setState({
       isAgreed: e.target.checked
     })
+  }
+
+  handleGoodsAnswerChange = (e) => {
+    const checked = e.target.checked;
+    const name = e.target.value;
+    if (checked) {
+      this.setState({isGoodsChecked: name});
+    }
+  }
+
+  notifyGoodsAnswer = () => {
+    if (this.state.isGoodsChecked === "1"){
+      this.props.askGoods();
+    }
   }
 
   validateForm = (isAgreed) => {
@@ -47,10 +62,6 @@ class Login extends Component {
     }
 
     this.props.register(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
-  }
-
-  componentClicked = () => {
-    console.log("Clicked!");
   }
 
   render() {
@@ -83,16 +94,22 @@ class Login extends Component {
         <div class="shop-survey">
           <p><span class="bold">※海外向けグッズ販売にご興味はおありですか？</span></p>
             <div class="yesno">
-              <input type="checkbox" class="yesnocheckbox" />
+              {this.state.isGoodsChecked === "1" ?
+                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" checked />) :
+                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" />)
+              }
               <p class="yesno-yes">はい</p>
             </div>
             <div class="yesno">
-              <input type="checkbox" class="yesnocheckbox" />
+              {this.state.isGoodsChecked === "0" ?
+                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" checked />) :
+                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" />)
+              }
               <p class="yesno-yes">いいえ</p>
             </div>
         </div>
       </div>
-      <a class="btn savep" href="/myportfolio/edit">ポートフォリオページへ</a>
+      <a class="btn savep" href="/myportfolio/edit" onClick={this.notifyGoodsAnswer}>ポートフォリオページへ</a>
     </div>
   </div>
   <Footer />
@@ -195,6 +212,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     register: (first_name, last_name, email, password) => dispatch(auth.register(first_name, last_name, email, password)),
+    askGoods: ()  => {
+      return dispatch(
+        contact.askGoods()
+      );
+    },
   };
 }
 

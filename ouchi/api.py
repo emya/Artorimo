@@ -327,6 +327,20 @@ class AskHelpAPI(generics.GenericAPIView):
 
         return Response({})
 
+class AskGoodsAPI(generics.GenericAPIView):
+
+    def post(self, request):
+        user = request.user
+        email = user.email
+
+        # Notify Ohchee Team
+        html_message = render_to_string('email-goods-yes.html',
+                                        {'user': user, 'email': email})
+
+        send_email.delay("[Action Required] Sale of Goods", "Sale of Goods", html_message, [settings.EMAIL_HOST_USER])
+
+        return Response({})
+
 
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)
