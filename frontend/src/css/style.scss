@@ -2501,7 +2501,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 .community .Dropdown-control {
   width: 80%;
-  margin: 0px auto 80px;
+  margin: 0px auto 30px;
 }
 
 .community .Dropdown-menu {
@@ -2601,4 +2601,10 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 .yesno {
   display: inline-block;
   margin-right: 30px;
+}
+
+.community-image {
+  max-width: 300px;
+  height: auto;
+  margin: auto;
 }

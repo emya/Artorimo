@@ -105,19 +105,19 @@ class MakeCommunityPost extends Component {
             <p class="error-heading" key={error}>Error: {error}</p>
           ))}
 
+          <p class="bold">カテゴリー</p>
+          <Dropdown options={categories} onChange={this.handleChange} value={this.state.selectedCategory} placeholder="カテゴリを選択してください" />
           <p class="bold">タイトル</p>
           <input type="text" class="user-data" placeholder="50字以内" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})} />
           <p class="bold">本文</p>
           <textarea class="user-data" placeholder="200字以内" value={this.state.body} onChange={(e) => this.setState({body: e.target.value})} />
 
-          <p class="bold">画像</p>
-          {this.state.image && ( <div class="trim-wrap"> <img src={URL.createObjectURL(this.state.image)} /> </div>)}
+          <p class="bold">画像添付</p>
+          {this.state.image && ( <div class="community-image"> <img class="community-image" src={URL.createObjectURL(this.state.image)} /> </div>)}
           <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
           <p class="bold">ユーザー名</p>
-          <p>匿名</p>
-          <p class="bold">カテゴリー</p>
-          <Dropdown options={categories} onChange={this.handleChange} value={this.state.selectedCategory} placeholder="カテゴリを選択してください" />
+          <p>匿名</p><br/>
           <input class="btn savep" type="submit" value="トピックを作成する" />
         </form>
       </div>
