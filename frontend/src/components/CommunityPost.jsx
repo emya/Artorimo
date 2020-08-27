@@ -62,7 +62,7 @@ class CommunityPost extends Component {
         </a>
         <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=3BK37G+B89EUI+2PEO+6VRR5" alt=""/>
       </div>
-      
+
         <h2>Community</h2>
 
         {this.props.community && this.props.community.communityPost && (
@@ -71,8 +71,8 @@ class CommunityPost extends Component {
             <p class="topic-title"> {this.props.community.communityPost.title} </p>
             <p> {this.props.community.communityPost.body} </p>
             {this.props.community.communityPost.image && (
-              <div class="trim-wrap">
-                <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/communities/${this.props.community.communityPost.id}/${this.props.community.communityPost.image}`} />
+              <div class="community-image">
+                <img class="community-image" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/communities/${this.props.community.communityPost.id}/${this.props.community.communityPost.image}`} />
               </div>
             )}
             <div class="comment">
