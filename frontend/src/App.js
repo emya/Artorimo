@@ -101,10 +101,10 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/all/users" component={Users} />
                     <StaffRoute exact path="/send/emails" component={SendEmails} />
                     <StaffRoute exact path="/send/emagazines" component={SendEmailMagazines} />
-                    <StaffRoute exact path="/community" component={CommunityCategories} />
-                    <StaffRoute exact path="/community/posts/:category" component={CommunityPosts} />
-                    <StaffRoute exact path="/community/make/post" component={MakeCommunityPost} />
-                    <StaffRoute exact path="/community/post/:postId" component={CommunityPost} />
+                    <PrivateRoute exact path="/community" component={CommunityCategories} />
+                    <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
+                    <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />
+                    <PrivateRoute exact path="/community/post/:postId" component={CommunityPost} />
                 </Switch>
             </BrowserRouter>
         );

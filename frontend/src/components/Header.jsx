@@ -25,6 +25,7 @@ class Header extends Component {
     const options = [
       { value: '/myportfolio', label: 'My Portfolio' },
       { value: '/myprofile', label: 'My Profile' },
+      { value: '/community', label: 'Community' },
     ];
 
     const defaultOption = options[0];

@@ -10,6 +10,7 @@ render() {
           <li><a href={'/ask/help'} class="contact-us-sidebar">仲介を相談する</a></li>
           <li><a href={'/myportfolio'}>My Portfolio</a></li>
           <li><a href={'/myprofile'}>My Profile</a></li>
+          <li><a href={'/community'}>Community</a></li>
           <li><a href={'/how-it-works'}>How It Works</a></li>
           <li><a class="logout" onClick={this.props.logout}>Logout</a></li>
         </ul>

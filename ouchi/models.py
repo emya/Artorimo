@@ -110,8 +110,8 @@ class CommunityPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # 0: worry as an illustrator, 1: opinion on illustration
     category = models.IntegerField()
-    title = models.CharField(max_length=50)
-    body = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    body = models.CharField(max_length=700)
     image = models.CharField(max_length=200, null=True, blank=True)
     posted_time = models.DateTimeField(auto_now_add=True)
 
@@ -119,5 +119,5 @@ class CommunityReply(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     community_post = models.ForeignKey(CommunityPost, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.CharField(max_length=200, blank=True)
+    body = models.CharField(max_length=350, blank=True)
     posted_time = models.DateTimeField(auto_now_add=True)

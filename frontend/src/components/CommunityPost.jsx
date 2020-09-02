@@ -28,7 +28,10 @@ class CommunityPost extends Component {
     const errors = [];
 
     if(this.state.reply.length === 0) {
-      errors.push("Bodyを入力してください。Body cannot be empty");
+      errors.push("コメントを入力してください。Comment cannot be empty");
+    }
+    if(this.state.reply.length > 100) {
+      errors.push("コメントは100字以内にしてください。Comment cannot be longer than 100 characters");
     }
     return errors;
   }
@@ -48,6 +51,8 @@ class CommunityPost extends Component {
   }
 
   render() {
+    const errors = this.state.errors;
+
     return (
   <div>
     <Header />
@@ -78,6 +83,9 @@ class CommunityPost extends Component {
             <div class="comment">
               <p class="bold">コメント（匿名）</p>
               <form onSubmit={this.submitReply}>
+                {errors.map(error => (
+                    <p class="error-heading" key={error}>Error: {error}</p>
+                ))}
                 <input type="text" class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
                 <input class="btn savep two-btn" type="submit" value="投稿する" />
               </form>
