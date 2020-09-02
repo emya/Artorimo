@@ -40,14 +40,26 @@ class MakeCommunityPost extends Component {
     const errors = [];
 
     if(this.state.title.length === 0) {
-      errors.push("Titleを入力してください。Title cannot be empty");
+      errors.push("タイトルを入力してください。Title cannot be empty");
     }
     if(this.state.body.length === 0) {
-      errors.push("Bodyを入力してください。Body cannot be empty");
+      errors.push("本文を入力してください。Body cannot be empty");
     }
+    if(this.state.title.length > 50) {
+      errors.push("タイトルは50字以内にしてください。Title cannot be longer than 50 characters");
+    }
+    if(this.state.body.length > 200) {
+      errors.push("本文は200字以内にしてください。。Body cannot be longer than 200 characters");
+    }
+
     if(this.state.selectedCategory === null) {
       errors.push("カテゴリを選択してください。Category is not selected");
     }
+
+    if (this.state.image && this.state.image.name.length > 200){
+      errors.push("画像名は200字以内にしてください。Name of a file cannot be longer than 200 characters");
+    }
+
     return errors;
   }
 
