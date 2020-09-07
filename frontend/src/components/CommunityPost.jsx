@@ -86,7 +86,7 @@ class CommunityPost extends Component {
                 {errors.map(error => (
                     <p class="error-heading" key={error}>Error: {error}</p>
                 ))}
-                <input type="text" class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
+                <textarea class="user-data" placeholder="100字以内" value={this.state.reply} onChange={(e) => this.setState({reply: e.target.value})} />
                 <input class="btn savep two-btn" type="submit" value="投稿する" />
               </form>
             </div>

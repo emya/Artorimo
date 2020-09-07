@@ -25,30 +25,28 @@ class MyPortfolio extends Component {
       <SideMenu />
 
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
-        <div class="portfolio placeholder">
+      <div class="portfolio placeholder">
         <div class="port-list ">
         <a class="button fixed-btn" href="/ask/help">仲介の相談</a>
         <a class="button fixed-btn-mobile" href="/ask/help">仲介の相談</a>
           <h2>My Portfolio</h2>
 
-
           <div class="profile-top">
             <div class="profile-left">
-            <div class="trim-wrap">
-              {portfolio.profile.image && (
+              <div class="trim-wrap">
+                {portfolio.profile.image && (
                   <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
                 )}
-              {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
-            </div>
+                {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
+              </div>
 
-            <div class="profile-right-mobile">
-              {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
-              {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
-              <p>Illustrator</p>
-              {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
-              {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
-            </div>
-
+              <div class="profile-right-mobile">
+                {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
+                {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
+                <p>Illustrator</p>
+                {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
+                {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
+              </div>
             </div>
 
             <div class="profile-right">
@@ -58,18 +56,16 @@ class MyPortfolio extends Component {
               {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
               {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
             </div>
-
           </div>
 
-
           <ul class="port-list">
-            <li >
+            <li>
               {portfolio.image0 ? (
                  <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
                   ) : (
                  <img class="cropped" src={require('../img/default.png')}/>
               )}
-          </li>
+            </li>
 
             <li>
               {portfolio.image1 ? (
@@ -85,7 +81,7 @@ class MyPortfolio extends Component {
                   ) : (
                  <img class="cropped" src={require('../img/default.png')}/>
               )}
-          </li>
+            </li>
 
             <li>
               {portfolio.image3 ? (
@@ -125,13 +121,13 @@ class MyPortfolio extends Component {
                   ) : (
                  <img class="cropped" src={require('../img/default.png')}/>
               )}
-          </li>
+            </li>
 
           </ul>
           <a class="btn savep two-btn" href="/myprofile/edit">アーティスト名を編集</a>
           <a class="btn savep two-btn" href="/myportfolio/edit">ポートフォリオを編集</a><br/>
         </div>
-        </div>
+      </div>
       ))}
     </div>
     <Footer />

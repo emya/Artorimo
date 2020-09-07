@@ -29,35 +29,37 @@ class Portfolio extends Component {
       </div>
 
       {this.props.portfolio && this.props.portfolio.myportfolio && this.props.portfolio.myportfolio.map((portfolio) => (
-        <div class="portfolio placeholder">
+      <div class="portfolio placeholder">
         <div class="port-list ">
           <h2>Portfolio</h2>
 
 
           <div class="profile-top">
-          <div class="profile-left">
-          <div class="trim-wrap">
-            {portfolio.profile.image && (
-                <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
-              )}
-            {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
-          </div>
+            <div class="profile-left">
+              <div class="trim-wrap">
+                {portfolio.profile.image && (
+                  <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
+                )}
+                {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
+              </div>
 
-          <div class="profile-right-mobile">
-            {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
-            {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
-            <p>Illustrator</p>
-            {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
-            {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
-          </div>
-          </div>
+              <div class="profile-right-mobile">
+                {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
+                {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
+                <p>Illustrator</p>
+                {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
+                {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
+              </div>
+            </div>
 
-          <div class="profile-right">
-            {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
-            <p>Illustrator</p>
+            <div class="profile-right">
+              {portfolio.profile.user_name && (<p class="user-name">{portfolio.profile.user_name}</p>)}
+              {!portfolio.profile.user_name && (<p>アーティスト名</p>)}
+              <p>Illustrator</p>
+              {portfolio.ig && (<a href={`https://www.instagram.com/${portfolio.ig}/`}><img class="ig" src={require('../img/ig.png')}/></a>)}
+              {portfolio.twitter && (<a href={`https://twitter.com/${portfolio.twitter}/`}><img class="ig" src={require('../img/twitter.png')}/></a>)}
+            </div>
           </div>
-          </div>
-
 
           <ul class="port-list">
             <li>
@@ -127,7 +129,7 @@ class Portfolio extends Component {
 
           </ul>
         </div>
-        </div>
+      </div>
       ))}
     </div>
     <Footer />
