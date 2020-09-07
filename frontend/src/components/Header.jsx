@@ -23,9 +23,9 @@ class Header extends Component {
     }
 
     const options = [
-      { value: '/myportfolio', label: 'My Portfolio' },
-      { value: '/myprofile', label: 'My Profile' },
-      { value: '/community', label: 'Community' },
+      { value: '/myportfolio', label: 'ポートフォリオ' },
+      { value: '/myprofile', label: 'プロフィール' },
+      { value: '/community', label: 'コミュニティ' },
     ];
 
     const defaultOption = options[0];
@@ -37,7 +37,7 @@ class Header extends Component {
         <a href="/" class="logo-link">Ohchee Studio</a>
         { !this.props.user && (
           <div class="login">
-            <a class="signin" href="/login">Login</a>
+            <a class="signin" href="/login">ログイン</a>
           </div>
         )}
         { this.props.user && (

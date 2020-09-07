@@ -24,10 +24,11 @@ class Landing extends Component {
     </header>
 
     <div class="menu">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/artists">Find Artists</a>
-      <a href="/about">About Us</a>
-      <a href="/contact-us">Contact Us</a>
+      <a href="/how-it-works">サービス</a>
+      <a href="/artists">アーティスト一覧</a>
+      <a href="https://ohcheestudio.storenvy.com/">オンラインストア</a>
+      <a href="/about">会社情報</a>
+      <a href="/contact-us">お問い合わせ</a>
     </div>
 
     <section class="how">
