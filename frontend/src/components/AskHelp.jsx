@@ -75,7 +75,7 @@ class AskHelp extends Component {
           <h2>仲介依頼・ご相談</h2>
 
             <p class="contact-form-intro">
-            仲介をご希望の際は、以下のフォームを送信いただき、クライアントからのメールを<br/>弊社アドレス<a href="mailto: ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご転送ください。<br/><br/>
+            仲介をご希望の際は、以下のフォームを送信いただき、クライアントからのメールを<br/>弊社アドレス<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご転送ください。<br/><br/>
             弊社サービスは完全成功報酬制のため、<span class="red">ご相談はすべて無料</span>です。<br/>
             また、仲介のご相談以外についてもお気軽にご連絡ください。
             </p>
