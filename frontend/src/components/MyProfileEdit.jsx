@@ -49,7 +49,13 @@ class MyProfileEdit extends Component {
   submitProfile = (e) => {
     e.preventDefault();
 
-    const errors = this.validateForm(this.state.image);
+    const errors = this.validateInput(
+      this.state.image,
+      this.state.availability,
+      this.state.work_process,
+      this.state.achievement,
+      this.state.skills
+    );
 
     if (errors.length > 0) {
       this.setState({ errors });
@@ -133,15 +139,31 @@ class MyProfileEdit extends Component {
     });
   }
 
-  validateForm = (image) => {
-    // we are going to store errors for all fields
-    // in a signle array
+  validateInput = (image, availability, work_process, achievement, skills) => {
     const errors = [];
 
     if (image && image.size > 3145728) {
       errors.push("Please Select an image smaller than 3 MB");
     }
+
+    if (availability && availability.length > 50) {
+      errors.push("稼働時間／週への入力が50字を超えています")
+    }
+
+    if (work_process && work_process.length > 100) {
+      errors.push("作業の進め方への入力が100字を超えています")
+    }
+
+    if (achievement && achievement.length > 200) {
+      errors.push("経歴・仕事実績への入力が200字を超えています")
+    }
+
+    if (skills && skills.length > 100) {
+      errors.push("その他使用ツール・スキルへの入力が100字を超えています")
+    }
+
     return errors;
+
   }
 
   render() {
@@ -161,7 +183,7 @@ class MyProfileEdit extends Component {
       <h2>My Profile</h2>
         <form onSubmit={this.submitProfile}>
           {errors.map(error => (
-            <p class="error-heading" key={error}>Error: {error}</p>
+            <p class="error-heading" key={error}>エラー: {error}</p>
           ))}
           {this.props.profile.myprofile && this.props.profile.myprofile.map((profile) => (
             <div class="wrapper clearfix">
@@ -306,11 +328,11 @@ class MyProfileEdit extends Component {
                   )}
                   <p class="checkbox-selection">3D／CG</p>
                 </div>
-                <p class="object">稼働時間／週</p>
+                <p class="object">稼働時間／週 (50文字以内)</p>
                 <input placeholder="例：10" type="text" class="user-data" onChange={this.handleChange.bind(this, 'availability', profile)} value={profile.availability}/>
-                <p class="object">作業の進め方</p>
+                <p class="object">作業の進め方 (100文字以内)</p>
                 <input placeholder="例：ラフとカラーの後にそれぞれクライアントチェック" type="text" class="user-data" onChange={this.handleChange.bind(this, 'work_process', profile)} value={profile.work_process}/>
-                <p class="object">経歴・仕事実績</p>
+                <p class="object">経歴・仕事実績 (200文字以内)</p>
                 <textarea class="user-data" onChange={this.handleChange.bind(this, 'achievement', profile)} value={profile.achievement}></textarea>
                 <p class="object">使用ツール</p>
                 <div class="checkbox-outline">
@@ -342,7 +364,7 @@ class MyProfileEdit extends Component {
                   )}
                   <p class="checkbox-selection">Clip Studio</p>
                 </div>
-                <p class="object">その他使用ツール・スキル</p>
+                <p class="object">その他使用ツール・スキル (100文字以内)</p>
                 <input class="user-data" placeholder="例：キャラクターデザイン, アニメーション" onChange={this.handleChange.bind(this, 'skills', profile)} value={profile.skills}/>
                 <p class="object">可能報酬入金方法</p>
                 <div class="checkbox-outline">
@@ -381,10 +403,14 @@ class MyProfileEdit extends Component {
                   )}
                   <p class="checkbox-selection">銀行振り込み</p>
                 </div>
-
               </div>
             </div>
           ))}
+
+          {errors.map(error => (
+            <p class="error-heading" key={error}>エラー: {error}</p>
+          ))}
+
           <input class="btn savep two-btn" type="submit" value="変更を保存" />
           <a href="/myprofile" class="btn savep two-btn right-btn">戻る</a>
 
