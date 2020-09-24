@@ -75,17 +75,17 @@ class Profile(models.Model):
     # 0: character, 1: fashion, 2: books, 3: real, 4: comic, 5: games, 6: pop
     # 7: japanese, 8: watercolor, 9: sumie, 10: line drawing, 11: arts, 12: 3D
     style = models.CharField(max_length=100, blank=True)
-    work_process = models.CharField(max_length=100, blank=True)
+    work_process = models.CharField(max_length=250, blank=True)
     # employment_type
     # 0: full-time
     # 1: part-time
     employment_type = models.IntegerField(default=-1)
     availability = models.CharField(max_length=100, blank=True)
-    achievement = models.CharField(max_length=200, blank=True)
+    achievement = models.CharField(max_length=350, blank=True)
     # tools
     # 0: Adobe illustrator, 1: Adobe photoshop, 2: Adobe indesign, 3: Clip studio
     tools = models.CharField(max_length=100, blank=True)
-    skills = models.CharField(max_length=100, blank=True)
+    skills = models.CharField(max_length=200, blank=True)
     # payment_method
     # 0: Line pay 1: PayPay 2: Pay-easy 3: Paypal 4: Bank
     payment_method = models.CharField(max_length=100, blank=True)

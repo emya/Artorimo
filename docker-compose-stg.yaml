@@ -1,0 +1,30 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=artorimo.settings_stg
+    expose:
+      - 8000
+    volumes:
+      - ./assets:/static
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx-stg
+    ports:
+      - "80:80"
+    volumes:
+      - ./assets:/static
+    depends_on:
+      - server
+  redis:
+    image: redis:3.2
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    depends_on:
+      - redis

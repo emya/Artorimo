@@ -9,7 +9,7 @@ from rest_framework.parsers import (
 )
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.template.loader import render_to_string
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.conf import settings
 from django.dispatch import receiver
 
@@ -105,68 +105,72 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
+
+        request.data._mutable = True
+        img0 = request.data.pop('image0')
+        img1 = request.data.pop('image1')
+        img2 = request.data.pop('image2')
+        img3 = request.data.pop('image3')
+        img4 = request.data.pop('image4')
+        img5 = request.data.pop('image5')
+        img6 = request.data.pop('image6')
+        img7 = request.data.pop('image7')
+        img8 = request.data.pop('image8')
+        request.data._mutable = False
+
         data = request.data.copy()
-        img0 = data.pop('image0')
-        img1 = data.pop('image1')
-        img2 = data.pop('image2')
-        img3 = data.pop('image3')
-        img4 = data.pop('image4')
-        img5 = data.pop('image5')
-        img6 = data.pop('image6')
-        img7 = data.pop('image7')
-        img8 = data.pop('image8')
 
         is_upload_images = {}
 
         if img0:
             image = img0[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image0'] = image.name
                 is_upload_images['image0'] = image
         if img1:
             image = img1[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image1'] = image.name
                 is_upload_images['image1'] = image
         if img2:
             image = img2[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image2'] = image.name
                 is_upload_images['image2'] = image
 
         if img3:
             image = img3[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image3'] = image.name
                 is_upload_images['image3'] = image
 
         if img4:
             image = img4[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image4'] = image.name
                 is_upload_images['image4'] = image
 
         if img5:
             image = img5[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image5'] = image.name
                 is_upload_images['image5'] = image
 
         if img6:
             image = img6[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image6'] = image.name
                 is_upload_images['image6'] = image
 
         if img7:
             image = img7[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image7'] = image.name
                 is_upload_images['image7'] = image
 
         if img8:
             image = img8[0]
-            if isinstance(image, InMemoryUploadedFile):
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image8'] = image.name
                 is_upload_images['image8'] = image
 
