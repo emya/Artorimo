@@ -31,6 +31,7 @@ import CommunityCategories from "./components/CommunityCategories";
 import CommunityPosts from "./components/CommunityPosts";
 import CommunityPost from "./components/CommunityPost";
 import MakeCommunityPost from "./components/MakeCommunityPost";
+import IconMaker from "./components/IconMaker";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -101,6 +102,7 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/all/users" component={Users} />
                     <StaffRoute exact path="/send/emails" component={SendEmails} />
                     <StaffRoute exact path="/send/emagazines" component={SendEmailMagazines} />
+                    <Route exact path="/iconmaker" component={IconMaker} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />
