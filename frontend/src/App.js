@@ -102,7 +102,7 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/all/users" component={Users} />
                     <StaffRoute exact path="/send/emails" component={SendEmails} />
                     <StaffRoute exact path="/send/emagazines" component={SendEmailMagazines} />
-                    <StaffRoute exact path="/iconmaker" component={IconMaker} />
+                    <Route exact path="/iconmaker" component={IconMaker} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />
