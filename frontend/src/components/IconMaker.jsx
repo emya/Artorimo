@@ -16,14 +16,12 @@ class IconMaker extends Component {
   }
 
   switchEyes = (neweyes) => {
-    console.log("switchEyes");
     this.setState({
       eyes: neweyes
     })
   }
 
   switchMouth = (newmouth) => {
-    console.log("switchMouth");
     this.setState({
       mouth: newmouth
     })
