@@ -4,7 +4,8 @@ import * as portfolio from "./portfolio";
 import * as contact from "./contact";
 import * as artists from "./artists";
 import * as staff from "./staff";
+import * as payment from "./payment";
 import * as community from "./community";
 
-export {auth, profile, portfolio, contact, artists, staff, community}
+export {auth, profile, portfolio, contact, artists, staff, payment, community}
 

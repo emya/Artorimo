@@ -12,13 +12,18 @@ from django.template.loader import render_to_string
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.conf import settings
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 from knox.models import AuthToken
 
 import boto3
+from decimal import Decimal
 
 from .models import (
-    User, Profile, Portfolio, CommunityPost, CommunityReply
+    User, Profile, Portfolio,
+    CommunityPost, CommunityReply,
+    IconOrder
 )
 from .serializers import (
     UserSerializer,
@@ -342,8 +347,31 @@ class AskGoodsAPI(generics.GenericAPIView):
                                         {'user': user, 'email': email})
 
         send_email.delay("[Action Required] Sale of Goods", "Sale of Goods", html_message, [settings.EMAIL_HOST_USER])
-
         return Response({})
+
+
+from paypal.standard.forms import PayPalPaymentsForm
+
+class PayPalAPI(generics.GenericAPIView):
+
+    def get(self, request):
+        order_id = request.session.get('order_id')
+        order = get_object_or_404(IconOrder, id=order_id)
+        host = request.get_host()
+
+        paypal_dict = {
+            'business': settings.PAYPAL_RECEIVER_EMAIL,
+            'amount': '%.2f' % order.total_cost().quantize(Decimal('.01')),
+            'item_name': f"Order {order.id}",
+            'invoice': str(order.id),
+            'currency_code': 'USD',
+            'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+            'return_url': f"http://{host}{reverse('payment_done')}",
+            'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
+        }
+
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        return Response({"emagazines": form})
 
 
 class CustomPasswordResetView:
