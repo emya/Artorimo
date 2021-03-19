@@ -3,7 +3,7 @@ boto3==1.9.233
 celery==4.3.0
 cffi==1.14.0
 cryptography==2.9
-Django==3.0.5
+Django==3.1.6
 django-rest-knox==4.1.0
 django-rest-passwordreset==1.1.0
 django-webpack-loader==0.7.0
