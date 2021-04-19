@@ -121,3 +121,10 @@ class CommunityReply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.CharField(max_length=350, blank=True)
     posted_time = models.DateTimeField(auto_now_add=True)
+
+class IconOrder(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    artist = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.FloatField()
+    status = models.CharField(max_length=100)
+    created_time = models.DateTimeField(auto_now_add=True)

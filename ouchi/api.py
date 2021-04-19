@@ -7,18 +7,25 @@ from rest_framework.response import Response
 from rest_framework.parsers import (
     MultiPartParser, FormParser, FileUploadParser, FormParser
 )
+
+from django.http import HttpResponse
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.template.loader import render_to_string
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.conf import settings
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 from knox.models import AuthToken
 
 import boto3
+from decimal import Decimal
 
 from .models import (
-    User, Profile, Portfolio, CommunityPost, CommunityReply
+    User, Profile, Portfolio,
+    CommunityPost, CommunityReply,
+    IconOrder
 )
 from .serializers import (
     UserSerializer,
@@ -26,6 +33,7 @@ from .serializers import (
     LoginUserSerializer,
     ProfileSerializer,
     PortfolioSerializer,
+    IconOrderSerializer,
     CommunityPostSerializer,
     CommunityReplySerializer,
 )
@@ -342,8 +350,94 @@ class AskGoodsAPI(generics.GenericAPIView):
                                         {'user': user, 'email': email})
 
         send_email.delay("[Action Required] Sale of Goods", "Sale of Goods", html_message, [settings.EMAIL_HOST_USER])
-
         return Response({})
+
+
+class IconOrderViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseUserPermissions, ]
+    #parser_classes = [MultiPartParser, FormParser, ]
+    serializer_class = IconOrderSerializer
+
+    def create(self, request):
+        print("create")
+        artist = User.objects.get(pk="751ecde810454ae9aa42d00c45428bd5")
+        icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created")
+        serializer = self.serializer_class(icon_order)
+
+        return Response(serializer.data)
+
+class IconMakerAPI(generics.GenericAPIView):
+    permission_classes = [BaseUserPermissions, ]
+
+    def get(self, request):
+        # For now, use fixed user id
+        user_id = "d9d5c4f7-8977-4181-a94a-cc811c15b4be"
+        client = boto3.client(
+            "s3",
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            region_name=settings.AWS_REGION
+        )
+        response = client.list_objects(
+            Bucket=settings.AWS_BUCKET_NAME,
+            Prefix=f"icons/{user_id}",
+        )
+        print(response)
+
+        icon_parts = {
+            "hair": 0,
+            "bang": 0,
+            "side": 0,
+            "eyes": 0,
+            "eyebrows": 0,
+            "mouth": 0,
+            "cloth": 0
+        }
+        if "Contents" in response:
+            for content in response["Contents"]:
+                key = content['Key']
+                for part in icon_parts.keys():
+                    if key.split("/")[-1].startswith(part):
+                        icon_parts[part] += 1
+
+        return Response(icon_parts)
+
+from paypal.standard.forms import PayPalPaymentsForm
+
+class PayPalAPI(generics.GenericAPIView):
+    permission_classes = [BaseUserPermissions, ]
+
+    def get(self, request):
+        print("get object")
+        order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
+        order = get_object_or_404(IconOrder, id=order_id)
+        #user = User.objects.get(pk="751ecde810454ae9aa42d00c45428bd5")
+        #order = IconOrder.objects.create(artist=user, price=50.0)
+        host = request.get_host()
+
+        print("order", order)
+        print("host", host)
+
+        paypal_dict = {
+            'business': settings.PAYPAL_RECEIVER_EMAIL,
+            'amount': '%.2f' % order.price,
+            'item_name': f"Order {order.id}",
+            'invoice': str(order.id),
+            'currency_code': 'USD',
+            #'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+            #'return_url': f"http://{host}{reverse('payment_done')}",
+            #'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
+        }
+
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        print("form", type(form), form.render())
+        return Response({"form": form.render()})
+        """
+        r = HttpResponse(form.render())
+        print(r.content)
+        print(r.__dir__())
+        return HttpResponse(form.render())
+        """
 
 
 class CustomPasswordResetView:

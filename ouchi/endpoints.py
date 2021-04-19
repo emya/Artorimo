@@ -14,6 +14,9 @@ from .api import (
     PortfolioViewSet,
     CommunityPostViewSet,
     CommunityReplyViewSet,
+    IconOrderViewSet,
+    IconMakerAPI,
+    PayPalAPI,
 )
 
 #from .views import ListNote
@@ -23,6 +26,7 @@ router.register('profiles', ProfileViewSet, 'profiles')
 router.register('portfolios', PortfolioViewSet, 'portfolios')
 router.register('community/post', CommunityPostViewSet, 'community_post')
 router.register('community/reply', CommunityReplyViewSet, 'community_reply')
+router.register('order/icon', IconOrderViewSet, 'icon_order')
 
 urlpatterns = [
     url("^", include(router.urls)),
@@ -34,6 +38,8 @@ urlpatterns = [
     url("^notify/users/$", NotifyUsersAPI.as_view()),
     url("^send/emagazines/$", EmailMagazinesAPI.as_view()),
     url("^artists/$", ArtistAPI.as_view()),
+    url("^payment/paypal/$", PayPalAPI.as_view()),
+    url("^icons/maker/$", IconMakerAPI.as_view()),
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 

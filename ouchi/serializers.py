@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import (
     User, Profile, Portfolio,
-    CommunityPost, CommunityReply
+    CommunityPost, CommunityReply,
+    IconOrder
 )
 
 from django.contrib.auth import authenticate
@@ -111,4 +112,11 @@ class CommunityReplySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityReply
+        fields = '__all__'
+
+class IconOrderSerializer(serializers.ModelSerializer):
+    artist = UserSerializer(read_only=True)
+
+    class Meta:
+        model = IconOrder
         fields = '__all__'
