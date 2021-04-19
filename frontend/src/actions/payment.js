@@ -7,11 +7,12 @@ export const getPaypal = () => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    var query = "";
+    console.log("getPaypal")
 
-    return fetch(`/api/payment/paypal`, {headers, })
+    return fetch("/api/payment/paypal/", {headers, })
       .then(res => {
         if (res.status < 500) {
+          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -22,10 +23,10 @@ export const getPaypal = () => {
       })
       .then(res => {
         if (res.status === 200) {
-          dispatch({type: 'FETCH_COMMUNITY_POSTS', data: res.data });
+          dispatch({type: "GET_PAYPAL", data: res.data });
           return res.data;
         } else {
-          dispatch({type: "ASKED_HELP_FAILURE", data: res.data});
+          dispatch({type: "GET_PAYPAL_FAILURE", data: res.data});
           throw res.data;
         }
       })

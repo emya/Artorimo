@@ -1,0 +1,92 @@
+.filterHairColor1 {
+  // 252921
+  filter: brightness(50%) sepia(1) hue-rotate(52deg) saturate(113.5%) brightness(55%);
+}
+.filterHairColor2 {
+  // 5B1F19
+  filter: brightness(50%) sepia(1) hue-rotate(-33deg) saturate(67.5%) brightness(63%);
+}
+.filterHairColor3 {
+  // 61473B
+  filter: brightness(50%) sepia(1) hue-rotate(-19deg) saturate(100.5%) brightness(71%);
+}
+.filterHairColor4 {
+  // EAD8B3
+  filter: brightness(50%) sepia(1) hue-rotate(2deg) saturate(67.5%) brightness(121%);
+}
+.filterHairColor5 {
+  // A08676
+  filter: brightness(50%) sepia(1) hue-rotate(-15deg) saturate(106.5%) brightness(91%);
+}
+.filterHairColor6 {
+  // CFA17E
+  filter: brightness(50%) sepia(1) hue-rotate(-12deg) saturate(78.5%) brightness(105%);
+}
+.filterHairColor7 {
+  // FFF9E9
+  filter: brightness(50%) sepia(1) hue-rotate(6deg) saturate(24.5%) brightness(136%);
+}
+
+.filterSkinColor1 {
+  // FFFFFF
+  filter: invert(100%) sepia(0%) saturate(2067%) hue-rotate(359deg) brightness(124%) contrast(109%);
+}
+.filterSkinColor2 {
+  // EDD7C1
+  filter: invert(88%) sepia(28%) saturate(259%) hue-rotate(335deg) brightness(99%) contrast(87%);
+}
+.filterSkinColor3 {
+  // E9C9B1
+  filter: invert(95%) sepia(5%) saturate(2799%) hue-rotate(312deg) brightness(89%) contrast(105%);
+}
+.filterSkinColor4 {
+  // D7A385
+  filter: invert(74%) sepia(10%) saturate(1176%) hue-rotate(338deg) brightness(92%) contrast(92%);
+}
+.filterSkinColor5 {
+  // C5854F
+  filter: invert(56%) sepia(60%) saturate(409%) hue-rotate(346deg) brightness(91%) contrast(86%);
+}
+.filterSkinColor6 {
+  // 954E1E
+  filter: invert(34%) sepia(26%) saturate(1332%) hue-rotate(341deg) brightness(97%) contrast(94%);
+}
+
+.filterEyesColor1 {
+  // AFAF77
+  filter: brightness(50%) sepia(1) hue-rotate(22deg) saturate(98.5%) brightness(98%);
+}
+.filterEyesColor2 {
+  // AFC1D3
+  filter: brightness(50%) sepia(1) hue-rotate(172deg) saturate(95.5%) brightness(116%);
+}
+.filterEyesColor3 {
+  // C58B5B
+  filter: brightness(50%) sepia(1) hue-rotate(-11deg) saturate(76.5%) brightness(96%);
+}
+.filterEyesColor4 {
+  // 663B26
+  filter: brightness(50%) sepia(1) hue-rotate(-18deg) saturate(78.5%) brightness(67%);
+}
+.filterEyesColor5 {
+  // 392522
+  filter: brightness(50%) sepia(1) hue-rotate(-30deg) saturate(99.5%) brightness(58%);
+}
+
+.filterMouthColor1 {
+  // E54D32
+  filter: brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);
+  //filter: brightness(50%) sepia(1) hue-rotate(-29deg) saturate(47.5%) brightness(95%);
+}
+.filterMouthColor2 {
+  // ED9F9B
+  filter: brightness(50%) sepia(1) hue-rotate(-35deg) saturate(55.5%) brightness(117%);
+}
+.filterMouthColor3 {
+  // F7D3C3
+  filter: brightness(50%) sepia(1) hue-rotate(-20deg) saturate(48.5%) brightness(127%);
+}
+
+.filterTestColor {
+  filter: hue-rotate(90deg) saturate(89%) brightness(15%);
+}

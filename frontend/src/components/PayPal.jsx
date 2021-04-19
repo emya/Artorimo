@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import moment from 'moment';
 
 import Header from './Header';
 import Footer from './Footer';
 import SideMenu from './SideMenu';
 
-import {community, auth} from "../actions";
+import {payment, icons, auth} from "../actions";
 
 import { keys } from '../keys.js';
 import '../css/style.scss';
@@ -14,11 +15,16 @@ import '../css/style.scss';
 class PayPal extends Component {
 
   componentDidMount() {
-    this.props.fetchCommunityPosts();
+    this.props.getPaypal();
   }
 
   render() {
-    const errors = this.state.errors;
+    console.log(this.props.payment);
+    console.log(this.props.icons);
+
+    if (this.props.icons === null || this.props.icons.isOrdered === null){
+        return <Redirect to="/iconmaker" />;
+    }
 
     return (
   <div>
@@ -27,7 +33,10 @@ class PayPal extends Component {
     <div class="wrapper clearfix">
       <SideMenu />
       <div class="profile">
-        <h2>PayPal</h2>
+        <h2>Checkout</h2>
+        <h3>Your Order</h3>
+        <div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />
+
       </div>
 
     </div>
@@ -39,6 +48,8 @@ class PayPal extends Component {
 
 const mapStateToProps = state => {
   return {
+    payment: state.payment,
+    icons: state.icons,
     user: state.auth.user,
   }
 }
@@ -46,12 +57,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCommunityPosts: () => {
-      dispatch(community.fetchCommunityPosts());
+    getPaypal: () => {
+      dispatch(payment.getPaypal());
     },
     postCommunity: (message)  => {
       return dispatch(
-        community.postCommunity(message)
+        //community.postCommunity(message)
       );
     },
   }
