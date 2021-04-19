@@ -7,8 +7,6 @@ export const getPaypal = () => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("getPaypal")
-
     return fetch("/api/payment/paypal/", {headers, })
       .then(res => {
         if (res.status < 500) {

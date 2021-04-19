@@ -49,9 +49,7 @@ class IconMakerTest extends Component {
 
   changeColorFilter = (filter) => {
     let className = `${this.state.mapping[this.state.looked_element]}_classes`;
-    console.log("changeColorFilter", className);
     let classes = this.state[className];
-    console.log("classes", classes);
     let classes_ls = classes.split(" ");
     if (classes_ls[classes_ls.length - 1].startsWith("filter")) {
       classes_ls.pop();
@@ -65,22 +63,18 @@ class IconMakerTest extends Component {
   }
 
   changeLookedElement = (value) => {
-    console.log("changeLookedElement", value);
     this.setState({
       looked_element: value
     })
   }
 
   changeOption = (optionName, optionValue) => {
-    console.log("changeOption")
     this.setState({
       [optionName]: optionValue
     })
   }
 
   getClothOptions = (optionName) => {
-    console.log("getClothOptions", this.props);
-
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
 
@@ -102,7 +96,6 @@ class IconMakerTest extends Component {
           </div>
         )
       }
-      console.log(content);
       return content;
     }
   }
@@ -114,9 +107,6 @@ class IconMakerTest extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props.icons);
-
     return (
   <div>
     <Header />

@@ -7,7 +7,6 @@ export const orderIcon = () => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("orderIcon")
     let body = {};
 
     return fetch("/api/order/icon/", {headers, body, method: "POST"})
@@ -42,8 +41,6 @@ export const fetchIconParts = () => {
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
-
-    console.log("getIconParts")
 
     return fetch("/api/icons/maker/", {headers, })
       .then(res => {

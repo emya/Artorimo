@@ -36,8 +36,6 @@ class IconMaker extends Component {
   }
 
   render() {
-    console.log(this.props.icons);
-
     if (this.props.icons.isOrdered) {
         return <Redirect to="/payment/paypal" />;
     }

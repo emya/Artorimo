@@ -19,9 +19,6 @@ class PayPal extends Component {
   }
 
   render() {
-    console.log(this.props.payment);
-    console.log(this.props.icons);
-
     if (this.props.icons === null || this.props.icons.isOrdered === null){
         return <Redirect to="/iconmaker" />;
     }

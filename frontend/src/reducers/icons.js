@@ -8,7 +8,6 @@ export default function payment(state=initialState, action) {
 
   switch (action.type) {
     case 'ORDER_ICON':
-      console.log(action.data);
       return {...state, order: action.data, isOrdered: true};
 
     case 'GET_ICON_PARTS':
