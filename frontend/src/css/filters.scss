@@ -1,10 +1,18 @@
 .filterHairColor1 {
   // 252921
-  filter: brightness(50%) sepia(1) hue-rotate(52deg) saturate(113.5%) brightness(55%);
+  filter: brightness(50%) sepia(1) hue-rotate(52deg) saturate(86.5%) brightness(35%);
+  -webkit-filter: brightness(50%) sepia(1) hue-rotate(52deg) saturate(86.5%) brightness(35%);
 }
+/*
+.filterHairColor1 {
+  // 252921
+  filter: brightness(50%) sepia(1)  hue-rotate(132deg) saturate(103.2%) brightness(91.2%);
+}
+*/
 .filterHairColor2 {
   // 5B1F19
   filter: brightness(50%) sepia(1) hue-rotate(-33deg) saturate(67.5%) brightness(63%);
+  -webkit-filter: brightness(50%) sepia(1) hue-rotate(-33deg) saturate(67.5%) brightness(63%);
 }
 .filterHairColor3 {
   // 61473B
@@ -29,11 +37,11 @@
 
 .filterSkinColor1 {
   // FFFFFF
-  filter: invert(100%) sepia(0%) saturate(2067%) hue-rotate(359deg) brightness(124%) contrast(109%);
+  filter: brightness(50%) sepia(1) hue-rotate(-38deg) saturate(124.5%) brightness(140%);
 }
 .filterSkinColor2 {
   // EDD7C1
-  filter: invert(88%) sepia(28%) saturate(259%) hue-rotate(335deg) brightness(99%) contrast(87%);
+  filter: brightness(50%) sepia(1) hue-rotate(-8deg) saturate(69.5%) brightness(124%);
 }
 .filterSkinColor3 {
   // E9C9B1

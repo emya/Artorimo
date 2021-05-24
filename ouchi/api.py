@@ -41,6 +41,13 @@ from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
 from .tasks import send_email, send_bcc_email
 
+s3_client = boto3.client(
+    "s3",
+    aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    region_name=settings.AWS_REGION
+)
+
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
 
@@ -357,11 +364,19 @@ class IconOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
     #parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = IconOrderSerializer
+    queryset = IconOrder.objects.all()
 
     def create(self, request):
         print("create")
-        artist = User.objects.get(pk="751ecde810454ae9aa42d00c45428bd5")
-        icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created")
+        data = request.data
+        artist_id = data.pop('artist_id')
+        # For testing
+        artist_id = "751ecde810454ae9aa42d00c45428bd5"
+
+        print("data", data)
+
+        artist = User.objects.get(pk=artist_id)
+        icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)
         serializer = self.serializer_class(icon_order)
 
         return Response(serializer.data)
@@ -371,27 +386,26 @@ class IconMakerAPI(generics.GenericAPIView):
 
     def get(self, request):
         # For now, use fixed user id
-        user_id = "d9d5c4f7-8977-4181-a94a-cc811c15b4be"
-        client = boto3.client(
-            "s3",
-            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-            region_name=settings.AWS_REGION
-        )
-        response = client.list_objects(
+        artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
+        print(f"artist_id {artist_id}")
+        response = s3_client.list_objects(
             Bucket=settings.AWS_BUCKET_NAME,
-            Prefix=f"icons/{user_id}",
+            Prefix=f"icons/{artist_id}",
         )
-        print(response)
+        #print(response)
 
         icon_parts = {
             "hair": 0,
             "bang": 0,
             "side": 0,
             "eyes": 0,
+            "eyeballs": 0,
             "eyebrows": 0,
+            "nose": 0,
             "mouth": 0,
-            "cloth": 0
+            "cloth": 0,
+            "face": 0,
+            "accessories": 0,
         }
         if "Contents" in response:
             for content in response["Contents"]:
@@ -400,7 +414,189 @@ class IconMakerAPI(generics.GenericAPIView):
                     if key.split("/")[-1].startswith(part):
                         icon_parts[part] += 1
 
+        #print(f"Icon Parts {icon_parts}")
         return Response(icon_parts)
+
+class IconMakerSetupAPI(generics.GenericAPIView):
+    permission_classes = [BaseUserPermissions, ]
+    parser_classes = [MultiPartParser, FormParser, ]
+
+    def post(self, request):
+        # Upload new images
+        data = request.data
+        print("post", data)
+        artist_id = data['artist_id']
+        icon_part = data['icon_part']
+
+        is_deleted = data.get('is_deleted', False)
+
+        response = s3_client.list_objects(
+            Bucket=settings.AWS_BUCKET_NAME,
+            Prefix=f"icons/{artist_id}/{icon_part}",
+        )
+
+        keys = []
+        if "Contents" in response:
+            for content in response["Contents"]:
+                key = content['Key']
+                if key.endswith(".png"):
+                    keys.append(key)
+
+        keys.sort()
+        n_keys = len(keys)
+
+        if is_deleted:
+            file_numbers_str = data['file_numbers']
+            file_numbers = [int(file_number) for file_number in file_numbers_str.split(",")]
+            print(file_numbers)
+            file_numbers.sort()
+            full_files = []
+            n_removed = 0
+
+            for key in keys:
+                n_key = key.split("/")[-1].split(".")[0].replace(icon_part, "")
+                n_key = int(n_key)
+                if n_key in file_numbers:
+                    s3_client.delete_object(
+                        Bucket=settings.AWS_BUCKET_NAME,
+                        Key=key,
+                    )
+                    if icon_part == "eyes":
+                        s3_client.delete_object(
+                            Bucket=settings.AWS_BUCKET_NAME,
+                            Key=f"icons/{artist_id}/eyeballs{n_key}.png",
+                        )
+                    n_removed += 1
+                else:
+                    if n_removed > 0:
+                        copy_source = {'Bucket': settings.AWS_BUCKET_NAME, 'Key': key}
+                        s3_client.copy_object(
+                            CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}{n_key-n_removed}.png"
+                        )
+                        s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=key)
+                        if icon_part == "eyes":
+                            s3_client.copy_object(
+                                CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/eyeballs{n_key-n_removed}.png"
+                            )
+                            s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/eyeballs{n_key}.png")
+
+            icon_parts = {"updated_key": icon_part,
+                          "updated_value": n_keys - n_removed}
+            return Response(icon_parts)
+
+        if icon_part == "eyes":
+            request.data._mutable = True
+            eyes_image_ls = request.data.pop('eyes_image')
+            eyeballs_image_ls = request.data.pop('eyeballs_image')
+            request.data._mutable = False
+
+            eyes_image = eyes_image_ls[0]
+            eyeballs_image = eyeballs_image_ls[0]
+            print(eyes_image)
+            print(type(eyes_image))
+
+            is_upload_images = {}
+            if isinstance(eyes_image, InMemoryUploadedFile) or isinstance(eyes_image, TemporaryUploadedFile):
+                image_name = f"{icon_part}{n_keys+1}.png"
+                #data['eyes_image'] = image_name
+                eyes_image.name = image_name
+                is_upload_images['eyes_image'] = eyes_image
+
+            if isinstance(eyeballs_image, InMemoryUploadedFile) or isinstance(eyeballs_image, TemporaryUploadedFile):
+                image_name = f"eyeballs{n_keys+1}.png"
+                #data['eyeballs_image'] = image_name
+                eyeballs_image.name = image_name
+                is_upload_images['eyeballs_image'] = eyeballs_image
+
+            icon_parts = {"updated_key": icon_part,
+                          "updated_value": n_keys}
+
+            print(is_upload_images)
+
+            if is_upload_images:
+                if "eyes_image" in is_upload_images.keys() and "eyeballs_image" in is_upload_images.keys():
+                    v_eyes = is_upload_images["eyes_image"]
+                    upload_to_s3(v_eyes, f'icons/{artist_id}/{v_eyes.name}')
+                    v_eyeballs = is_upload_images["eyeballs_image"]
+                    upload_to_s3(v_eyeballs, f'icons/{artist_id}/{v_eyeballs.name}')
+
+                    icon_parts["updated_value"] += 1
+
+            return Response(icon_parts)
+
+
+        request.data._mutable = True
+        img0 = request.data.pop('image0') if 'image0' in request.data else None
+        img1 = request.data.pop('image1') if 'image1' in request.data else None
+        img2 = request.data.pop('image2') if 'image2' in request.data else None
+        img3 = request.data.pop('image3') if 'image3' in request.data else None
+        img4 = request.data.pop('image4') if 'image4' in request.data else None
+        img5 = request.data.pop('image5') if 'image5' in request.data else None
+
+        is_upload_images = {}
+        n_uploaded_images = 0
+
+        if img0:
+            image = img0[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image0'] = image_name
+                image.name = image_name
+                is_upload_images['image0'] = image
+        if img1:
+            image = img1[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image1'] = image_name
+                image.name = image_name
+                is_upload_images['image1'] = image
+        if img2:
+            image = img2[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image2'] = image_name
+                image.name = image_name
+                is_upload_images['image2'] = image
+
+        if img3:
+            image = img3[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image3'] = image_name
+                image.name = image_name
+                is_upload_images['image3'] = image
+
+        if img4:
+            image = img4[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image4'] = image_name
+                image.name = image_name
+                is_upload_images['image4'] = image
+
+        if img5:
+            image = img5[0]
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
+                n_uploaded_images += 1
+                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
+                #data['image5'] = image_name
+                image.name = image_name
+                is_upload_images['image5'] = image
+
+        icon_parts = {"updated_key": icon_part,
+                      "updated_value": n_keys}
+        if is_upload_images:
+            for k, v in is_upload_images.items():
+                upload_to_s3(v, f'icons/{artist_id}/{v.name}')
+                icon_parts["updated_value"] += 1
+
+        return Response(icon_parts)
+
 
 from paypal.standard.forms import PayPalPaymentsForm
 
@@ -409,9 +605,9 @@ class PayPalAPI(generics.GenericAPIView):
 
     def get(self, request):
         print("get object")
-        order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
+        #order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
+        order_id = request.GET.get("order_id")
         order = get_object_or_404(IconOrder, id=order_id)
-        #user = User.objects.get(pk="751ecde810454ae9aa42d00c45428bd5")
         #order = IconOrder.objects.create(artist=user, price=50.0)
         host = request.get_host()
 

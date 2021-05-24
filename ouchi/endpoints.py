@@ -16,6 +16,7 @@ from .api import (
     CommunityReplyViewSet,
     IconOrderViewSet,
     IconMakerAPI,
+    IconMakerSetupAPI,
     PayPalAPI,
 )
 
@@ -40,6 +41,7 @@ urlpatterns = [
     url("^artists/$", ArtistAPI.as_view()),
     url("^payment/paypal/$", PayPalAPI.as_view()),
     url("^icons/maker/$", IconMakerAPI.as_view()),
+    url("^setup/icons/maker/$", IconMakerSetupAPI.as_view()),
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 
