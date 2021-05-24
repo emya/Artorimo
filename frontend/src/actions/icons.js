@@ -32,7 +32,6 @@ export const orderIcon = (
     return fetch("/api/order/icon/", {headers, body, method: "POST"})
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -65,7 +64,6 @@ export const fetchOrder = order_id => {
     return fetch(`/api/order/icon/${order_id}/`, {headers, })
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -76,7 +74,6 @@ export const fetchOrder = order_id => {
       })
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data)
           dispatch({type: "FETCH_ORDER", data: res.data });
           return res.data;
         } else {
@@ -96,13 +93,11 @@ export const fetchIconParts = artist_id => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(artist_id);
     let params = `?artist_id=${artist_id}`;
 
     return fetch(`/api/icons/maker/${params}`, {headers, })
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -139,7 +134,6 @@ export const uploadIconParts = (artist_id, icon_part, imageFiles) => {
 
     var j = 0;
     for (var i = 0; i < imageFiles.length; i++) {
-      console.log(imageFiles[i]);
       formData.append(`image${i}`, imageFiles[i]);
       j++;
     }
@@ -147,7 +141,6 @@ export const uploadIconParts = (artist_id, icon_part, imageFiles) => {
     return fetch('/api/setup/icons/maker/', {headers, method: "POST", body: formData})
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -177,7 +170,6 @@ export const uploadEyeParts = (artist_id, eyesFile, eyeballsFile) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("uploadEyeParts");
     const formData = new FormData();
 
     formData.append('artist_id', artist_id);
@@ -189,7 +181,6 @@ export const uploadEyeParts = (artist_id, eyesFile, eyeballsFile) => {
     return fetch('/api/setup/icons/maker/', {headers, method: "POST", body: formData})
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
@@ -230,7 +221,6 @@ export const removeIconParts = (artist_id, icon_part, imageNumbers) => {
     return fetch('/api/setup/icons/maker/', {headers, method: "POST", body: formData})
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })

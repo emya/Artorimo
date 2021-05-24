@@ -9,9 +9,6 @@ import Header from './Header';
 import Footer from './Footer';
 import SideMenu from './SideMenu';
 
-import '../css/test.scss';
-//import '../css/style.scss';
-
 class Test extends Component {
   onDrop = (imageFiles) => {
     /*

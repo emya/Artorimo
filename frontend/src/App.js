@@ -37,7 +37,6 @@ import SetupIconMaker from "./components/SetupIconMaker";
 import PayPal from "./components/PayPal";
 import PayPalDone from "./components/PayPalDone";
 import Test from "./components/Test";
-import JoinForm from "./components/JoinForm";
 
 import {auth} from "./actions";
 import artorimoApp from "./reducers";
@@ -95,7 +94,6 @@ class RootContainerComponent extends Component {
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                     <Route exact path="/test" component={Test} />
-                    <Route exact path="/joinform" component={JoinForm} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />

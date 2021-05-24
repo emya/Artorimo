@@ -21,7 +21,6 @@ export default function payment(state=initialState, action) {
 
     case 'REMOVED_ICON':
     case 'UPLOADED_ICON':
-      console.log(action.data)
       return update(state, {
         icon_parts: {
           [action.data["updated_key"]]: {$set: action.data["updated_value"]}

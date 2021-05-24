@@ -367,13 +367,10 @@ class IconOrderViewSet(viewsets.ModelViewSet):
     queryset = IconOrder.objects.all()
 
     def create(self, request):
-        print("create")
         data = request.data
         artist_id = data.pop('artist_id')
         # For testing
         artist_id = "751ecde810454ae9aa42d00c45428bd5"
-
-        print("data", data)
 
         artist = User.objects.get(pk=artist_id)
         icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)
@@ -387,7 +384,6 @@ class IconMakerAPI(generics.GenericAPIView):
     def get(self, request):
         # For now, use fixed user id
         artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
-        print(f"artist_id {artist_id}")
         response = s3_client.list_objects(
             Bucket=settings.AWS_BUCKET_NAME,
             Prefix=f"icons/{artist_id}",
@@ -424,7 +420,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
     def post(self, request):
         # Upload new images
         data = request.data
-        print("post", data)
         artist_id = data['artist_id']
         icon_part = data['icon_part']
 
@@ -448,7 +443,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
         if is_deleted:
             file_numbers_str = data['file_numbers']
             file_numbers = [int(file_number) for file_number in file_numbers_str.split(",")]
-            print(file_numbers)
             file_numbers.sort()
             full_files = []
             n_removed = 0
@@ -492,8 +486,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
             eyes_image = eyes_image_ls[0]
             eyeballs_image = eyeballs_image_ls[0]
-            print(eyes_image)
-            print(type(eyes_image))
 
             is_upload_images = {}
             if isinstance(eyes_image, InMemoryUploadedFile) or isinstance(eyes_image, TemporaryUploadedFile):
@@ -510,8 +502,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
             icon_parts = {"updated_key": icon_part,
                           "updated_value": n_keys}
-
-            print(is_upload_images)
 
             if is_upload_images:
                 if "eyes_image" in is_upload_images.keys() and "eyeballs_image" in is_upload_images.keys():
@@ -604,15 +594,11 @@ class PayPalAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
 
     def get(self, request):
-        print("get object")
         #order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
         order_id = request.GET.get("order_id")
         order = get_object_or_404(IconOrder, id=order_id)
         #order = IconOrder.objects.create(artist=user, price=50.0)
         host = request.get_host()
-
-        print("order", order)
-        print("host", host)
 
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -626,7 +612,6 @@ class PayPalAPI(generics.GenericAPIView):
         }
 
         form = PayPalPaymentsForm(initial=paypal_dict)
-        print("form", type(form), form.render())
         return Response({"form": form.render()})
         """
         r = HttpResponse(form.render())

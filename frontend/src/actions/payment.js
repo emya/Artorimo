@@ -7,13 +7,11 @@ export const getPaypal = (order_id) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(order_id);
     let params = `?order_id=${order_id}`;
 
     return fetch(`/api/payment/paypal/${params}`, {headers, })
       .then(res => {
         if (res.status < 500) {
-          console.log("Server returned", res.body)
           return res.json().then(data => {
             return {status: res.status, data};
           })
