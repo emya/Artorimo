@@ -29,7 +29,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sw-precache-webpack-plugin": "^1.0.0",
-    "uglifyjs-3-webpack-plugin": "^1.2.4",
+    //"uglifyjs-3-webpack-plugin": "^1.2.4",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
     "webpack": "^4.43.0"
   },
   "scripts": {

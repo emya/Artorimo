@@ -104,8 +104,8 @@ class ClientLanding extends Component {
         <Header />
         <header>
           <div class="catchcopy clearfix">
-            <img class="lpimage englishlp" src={require('../img/lp-english.jpg')}/>
-            <img class="lpimage-mobile englishlp" src={require('../img/lp-english.jpg')}/>
+            <img class="lpimage englishlp" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/lp-english.jpg`} />
+            <img class="lpimage-mobile englishlp" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/lp-english.jpg`} />
               <div class="catch-english">
                 <h1 class="site-title2">Looking to work with a<span class="bold"> Japanese Illustrator</span>?<br/><br/>Ohchee Studio is here to help you <span class="bold">from initial search to delivering a finished piece.</span></h1>
                 <a class="button" href="mailto:ohcheestudio@gmail.com"> Contact Us</a>
