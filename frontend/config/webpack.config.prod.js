@@ -13,7 +13,8 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const BundleTracker = require('webpack-bundle-tracker');
-const UglifyJsPlugin = require("uglifyjs-3-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+//const UglifyJsPlugin = require("uglifyjs-3-webpack-plugin");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
