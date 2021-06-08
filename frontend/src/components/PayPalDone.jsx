@@ -68,63 +68,93 @@ class PayPalDone extends Component {
     {this.props.icons.order && this.props.icons.orderCompleted && (
 
     <div class="parent" id="my-node">
-      {icon_state.hair > 0 && (
+      {icon_state.face > 0 && (
         <img class={`image1 imgFace filterSkinColor${icon_state.face_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/face${icon_state.face}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
 
-      // Hair
+      {/* Hair */}
       {icon_state.hair > 0 && (
         <img class={`image1 imgHair filterHairColor${icon_state.hair_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/hair${icon_state.hair}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
       {icon_state.bang > 0 && (
         <img class={`image1 imgBang filterHairColor${icon_state.bang_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/bang${icon_state.bang}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
       {icon_state.side > 0 && (
         <img class={`image1 imgSide filterHairColor${icon_state.side_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/side${icon_state.side}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
 
-      // Eyes
+      {/* Eyes */}
       {icon_state.eyes > 0 && (
         <img class="image1 imgEyes"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyes${icon_state.eyes}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
       {icon_state.eyes > 0 && (
         <img class={`image1 imgEyeballs filterEyesColor${icon_state.eyes_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyeballs${icon_state.eyes}.png`}
+             source={{
+               header: {
+                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
         />
       )}
 
-      // Eyebrow
+      {/* Eyebrow */}
       {icon_state.eyebrows > 0 && (
         <img class={`image1 imgEyebrows filterHairColor${icon_state.eyebrows_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyebrows${icon_state.eyebrows}.png`}
         />
       )}
 
-      // Nose
+      {/* Nose */}
       {icon_state.nose > 0 && (
         <img class="image1 imgNose"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/nose${icon_state.nose}.png`}
         />
       )}
 
-      // Mouth
+      {/* Mouth */}
       {icon_state.mouth > 0 && (
         <img class={`image1 imgMouth filterMouthColor${icon_state.mouth_filter}`}
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/mouth${icon_state.mouth}.png`}
         />
       )}
 
-      // Cloth
+      {/* Cloth */}
       {icon_state.cloth > 0 && (
         <img
           class={`image1 imgCloth filterMouthColor${icon_state.cloth_filter}`}

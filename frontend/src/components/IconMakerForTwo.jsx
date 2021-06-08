@@ -14,7 +14,7 @@ import { keys } from '../keys.js';
 import '../css/icons.scss';
 import '../css/filters.scss';
 
-class IconMakerTest extends Component {
+class IconMakerForTwo extends Component {
 
   componentDidMount() {
     this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
@@ -422,4 +422,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IconMakerTest);
+export default connect(mapStateToProps, mapDispatchToProps)(IconMakerForTwo);
