@@ -187,7 +187,6 @@ class SetupIconMaker extends Component {
         return;
       }
 
-      console.log("uploadEyeParts");
       this.props.uploadEyeParts(
         this.state.artist_id,
         this.state.eyesFile,
@@ -221,12 +220,9 @@ class SetupIconMaker extends Component {
     this.setState({
         imageFiles: imageFiles
     })
-    console.log(imageFiles)
-    console.log(this.state.imageFiles.length)
   }
 
   onDropEyes = (imageFiles) => {
-    console.log(imageFiles.length);
 
     if (imageFiles.length > 1) {
       this.setState({ eyes_errors: "Only one file allowed for Eyes" });
@@ -236,13 +232,9 @@ class SetupIconMaker extends Component {
     this.setState({
         eyesFile: imageFiles
     })
-    console.log(imageFiles)
-    console.log(this.state.eyesFile.length)
   }
 
   onDropEyeballs = (imageFiles) => {
-    console.log(imageFiles.length);
-
     if (imageFiles.length > 1) {
       this.setState({ eyeballs_errors: "Only one file allowed for Eyes" });
       return;
@@ -251,13 +243,9 @@ class SetupIconMaker extends Component {
     this.setState({
         eyeballsFile: imageFiles
     })
-    console.log(imageFiles)
-    console.log(this.state.eyeballsFile.length)
   }
 
   render() {
-    console.log(this.state);
-
     const previewStyle = {
       display: 'inline',
       width: 50,

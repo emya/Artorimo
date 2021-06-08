@@ -55,7 +55,6 @@ class AdditionalItems extends Component {
     4: Post card
   */
   componentWillUpdate(nextProps, nextState) {
-    console.log("componentWillUpdate", this.state.added_items);
     if (nextState.added_items !== this.state.added_items){
       this.props.parentCallback(nextState.added_items);
     }
@@ -76,9 +75,7 @@ class AdditionalItems extends Component {
   }
 
   handleAddedItemsChange = (item_number, action) => {
-    console.log("action", action);
     if (action === -1){
-      console.log("remove!", this.state.added_items);
       this.setState({
         added_items: this.state.added_items.filter((_, i) => _ !== item_number)
       });
@@ -95,14 +92,12 @@ class AdditionalItems extends Component {
       isOpen: true,
       item_number: item_number
     })
-    console.log("openLightbox");
   };
 
   closeLightbox = () => {
     this.setState({
       isOpen: false
     })
-    console.log("closeLightbox");
   };
 
 

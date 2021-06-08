@@ -22,12 +22,10 @@ class PayPal extends Component {
   }
 
   handleCallback = (childData) =>{
-    console.log("childData", childData)
     this.setState({additional_items: childData})
   }
 
   componentDidMount() {
-    console.log("props", this.props)
     this.props.getPaypal(this.props.icons.order.id);
   }
 
@@ -40,8 +38,6 @@ class PayPal extends Component {
     // This should be used once test is done
     //const artist_id = this.props.icons.order.artist.id;
     const artist_id = "d9d5c4f7-8977-4181-a94a-cc811c15b4be";
-
-    console.log("icon_state", icon_state);
 
     return (
   <div>
