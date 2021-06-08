@@ -71,6 +71,37 @@ class Filters extends Component {
       <filter id="filterMouthColor3" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.968   0 0 0 0 0.827   0 0 0 0 0.764  0 0 0 1 0"/>
       </filter>
+      <filter id="filterMouthColor4" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.435   0 0 0 0 0.133   0 0 0 0 0.086  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterMouthColor5" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.858   0 0 0 0 0.364   0 0 0 0 0.411  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterMouthColor6" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.929   0 0 0 0 0.458   0 0 0 0 0.262  0 0 0 1 0"/>
+      </filter>
+
+      <filter id="filterClothColor1" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.960   0 0 0 0 0.827   0 0 0 0 0.819  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor2" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.827   0 0 0 0 0.866   0 0 0 0 0.905  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor3" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.913   0 0 0 0 0.843   0 0 0 0 0.725  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor4" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.788   0 0 0 0 0.607   0 0 0 0 0.384  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor5" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.898   0 0 0 0 0.780   0 0 0 0 0.866  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor6" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.717   0 0 0 0 0.764   0 0 0 0 0.6    0 0 0 1 0"/>
+      </filter>
+      <filter id="filterClothColor7" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.223   0 0 0 0 0.145   0 0 0 0 0.133  0 0 0 1 0"/>
+      </filter>
     </defs>
   </svg>
     );

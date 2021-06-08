@@ -221,7 +221,7 @@ class IconMakerTest extends Component {
         // Cloth
         {this.state.cloth > 0 && (
           <img class="image1 imgCloth"
-               style={{filter: `url(#filterMouthColor${this.state.cloth_classes})`, WebkitFilter: `url(#filterMouthColor${this.state.cloth_classes})`}}
+               style={{filter: `url(#filterClothColor${this.state.cloth_classes})`, WebkitFilter: `url(#filterClothColor${this.state.cloth_classes})`}}
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth${this.state.cloth}.png`}
           />
         )}
@@ -238,13 +238,13 @@ class IconMakerTest extends Component {
        <p> Color </p>
        <div style={{ display: (this.state.looked_element === 0 || this.state.looked_element === 1 || this.state.looked_element === 2 || this.state.looked_element === 4)
           ? "block" : "none" }}>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter("1")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor2)"}} onClick={() => this.changeColorFilter("2")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor3)"}} onClick={() => this.changeColorFilter("3")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor4)"}} onClick={() => this.changeColorFilter("4")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor5)"}} onClick={() => this.changeColorFilter("5")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor6)"}} onClick={() => this.changeColorFilter("6")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor7)"}} onClick={() => this.changeColorFilter("7")} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter(1)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor2)", WebkitFilter: "url(#filterHairColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor3)", WebkitFilter: "url(#filterHairColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor4)", WebkitFilter: "url(#filterHairColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor5)", WebkitFilter: "url(#filterHairColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor6)", WebkitFilter: "url(#filterHairColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor7)", WebkitFilter: "url(#filterHairColor7)"}} onClick={() => this.changeColorFilter(7)} ></span>
        </div>
 
        <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
@@ -258,18 +258,23 @@ class IconMakerTest extends Component {
        {/* Mouth */}
        <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
          <span class="dot" style={{filter: "url(#filterMouthColor1)", WebkitFilter: "url(#filterMouthColor1)"}} onClick={() => this.changeColorFilter(1)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor2)", WebkitFilter: "url(#filterMouthColor2)"}} onClick={() => this.changeColorFilter(1)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor3)", WebkitFilter: "url(#filterMouthColor3)"}} onClick={() => this.changeColorFilter(2)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor4)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor2)", WebkitFilter: "url(#filterMouthColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor3)", WebkitFilter: "url(#filterMouthColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor4)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor5)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor6)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(6)} ></span>
        </div>
 
 
        {/* Cloth */}
        <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-         <span class="dot" style={{filter: "url(#filterMouthColor1)", WebkitFilter: "url(#filterMouthColor1)"}} onClick={() => this.changeColorFilter(1)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor2)", WebkitFilter: "url(#filterMouthColor2)"}} onClick={() => this.changeColorFilter(1)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor3)", WebkitFilter: "url(#filterMouthColor3)"}} onClick={() => this.changeColorFilter(2)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor4)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor1)", WebkitFilter: "url(#filterClothColor1)"}} onClick={() => this.changeColorFilter(1)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor2)", WebkitFilter: "url(#filterClothColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor3)", WebkitFilter: "url(#filterClothColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor4)", WebkitFilter: "url(#filterClothColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor5)", WebkitFilter: "url(#filterClothColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor6)", WebkitFilter: "url(#filterClothColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
+         <span class="dot" style={{filter: "url(#filterClothColor7)", WebkitFilter: "url(#filterClothColor7)"}} onClick={() => this.changeColorFilter(7)} ></span>
        </div>
 
        {/* Face */}
@@ -278,8 +283,8 @@ class IconMakerTest extends Component {
          <span class="dot" style={{filter: "url(#filterSkinColor2)", WebkitFilter: "url(#filterSkinColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
          <span class="dot" style={{filter: "url(#filterSkinColor3)", WebkitFilter: "url(#filterSkinColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
          <span class="dot" style={{filter: "url(#filterSkinColor4)", WebkitFilter: "url(#filterSkinColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
-         <span class="dot" style={{filter: "url(#filterSkinColor5)", WebkitFilter: "url(#filterSkinColor5)"}} onClick={() => this.changeColorFilter(4)} ></span>
-         <span class="dot" style={{filter: "url(#filterSkinColor6)", WebkitFilter: "url(#filterSkinColor6)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterSkinColor5)", WebkitFilter: "url(#filterSkinColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterSkinColor6)", WebkitFilter: "url(#filterSkinColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
        </div>
 
       </div>

@@ -1,8 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-
-import Dropzone from 'react-dropzone';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -16,38 +14,14 @@ import { keys } from '../keys.js';
 import '../css/icons.scss';
 import '../css/filters.scss';
 
-class SetupIconMaker extends Component {
+class IconMakerForTwo extends Component {
 
   componentDidMount() {
-    //this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
-    this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
-  }
-
-  componentDidUpdate(prevProps) {
-    console.log(prevProps.icons);
-    console.log(this.props.icons);
-    if (prevProps.icons !== this.props.icons){
-      if (this.props.icons.icon_parts){
-        for (var key in this.props.icons.icon_parts) {
-          if (this.props.icons.icon_parts.hasOwnProperty(key)) {
-            if (this.props.icons.icon_parts[key] === 0){
-              this.setState({
-                [key]: null
-              })
-            }else{
-              this.setState({
-                [key]: 1
-              })
-            }
-          }
-        }
-      }
-    }
+    this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
   }
 
   state = {
-    // Test id
-    artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    artist_id: "d9d5c4f7-8977-4181-a94a-cc811c15b4be",
     mapping: {
       0: "hair",
       1: "bang",
@@ -58,18 +32,20 @@ class SetupIconMaker extends Component {
       6: "mouth",
       7: "cloth",
       8: "face",
+      9: "accessories",
     },
-    removedFiles: [],
-    unselectable_options: ["bang", "side", "cloth"],
+    unselectable_options: ["bang", "side", "cloth", "accessories"],
     looked_element: 0,
     hair: 1,
     bang: 1,
     side: 1,
     eyes: 1,
     eyebrows: 1,
+    nose: 1,
     mouth: 1,
     cloth: 1,
     face: 1,
+    accessories: 0,
     hair_classes: 1,
     bang_classes: 1,
     side_classes: 1,
@@ -78,14 +54,6 @@ class SetupIconMaker extends Component {
     mouth_classes: 1,
     cloth_classes: 1,
     face_classes: 1,
-
-    // imageFiles to upload
-    imageFiles: [],
-    eyesFile: [],
-    eyeballsFile: [],
-    eyes_errors: null,
-    eyeballs_errors: null,
-    errors: []
   }
 
   changeColorFilter = (filter) => {
@@ -100,8 +68,7 @@ class SetupIconMaker extends Component {
   changeLookedElement = (value) => {
     console.log("changeLookedElement", value);
     this.setState({
-      looked_element: value,
-      removedFiles: []
+      looked_element: value
     })
   }
 
@@ -111,41 +78,27 @@ class SetupIconMaker extends Component {
     })
   }
 
-  handleRemoveOption = (optionNumber) => {
-    console.log("handleRemoveOption", optionNumber);
-    this.setState({ removedFiles: [...this.state.removedFiles, optionNumber] })
-  }
-
-  removeChosenOption = (e) => {
-    console.log("removeChosenOption");
+  proceedCheckout = (e) => {
     e.preventDefault();
-    this.props.removeIconParts(
-      this.state.artist_id,
-      this.state.mapping[this.state.looked_element],
-      this.state.removedFiles
-    );
+
+    this.props.orderIcon();
   }
 
   getAvailableOptions = (optionName) => {
-    //console.log(this.props.icons.icon_parts);
-    console.log(optionName);
-    console.log(this.state[optionName]);
-
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
-      console.log(this.props.icons.icon_parts[optionName]);
 
       if (this.state.unselectable_options.includes(optionName)) {
         content.push(
           <div class="column">
-            {this.state[optionName] === null ? (
+            {this.state[optionName] === -1 ? (
               <button class="choosed"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, -1)}
               > Unselected </button>
             )
             : (
               <button class="choice"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, -1)}
               > Disable </button>
             )}
           </div>
@@ -166,107 +119,34 @@ class SetupIconMaker extends Component {
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )}
-            <button> Remove </button>
-            <input type="checkbox" onChange={this.handleRemoveOption.bind(this, i)} /> Remove this
           </div>
         )
       }
-      content.push(<button class="form-send-btn btn" onClick={this.removeChosenOption} >Remove choosed items</button>)
       return content;
     }
-    return [<div>No parts uploaded</div>];
   }
 
-  uploadIconParts = (e) => {
+  proceedCheckout = (e) => {
     e.preventDefault();
 
-    if (this.state.looked_element === 3){
-      const errors = this.validateEyesUpload();
-      if (errors.length > 0) {
-        this.setState({ errors });
-        return;
-      }
-
-      console.log("uploadEyeParts");
-      this.props.uploadEyeParts(
-        this.state.artist_id,
-        this.state.eyesFile,
-        this.state.eyeballsFile
-      );
-    } else {
-      this.props.uploadIconParts(
-        this.state.artist_id,
-        this.state.mapping[this.state.looked_element],
-        this.state.imageFiles
-      );
-    }
-  }
-
-  validateEyesUpload = () => {
-    // we are going to store errors for all fields
-    // in a signle array
-    const errors = [];
-
-    if (this.state.eyesFile.length !== 1){
-      errors.push("Please select one image for Eyes.")
-    }
-
-    if (this.state.eyeballsFile.length !== 1){
-      errors.push("Please select one image for Eyeballs.")
-    }
-    return errors;
-   }
-
-  onDrop = (imageFiles) => {
-    this.setState({
-        imageFiles: imageFiles
-    })
-    console.log(imageFiles)
-    console.log(this.state.imageFiles.length)
-  }
-
-  onDropEyes = (imageFiles) => {
-    console.log(imageFiles.length);
-
-    if (imageFiles.length > 1) {
-      this.setState({ eyes_errors: "Only one file allowed for Eyes" });
-      return;
-    }
-
-    this.setState({
-        eyesFile: imageFiles
-    })
-    console.log(imageFiles)
-    console.log(this.state.eyesFile.length)
-  }
-
-  onDropEyeballs = (imageFiles) => {
-    console.log(imageFiles.length);
-
-    if (imageFiles.length > 1) {
-      this.setState({ eyeballs_errors: "Only one file allowed for Eyes" });
-      return;
-    }
-
-    this.setState({
-        eyeballsFile: imageFiles
-    })
-    console.log(imageFiles)
-    console.log(this.state.eyeballsFile.length)
+    this.props.orderIcon(
+      this.state.artist_id,
+      this.state.face, this.state.face_classes,
+      this.state.hair, this.state.hair_classes,
+      this.state.bang, this.state.bang_classes,
+      this.state.side, this.state.side_classes,
+      this.state.eyes, this.state.eyes_classes,
+      this.state.eyebrows, this.state.eyebrows_classes,
+      this.state.nose,
+      this.state.mouth, this.state.mouth_classes,
+      this.state.cloth, this.state.cloth_classes,
+    );
   }
 
   render() {
-    console.log(this.state);
-
-    const previewStyle = {
-      display: 'inline',
-      width: 50,
-      height: 50,
-    };
-
-    const errors = this.state.errors;
-    const eyes_errors = this.state.eyes_errors;
-    const eyeballs_errors = this.state.eyeballs_errors;
+    if (this.props.icons.isOrdered){
+        return <Redirect to="/payment/paypal" />;
+    }
 
     return (
   <div>
@@ -352,20 +232,19 @@ class SetupIconMaker extends Component {
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/accessories${this.state.accessories}.png`}
           />
         )}
-
       </div>
 
       <div>
        <p> Color </p>
        <div style={{ display: (this.state.looked_element === 0 || this.state.looked_element === 1 || this.state.looked_element === 2 || this.state.looked_element === 4)
           ? "block" : "none" }}>
-         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter("1")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor2)", WebkitFilter: "url(#filterHairColor2)"}} onClick={() => this.changeColorFilter("2")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor3)", WebkitFilter: "url(#filterHairColor3)"}} onClick={() => this.changeColorFilter("3")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor4)", WebkitFilter: "url(#filterHairColor4)"}} onClick={() => this.changeColorFilter("4")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor5)", WebkitFilter: "url(#filterHairColor5)"}} onClick={() => this.changeColorFilter("5")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor6)", WebkitFilter: "url(#filterHairColor6)"}} onClick={() => this.changeColorFilter("6")} ></span>
-         <span class="dot" style={{filter: "url(#filterHairColor7)", WebkitFilter: "url(#filterHairColor7)"}} onClick={() => this.changeColorFilter("7")} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter(1)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor2)", WebkitFilter: "url(#filterHairColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor3)", WebkitFilter: "url(#filterHairColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor4)", WebkitFilter: "url(#filterHairColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor5)", WebkitFilter: "url(#filterHairColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor6)", WebkitFilter: "url(#filterHairColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
+         <span class="dot" style={{filter: "url(#filterHairColor7)", WebkitFilter: "url(#filterHairColor7)"}} onClick={() => this.changeColorFilter(7)} ></span>
        </div>
 
        <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
@@ -382,8 +261,8 @@ class SetupIconMaker extends Component {
          <span class="dot" style={{filter: "url(#filterMouthColor2)", WebkitFilter: "url(#filterMouthColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
          <span class="dot" style={{filter: "url(#filterMouthColor3)", WebkitFilter: "url(#filterMouthColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
          <span class="dot" style={{filter: "url(#filterMouthColor4)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor5)", WebkitFilter: "url(#filterMouthColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
-         <span class="dot" style={{filter: "url(#filterMouthColor6)", WebkitFilter: "url(#filterMouthColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor5)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterMouthColor6)", WebkitFilter: "url(#filterMouthColor4)"}} onClick={() => this.changeColorFilter(6)} ></span>
        </div>
 
 
@@ -404,8 +283,8 @@ class SetupIconMaker extends Component {
          <span class="dot" style={{filter: "url(#filterSkinColor2)", WebkitFilter: "url(#filterSkinColor2)"}} onClick={() => this.changeColorFilter(2)} ></span>
          <span class="dot" style={{filter: "url(#filterSkinColor3)", WebkitFilter: "url(#filterSkinColor3)"}} onClick={() => this.changeColorFilter(3)} ></span>
          <span class="dot" style={{filter: "url(#filterSkinColor4)", WebkitFilter: "url(#filterSkinColor4)"}} onClick={() => this.changeColorFilter(4)} ></span>
-         <span class="dot" style={{filter: "url(#filterSkinColor5)", WebkitFilter: "url(#filterSkinColor5)"}} onClick={() => this.changeColorFilter(4)} ></span>
-         <span class="dot" style={{filter: "url(#filterSkinColor6)", WebkitFilter: "url(#filterSkinColor6)"}} onClick={() => this.changeColorFilter(4)} ></span>
+         <span class="dot" style={{filter: "url(#filterSkinColor5)", WebkitFilter: "url(#filterSkinColor5)"}} onClick={() => this.changeColorFilter(5)} ></span>
+         <span class="dot" style={{filter: "url(#filterSkinColor6)", WebkitFilter: "url(#filterSkinColor6)"}} onClick={() => this.changeColorFilter(6)} ></span>
        </div>
 
       </div>
@@ -419,111 +298,81 @@ class SetupIconMaker extends Component {
         <button onClick={() => this.changeLookedElement(4)} > Eyebrows </button>
         <button onClick={() => this.changeLookedElement(6)} > Mouth </button>
         <button onClick={() => this.changeLookedElement(7)} > Cloth </button>
+        <button onClick={() => this.changeLookedElement(9)} > Accessories </button>
+        <button onClick={() => this.changeLookedElement(8)} > Face </button>
+        <button onClick={() => this.changeLookedElement(0)} > Hair </button>
       </div>
 
-
-      {this.state.looked_element !== 3 &&
-        <Dropzone onDrop={acceptedFiles => this.onDrop(acceptedFiles)}>
-          {({getRootProps, getInputProps}) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <div style={{height: "40px", width: "1000px", border: "1px solid black"}} >Drag 'n' drop some files here, or click to select files
-                </div>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-      }
-
-      {this.state.looked_element === 3 &&
-        <div>
-          <Dropzone onDrop={acceptedFiles => this.onDropEyes(acceptedFiles)}>
-            {({getRootProps, getInputProps}) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div style={{height: "40px", width: "1000px", border: "1px solid black"}} >Drag 'n' drop a file for eyes here, or click to select a file
-                  </div>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-          {eyes_errors && <p class="error-heading">エラー: {eyes_errors}</p>}
-          <Dropzone onDrop={acceptedFiles => this.onDropEyeballs(acceptedFiles)}>
-            {({getRootProps, getInputProps}) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div style={{height: "40px", width: "1000px", border: "1px solid black"}} >Drag 'n' drop a file for eyeballs here, or click to select a file
-                  </div>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </div>
-      }
-
-      {this.state.imageFiles.length > 0 &&
-        <Fragment>
-          <h3>Previews</h3>
-          {this.state.imageFiles.map((file) => (
-            <img
-              alt="Preview"
-              key={file.preview}
-              src={URL.createObjectURL(file)}
-              style={previewStyle}
-            />
-          ))}
-        </Fragment>
-      }
-
-      {errors.map(error => (
-        <p class="error-heading" key={error}>エラー: {error}</p>
-      ))}
-      <button style={{width:"20%"}} class="form-send-btn btn" onClick={this.uploadIconParts}>
-        Upload Parts of {this.state.mapping[this.state.looked_element]}
-      </button>
+      <Link to={{
+        pathname: "/payment/paypal",
+        state: {
+          price: 5,
+          artist_id: this.state.artist_id,
+          hair: this.state.hair,
+          bang: this.state.bang,
+          side: this.state.side,
+          eyes: this.state.eyes,
+          eyebrows: this.state.eyebrows,
+          mouth: this.state.mouth,
+          cloth: this.state.cloth,
+          face: this.state.face,
+          hair_classes: this.state.hair_classes,
+          bang_classes: this.state.bang_classes,
+          side_classes: this.state.side_classes,
+          eyes_classes: this.state.eyes_classes,
+          eyebrows_classes: this.state.eyebrows_classes,
+          mouth_classes: this.state.mouth_classes,
+          cloth_classes: this.state.cloth_classes,
+          face_classes: this.state.face_classes,
+        }
+      }}>
+        <button style={{width:"20%"}} class="form-send-btn btn" onClick={this.proceedCheckout}> Proceed to Checkout </button>
+      </Link>
 
       <div class="function-buttons">
         <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
-          <p>Uploaded Hair</p>
+          <p>Hair</p>
           {this.getAvailableOptions("hair")}
         </div>
 
         <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
-          <p>Uploaded Bang</p>
+          <p>Bang</p>
           {this.getAvailableOptions("bang")}
         </div>
 
         <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
-          <p>Uploaded Side</p>
+          <p>Side</p>
           {this.getAvailableOptions("side")}
         </div>
 
         <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
-          <p>Uploaded Eyes</p>
+          <p>Eyes</p>
           {this.getAvailableOptions("eyes")}
         </div>
 
         <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
-          <p>Uploaded Eyebrows</p>
+          <p>Eyebrows</p>
           {this.getAvailableOptions("eyebrows")}
         </div>
 
         <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
-          <p>Uploaded Mouth</p>
+          <p>Mouth</p>
           {this.getAvailableOptions("mouth")}
         </div>
 
         <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-          <p>Uploaded Cloth</p>
+          <p>Cloth</p>
           {this.getAvailableOptions("cloth")}
         </div>
 
         <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
-          <p>Uploaded Face</p>
+          <p>Face</p>
           {this.getAvailableOptions("face")}
+        </div>
+
+        <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
+          <p>Accessories</p>
+          {this.getAvailableOptions("accessories")}
         </div>
 
       </div>
@@ -543,14 +392,28 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadIconParts: (artist_id, icon_part, imageFiles) => {
-      dispatch(icons.uploadIconParts(artist_id, icon_part, imageFiles));
-    },
-    removeIconParts: (artist_id, icon_part, removedFiles) => {
-      dispatch(icons.removeIconParts(artist_id, icon_part, removedFiles));
-    },
-    uploadEyeParts: (artist_id, eyesFile, eyeballsFile) => {
-      dispatch(icons.uploadEyeParts(artist_id, eyesFile, eyeballsFile));
+    orderIcon: (
+      artist_id, face, face_filter,
+      hair, hair_filter,
+      bang, bang_filter,
+      side, side_filter,
+      eyes, eyes_filter,
+      eyebrows, eyebrows_filter,
+      nose,
+      mouth, mouth_filter,
+      cloth, cloth_filter
+    ) => {
+      dispatch(icons.orderIcon(
+        artist_id, face, face_filter,
+        hair, hair_filter,
+        bang, bang_filter,
+        side, side_filter,
+        eyes, eyes_filter,
+        eyebrows, eyebrows_filter,
+        nose,
+        mouth, mouth_filter,
+        cloth, cloth_filter
+      ));
     },
     fetchIconParts: (artist_id) => {
       dispatch(icons.fetchIconParts(artist_id));
@@ -559,4 +422,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupIconMaker);
+export default connect(mapStateToProps, mapDispatchToProps)(IconMakerForTwo);

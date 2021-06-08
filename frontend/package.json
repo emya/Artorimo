@@ -22,6 +22,7 @@
     "react-dropdown": "^1.7.0",
     "react-dropzone": "^11.3.2",
     "react-image-crop": "^8.6.4",
+    "react-image-lightbox": "^5.1.1",
     "react-pdf": "^4.1.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
@@ -29,7 +30,6 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sw-precache-webpack-plugin": "^1.0.0",
-    //"uglifyjs-3-webpack-plugin": "^1.2.4",
     "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
     "webpack": "^4.43.0"
   },
