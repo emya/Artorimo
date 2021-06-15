@@ -108,67 +108,59 @@ body {
     min-width: 800px;
     min-height: 400px
 }
-/*Filter styles*/
-.saturate { filter: saturate(3); }
-.grayscale { filter: grayscale(100%); }
-.contrast { filter: contrast(160%); }
-.brightness { filter: brightness(0.25); }
-.blur { filter: blur(3px); }
-.invert { filter: invert(100%); }
-.sepia { filter: sepia(100%); }
-.huerotate { filter: hue-rotate(180deg); }
-.rss.opacity { filter: opacity(50%); }
 
-.filter-green{
-  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
-}
-
-.filter-green1{
-  filter: invert(0%) sepia(90%) saturate(2476%) hue-rotate(255deg);
-}
-
-.filterBeige {
-  filter: invert(0%) sepia(90%) saturate(476%) hue-rotate(301deg);
-}
-
-.filterPink{
-  filter: invert(0%) sepia(90%) saturate(2476%) hue-rotate(255deg);
-}
-
-.filterBrown{
-  filter: invert(0%) sepia(100%) saturate(10000%) hue-rotate(294deg) brightness(50%);
-}
 .imgFace {
-  z-index: -15;
+  z-index: -35;
+}
+.imgFaceLine {
+  z-index: -33;
 }
 .imgHair {
-  z-index: -13;
-  //filter: invert(0%) sepia(90%) saturate(2476%) hue-rotate(255deg);
+  z-index: -31;
+}
+.imgHairLine {
+  z-index: -29;
 }
 .imgBang {
-  z-index: -11;
-  //filter: invert(0%) sepia(90%) saturate(2476%) hue-rotate(255deg);
+  z-index: -27;
+}
+.imgBangLine {
+  z-index: -25;
 }
 .imgSide {
-  z-index: -9;
-  //filter: invert(0%) sepia(90%) saturate(2476%) hue-rotate(255deg);
+  z-index: -23;
+}
+.imgSideLine {
+  z-index: -21;
 }
 .imgEyes {
-  z-index: -7;
+  z-index: -19;
 }
 .imgEyeballs {
-  z-index: -5;
+  z-index: -17;
 }
 .imgEyebrows {
-  z-index: -5;
+  z-index: -15;
+}
+.imgEyebrowsLine {
+  z-index: -13;
 }
 .imgNose {
-  z-index: -3;
+  z-index: -11;
 }
 .imgMouth {
-  z-index: -3;
+  z-index: -9;
+}
+.imgMouthLine {
+  z-index: -7;
 }
 .imgCloth {
+  z-index: -5;
+}
+.imgClothLine {
   z-index: -3;
+}
+.imgAccessories {
+  z-index: -1;
 }
 

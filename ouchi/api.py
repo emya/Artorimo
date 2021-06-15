@@ -370,7 +370,7 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         data = request.data
         artist_id = data.pop('artist_id')
         # For testing
-        artist_id = "751ecde810454ae9aa42d00c45428bd5"
+        artist_id = settings.TEST_ARTIST_ID
 
         artist = User.objects.get(pk=artist_id)
         icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)
@@ -395,7 +395,6 @@ class IconMakerAPI(generics.GenericAPIView):
             "bang": 0,
             "side": 0,
             "eyes": 0,
-            "eyeballs": 0,
             "eyebrows": 0,
             "nose": 0,
             "mouth": 0,
@@ -407,7 +406,8 @@ class IconMakerAPI(generics.GenericAPIView):
             for content in response["Contents"]:
                 key = content['Key']
                 for part in icon_parts.keys():
-                    if key.split("/")[-1].startswith(part):
+                    file_name = key.split("/")[-1]
+                    if file_name.startswith(part) and "_line" not in file_name:
                         icon_parts[part] += 1
 
         #print(f"Icon Parts {icon_parts}")
@@ -596,9 +596,10 @@ class PayPalAPI(generics.GenericAPIView):
     def get(self, request):
         #order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
         order_id = request.GET.get("order_id")
+        print("order_id", order_id)
         order = get_object_or_404(IconOrder, id=order_id)
         #order = IconOrder.objects.create(artist=user, price=50.0)
-        host = request.get_host()
+        host = settings.SITE_URL
 
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -607,7 +608,7 @@ class PayPalAPI(generics.GenericAPIView):
             'invoice': str(order.id),
             'currency_code': 'USD',
             #'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-            #'return_url': f"http://{host}{reverse('payment_done')}",
+            'return_url': f"{host}/payment/paypal/done",
             #'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
         }
 
