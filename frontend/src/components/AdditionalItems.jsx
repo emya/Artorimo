@@ -18,11 +18,7 @@ import '../css/style.scss';
 // Mask images
 const images0 = [
   `https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/items/all-over-print-premium-face-mask-black-right-609990d986a22.jpg`,
-  `ht    0: Mask
-    1: iPhone Case
-    2: Tote Bag
-    3: Stickers
-    4: Post cardtps://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/items/all-over-print-premium-face-mask-black-front-609990d986baf.jpg`,
+  `https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/items/all-over-print-premium-face-mask-black-front-609990d986baf.jpg`,
 ];
 
 // iPhone images
@@ -52,7 +48,11 @@ const images4 = [
 class AdditionalItems extends Component {
   // Item Number
   /*
-
+    0: Mask
+    1: iPhone Case
+    2: Tote Bag
+    3: Stickers
+    4: Post card
   */
   componentWillUpdate(nextProps, nextState) {
     if (nextState.added_items !== this.state.added_items){
