@@ -71,6 +71,13 @@ class AdditionalItems extends Component {
       2: images2,
       3: images3,
       4: images4,
+    },
+    prices: {
+      0: 28,
+      1: 21,
+      2: 34,
+      3: 8,
+      4: 7,
     }
   }
 
@@ -135,6 +142,7 @@ class AdditionalItems extends Component {
             src={images0[0]}
             onClick={() => this.openLightbox(0)}
           />
+          <p> $ {this.state.prices[0]} </p>
           { this.state.added_items.includes(0) ? (
             <div>
               Remove from the cart
@@ -154,6 +162,7 @@ class AdditionalItems extends Component {
             src={images1[0]}
             onClick={() => this.openLightbox(1)}
           />
+          <p> $ {this.state.prices[1]} </p>
           { this.state.added_items.includes(1) ? (
             <div>
               Remove from the cart
@@ -173,6 +182,7 @@ class AdditionalItems extends Component {
             src={images2[0]}
             onClick={() => this.openLightbox(2)}
           />
+          <p> $ {this.state.prices[2]} </p>
           { this.state.added_items.includes(2) ? (
             <div>
               Remove from the cart
@@ -192,6 +202,7 @@ class AdditionalItems extends Component {
             src={images3[0]}
             onClick={() => this.openLightbox(3)}
           />
+          <p> $ {this.state.prices[3]} </p>
           { this.state.added_items.includes(3) ? (
             <div>
               Remove from the cart
@@ -211,6 +222,7 @@ class AdditionalItems extends Component {
             src={images4[0]}
             onClick={() => this.openLightbox(4)}
           />
+          <p> $ {this.state.prices[4]} </p>
           { this.state.added_items.includes(4) ? (
             <div>
               Remove from the cart

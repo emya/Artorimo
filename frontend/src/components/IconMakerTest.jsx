@@ -17,11 +17,11 @@ import '../css/filters.scss';
 class IconMakerTest extends Component {
 
   componentDidMount() {
-    this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
+    this.props.fetchIconParts("0b86df2e-2ed7-48d0-a4e9-7f79d4cbaf35");
   }
 
   state = {
-    artist_id: "d9d5c4f7-8977-4181-a94a-cc811c15b4be",
+    artist_id: "0b86df2e-2ed7-48d0-a4e9-7f79d4cbaf35",
     mapping: {
       0: "hair",
       1: "bang",
@@ -87,6 +87,10 @@ class IconMakerTest extends Component {
   getAvailableOptions = (optionName) => {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
+      let line = "_line";
+      if (optionName === "accessories") {
+        line = "";
+      }
 
       if (this.state.unselectable_options.includes(optionName)) {
         content.push(
@@ -109,13 +113,13 @@ class IconMakerTest extends Component {
           <div class="column">
             {this.state[optionName] === i ? (
               <img class="choosed"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )}
@@ -161,6 +165,11 @@ class IconMakerTest extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face${this.state.face}.png`}
           />
         )}
+        {this.state.face > 0 && (
+          <img class="image1 imgFaceLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face_line${this.state.face}.png`}
+          />
+        )}
 
         // Hair
         {this.state.hair > 0 && (
@@ -169,10 +178,20 @@ class IconMakerTest extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair${this.state.hair}.png`}
           />
         )}
+        {this.state.hair > 0 && (
+          <img class="image1 imgHairLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair_line${this.state.hair}.png`}
+          />
+        )}
         {this.state.bang > 0 && (
           <img class="image1 imgBang"
                style={{filter: `url(#filterHairColor${this.state.bang_classes})`, WebkitFilter: `url(#filterHairColor${this.state.bang_classes})`}}
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang${this.state.bang}.png`}
+          />
+        )}
+        {this.state.bang > 0 && (
+          <img class="image1 imgBangLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang_line${this.state.bang}.png`}
           />
         )}
         {this.state.side > 0 && (
@@ -181,17 +200,22 @@ class IconMakerTest extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side${this.state.side}.png`}
           />
         )}
+        {this.state.side > 0 && (
+          <img class="image1 imgSideLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side_line${this.state.side}.png`}
+          />
+        )}
 
         // Eyes
         {this.state.eyes > 0 && (
           <img class="image1 imgEyes"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes_line${this.state.eyes}.png`}
           />
         )}
         {this.state.eyes > 0 && (
           <img class="image1 imgEyeballs"
                style={{filter: `url(#filterEyesColor${this.state.eyes_classes})`, WebkitFilter: `url(#filterEyesColor${this.state.eyes_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyeballs${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes${this.state.eyes}.png`}
           />
         )}
 
@@ -200,6 +224,11 @@ class IconMakerTest extends Component {
           <img class="image1 imgEyebrows"
                style={{filter: `url(#filterHairColor${this.state.eyebrows_classes})`, WebkitFilter: `url(#filterHairColor${this.state.eyebrows_classes})`}}
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows${this.state.eyebrows}.png`}
+          />
+        )}
+        {this.state.eyebrows > 0 && (
+          <img class="image1 imgEyebrowsLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows_line${this.state.eyebrows}.png`}
           />
         )}
 
@@ -217,6 +246,11 @@ class IconMakerTest extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth${this.state.mouth}.png`}
           />
         )}
+        {this.state.mouth > 0 && (
+          <img class="image1 imgMouthLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth_line${this.state.mouth}.png`}
+          />
+        )}
 
         // Cloth
         {this.state.cloth > 0 && (
@@ -225,10 +259,15 @@ class IconMakerTest extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth${this.state.cloth}.png`}
           />
         )}
+        {this.state.cloth > 0 && (
+          <img class="image1 imgClothLine"
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth_line${this.state.cloth}.png`}
+          />
+        )}
 
         // Accessories
         {this.state.accessories > 0 && (
-          <img class="image1 imgCloth"
+          <img class="image1 imgAccessories"
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/accessories${this.state.accessories}.png`}
           />
         )}

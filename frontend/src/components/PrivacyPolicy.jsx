@@ -6,7 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 
 import {auth} from "../actions";
 
-import term from '../img/Privacy_Policy.pdf'
+import { keys } from '../keys.js';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -23,24 +23,15 @@ class PrivacyPolicy extends Component {
   render() {
     const { pageNumber, numPages } = this.state;
     return (
-        <Document
-          file={term}
-          onLoadSuccess={this.onDocumentLoadSuccess}
-          onLoadError={console.error}
-        >
-          {
-            Array.from(
-              new Array(numPages),
-              (el, index) => (
-                <Page
-                  key={`page_${index + 1}`}
-                  pageNumber={index + 1}
-                />
-              ),
-            )
+      <iframe
+        src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Privacy_Policy.pdf`}
+        style={{width: "100%", height: "800px"}}
+        source={{
+          header: {
+            'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
           }
-
-        </Document>
+        }}
+      />
     )
   }
 }
