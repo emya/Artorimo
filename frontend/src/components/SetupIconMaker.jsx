@@ -46,6 +46,7 @@ class SetupIconMaker extends Component {
   state = {
     // Test id
     artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    selected_language: "jpn",
     mapping: {
       0: "hair",
       1: "bang",
@@ -547,16 +548,36 @@ class SetupIconMaker extends Component {
        </div>
 
        <div class="looked-element-pad">
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(8)} > Face </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(0)} > Hair </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(1)} > Bang </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(2)} > Side </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(3)} > Eyes </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(4)} > Eyebrows </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(5)} > Nose </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(6)} > Mouth </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(7)} > Cloth </button>
-         <button class="looked-element-button" onClick={() => this.changeLookedElement(9)} > Accessories </button>
+         <button class={this.state.looked_element === 8 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(8)} >
+           Face
+         </button>
+         <button class={this.state.looked_element === 0 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(0)} >
+           Hair
+         </button>
+         <button class={this.state.looked_element === 1 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(1)} >
+           Bang
+         </button>
+         <button class={this.state.looked_element === 2 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(2)} >
+           Side
+         </button>
+         <button class={this.state.looked_element === 3 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(3)} >
+           Eyes
+         </button>
+         <button class={this.state.looked_element === 4 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(4)} >
+           Eyebrows
+         </button>
+         <button class={this.state.looked_element === 5 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(5)} >
+           Nose
+         </button>
+         <button class={this.state.looked_element === 6 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(6)} >
+           Mouth
+         </button>
+         <button class={this.state.looked_element === 7 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(7)} >
+           Cloth
+         </button>
+         <button class={this.state.looked_element === 9 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(9)} >
+           Accessories
+         </button>
        </div>
 
        {this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) &&
@@ -566,8 +587,10 @@ class SetupIconMaker extends Component {
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <div class="dropzone-icon-upload">
-                  <p>絵を選択/ドラッグ＆ドロップしてください (一度に５枚まで)</p>
-                  <p>Drag & drop or click to select up to 5 files</p>
+                  {this.state.selected_language === "jpn" ? (
+                    <p>絵を選択/ドラッグ＆ドロップしてください (一度に５枚まで)</p>) : (
+                    <p>Drag & drop or click to select up to 5 files</p>
+                  )}
                 </div>
               </div>
             </section>
@@ -583,8 +606,10 @@ class SetupIconMaker extends Component {
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <div class="dropzone-icon-line-upload">
-                    <p>線画（輪郭部分）の絵を選択/ドラッグ＆ドロップしてください</p>
-                    <p>Drag & drop or click to select a file for a ling drawing</p>
+                    {this.state.selected_language === "jpn" ? (
+                      <p>線画（輪郭部分）の絵を選択/ドラッグ＆ドロップしてください</p>) : (
+                      <p>Drag & drop or click to select a file for a ling drawing</p>
+                    )}
                   </div>
                 </div>
               </section>
@@ -597,8 +622,10 @@ class SetupIconMaker extends Component {
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <div class="dropzone-icon-colored-upload">
-                    <p>塗りつぶし用の絵を選択/ドラッグ＆ドロップしてください</p>
-                    <p>Drag & drop or click to select a file for a colored area</p>
+                    {this.state.selected_language === "jpn" ? (
+                      <p>塗りつぶし用の絵を選択/ドラッグ＆ドロップしてください</p>) : (
+                      <p>Drag & drop or click to select a file for a colored area</p>
+                    )}
                   </div>
                 </div>
               </section>
@@ -644,9 +671,12 @@ class SetupIconMaker extends Component {
                   style={previewColoredStyle}
                  />
                )}
-               {this.state.fillingFile.length === 1 && (
-                 <p>Showing with sample color</p>
-               )}
+               {this.state.fillingFile.length === 1 && this.state.selected_language === "jpn" &&
+                  <p>サンプルの色で塗った状態で表示しています</p>
+               }
+               {this.state.fillingFile.length === 1 && this.state.selected_language !== "jpn" &&
+                  <p>Showing with sample color</p>
+               }
              </div>
          </Fragment>
        }
@@ -661,52 +691,52 @@ class SetupIconMaker extends Component {
 
       <div class="icon-uploaded-parts">
         <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
-          <p>Uploaded Hair</p>
+          <h3 style={{width:"50%"}}>Uploaded Hair</h3>
           {this.getAvailableOptions("hair")}
         </div>
 
         <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
-          <p>Uploaded Bang</p>
+          <h3 style={{width:"50%"}}>Uploaded Bang</h3>
           {this.getAvailableOptions("bang")}
         </div>
 
         <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
-          <p>Uploaded Side</p>
+          <h3 style={{width:"50%"}}>Uploaded Side</h3>
           {this.getAvailableOptions("side")}
         </div>
 
         <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
-          <p>Uploaded Eyes</p>
+          <h3 style={{width:"50%"}}>Uploaded Eyes</h3>
           {this.getAvailableOptions("eyes")}
         </div>
 
         <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
-          <p>Uploaded Eyebrows</p>
+          <h3 style={{width:"50%"}}>Uploaded Eyebrows</h3>
           {this.getAvailableOptions("eyebrows")}
         </div>
 
         <div style={{ display: this.state.looked_element === 5 ? "block" : "none" }}>
-          <p>Uploaded Nose</p>
+          <h3 style={{width:"50%"}}>Uploaded Nose</h3>
           {this.getAvailableOptions("nose")}
         </div>
 
         <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
-          <p>Uploaded Mouth</p>
+          <h3 style={{width:"50%"}}>Uploaded Mouth</h3>
           {this.getAvailableOptions("mouth")}
         </div>
 
         <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-          <p>Uploaded Cloth</p>
+          <h3 style={{width:"50%"}}>Uploaded Cloth</h3>
           {this.getAvailableOptions("cloth")}
         </div>
 
         <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
-          <h3>Uploaded Face</h3>
+          <h3 style={{width:"50%"}}>Uploaded Face</h3>
           {this.getAvailableOptions("face")}
         </div>
 
         <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
-          <p>Accessories</p>
+          <h3 style={{width:"50%"}}>Accessories</h3>
           {this.getAvailableOptions("accessories")}
         </div>
 
