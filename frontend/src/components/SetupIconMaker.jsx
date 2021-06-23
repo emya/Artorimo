@@ -566,8 +566,8 @@ class SetupIconMaker extends Component {
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <div class="dropzone-icon-upload">
-                  <p>絵を選択/ドラッグ＆ドロップしてください</p>
-                  <p>Drag & drop or click to select a file</p>
+                  <p>絵を選択/ドラッグ＆ドロップしてください (一度に５枚まで)</p>
+                  <p>Drag & drop or click to select up to 5 files</p>
                 </div>
               </div>
             </section>
