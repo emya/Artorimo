@@ -1,6 +1,6 @@
-.wrapper {
+.wrapper-icon {
     overflow: hidden;
-    min-height: 1200px;
+    min-height: 1500px;
 }
 
 .parent {
@@ -11,26 +11,103 @@
   width: 500px;
 }
 
+.icon-container {
+  // height: 1000px;
+  width: 100%;
+  height: 500px;
+  display: block;
+}
+
+.icon-container {
+  @media (max-width: 767px) {
+    width: 100%;
+    //height: auto;
+    height: 500px;
+    padding: 0 3% 100px 3%;
+  }
+}
+
+.icon-container-left {
+  height: 500px;
+}
+.icon-container-left {
+  @media (min-width: 767px) {
+    float: left;
+    width: 50%;
+  }
+}
+
+.icon-container-right {
+  @media (min-width: 767px) {
+    float: right;
+    width: 50%;
+    height: 500px;
+  }
+}
+
+.color-pad {
+  display: block;
+  height: 50px;
+  width: 100%;
+}
+
+.looked-element-pad {
+  display: block;
+  height: 50px;
+  width: 100%;
+}
+
+.looked-element-button {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropzone-icon-upload {
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 150px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.dropzone-icon-line-upload {
+  //margin: 0 auto;
+  //margin-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left: 10px;
+  height: 150px;
+  width: 45%;
+  border: 1px solid black;
+  float: left;
+}
+
+.dropzone-icon-colored-upload {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  height: 150px;
+  width: 45%;
+  //width: 150px;
+  border: 1px solid black;
+  float: left;
+}
+
+.icon-uploaded-parts {
+  display: block;
+}
+
 .image1 {
   position: absolute;
-  top: 80px;
+  top: 180px;
   left: 0;
   width: 500px;
-  z-index: 1;
-}
-.eyes {
-  position: absolute;
-  top: 80px;
-  left: 0px;
-  width: 500px;
-  z-index: 2;
-}
-.mouth {
-  position: absolute;
-  top: 50px;
-  left: -25px;
-  width: 550px;
-  z-index: 2;
+  //z-index: 1;
 }
 
 .function-buttons {
@@ -42,12 +119,13 @@
 
 .column {
   float: left;
-  width: 50%;
-  padding: 15px;
+  width: 33%;
+  //padding: 15px;
 }
 
 .choice {
   width: 200px;
+  border: 1px dotted gray;
 }
 
 .choosed {
@@ -55,36 +133,6 @@
   border: 2px solid red;
 }
 
-.a {
-    display: block;
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border: 1px solid red;
-}
-.a.b {
-    width: 500px;
-    height: 600px;
-    border: 1px solid green;
-}
-.c {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    display: block;
-    width: 50px;
-    height: 50px;
-    border: 1px solid blue;
-}
-.d {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    display: block;
-    width: 50px;
-    height: 50px;
-    border: 1px solid blue;
-}
 
 .icontest1 {
   position: absolute;
@@ -103,10 +151,45 @@
   display: inline-block;
 }
 
+.outer-circle {
+   background: black;
+   border-radius: 50%;
+   height: 30px;
+   width: 30px;
+   position: relative;
+   float: left;
+   /*
+    Child elements with absolute positioning will be
+    positioned relative to this div
+   */
+}
+
+.inner-circle {
+   position: absolute;
+   background: #a9aaab;
+   border-radius: 50%;
+   height: 26px;
+   width: 26px;
+   /*
+    Put top edge and left edge in the center
+   */
+   top: 50%;
+   left: 50%;
+   margin: -13px 0px 0px -13px;
+   /*
+    Offset the position correctly with
+    minus half of the width and minus half of the height
+   */
+}
+
 body {
-    //background-color:#03030a;
-    min-width: 800px;
-    min-height: 400px
+  //background-color:#03030a;
+  min-width: 800px;
+  min-height: 400px
+}
+
+.preview {
+  position: relative;
 }
 
 .imgFace {

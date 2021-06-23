@@ -2,13 +2,9 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
-import { Document, Page, pdfjs } from 'react-pdf';
-
 import {auth} from "../actions";
 
 import { keys } from '../keys.js';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 class PrivacyPolicy extends Component {
   state = {

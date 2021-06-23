@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import Lightbox from 'react-image-lightbox';
+
 import Header from './Header';
 import Footer from './Footer';
 import SideMenu from './SideMenu';
@@ -16,9 +18,34 @@ class Portfolio extends Component {
     this.props.fetchPortfolio(this.props.match.params.userId);
   }
 
+  state = {
+    isOpen: false,
+    portfolio_number: 0
+  }
+
+  openLightbox = (portfolio_number) => {
+    this.setState({
+      isOpen: true,
+      portfolio_number: portfolio_number
+    })
+  };
+
   render() {
+    const pf = this.props.portfolio;
+    let opened_image = "";
+
+    if(pf.myportfolio) {
+      opened_image = pf.myportfolio[0][`image${this.state.portfolio_number}`];
+    }
+
     return (
   <div>
+    {this.state.isOpen &&
+      <Lightbox
+        mainSrc={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${pf.myportfolio[0].user.id}/${opened_image}`}
+        onCloseRequest={() => this.setState({ isOpen: false })}
+      />
+    }
     <Header />
 
     <div class="wrapper clearfix">
@@ -32,7 +59,6 @@ class Portfolio extends Component {
       <div class="portfolio placeholder">
         <div class="port-list ">
           <h2>Portfolio</h2>
-
 
           <div class="profile-top">
             <div class="profile-left">
@@ -63,67 +89,83 @@ class Portfolio extends Component {
 
           <ul class="port-list">
             <li>
-              {portfolio.image0 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image0 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image0}`}
+                  onClick={() => this.openLightbox(0)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image1 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image1 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image1}`}
+                  onClick={() => this.openLightbox(1)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image2 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image2 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image2}`}
+                  onClick={() => this.openLightbox(2)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image3 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image3 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image3}`}
+                  onClick={() => this.openLightbox(3)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image4 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image4 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image4}`}
+                  onClick={() => this.openLightbox(4)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image5 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image5 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image5}`}
+                  onClick={() => this.openLightbox(5)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image6 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image6 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image6}`}
+                  onClick={() => this.openLightbox(6)}
+                />
+              }
             </li>
 
             <li>
-              {portfolio.image7 ? (
-                 <img class="cropped" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`} />
-                  ) : (
-                 <img class="cropped" src={require('../img/default.png')}/>
-              )}
+              {portfolio.image7 &&
+                <img
+                  class="cropped"
+                  src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/portfolios/${portfolio.profile.user.id}/${portfolio.image7}`}
+                  onClick={() => this.openLightbox(7)}
+                />
+              }
             </li>
 
 
