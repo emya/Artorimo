@@ -419,6 +419,7 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
     def post(self, request):
         # Upload new images
+        line_only_elements = ["nose", "accessories"]
         data = request.data
         artist_id = data['artist_id']
         icon_part = data['icon_part']
@@ -444,10 +445,12 @@ class IconMakerSetupAPI(generics.GenericAPIView):
             file_numbers_str = data['file_numbers']
             file_numbers = [int(file_number) for file_number in file_numbers_str.split(",")]
             file_numbers.sort()
-            full_files = []
             n_removed = 0
 
             for key in keys:
+                if "_line" in key.split("/")[-1]:
+                    continue
+
                 n_key = key.split("/")[-1].split(".")[0].replace(icon_part, "")
                 n_key = int(n_key)
                 if n_key in file_numbers:
@@ -455,10 +458,10 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                         Bucket=settings.AWS_BUCKET_NAME,
                         Key=key,
                     )
-                    if icon_part == "eyes":
+                    if icon_part != "accessories":
                         s3_client.delete_object(
                             Bucket=settings.AWS_BUCKET_NAME,
-                            Key=f"icons/{artist_id}/eyeballs{n_key}.png",
+                            Key=f"icons/{artist_id}/{icon_part}_line{n_key}.png",
                         )
                     n_removed += 1
                 else:
@@ -468,48 +471,52 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                             CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}{n_key-n_removed}.png"
                         )
                         s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=key)
-                        if icon_part == "eyes":
+                        if icon_part != "accessories":
                             s3_client.copy_object(
-                                CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/eyeballs{n_key-n_removed}.png"
+                                CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}_line{n_key-n_removed}.png"
                             )
-                            s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/eyeballs{n_key}.png")
+                            s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}_line{n_key}.png")
 
             icon_parts = {"updated_key": icon_part,
                           "updated_value": n_keys - n_removed}
             return Response(icon_parts)
 
-        if icon_part == "eyes":
+        if icon_part not in line_only_elements:
             request.data._mutable = True
-            eyes_image_ls = request.data.pop('eyes_image')
-            eyeballs_image_ls = request.data.pop('eyeballs_image')
+            line_image_ls = request.data.pop('line_image')
+            filling_image_ls = request.data.pop('filling_image')
             request.data._mutable = False
 
-            eyes_image = eyes_image_ls[0]
-            eyeballs_image = eyeballs_image_ls[0]
+            line_image = line_image_ls[0]
+            filling_image = filling_image_ls[0]
 
             is_upload_images = {}
-            if isinstance(eyes_image, InMemoryUploadedFile) or isinstance(eyes_image, TemporaryUploadedFile):
-                image_name = f"{icon_part}{n_keys+1}.png"
+            if isinstance(line_image, InMemoryUploadedFile) or isinstance(line_image, TemporaryUploadedFile):
+                image_name = f"{icon_part}_line{n_keys+1}.png"
                 #data['eyes_image'] = image_name
-                eyes_image.name = image_name
-                is_upload_images['eyes_image'] = eyes_image
+                line_image.name = image_name
+                is_upload_images['line_image'] = line_image
 
-            if isinstance(eyeballs_image, InMemoryUploadedFile) or isinstance(eyeballs_image, TemporaryUploadedFile):
-                image_name = f"eyeballs{n_keys+1}.png"
+            if isinstance(filling_image, InMemoryUploadedFile) or isinstance(filling_image, TemporaryUploadedFile):
+                image_name = f"{icon_part}{n_keys+1}.png"
                 #data['eyeballs_image'] = image_name
-                eyeballs_image.name = image_name
-                is_upload_images['eyeballs_image'] = eyeballs_image
+                filling_image.name = image_name
+                is_upload_images['filling_image'] = filling_image
 
             icon_parts = {"updated_key": icon_part,
                           "updated_value": n_keys}
 
             if is_upload_images:
-                if "eyes_image" in is_upload_images.keys() and "eyeballs_image" in is_upload_images.keys():
-                    v_eyes = is_upload_images["eyes_image"]
-                    upload_to_s3(v_eyes, f'icons/{artist_id}/{v_eyes.name}')
-                    v_eyeballs = is_upload_images["eyeballs_image"]
-                    upload_to_s3(v_eyeballs, f'icons/{artist_id}/{v_eyeballs.name}')
-
+                added_flag = False
+                if "line_image" in is_upload_images.keys():
+                    v_line = is_upload_images["line_image"]
+                    upload_to_s3(v_line, f'icons/{artist_id}/{v_line.name}')
+                    added_flag = True
+                if "filling_image" in is_upload_images.keys():
+                    v_filling = is_upload_images["filling_image"]
+                    upload_to_s3(v_filling, f'icons/{artist_id}/{v_filling.name}')
+                    added_flag = True
+                if added_flag:
                     icon_parts["updated_value"] += 1
 
             return Response(icon_parts)
@@ -521,7 +528,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
         img2 = request.data.pop('image2') if 'image2' in request.data else None
         img3 = request.data.pop('image3') if 'image3' in request.data else None
         img4 = request.data.pop('image4') if 'image4' in request.data else None
-        img5 = request.data.pop('image5') if 'image5' in request.data else None
 
         is_upload_images = {}
         n_uploaded_images = 0
@@ -568,15 +574,6 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                 #data['image4'] = image_name
                 image.name = image_name
                 is_upload_images['image4'] = image
-
-        if img5:
-            image = img5[0]
-            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
-                n_uploaded_images += 1
-                image_name = f"{icon_part}{n_keys+n_uploaded_images}.png"
-                #data['image5'] = image_name
-                image.name = image_name
-                is_upload_images['image5'] = image
 
         icon_parts = {"updated_key": icon_part,
                       "updated_value": n_keys}

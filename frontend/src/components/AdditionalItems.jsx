@@ -131,7 +131,6 @@ class AdditionalItems extends Component {
             })
           }
         />
-
       }
 
       <h2> Add Items </h2>

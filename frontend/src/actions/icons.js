@@ -161,7 +161,7 @@ export const uploadIconParts = (artist_id, icon_part, imageFiles) => {
   }
 }
 
-export const uploadEyeParts = (artist_id, eyesFile, eyeballsFile) => {
+export const uploadPairedParts = (artist_id, icon_part, lineFile, fillingFile) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
     let headers = {};
@@ -173,10 +173,10 @@ export const uploadEyeParts = (artist_id, eyesFile, eyeballsFile) => {
     const formData = new FormData();
 
     formData.append('artist_id', artist_id);
-    formData.append('icon_part', "eyes");
+    formData.append('icon_part', icon_part);
 
-    formData.append('eyes_image', eyesFile[0]);
-    formData.append('eyeballs_image', eyeballsFile[0]);
+    formData.append('line_image', lineFile[0]);
+    formData.append('filling_image', fillingFile[0]);
 
     return fetch('/api/setup/icons/maker/', {headers, method: "POST", body: formData})
       .then(res => {
