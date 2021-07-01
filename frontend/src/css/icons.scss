@@ -1,5 +1,5 @@
 .wrapper-icon {
-    overflow: hidden;
+    //overflow: hidden;
     min-height: 3500px;
 }
 
@@ -43,6 +43,27 @@
     width: 50%;
     height: 500px;
   }
+}
+
+.layout-pad {
+  display: block;
+  height: 120px;
+  width: 100%;
+}
+
+.layout-column {
+  float: left;
+  //width: 50%;
+  height: 80px;
+  width: 80px;
+  margin-left: 30px;
+  margin-bottom: 40px;
+}
+
+.layout-img {
+  //height: 50px;
+  //margin: 50px;
+  height: 100%;
 }
 
 .color-pad {
@@ -111,12 +132,76 @@
   display: block;
 }
 
+.icon-pair {
+  display: block;
+  height: 400px;
+  width: 100%;
+}
+
+.icon-pair-left {
+  //display: inline-block;
+  //position: absolute;
+  top: 50;
+  left: 0;
+  width: 200px;
+  height: 400px;
+  float: left;
+}
+
+.icon-pair-right {
+  //display: inline-block;
+  //position: absolute;
+  top: 50;
+  left: 250;
+  width: 200px;
+  height: 400px;
+  float: left;
+}
+
+.icon-pair-selection {
+  display: block;
+  height: 60px;
+  width: 400px;
+}
+
+.image-pair1-left {
+  position: absolute;
+  //top: 180px;
+  //left: 0;
+  margin-left: -100px;
+  width: 320px;
+}
+
+.image-pair1-right {
+  position: absolute;
+  //top: 120px;
+  //left: 50;
+  margin-left: -100px;
+  width: 320px;
+}
+
+.image-pair2-left {
+  position: absolute;
+  //top: 180px;
+  //left: 0;
+  margin-left: -100px;
+  width: 320px;
+}
+
+.image-pair2-right {
+  position: absolute;
+  //top: 120px;
+  //left: 50;
+  margin-left: -150px;
+  margin-top: -50px;
+  width: 350px;
+}
+
 .image1 {
   position: absolute;
   top: 180px;
   left: 0;
   width: 500px;
-  //z-index: 1;
 }
 
 .function-buttons {
@@ -256,3 +341,59 @@ body {
   z-index: -1;
 }
 
+
+// Second person
+.imgFaceBehind {
+  z-index: -71;
+}
+.imgFaceLineBehind {
+  z-index: -69;
+}
+.imgHairBehind {
+  z-index: -67;
+}
+.imgHairLineBehind {
+  z-index: -65;
+}
+.imgBangBehind {
+  z-index: -63;
+}
+.imgBangLineBehind {
+  z-index: -61;
+}
+.imgSideBehind {
+  z-index: -59;
+}
+.imgSideLineBehind {
+  z-index: -57;
+}
+.imgEyesBehind {
+  z-index: -55;
+}
+.imgEyeballsBehind {
+  z-index: -53;
+}
+.imgEyebrowsBehind {
+  z-index: -51;
+}
+.imgEyebrowsLineBehind {
+  z-index: -49;
+}
+.imgNoseBehind {
+  z-index: -47;
+}
+.imgMouthBehind {
+  z-index: -45;
+}
+.imgMouthLineBehind {
+  z-index: -43;
+}
+.imgClothBehind {
+  z-index: -41;
+}
+.imgClothLineBehind {
+  z-index: -39;
+}
+.imgAccessoriesBehind {
+  z-index: -37;
+}
