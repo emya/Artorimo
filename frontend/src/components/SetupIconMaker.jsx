@@ -310,7 +310,6 @@ class SetupIconMaker extends Component {
     return (
   <div>
     <Header />
-    <Filters />
     <div class="wrapper-icon clearfix">
 
       <div class="icon-container ">
@@ -744,6 +743,7 @@ class SetupIconMaker extends Component {
     </div>
     </div>
     { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
+    <Filters />
     <Footer />
   </div>
     )
