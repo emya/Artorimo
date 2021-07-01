@@ -120,8 +120,6 @@ class IconMakerForTwo extends Component {
   }
 
   changeLookedElement = (value) => {
-    console.log("changeLookedElement", value);
-
     this.setState({
       looked_element: value
     });
@@ -129,9 +127,6 @@ class IconMakerForTwo extends Component {
 
   changeOption = (optionName, optionValue) => {
     let person_key = this.state.person_key;
-
-    console.log(person_key);
-    console.log(this.state.looked_person);
 
     this.setState({
       [person_key]: {
