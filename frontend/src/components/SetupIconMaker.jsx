@@ -124,7 +124,10 @@ class SetupIconMaker extends Component {
       removedFiles: [],
       imageFiles: [],
       lineFile: [],
-      fillingFile: []
+      fillingFile: [],
+      line_errors: [],
+      filling_errors: [],
+      errors: []
     })
   }
 
@@ -785,7 +788,7 @@ class SetupIconMaker extends Component {
               </section>
             )}
            </Dropzone>
-          {line_errors.length > 0 && <p class="error-heading">エラー: {line_errors}</p>}
+          {line_errors.length > 0 && <p class="icon-error-heading">エラー: {line_errors}</p>}
            <Dropzone onDrop={acceptedFiles => this.onDropFilling(acceptedFiles)}>
             {({getRootProps, getInputProps}) => (
               <section>
@@ -801,7 +804,7 @@ class SetupIconMaker extends Component {
               </section>
             )}
            </Dropzone>
-          {filling_errors.length > 0 && <p class="error-heading">エラー: {filling_errors}</p>}
+          {filling_errors.length > 0 && <p class="icon-error-heading">エラー: {filling_errors}</p>}
          </div>
        }
 
@@ -852,7 +855,7 @@ class SetupIconMaker extends Component {
        }
 
       {errors.map(error => (
-        <p class="error-heading" key={error}>エラー: {error}</p>
+        <p class="icon-error-heading" key={error}>エラー: {error}</p>
       ))}
         <button style={{width:"50%"}} class="form-send-btn btn" onClick={this.uploadIconParts}>
           {/*Upload Parts of {this.state.mapping[this.state.looked_element]}*/}
