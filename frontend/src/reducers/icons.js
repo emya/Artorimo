@@ -3,6 +3,7 @@ import update from 'react-addons-update';
 const initialState = {
   //{text: "Write code!"}
   isOrdered: null,
+  isRemoved: null,
   orderCompleted: null
 };
 
@@ -20,6 +21,13 @@ export default function payment(state=initialState, action) {
       return {...state, icon_parts: action.data};
 
     case 'REMOVED_ICON':
+      return update(state, {
+        isRemoved: {$set: true},
+        icon_parts: {
+          [action.data["updated_key"]]: {$set: action.data["updated_value"]}
+        }
+      })
+
     case 'UPLOADED_ICON':
       return update(state, {
         icon_parts: {

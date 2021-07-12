@@ -384,11 +384,17 @@ class IconMakerAPI(generics.GenericAPIView):
     def get(self, request):
         # For now, use fixed user id
         artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
+        is_setup = request.GET.get("is_setup")
+
+        if is_setup:
+            prefix = f"uploaded_icons/{artist_id}"
+        else:
+            prefix = f"icons/{artist_id}"
+
         response = s3_client.list_objects(
             Bucket=settings.AWS_BUCKET_NAME,
-            Prefix=f"icons/{artist_id}",
+            Prefix=prefix,
         )
-        #print(response)
 
         icon_parts = {
             "hair": 0,
@@ -401,6 +407,7 @@ class IconMakerAPI(generics.GenericAPIView):
             "cloth": 0,
             "face": 0,
             "accessories": 0,
+            "glasses": 0,
         }
         if "Contents" in response:
             for content in response["Contents"]:
@@ -419,16 +426,21 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
     def post(self, request):
         # Upload new images
-        line_only_elements = ["nose", "accessories"]
+        line_only_elements = ["nose", "accessories", "glasses"]
         data = request.data
         artist_id = data['artist_id']
         icon_part = data['icon_part']
+
+        if icon_part in line_only_elements:
+            icon_part_prefix = f"{icon_part}"
+        else:
+            icon_part_prefix = f"{icon_part}_line"
 
         is_deleted = data.get('is_deleted', False)
 
         response = s3_client.list_objects(
             Bucket=settings.AWS_BUCKET_NAME,
-            Prefix=f"icons/{artist_id}/{icon_part}",
+            Prefix=f"uploaded_icons/{artist_id}/{icon_part_prefix}"
         )
 
         keys = []
@@ -448,34 +460,32 @@ class IconMakerSetupAPI(generics.GenericAPIView):
             n_removed = 0
 
             for key in keys:
-                if "_line" in key.split("/")[-1]:
-                    continue
-
-                n_key = key.split("/")[-1].split(".")[0].replace(icon_part, "")
+                n_key = key.split("/")[-1].split(".")[0].replace(icon_part_prefix, "")
                 n_key = int(n_key)
                 if n_key in file_numbers:
                     s3_client.delete_object(
                         Bucket=settings.AWS_BUCKET_NAME,
                         Key=key,
                     )
-                    if icon_part != "accessories":
+                    if icon_part not in line_only_elements:
                         s3_client.delete_object(
                             Bucket=settings.AWS_BUCKET_NAME,
-                            Key=f"icons/{artist_id}/{icon_part}_line{n_key}.png",
+                            Key=f"uploaded_icons/{artist_id}/{icon_part}{n_key}.png",
                         )
                     n_removed += 1
                 else:
                     if n_removed > 0:
                         copy_source = {'Bucket': settings.AWS_BUCKET_NAME, 'Key': key}
                         s3_client.copy_object(
-                            CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}{n_key-n_removed}.png"
+                            CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"uploaded_icons/{artist_id}/{icon_part_prefix}{n_key-n_removed}.png"
                         )
                         s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=key)
-                        if icon_part != "accessories":
+                        if icon_part not in line_only_elements:
+                            copy_source = {'Bucket': settings.AWS_BUCKET_NAME, 'Key': f"uploaded_icons/{artist_id}/{icon_part}{n_key}.png"}
                             s3_client.copy_object(
-                                CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}_line{n_key-n_removed}.png"
+                                CopySource=copy_source, Bucket=settings.AWS_BUCKET_NAME, Key=f"uploaded_icons/{artist_id}/{icon_part}{n_key-n_removed}.png"
                             )
-                            s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=f"icons/{artist_id}/{icon_part}_line{n_key}.png")
+                            s3_client.delete_object(Bucket=settings.AWS_BUCKET_NAME, Key=f"uploaded_icons/{artist_id}/{icon_part}{n_key}.png")
 
             icon_parts = {"updated_key": icon_part,
                           "updated_value": n_keys - n_removed}
@@ -510,11 +520,11 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                 added_flag = False
                 if "line_image" in is_upload_images.keys():
                     v_line = is_upload_images["line_image"]
-                    upload_to_s3(v_line, f'icons/{artist_id}/{v_line.name}')
+                    upload_to_s3(v_line, f'uploaded_icons/{artist_id}/{v_line.name}')
                     added_flag = True
                 if "filling_image" in is_upload_images.keys():
                     v_filling = is_upload_images["filling_image"]
-                    upload_to_s3(v_filling, f'icons/{artist_id}/{v_filling.name}')
+                    upload_to_s3(v_filling, f'uploaded_icons/{artist_id}/{v_filling.name}')
                     added_flag = True
                 if added_flag:
                     icon_parts["updated_value"] += 1
@@ -579,7 +589,7 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                       "updated_value": n_keys}
         if is_upload_images:
             for k, v in is_upload_images.items():
-                upload_to_s3(v, f'icons/{artist_id}/{v.name}')
+                upload_to_s3(v, f'uploaded_icons/{artist_id}/{v.name}')
                 icon_parts["updated_value"] += 1
 
         return Response(icon_parts)

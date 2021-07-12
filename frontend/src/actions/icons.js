@@ -84,7 +84,7 @@ export const fetchOrder = order_id => {
   }
 }
 
-export const fetchIconParts = artist_id => {
+export const fetchIconParts = (artist_id, is_setup = false) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
     let headers = {"Content-Type": "application/json"};
@@ -93,7 +93,7 @@ export const fetchIconParts = artist_id => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let params = `?artist_id=${artist_id}`;
+    let params = `?artist_id=${artist_id}&is_setup=${is_setup}`;
 
     return fetch(`/api/icons/maker/${params}`, {headers, })
       .then(res => {
