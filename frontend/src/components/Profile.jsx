@@ -35,7 +35,7 @@ class Profile extends Component {
               {profile.image && (
                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
               )}
-              {!profile.image && (<img src={require('../img/default.png')} />)}
+              {!profile.image && (<img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/default.png`} />)}
 
             </div>
 

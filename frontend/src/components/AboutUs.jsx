@@ -4,6 +4,8 @@ import '../css/style.scss';
 import Header from './Header'
 import Footer from './Footer'
 
+import { keys } from '../keys.js';
+
 class AboutUs extends Component {
   state = {
     language: 0,
@@ -69,7 +71,7 @@ class AboutUs extends Component {
 
 
           <div class="member">
-            <img class="us-picture" src={require('../img/Chiaki.png')}/>
+            <img class="us-picture" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Chiaki.png`} />
             <p><strong>Chiaki Ikuyama</strong></p>
             <p class="member-title">Cofounder & CEO</p>
             <p>香川県出身。高校時代に渡米。起業前は外資系投資銀行で勤務。ウェブデザイン、デジタルアート、ファッション、旅行が趣味。フリーのイラストレーターとしても活動。
@@ -77,7 +79,7 @@ class AboutUs extends Component {
           </div>
 
           <div class="member">
-            <img class="us-picture" src={require('../img/Emi.png')}/>
+            <img class="us-picture" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Emi.png`} />
             <p><strong>Emi Ayada</strong></p>
             <p class="member-title">Cofounder & CTO</p>
             <p>香川県出身。東京大学大学院でコンピュータ科学の修士号を取得後、渡米しソフトウェアエンジニアとして主にスタートアップの会社に勤務。テニス、旅行が趣味。</p>
@@ -127,7 +129,7 @@ class AboutUs extends Component {
 
 
           <div class="member">
-            <img class="us-picture" src={require('../img/Chiaki.png')}/>
+            <img class="us-picture" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Chiaki.png`} />
             <p><strong>Chiaki Ikuyama</strong></p>
             <p class="member-title">Cofounder & CEO</p>
             <p>Chiaki is originally from Japan and studied in Minnesota,USA. Prior to Torimo, she worked as a USCPA at Deloitte, as well as an investment banker at Citigroup. She is also a freelance illustrator and passionate about web design, digital art, fashion, and traveling.
@@ -135,7 +137,7 @@ class AboutUs extends Component {
           </div>
 
           <div class="member">
-            <img class="us-picture" src={require('../img/Emi.png')}/>
+            <img class="us-picture" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Emi.png`} />
             <p><strong>Emi Ayada</strong></p>
             <p class="member-title">Cofounder & CTO</p>
             <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>

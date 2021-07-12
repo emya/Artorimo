@@ -66,7 +66,7 @@ class Portfolio extends Component {
                 {portfolio.profile.image && (
                   <img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${portfolio.profile.user.id}/${portfolio.profile.image}`} />
                 )}
-                {!portfolio.profile.image && (<img class="portfolio-pic" src={require('../img/default.png')} />)}
+                {!portfolio.profile.image && (<img class="portfolio-pic" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/default.png`} />)}
               </div>
 
               <div class="profile-right-mobile">
