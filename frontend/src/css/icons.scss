@@ -14,7 +14,7 @@
 .icon-container {
   // height: 1000px;
   width: 100%;
-  height: 500px;
+  height: 600px;
   display: block;
 }
 
@@ -22,14 +22,16 @@
   @media (max-width: 767px) {
     width: 100%;
     //height: auto;
-    height: 500px;
+    height: 1200px;
     padding: 0 3% 100px 3%;
   }
 }
 
 .icon-container-left {
-  height: 500px;
+  height: 600px;
+  display: block;
 }
+
 .icon-container-left {
   @media (min-width: 767px) {
     float: left;
@@ -38,12 +40,18 @@
 }
 
 .icon-container-right {
+  height: 600px;
+  display: block;
+}
+
+.icon-container-right {
   @media (min-width: 767px) {
     float: right;
     width: 50%;
-    height: 500px;
+    height: 600px;
   }
 }
+
 
 .layout-pad {
   display: block;
@@ -68,13 +76,20 @@
 
 .color-pad {
   display: block;
-  height: 50px;
+  margin-top: 30px;
+  height: 80px;
   width: 100%;
 }
 
 .looked-element-pad {
   display: block;
   height: 80px;
+  width: 100%;
+}
+
+.upload-memo-pad {
+  display: block;
+  height: 50px;
   width: 100%;
 }
 
@@ -128,8 +143,20 @@
   float: left;
 }
 
+.dropzone-text {
+  font-size:80%;
+}
+
+.icon-uploaded-completed {
+  display: block;
+  width: 100%;
+  height: 150px;
+  margin-top: 80px;
+}
+
 .icon-uploaded-parts {
   display: block;
+  width: 100%;
 }
 
 .icon-pair {
@@ -199,7 +226,7 @@
 
 .image1 {
   position: absolute;
-  top: 180px;
+  top: 80px;
   left: 0;
   width: 500px;
 }
@@ -222,7 +249,7 @@
   border: 1px dotted gray;
 }
 
-.choosed {
+.chosen {
   width: 200px;
   border: 2px solid red;
 }
