@@ -18,8 +18,6 @@ if (process.env.NODE_ENV === "production"){
 class Landing extends Component {
 
   render() {
-    console.log(process.env);
-
     return (
   <div>
     <Header />
