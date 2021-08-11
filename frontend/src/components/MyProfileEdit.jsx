@@ -10,7 +10,13 @@ import SideMenu from './SideMenu';
 import Footer from './Footer';
 import {profile, auth} from "../actions";
 
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 library.add(faIgloo)
 
@@ -30,6 +36,7 @@ class MyProfileEdit extends Component {
     skills: null,
     achievement: null,
     payment_method: null,
+    paypal_account: null,
     image: null,
     isChanged: false,
     errors: []
@@ -71,7 +78,7 @@ class MyProfileEdit extends Component {
       this.state.residence, this.state.style, this.state.work_process,
       this.state.employment_type, this.state.availability,
       this.state.tools, this.state.skills, this.state.achievement,
-      this.state.payment_method, this.state.image
+      this.state.payment_method, this.state.paypal_account, this.state.image
     ).then(this.resetForm);
   }
 
@@ -403,6 +410,8 @@ class MyProfileEdit extends Component {
                   )}
                   <p class="checkbox-selection">銀行振り込み</p>
                 </div>
+                <p class="object">PayPalのアカウント (メールアドレスもしくはID)</p>
+                <input class="user-data" onChange={this.handleChange.bind(this, 'paypal_account', profile)} value={profile.paypal_account}/>
               </div>
             </div>
           ))}
@@ -439,13 +448,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(profile.fetchProfile(userId));
     },
     updateProfile: (
-      id, user_name, residence, style, work_process, employment_type,
-      availability, tools, skills, achievement, payment_method, img
+      id, user_name, residence, style, work_process, employment_type, availability,
+      tools, skills, achievement, payment_method, paypal_account, img
       ) => {
       return dispatch(
         profile.updateProfile(
-          id, user_name, residence, style, work_process, employment_type,
-          availability, tools, skills, achievement, payment_method, img)
+          id, user_name, residence, style, work_process, employment_type, availability,
+          tools, skills, achievement, payment_method, paypal_account, img)
       );
     },
     logout: () => dispatch(auth.logout()),

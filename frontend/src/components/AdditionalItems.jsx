@@ -11,9 +11,16 @@ import SideMenu from './SideMenu';
 
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import { keys } from '../keys.js';
+
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
 import '../css/style.scss';
 
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 // Mask images
 const images0 = [

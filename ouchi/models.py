@@ -89,6 +89,7 @@ class Profile(models.Model):
     # payment_method
     # 0: Line pay 1: PayPay 2: Pay-easy 3: Paypal 4: Bank
     payment_method = models.CharField(max_length=100, blank=True)
+    paypal_account = models.CharField(max_length=200, blank=True)
     image = models.CharField(max_length=200, null=True)
 
 class Portfolio(models.Model):

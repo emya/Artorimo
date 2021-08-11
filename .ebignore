@@ -1,0 +1,19 @@
+# Ignore everything
+* 
+
+# Except
+!artorimo/*.py
+!ouchi/*.py
+!templates/
+!.ebextensions/
+!webpack-stats.prod.json
+!requirements.txt
+!manage.py
+
+# Ignore node_modules
+frontend
+./frontend
+./artorimo_env
+./Dockerfile*
+assets
+./assets

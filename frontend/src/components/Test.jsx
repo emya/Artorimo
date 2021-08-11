@@ -10,7 +10,6 @@ import Footer from './Footer';
 import SideMenu from './SideMenu';
 
 import AdditionalItems from './AdditionalItems'
-import { keys } from '../keys.js';
 import '../css/style.scss';
 
 

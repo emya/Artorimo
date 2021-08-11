@@ -10,9 +10,15 @@ import Filters from './Filters';
 
 import {icons, auth} from "../actions";
 
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
 import '../css/icons.scss';
 import '../css/filters.scss';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 class IconMakerTest extends Component {
 
@@ -371,7 +377,7 @@ class IconMakerTest extends Component {
       <div class="function-buttons">
         <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
           <p>Hair</p>
-          {this.getAvailableOptions("hair")}
+          {this.getAvailableOptions("hair", keys)}
         </div>
 
         <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>

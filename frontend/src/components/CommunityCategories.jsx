@@ -8,7 +8,6 @@ import SideMenu from './SideMenu';
 
 import {community, auth} from "../actions";
 
-import { keys } from '../keys.js';
 import '../css/style.scss';
 
 class CommunityCategories extends Component {

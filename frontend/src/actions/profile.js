@@ -30,8 +30,8 @@ export const fetchProfile = userId => {
 }
 
 export const updateProfile = (
-  id, user_name, residence, style, work_process, employment_type,
-  availability, tools, skills, achievement, payment_method, img
+  id, user_name, residence, style, work_process, employment_type, availability,
+  tools, skills, achievement, payment_method, paypal_account, img
   ) => {
   return (dispatch, getState) => {
     const formData = new FormData();
@@ -72,6 +72,9 @@ export const updateProfile = (
     }
     if (payment_method !== null) {
       formData.append('payment_method', payment_method);
+    }
+    if (paypal_account !== null) {
+      formData.append('paypal_account', paypal_account);
     }
     formData.append('image', img);
 

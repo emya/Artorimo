@@ -3,11 +3,16 @@ from django.conf import settings
 
 from .celery import app
 
+import logging
+logger = logging.getLogger("analyzer")
+logger.info("celery_task: Started")
+
 site_url = settings.SITE_URL
 
 @app.task
 def send_email(subject, message, html_message, to_emails):
     from django.core.mail import send_mail
+    logger.info("celery_task: send_email")
     send_mail(
         subject,
         message,
@@ -20,6 +25,8 @@ def send_email(subject, message, html_message, to_emails):
 @app.task
 def send_bcc_email(subject, message, html_message, bcc_emails):
     from django.core.mail import EmailMultiAlternatives
+    logger.info("celery_task: send_bcc_email")
+
     msg = EmailMultiAlternatives(
         subject,
         message,

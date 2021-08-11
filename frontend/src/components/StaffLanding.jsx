@@ -9,8 +9,6 @@ import SideMenu from './SideMenu';
 import Footer from './Footer';
 import {profile, auth} from "../actions";
 
-import { keys } from '../keys.js';
-
 class StaffLanding extends Component {
 
   render() {

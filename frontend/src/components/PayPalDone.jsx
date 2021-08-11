@@ -15,8 +15,14 @@ import Footer from './Footer';
 import SideMenu from './SideMenu';
 
 import Filters from './Filters';
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
 import '../css/style.scss';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 class PayPalDone extends Component {
   componentWillMount() {
@@ -55,7 +61,6 @@ class PayPalDone extends Component {
 
   render() {
 
-    console.log(this.props)
     const icon_state = this.props.icons.order;
     // This should be used once test is done
     //const artist_id = this.props.icons.order.artist.id;
