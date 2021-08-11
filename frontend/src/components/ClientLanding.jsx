@@ -6,7 +6,13 @@ import Header from './Header';
 import Footer from './Footer';
 
 import '../css/style.scss';
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 class ClientLanding extends Component {
   state = {
@@ -50,6 +56,12 @@ class ClientLanding extends Component {
 
     if (!artists) {
       return filteredArtists;
+    }
+
+    if (process.env.NODE_ENV === "production"){
+      const keys = keys_prod;
+    }else{
+      const keys = keys_stg;
     }
 
     artists.forEach(function (artist) {
@@ -99,6 +111,7 @@ class ClientLanding extends Component {
   }
 
   render() {
+
     return (
       <div>
         <Header />

@@ -4,7 +4,13 @@ import {Link, Redirect} from "react-router-dom";
 
 import {auth} from "../actions";
 
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 class PrivacyPolicy extends Component {
   state = {
@@ -17,6 +23,7 @@ class PrivacyPolicy extends Component {
   }
 
   render() {
+
     const { pageNumber, numPages } = this.state;
     return (
       <iframe

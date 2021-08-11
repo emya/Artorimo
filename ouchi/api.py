@@ -1,4 +1,5 @@
 import json
+import sys
 from rest_framework import (
     status, viewsets, permissions, generics,
     parsers, renderers, views
@@ -41,6 +42,11 @@ from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
 from .tasks import send_email, send_bcc_email
 
+import logging
+
+logger = logging.getLogger("analyzer")
+logger.info("api: Started")
+
 s3_client = boto3.client(
     "s3",
     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
@@ -71,7 +77,9 @@ class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginUserSerializer
 
     def post(self, request, *args, **kwargs):
+        logger.info("Login Post")
         serializer = self.get_serializer(data=request.data)
+
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         _, token = AuthToken.objects.create(user)
@@ -95,7 +103,7 @@ class ArtistAPI(generics.RetrieveAPIView):
         styles = request.GET.get("styles")
 
         queryset = Portfolio.objects.all()
-        queryset = queryset.filter(user__is_staff=False)
+        queryset = queryset.filter(user__is_staff=False, user__is_active=True)
         portfolios = self.serializer_class(queryset, many=True).data
 
         if styles:
@@ -119,6 +127,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     serializer_class = PortfolioSerializer
 
     def partial_update(self, request, *args, **kwargs):
+        logger.info(f"PortfolioViewSet: partial_update {request.data}")
         instance = self.get_object()
 
         request.data._mutable = True
@@ -139,6 +148,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
         if img0:
             image = img0[0]
+            logger.info(f"image type {type(image)}")
             if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile):
                 data['image0'] = image.name
                 is_upload_images['image0'] = image
@@ -195,6 +205,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
         if is_upload_images:
             for k, v in is_upload_images.items():
+                logger.info(f"Uploading {k}, {v}")
                 upload_to_s3(v, f'portfolios/{request.user.id}/{v.name}')
 
         return Response(serializer.data)
@@ -210,6 +221,8 @@ class PortfolioViewSet(viewsets.ModelViewSet):
             user = User.objects.get(pk=user_id)
             queryset = queryset.filter(user=user)
 
+            # TODO: Remove
+            logger.info(f"Portfolio queryset {queryset[0].image0}")
             if user and queryset.count() == 0:
                 p = Portfolio.objects.create(user=user)
                 return [p]
@@ -292,6 +305,7 @@ class EmailMagazinesAPI(generics.GenericAPIView):
         to_email = []
         if email.capitalize() == "All":
             users = User.objects.all()
+            users = users.filter(is_active=True)
             for u in users:
                 to_email.append(u.email)
         else:
@@ -316,6 +330,7 @@ class NotifyUsersAPI(generics.GenericAPIView):
         to_email = []
         if email.capitalize() == "All":
             users = User.objects.all()
+            users = users.filter(is_active=True)
             for u in users:
                 to_email.append(u.email)
         else:

@@ -4,7 +4,13 @@ import '../css/style.scss';
 import Header from './Header'
 import Footer from './Footer'
 
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
 
 class AboutUs extends Component {
   state = {

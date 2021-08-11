@@ -9,7 +9,14 @@ import SideMenu from './SideMenu';
 import Footer from './Footer';
 import {profile, auth} from "../actions";
 
-import { keys } from '../keys.js';
+import { keys_prod } from '../keys_prod.js';
+import { keys_stg } from '../keys.js';
+
+var keys = keys_stg;
+if (process.env.NODE_ENV === "production"){
+  keys = keys_prod;
+}
+
 
 library.add(faIgloo)
 
@@ -116,6 +123,10 @@ class MyProfile extends Component {
                 {profile.payment_method.includes("2") && (<p class="checkbox-selection">Pay-easy</p>)}
                 {profile.payment_method.includes("3") && (<p class="checkbox-selection">Paypal</p>)}
                 {profile.payment_method.includes("4") && (<p class="checkbox-selection">銀行振り込み</p>)}
+              </div>
+              <p class="object">PayPalのアカウント (メールアドレスもしくはID)</p>
+              <div class="checkbox-outline">
+                <p class="user-data">{profile.paypal_account}</p>
               </div>
 
             </div>
