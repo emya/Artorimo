@@ -13,9 +13,10 @@
 
 .icon-container {
   // height: 1000px;
-  width: 100%;
+  width: 75%;
   height: 600px;
   display: block;
+  float: right;
 }
 
 .icon-container {
@@ -149,14 +150,16 @@
 
 .icon-uploaded-completed {
   display: block;
-  width: 100%;
+  width: 75%;
   height: 150px;
   margin-top: 90px;
+  float: right;
 }
 
 .icon-uploaded-parts {
   display: block;
-  width: 100%;
+  width: 75%;
+  float: right;
 }
 
 .icon-pair {

@@ -460,6 +460,7 @@ class SetupIconMaker extends Component {
   <div>
     <Header />
     <div class="wrapper-icon clearfix">
+    <SideMenu />
 
       <div class="icon-container ">
       {/*<div class="parent">*/}

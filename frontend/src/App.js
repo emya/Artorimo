@@ -111,7 +111,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/iconmaker" component={IconMaker} />
                     <StaffRoute exact path="/iconmaker/test" component={IconMakerTest} />
                     <StaffRoute exact path="/iconmaker/fortwo" component={IconMakerForTwo} />
-                    <StaffRoute exact path="/setup/iconmaker" component={SetupIconMaker} />
+                    <Route exact path="/setup/iconmaker" component={SetupIconMaker} />
                     <StaffRoute exact path="/payment/paypal" component={PayPal} />
                     <StaffRoute exact path="/payment/paypal/done" component={PayPalDone} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
