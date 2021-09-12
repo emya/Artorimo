@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             is_active=True,
+            is_activated=False,
             last_login=now,
             date_joined=now,
             **extra_fields)
@@ -54,6 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_activated = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     terms_version = models.IntegerField(default=0)

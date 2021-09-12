@@ -16,7 +16,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUpload
 from django.conf import settings
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 
 from knox.models import AuthToken
 
@@ -39,8 +41,8 @@ from .serializers import (
     CommunityReplySerializer,
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
-
 from .tasks import send_email, send_bcc_email
+from .tokens import account_activation_token
 
 import logging
 
@@ -58,20 +60,48 @@ class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        Profile.objects.create(user=user)
-        Portfolio.objects.create(user=user)
+        logger.info("Logger: Register")
+        data = request.data
+        is_registration_completed = data.get('is_registration_completed')
+        if is_registration_completed:
+            try:
+                user = User.objects.get(email=data['email'])
+            except User.DoesNotExist:
+                user = None
+
+            if not user:
+                return Response("No user is registered with the email", status=status.HTTP_400_BAD_REQUEST)
+
+            if user and not user.is_active:
+                return Response("The user is inactive", status=status.HTTP_400_BAD_REQUEST)
+
+            if user and user.is_activated:
+                # Please log in
+                return Response("The user is already activated", status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            serializer = self.get_serializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            user = serializer.save()
+            Profile.objects.create(user=user)
+            Portfolio.objects.create(user=user)
+
         _, token = AuthToken.objects.create(user)
 
-        html_message = render_to_string('email-signup.html', {'user': user})
+        site_url = settings.SITE_URL
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = account_activation_token.make_token(user)
+        activate_url = f"{site_url}/activate/account/{uid}/{token}"
+
+        html_message = render_to_string('email-signup-confirmation.html', {'activate_url': activate_url})
         send_email.delay("Welcome to OhcheeStudio!", "Thank you for joining us!", html_message, [user.email])
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": token
         })
+
+
 
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginUserSerializer
@@ -103,7 +133,7 @@ class ArtistAPI(generics.RetrieveAPIView):
         styles = request.GET.get("styles")
 
         queryset = Portfolio.objects.all()
-        queryset = queryset.filter(user__is_staff=False, user__is_active=True)
+        queryset = queryset.filter(user__is_staff=False, user__is_activated=True, user__is_active=True)
         portfolios = self.serializer_class(queryset, many=True).data
 
         if styles:
@@ -305,7 +335,7 @@ class EmailMagazinesAPI(generics.GenericAPIView):
         to_email = []
         if email.capitalize() == "All":
             users = User.objects.all()
-            users = users.filter(is_active=True)
+            users = users.filter(is_active=True, is_activated=True)
             for u in users:
                 to_email.append(u.email)
         else:
@@ -330,7 +360,7 @@ class NotifyUsersAPI(generics.GenericAPIView):
         to_email = []
         if email.capitalize() == "All":
             users = User.objects.all()
-            users = users.filter(is_active=True)
+            users = users.filter(is_active=True, is_activated=True)
             for u in users:
                 to_email.append(u.email)
         else:
@@ -432,7 +462,6 @@ class IconMakerAPI(generics.GenericAPIView):
                     if file_name.startswith(part) and "_line" not in file_name:
                         icon_parts[part] += 1
 
-        #print(f"Icon Parts {icon_parts}")
         return Response(icon_parts)
 
 class IconMakerSetupAPI(generics.GenericAPIView):
@@ -742,3 +771,43 @@ def upload_to_s3(image, key):
     )
 
     client.put_object(Bucket=settings.AWS_BUCKET_NAME, Key=key, Body=image)
+
+class AccountActivateAPI(generics.GenericAPIView):
+    serializer_class = LoginUserSerializer
+
+    def post(self, request, uidb64, token):
+        logger.info("Logger: AccountActivateAPI")
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and user.is_active and user.is_activated:
+            _, token = AuthToken.objects.create(user)
+            return Response({
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                "token": token
+            })
+
+        if user is not None and not account_activation_token.check_token(user, token):
+            return Response({"token": "The token is invalid."}, status=status.HTTP_400_BAD_REQUEST)
+
+        elif user is not None and user.is_active and account_activation_token.check_token(user, token):
+            user.is_activated = True
+            user.save()
+            # login(request, user)
+            # return redirect('home')
+            _, token = AuthToken.objects.create(user)
+
+            return Response({
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                "token": token
+            })
+        elif user is not None and not user.is_active:
+            # TODO: error message like please reach out to OS
+            return Response({"token": "The user is not active."}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({"token": "The link is invalid."}, status=status.HTTP_400_BAD_REQUEST)
+
+

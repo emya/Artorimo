@@ -52,6 +52,15 @@ class Login extends Component {
     return errors;
   }
 
+  createErrorMessage = (error) => {
+    let content = [];
+    if (error.message && error.message == "user with this email address already exists."){
+      content.push(<p class="start-error" key={error.field}>このメールアドレスは既に登録(もしくは仮登録)済みです</p>)
+      return content;
+    }
+    return content;
+  }
+
   onSubmit = e => {
     e.preventDefault();
     const errors = this.validateForm(this.state.isAgreed);
@@ -73,44 +82,14 @@ class Login extends Component {
   <div class="wrapper clearfix">
 
     <div class="placeholder">
-      <h2 class="thankyou">ご登録ありがとうございます！</h2>
+      <h2 class="thankyou">仮登録ありがとうございます！</h2>
+      <h3 class="thankyou">会員登録認証メールを送信しました</h3>
+      <div>
+         下記のメールアドレスに本登録のご案内をお送りしました。
+         メールに記載されたURLを開くと登録完了となります。
 
-      <h3 class="next">NEXT STEP</h3>
-      <div class="next-step">
-        <ol>
-          <li><span class="todo">ポートフォリオを登録する</span>
-            <ul>
-              <li><a href="/myportfolio">次のページ</a>で、お気に入りの作品をアップロードし、SNSアカウントを連携しましょう！<br/>
-              海外クライアント用の検索ページに表示され、お仕事に繋がりやすくなります。</li>
-            </ul>
-          </li>
-          <li><span class="todo">メールで仲介依頼をする</span>
-            <ul>
-              <li><span class="red">「海外クライアントからの仕事依頼が来たので対応して欲しい」「海外の企業やギャラリーに作品を売り込みたいので手伝って欲しい」</span>
-              <br/>そんな時は、<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までまずはご連絡ください！（ご相談は全て無料）</li>
-              <li>1案件のみのご利用でももちろんOKです。</li>
-            </ul>
-          </li>
-        </ol>
-        <div class="shop-survey">
-          <p><span class="bold">※海外向けグッズ販売にご興味はおありですか？</span></p>
-            <div class="yesno">
-              {this.state.isGoodsChecked === "1" ?
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" checked />) :
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" />)
-              }
-              <p class="yesno-yes">はい</p>
-            </div>
-            <div class="yesno">
-              {this.state.isGoodsChecked === "0" ?
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" checked />) :
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" />)
-              }
-              <p class="yesno-yes">いいえ</p>
-            </div>
-        </div>
+         <p> {this.state.email} </p>
       </div>
-      <a class="btn savep" href="/myportfolio/edit" onClick={this.notifyGoodsAnswer}>ポートフォリオページへ</a>
     </div>
   </div>
   <Footer />
@@ -133,6 +112,15 @@ class Login extends Component {
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
           <legend>新規会員登録</legend>
+          {this.props.errors.length > 0 && (
+              <div>
+                {this.props.errors.map((error) => (
+                  this.createErrorMessage(error)
+                )
+                )}
+              </div>
+          )}
+
           {errors.length > 0 && (
             <div>
               {errors.map(error => (
@@ -156,7 +144,7 @@ class Login extends Component {
               onChange={e => this.setState({first_name: e.target.value})} required/>
           </p>
           <p>
-            <label class="start" htmlFor="email">e-mail</label>
+            <label class="start" htmlFor="email">メールアドレス</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} required/>

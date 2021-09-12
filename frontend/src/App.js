@@ -9,6 +9,7 @@ import ClientLanding from "./components/ClientLanding";
 import StaffLanding from "./components/StaffLanding";
 import AboutUs from "./components/AboutUs";
 import Register from "./components/Register";
+import CompleteRegistration from "./components/CompleteRegistration";
 import Login from "./components/Login";
 import SideMenu from "./components/SideMenu";
 import MyProfile from "./components/MyProfile";
@@ -23,6 +24,8 @@ import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import ActivateAccount from "./components/ActivateAccount";
+import Welcome from "./components/Welcome";
 import Users from "./components/Users";
 import SendEmails from "./components/SendEmails";
 import SendEmailMagazines from "./components/SendEmailMagazines";
@@ -92,12 +95,15 @@ class RootContainerComponent extends Component {
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/how-it-works" component={HowItWorks} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/complete/registration" component={CompleteRegistration} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
+                    <Route exact path="/activate/account/:uidb64/:activeToken" component={ActivateAccount} />
+                    <PrivateRoute exact path="/welcome" component={Welcome} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/myprofile/edit" component={MyProfileEdit} />
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />

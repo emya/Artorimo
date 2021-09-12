@@ -23,7 +23,6 @@ class MyPortfolio extends Component {
   }
 
   render() {
-
     return (
   <div>
     <Header />

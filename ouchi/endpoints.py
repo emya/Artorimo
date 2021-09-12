@@ -18,6 +18,7 @@ from .api import (
     IconMakerAPI,
     IconMakerSetupAPI,
     PayPalAPI,
+    AccountActivateAPI
 )
 
 #from .views import ListNote
@@ -43,5 +44,7 @@ urlpatterns = [
     url("^icons/maker/$", IconMakerAPI.as_view()),
     url("^setup/icons/maker/$", IconMakerSetupAPI.as_view()),
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
+    url(r'^activate/account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        AccountActivateAPI.as_view(), name='activate')
 ]
 
