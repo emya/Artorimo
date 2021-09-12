@@ -19,6 +19,18 @@ class Login extends Component {
     this.props.login(this.state.email, this.state.password);
   }
 
+  createErrorMessage = (error) => {
+    let content = [];
+    if (error.message && error.message == "Unable to log in with provided credentials."){
+      content.push(<p class="start-error" key={error.field}>メールアドレスまたはパスワードが正しくありません</p>)
+      return content;
+    } else if(error.message && error.message == "This user is not activated yet."){
+      content.push(<p class="start-error" key={error.field}>本登録が完了していません。<br/><a href="/complete/registration">こちらから本登録を行ってください。</a></p>)
+      return content;
+    }
+    return content;
+  }
+
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to='/myportfolio' />
@@ -42,14 +54,15 @@ class Login extends Component {
             <legend>Login</legend>
             {this.props.errors.length > 0 && (
               <div>
-                {this.props.errors.map(error => (
-                  <p class="start-error" key={error.field}>{error.message}</p>
-                ))}
+                {this.props.errors.map((error) => (
+                  this.createErrorMessage(error)
+                )
+                )}
               </div>
             )}
 
             <p>
-              <label class="start" htmlFor="email">e-mail</label>
+              <label class="start" htmlFor="email">メールアドレス</label>
               <input
                 type="email" id="email"
                 onChange={e => this.setState({email: e.target.value})} required/>

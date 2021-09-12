@@ -71,6 +71,48 @@ export const register = (first_name, last_name, email, password) => {
   }
 }
 
+export const completeRegister = (email) => {
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    let headers = {"Content-Type": "application/json"};
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    const is_registration_completed = true;
+    let body = JSON.stringify({email, is_registration_completed});
+
+    return fetch("/api/auth/register/", {headers, body, method: "POST"})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: 'REGISTRATION_SUCCESSFUL', data: res.data });
+          return res.data;
+        } else if (res.status === 400) {
+          dispatch({type: "COMPLETE_REGISTRATION_ERROR", data: res.data});
+          throw res.data;
+        } else if (res.status === 403 || res.status === 401) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        } else {
+          dispatch({type: "REGISTRATION_FAILED", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+
 export const login = (email, password) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
@@ -109,6 +151,7 @@ export const login = (email, password) => {
       })
   }
 }
+
 
 export const logout = () => {
   return (dispatch, getState) => {
@@ -252,4 +295,45 @@ export const forgotPassword = (email) => {
       })
   }
 }
+
+export const activateAccount = (uidb64, activeToken) => {
+  return (dispatch, getState) => {
+    const authToken = getState().auth.token;
+
+    let headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (authToken) {
+      headers["Authorization"] = `Token ${authToken}`;
+    }
+
+    let body = JSON.stringify({uidb64, activeToken});
+
+    return fetch(`/api/activate/account/${uidb64}/${activeToken}/`, {headers, body, method: "POST"})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: 'ACTIVATE_ACCOUNT_SUCCESSFUL', data: res.data});
+          return res.data;
+        } else if (res.status === 400) {
+          dispatch({type: 'ACTIVATE_ACCOUNT_ERROR', data: res.data});
+          return res.data;
+        } else {
+          dispatch({type: "LOGIN_FAILED", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
 

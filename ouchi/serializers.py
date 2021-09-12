@@ -1,9 +1,15 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ErrorDetail, ValidationError
+from django.core.exceptions import ValidationError as DjangoValidationError
+from rest_framework.serializers import as_serializer_error
+from rest_framework.fields import empty
+from rest_framework.utils import html
 from .models import (
     User, Profile, Portfolio,
     CommunityPost, CommunityReply,
     IconOrder
 )
+from django.conf import settings
 
 from django.contrib.auth import authenticate
 
@@ -35,8 +41,12 @@ class LoginUserSerializer(serializers.Serializer):
 
     def validate(self, data):
         user = authenticate(**data)
-        if user and user.is_active:
+        if user and user.is_activated:
             return user
+
+        if user and not user.is_activated:
+            raise serializers.ValidationError("This user is not activated yet.")
+
         raise serializers.ValidationError("Unable to log in with provided credentials.")
 
 
