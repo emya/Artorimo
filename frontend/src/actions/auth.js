@@ -298,8 +298,7 @@ export const forgotPassword = (email) => {
 
 export const activateAccount = (uidb64, activeToken) => {
   return (dispatch, getState) => {
-    //const authToken = getState().auth.token;
-    const authToken = null;
+    const authToken = getState().auth.token;
 
     let headers = {
       "Content-Type": "application/json",

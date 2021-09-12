@@ -40,12 +40,10 @@ class LoginUserSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        print(f"data: {data}")
         user = authenticate(**data)
         if user and user.is_activated:
             return user
 
-        print(f"user: {user}")
         if user and not user.is_activated:
             raise serializers.ValidationError("This user is not activated yet.")
 
