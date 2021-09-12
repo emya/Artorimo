@@ -199,7 +199,7 @@ class SetupIconMaker extends Component {
             : (
               <button class="choice"
                    onClick={this.changeOption.bind(this, optionName, null)}
-              > Disable </button>
+              > 選択しない </button>
             )}
           </div>
         )
@@ -224,9 +224,9 @@ class SetupIconMaker extends Component {
               />
             )}
             <div>
-              <input type="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
+              <input type="checkbox" class="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
               {this.state.selected_language === "jpn" ? (
-                "アイテムを削除するため選択"
+                "削除するアイテム"
                  ) : (
                 "Select this item to delete"
               )}
@@ -234,7 +234,7 @@ class SetupIconMaker extends Component {
           </div>
         )
       }
-      content.push(<button style={{width:"70%"}} class="form-send-btn btn" onClick={this.removeChosenOption} >
+      content.push(<button style={{width:"68%"}} class="btn savep" onClick={this.removeChosenOption} >
               {this.state.selected_language === "jpn" ? (
                 "選択したアイテムを削除"
                  ) : (
@@ -267,7 +267,7 @@ class SetupIconMaker extends Component {
           : (
             <button class="choice"
                  onClick={this.removeChosenAccessory.bind(this, null)}
-            > Disable </button>
+            > 選択しない </button>
           )}
         </div>
       )
@@ -288,9 +288,9 @@ class SetupIconMaker extends Component {
               />
             )}
             <div>
-              <input type="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
+              <input type="checkbox"　class="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
               {this.state.selected_language === "jpn" ? (
-                "アイテムを削除するため選択"
+                "削除するアイテム"
                  ) : (
                 "Select this item to delete"
               )}
@@ -298,7 +298,7 @@ class SetupIconMaker extends Component {
           </div>
         )
       }
-      content.push(<button style={{width:"70%"}} class="form-send-btn btn" onClick={this.removeChosenOption} >
+      content.push(<button style={{width:"68%"}} class="btn savep" onClick={this.removeChosenOption} >
               {this.state.selected_language === "jpn" ? (
                 "選択したアイテムを削除"
                  ) : (
@@ -461,8 +461,10 @@ class SetupIconMaker extends Component {
     <Header />
     <div class="wrapper-icon clearfix">
     <SideMenu />
-
+      <div class="icon-uploader">
       <div class="icon-container ">
+      <h2>Iconio Uploader</h2>
+      <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
         <div class="icon-container-left">
         {this.state.face > 0 && (
@@ -750,16 +752,6 @@ class SetupIconMaker extends Component {
          </button>
        </div>
 
-       <div class="upload-memo-pad">
-         {!this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) && this.state.selected_language === "jpn" &&
-           <p>線画と塗りつぶし部分をセットで選択してアップロードをクリックしてください</p>
-         }
-
-         {!this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) && this.state.selected_language !== "jpn" &&
-           <p>Select a pair of a line drawing and a colored area and click Upload</p>
-         }
-
-       </div>
 
        {this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) &&
          <Dropzone onDrop={acceptedFiles => this.onDrop(acceptedFiles)}>
@@ -769,7 +761,7 @@ class SetupIconMaker extends Component {
                 <input {...getInputProps()} />
                 <div class="dropzone-icon-upload">
                   {this.state.selected_language === "jpn" ? (
-                    <p class="dropzone-text">絵を選択/ドラッグ＆ドロップしてください (一度に５枚まで)</p>) : (
+                    <p class="dropzone-text">絵を選択 or<br/>ドラッグ＆ドロップ（一度に５枚まで）</p>) : (
                     <p>Drag & drop or click to select up to 5 files</p>
                   )}
                 </div>
@@ -788,7 +780,7 @@ class SetupIconMaker extends Component {
                   <input {...getInputProps()} />
                   <div class="dropzone-icon-line-upload">
                     {this.state.selected_language === "jpn" ? (
-                      <p class="dropzone-text">線画（輪郭部分）の絵を選択/ドラッグ＆ドロップしてください</p>) : (
+                      <p class="dropzone-text">線画の絵を選択 or<br/>ドラッグ＆ドロップ</p>) : (
                       <p>Drag & drop or click to select a file for a ling drawing</p>
                     )}
                   </div>
@@ -796,7 +788,7 @@ class SetupIconMaker extends Component {
               </section>
             )}
            </Dropzone>
-          {line_errors.length > 0 && <p class="icon-error-heading">エラー: {line_errors}</p>}
+
            <Dropzone onDrop={acceptedFiles => this.onDropFilling(acceptedFiles)}>
             {({getRootProps, getInputProps}) => (
               <section>
@@ -804,7 +796,7 @@ class SetupIconMaker extends Component {
                   <input {...getInputProps()} />
                   <div class="dropzone-icon-colored-upload">
                     {this.state.selected_language === "jpn" ? (
-                      <p class="dropzone-text">塗りつぶし用の絵を選択/ドラッグ＆ドロップしてください</p>) : (
+                      <p class="dropzone-text">塗りつぶし用の絵を選択 or<br/>ドラッグ＆ドロップ</p>) : (
                       <p>Drag & drop or click to select a file for a colored area</p>
                     )}
                   </div>
@@ -812,13 +804,13 @@ class SetupIconMaker extends Component {
               </section>
             )}
            </Dropzone>
-          {filling_errors.length > 0 && <p class="icon-error-heading">エラー: {filling_errors}</p>}
+
          </div>
        }
 
        {this.state.imageFiles.length > 0 &&
          <Fragment>
-           <h3>Previews</h3>
+           <p>Previews</p>
           {this.state.imageFiles.map((file) => (
             <img
               alt="Preview"
@@ -832,7 +824,7 @@ class SetupIconMaker extends Component {
 
        {(this.state.lineFile.length === 1 || this.state.fillingFile.length === 1) &&
          <Fragment>
-           <h3>Previews</h3>
+           <p>Previews</p>
              <div class="preview">
                {this.state.lineFile.length === 1 && (
                  <img
@@ -853,7 +845,7 @@ class SetupIconMaker extends Component {
                  />
                )}
                {this.state.fillingFile.length === 1 && this.state.selected_language === "jpn" &&
-                  <p>サンプルの色で塗った状態で表示しています</p>
+                  <p class="dropzone-text">サンプルの色で塗った状態で表示しています</p>
                }
                {this.state.fillingFile.length === 1 && this.state.selected_language !== "jpn" &&
                   <p>Showing with sample color</p>
@@ -861,11 +853,14 @@ class SetupIconMaker extends Component {
              </div>
          </Fragment>
        }
-
+       <div>
       {errors.map(error => (
         <p class="icon-error-heading" key={error}>エラー: {error}</p>
       ))}
-        <button style={{width:"50%"}} class="form-send-btn btn" onClick={this.uploadIconParts}>
+      {filling_errors.length > 0 && <div class="icon-error-heading">エラー: {filling_errors}</div>}
+      {line_errors.length > 0 && <div class="icon-error-heading">エラー: {line_errors}</div>}
+      </div>
+        <button style={{width:"65%"}} class="btn savep" onClick={this.uploadIconParts}>
           {/*Upload Parts of {this.state.mapping[this.state.looked_element]}*/}
           {this.state.selected_language === "jpn" ? (
             "アップロード"
@@ -874,67 +869,71 @@ class SetupIconMaker extends Component {
           )}
         </button>
       </div>
+      </div>
     </div>
 
-    <div class="icon-uploaded-completed">
-      <button style={{width:"45%", float: "left", marginLeft: "30px", marginBottom: "30px"}} class="form-send-btn btn"> 保存して戻る </button>
-      <button style={{width:"45%", float: "left", marginLeft: "30px", marginBottom: "30px"}} class="form-send-btn btn"> 完了する </button>
-    </div>
     <div class="icon-uploaded-parts">
+    <div class="uploader-two">
       <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Hair</h3>
+        <h3 >アップロード済の髪パーツ</h3>
         {this.getAvailableOptions("hair")}
       </div>
 
       <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Bang</h3>
+        <h3 >アップロード済の前髪パーツ</h3>
         {this.getAvailableOptions("bang")}
       </div>
 
       <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Side</h3>
+        <h3 >アップロード済のサイドヘアパーツ</h3>
         {this.getAvailableOptions("side")}
       </div>
 
       <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Eyes</h3>
+        <h3 >アップロード済の目パーツ</h3>
         {this.getAvailableOptions("eyes")}
       </div>
 
       <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Eyebrows</h3>
+        <h3 >アップロード済の眉パーツ</h3>
         {this.getAvailableOptions("eyebrows")}
       </div>
 
       <div style={{ display: this.state.looked_element === 5 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Nose</h3>
+        <h3 >アップロード済の鼻パーツ</h3>
         {this.getAvailableOptions("nose")}
       </div>
 
       <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Mouth</h3>
+        <h3 >アップロード済の口パーツ</h3>
         {this.getAvailableOptions("mouth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Cloth</h3>
+        <h3 >アップロード済の洋服パーツ</h3>
         {this.getAvailableOptions("cloth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Face</h3>
+        <h3 >アップロード済の輪郭パーツ</h3>
         {this.getAvailableOptions("face")}
       </div>
 
       <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Accessories</h3>
+        <h3 >アップロード済のアクセサリーパーツ</h3>
         {this.getAvailableAccessoriesOptions()}
       </div>
 
       <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
-        <h3 style={{width:"50%"}}>Uploaded Glasses</h3>
+        <h3>アップロード済の眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
+
+    </div>
+
+    </div>
+    <button class="btn savep two-btn"> 完了する </button>
+    <button class="btn savep two-btn right-btn"> 保存して中断する </button>
 
     </div>
     </div>

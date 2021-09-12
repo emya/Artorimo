@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Filters extends Component {
   render() {
     return (
-  <svg>
+  <svg class="svg-filter">
     <defs>
       <filter id="filterHairColor1" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 .145   0 0 0 0 .160   0 0 0 0 .129   0 0 0 1 0"/>
