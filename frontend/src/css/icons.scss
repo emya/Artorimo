@@ -1,6 +1,6 @@
 .wrapper-icon {
     //overflow: hidden;
-    min-height: 3500px;
+    // min-height: 3500px;
 }
 
 .parent {
@@ -13,8 +13,8 @@
 
 .icon-container {
   // height: 1000px;
-  width: 75%;
-  height: 600px;
+  width: 100%;
+  // height: 800px;
   display: block;
   float: right;
 }
@@ -29,8 +29,10 @@
 }
 
 .icon-container-left {
-  height: 600px;
+  // height: 500px;
   display: block;
+  position: relative;
+  z-index: 0;
 }
 
 .icon-container-left {
@@ -40,16 +42,18 @@
   }
 }
 
+
 .icon-container-right {
-  height: 600px;
+  // height: 500px;
   display: block;
+  // text-align: left;
 }
 
 .icon-container-right {
   @media (min-width: 767px) {
     float: right;
     width: 50%;
-    height: 600px;
+    // height: 500px;
   }
 }
 
@@ -78,14 +82,16 @@
 .color-pad {
   display: block;
   margin-top: 30px;
-  height: 80px;
+  height: 50px;
   width: 100%;
 }
 
 .looked-element-pad {
   display: block;
-  height: 80px;
+  // height: 100px;
   width: 100%;
+  text-align: left;
+  margin: 20px 0 20px 0;
 }
 
 .upload-memo-pad {
@@ -97,7 +103,7 @@
 .looked-element-button {
   background-color: white;
   border: 1px solid black;
-  border-radius: 12px;
+  border-radius: 7px;
   font-size: 16px;
   padding: 10px;
   cursor: pointer;
@@ -106,60 +112,76 @@
 .chosen-looked-element-button {
   background-color: #0abab5;
   border: 1px solid #0abab5;
-  border-radius: 12px;
+  border-radius: 7px;
   font-size: 16px;
   padding: 10px;
   cursor: pointer;
+  // margin-right: 10px;
 }
 
 .dropzone-icon-upload {
-  margin: 0 auto;
-  margin-top: 10px;
+  // margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
   height: 70px;
-  width: 300px;
-  border: 1px solid black;
+  width: 100%;
+  border: 2px dashed black;
+  border-radius: 7px;
 }
 
 .dropzone-icon-line-upload {
   //margin: 0 auto;
   //margin-top: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-top: 10px;
+  margin-bottom: 30px;
+  margin-top: 12px;
   margin-right: 5px;
   margin-left: 10px;
   height: 70px;
   width: 45%;
-  border: 1px solid black;
+  border: 2px dashed black;
+  border-radius: 7px;
   float: left;
 }
 
 .dropzone-icon-colored-upload {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-top: 10px;
+  margin-top: 12px;
+  margin-bottom: 30px;
   margin-left: 5px;
   height: 70px;
   width: 45%;
   //width: 150px;
-  border: 1px solid black;
+  border: 2px dashed black;
+  border-radius: 7px;
   float: left;
 }
 
 .dropzone-text {
-  font-size:80%;
+  font-size:70%;
 }
 
 .icon-uploaded-completed {
   display: block;
-  width: 75%;
-  height: 150px;
-  margin-top: 90px;
-  float: right;
+  width: 100%;
+  // height: 150px;
+  // margin-top: 20px;
+  // float: right;
+  text-align: center;
 }
 
 .icon-uploaded-parts {
   display: block;
-  width: 75%;
+  width: 100%;
   float: right;
+  text-align: center;
+  // margin: 10px;
+  // border: solid 1px black;
+  // border-radius: 7px;
+}
+
+.icon-uploaded-parts h3 {
+  margin: 80px auto 50px;
 }
 
 .icon-pair {
@@ -174,7 +196,7 @@
   top: 50;
   left: 0;
   width: 200px;
-  height: 400px;
+  height: 600px;
   float: left;
 }
 
@@ -227,11 +249,18 @@
   width: 350px;
 }
 
+// .image1 {
+//   position: absolute;
+//   top: 80px;
+//   left: 0;
+//   width: 500px;
+// }
+
 .image1 {
   position: absolute;
-  top: 80px;
-  left: 0;
-  width: 500px;
+  top: 20%;
+  left: 0%;
+  width: 100%;
 }
 
 .function-buttons {
@@ -243,17 +272,19 @@
 
 .column {
   float: left;
+  margin-bottom: 30px;
   width: 33%;
+  // height: 300px;
   //padding: 15px;
 }
 
 .choice {
-  width: 200px;
+  width: 150px;
   border: 1px dotted gray;
 }
 
 .chosen {
-  width: 200px;
+  width: 150px;
   border: 2px solid red;
 }
 
@@ -313,13 +344,16 @@ body {
 }
 
 .icon-error-heading {
+  display: block;
   color: red;
   margin-top: 10px;
+  font-size: 0.7em;
 }
 
 
 .preview {
   position: relative;
+  z-index: 1;
 }
 
 .imgFace {
@@ -432,4 +466,50 @@ body {
 }
 .imgAccessoriesBehind {
   z-index: -37;
+}
+
+.instruction-upload {
+  margin: 20px 0 0 0;
+}
+
+.form-send-btn {
+  margin-top: 100px;
+}
+
+.uploader-one {
+  height: auto;
+  margin: 20px;
+  border: solid 2px white;
+  border-radius: 7px;
+  background-color: white;
+  padding: 10px;
+  z-index: -1;
+}
+.uploader-two {
+  height: auto;
+  margin: 20px 20px 50px 20px;
+  border: solid 2px white;
+  border-radius: 7px;
+  background-color: white;
+  padding: 10px;
+  z-index: -71;
+}
+
+.icon-uploader {
+  display: block;
+  float: right;
+  width: 75%;
+  // height: 2000px;
+  background-color: #EEEEEE;
+  text-align: center;
+  padding-bottom: 70px;
+  z-index: -1000;
+}
+
+.uploader-two h3 {
+  margin: 30px auto;
+}
+
+.svg-filter {
+  display: none;
 }
