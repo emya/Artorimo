@@ -1,6 +1,7 @@
 .wrapper-icon {
     //overflow: hidden;
     // min-height: 3500px;
+    height: auto;
 }
 
 .parent {
@@ -22,8 +23,8 @@
 .icon-container {
   @media (max-width: 767px) {
     width: 100%;
-    //height: auto;
-    height: 1200px;
+    height: auto;
+    //height: 1200px;
     padding: 0 3% 100px 3%;
   }
 }

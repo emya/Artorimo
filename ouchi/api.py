@@ -428,7 +428,8 @@ class IconMakerAPI(generics.GenericAPIView):
 
     def get(self, request):
         # For now, use fixed user id
-        artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
+        #artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
+        artist_id = request.GET.get("artist_id")
         is_setup = request.GET.get("is_setup")
 
         if is_setup:
