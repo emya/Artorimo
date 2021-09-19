@@ -39,6 +39,7 @@ import IconMakerTest from "./components/IconMakerTest";
 import IconMakerForTwo from "./components/IconMakerForTwo";
 import SetupIconMaker from "./components/SetupIconMaker";
 import IconioUploader from "./components/IconioUploader";
+import Iconio from "./components/Iconio";
 import PayPal from "./components/PayPal";
 import PayPalDone from "./components/PayPalDone";
 import AdditionalItems from "./components/AdditionalItems";
@@ -111,6 +112,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
                     <PrivateRoute exact path="/iconio/uploader" component={IconioUploader} />
+                    <Route exact path="/iconio" component={Iconio} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />

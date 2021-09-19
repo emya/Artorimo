@@ -23,48 +23,11 @@ if (process.env.NODE_ENV === "production"){
 }
 
 
-class SetupIconMaker extends Component {
+class Iconio extends Component {
 
   componentDidMount() {
     //this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
     this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.icons !== this.props.icons){
-      if (this.props.icons.icon_parts){
-        for (var key in this.props.icons.icon_parts) {
-          if (this.props.icons.icon_parts.hasOwnProperty(key)) {
-            if (this.props.icons.icon_parts[key] === 0){
-              if (key === "accessories") {
-                this.setState({
-                  [key]: []
-                })
-              }else{
-                this.setState({
-                  [key]: null
-                })
-              }
-
-            }else{
-              if (key === "accessories") {
-                this.setState({
-                  [key]: []
-                })
-              }else{
-                this.setState({
-                  [key]: 1
-                })
-              }
-            }
-          }
-        }
-      }
-      if (this.props.icons.isRemoved === true){
-        console.log("reload");
-        window.location.reload(true);
-      }
-    }
   }
 
   state = {
@@ -148,40 +111,6 @@ class SetupIconMaker extends Component {
     this.setState({ accessories: [...this.state.accessories, optionNumber] })
   }
 
-  removeChosenAccessory = (optionNumber) => {
-    if (optionNumber === null){
-      this.setState({accessories: []});
-      return false;
-    }
-
-    let accessories = [...this.state.accessories]; // make a separate copy of the array
-    let index = accessories.indexOf(optionNumber)
-    if (index !== -1) {
-      accessories.splice(index, 1);
-      this.setState({accessories: accessories});
-    }
-  }
-
-  handleRemoveOption = (optionNumber) => {
-    let removedFiles = [...this.state.removedFiles]; // make a separate copy of the array
-    let index = removedFiles.indexOf(optionNumber)
-    if (index !== -1) {
-      removedFiles.splice(index, 1);
-      this.setState({removedFiles: removedFiles});
-      return false;
-    }
-
-    this.setState({ removedFiles: [...this.state.removedFiles, optionNumber] })
-  }
-
-  removeChosenOption = (e) => {
-    e.preventDefault();
-    this.props.removeIconParts(
-      this.state.artist_id,
-      this.state.mapping[this.state.looked_element],
-      this.state.removedFiles
-    );
-  }
 
   getAvailableOptions = (optionName) => {
     //console.log(this.props.icons.icon_parts);
@@ -213,40 +142,26 @@ class SetupIconMaker extends Component {
           <div class="column">
             {this.state[optionName] === i ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )}
-            <div>
-              <input type="checkbox" class="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
-              {this.state.selected_language === "jpn" ? (
-                "削除するアイテム"
-                 ) : (
-                "Select this item to delete"
-              )}
-            </div>
           </div>
         )
       }
-      content.push(<button style={{width:"68%"}} class="btn savep">
-              {this.state.selected_language === "jpn" ? (
-                "選択したアイテムを削除"
-                 ) : (
-                "Remove selected item(s)"
-              )}</button>)
       return content;
     }
     return [<div>
              {this.state.selected_language === "jpn" ? (
-                "アップロードされたアイテムはありません"
+                "アイテムはありません"
                  ) : (
-                "No parts uploaded"
+                "No items found"
               )}
              </div>];
   }
@@ -277,149 +192,26 @@ class SetupIconMaker extends Component {
           <div class="column">
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   //onClick={this.removeChosenAccessory.bind(this, i)}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   //onClick={this.chooseAccessory.bind(this, i)}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
               />
             )}
-            <div>
-              <input type="checkbox"　class="checkbox" onChange={this.handleRemoveOption.bind(this, i)} />
-              {this.state.selected_language === "jpn" ? (
-                "削除するアイテム"
-                 ) : (
-                "Select this item to delete"
-              )}
-            </div>
           </div>
         )
       }
-      content.push(<button style={{width:"68%"}} class="btn savep">
-              {this.state.selected_language === "jpn" ? (
-                "選択したアイテムを削除"
-                 ) : (
-                "Remove selected item(s)"
-              )}</button>)
       return content;
     }
     return [<div>
              {this.state.selected_language === "jpn" ? (
-                "アップロードされたアイテムはありません"
+                "アイテムはありません"
                  ) : (
-                "No parts uploaded"
+                "No items found"
               )}
              </div>];
-  }
-
-
-  uploadIconParts = (e) => {
-    e.preventDefault();
-
-    if (this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element])){
-      this.props.uploadIconParts(
-        this.state.artist_id,
-        this.state.mapping[this.state.looked_element],
-        this.state.imageFiles
-      );
-      this.setState({
-        imageFiles: [],
-      });
-    } else {
-      const errors = this.validateUpload();
-      if (errors.length > 0) {
-        this.setState({ errors });
-        return;
-      }
-
-      this.props.uploadPairedParts(
-        this.state.artist_id,
-        this.state.mapping[this.state.looked_element],
-        this.state.lineFile,
-        this.state.fillingFile
-      );
-
-      this.setState({
-        lineFile: [],
-        fillingFile: [],
-      });
-    }
-  }
-
-  validateUpload = () => {
-    // we are going to store errors for all fields
-    // in a signle array
-    const errors = [];
-
-    if (this.state.lineFile.length !== 1){
-      errors.push("線画を一枚選択してください / Please select one image for Line.")
-    }
-
-    if (this.state.fillingFile.length !== 1){
-      errors.push("塗りつぶし用の絵を一枚選択してください / Please select one image for Filling.")
-    }
-    return errors;
-   }
-
-  onDrop = (imageFiles) => {
-    this.setState({ errors: [] });
-
-    if (imageFiles.length > 5) {
-      this.setState({ errors: "Files to be uploaded are up to 5" });
-      return;
-    }
-
-    for (var img in imageFiles) {
-      if (img.size > 500000){
-        this.setState({ errors: "500KB以下の写真を選択してください / Please Select an image smaller than 500KB." });
-        return;
-      }
-    }
-
-    this.setState({
-        imageFiles: imageFiles
-    })
-  }
-
-  onDropLine = (imageFiles) => {
-    this.setState({ line_errors: [] });
-    this.setState({ errors: [] });
-
-    if (imageFiles.length > 1) {
-      this.setState({ line_errors: "線画は一枚のみ選択してください / Only one file allowed for lining" });
-      return;
-    }
-
-    if (imageFiles.length === 1 && imageFiles[0].size > 500000){
-      this.setState({ line_errors: "線画のサイズが500KBを超えています / Please Select an image smaller than 500KB." });
-      return;
-    }
-
-    this.setState({
-      lineFile: imageFiles
-    })
-  }
-
-  onDropFilling = (imageFiles) => {
-    this.setState({ filling_errors: [] });
-    this.setState({ errors: [] });
-
-    if (imageFiles.length > 1) {
-      this.setState({ filling_errors: "塗りつぶし用の絵は一枚のみ選択してください / Only one file allowed for filling" });
-      return;
-    }
-
-    if (imageFiles.length === 1 && imageFiles[0].size > 500000){
-      this.setState({ filling_errors: "塗りつぶし用の絵のサイズが500KBを超えています / Please Select an image smaller than 500KB." });
-      return;
-    }
-
-    this.setState({
-      fillingFile: imageFiles
-    })
   }
 
   render() {
@@ -461,7 +253,7 @@ class SetupIconMaker extends Component {
     <SideMenu />
       <div class="icon-uploader">
       <div class="icon-container ">
-      <h2>Iconio Uploader</h2>
+      <h2>Iconio with Artist Name </h2>
       <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
         <div class="icon-container-left">
@@ -572,13 +364,6 @@ class SetupIconMaker extends Component {
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/cloth_line${this.state.cloth}.png`}
           />
         )}
-
-        {/* Accessories */}
-        {/*this.state.accessories > 0 && (
-          <img class="image1 imgCloth"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/accessories${this.state.accessories}.png`}
-          />
-        )*/}
 
         {/* Accessories */}
         {accessories.map(accessory => (
@@ -750,122 +535,6 @@ class SetupIconMaker extends Component {
          </button>
        </div>
 
-
-       {this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) &&
-         <Dropzone onDrop={acceptedFiles => this.onDrop(acceptedFiles)}>
-           {({getRootProps, getInputProps}) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <div class="dropzone-icon-upload">
-                  {this.state.selected_language === "jpn" ? (
-                    <p class="dropzone-text">絵を選択 or<br/>ドラッグ＆ドロップ（一度に５枚まで）</p>) : (
-                    <p>Drag & drop or click to select up to 5 files</p>
-                  )}
-                </div>
-              </div>
-            </section>
-           )}
-         </Dropzone>
-       }
-
-       {!this.state.line_only_elements.includes(this.state.mapping[this.state.looked_element]) &&
-         <div>
-           <Dropzone onDrop={acceptedFiles => this.onDropLine(acceptedFiles)}>
-            {({getRootProps, getInputProps}) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div class="dropzone-icon-line-upload">
-                    {this.state.selected_language === "jpn" ? (
-                      <p class="dropzone-text">線画の絵を選択 or<br/>ドラッグ＆ドロップ</p>) : (
-                      <p>Drag & drop or click to select a file for a ling drawing</p>
-                    )}
-                  </div>
-                </div>
-              </section>
-            )}
-           </Dropzone>
-
-           <Dropzone onDrop={acceptedFiles => this.onDropFilling(acceptedFiles)}>
-            {({getRootProps, getInputProps}) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div class="dropzone-icon-colored-upload">
-                    {this.state.selected_language === "jpn" ? (
-                      <p class="dropzone-text">塗りつぶし用の絵を選択 or<br/>ドラッグ＆ドロップ</p>) : (
-                      <p>Drag & drop or click to select a file for a colored area</p>
-                    )}
-                  </div>
-                </div>
-              </section>
-            )}
-           </Dropzone>
-
-         </div>
-       }
-
-       {this.state.imageFiles.length > 0 &&
-         <Fragment>
-           <p>Previews</p>
-          {this.state.imageFiles.map((file) => (
-            <img
-              alt="Preview"
-              key={file.preview}
-              src={URL.createObjectURL(file)}
-              style={previewStyle}
-            />
-           ))}
-         </Fragment>
-       }
-
-       {(this.state.lineFile.length === 1 || this.state.fillingFile.length === 1) &&
-         <Fragment>
-           <p>Previews</p>
-             <div class="preview">
-               {this.state.lineFile.length === 1 && (
-                 <img
-                  alt="Preview"
-                  class="imgFaceLine"
-                  key={this.state.lineFile[0].preview}
-                  src={URL.createObjectURL(this.state.lineFile[0])}
-                  style={previewPairedStyle}
-                 />
-               )}
-               {this.state.fillingFile.length === 1 && (
-                 <img
-                  alt="Preview"
-                  class="imgFace"
-                  key={this.state.fillingFile[0].preview}
-                  src={URL.createObjectURL(this.state.fillingFile[0])}
-                  style={previewColoredStyle}
-                 />
-               )}
-               {this.state.fillingFile.length === 1 && this.state.selected_language === "jpn" &&
-                  <p class="dropzone-text">サンプルの色で塗った状態で表示しています</p>
-               }
-               {this.state.fillingFile.length === 1 && this.state.selected_language !== "jpn" &&
-                  <p>Showing with sample color</p>
-               }
-             </div>
-         </Fragment>
-       }
-       <div style={{width:"95%"}} >
-        {errors.map(error => (
-          <p class="icon-error-heading" key={error}>エラー: {error}</p>
-        ))}
-        {filling_errors.length > 0 && <p class="icon-error-heading">エラー: {filling_errors}</p>}
-        {line_errors.length > 0 && <p class="icon-error-heading">エラー: {line_errors}</p>}
-      </div>
-        <button style={{width:"65%"}} class="btn savep" >
-          {/*Upload Parts of {this.state.mapping[this.state.looked_element]}*/}
-          {this.state.selected_language === "jpn" ? (
-            "アップロード"
-             ) : (
-            "Upload"
-          )}
-        </button>
       </div>
       </div>
     </div>
@@ -873,65 +542,64 @@ class SetupIconMaker extends Component {
     <div class="icon-uploaded-parts">
     <div class="uploader-two">
       <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
-        <h3 >アップロード済の髪パーツ</h3>
+        <h3 >髪パーツ</h3>
         {this.getAvailableOptions("hair")}
       </div>
 
       <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
-        <h3 >アップロード済の前髪パーツ</h3>
+        <h3 >前髪パーツ</h3>
         {this.getAvailableOptions("bang")}
       </div>
 
       <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
-        <h3 >アップロード済のサイドヘアパーツ</h3>
+        <h3 >サイドヘアパーツ</h3>
         {this.getAvailableOptions("side")}
       </div>
 
       <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
-        <h3 >アップロード済の目パーツ</h3>
+        <h3 >目パーツ</h3>
         {this.getAvailableOptions("eyes")}
       </div>
 
       <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
-        <h3 >アップロード済の眉パーツ</h3>
+        <h3 >眉パーツ</h3>
         {this.getAvailableOptions("eyebrows")}
       </div>
 
       <div style={{ display: this.state.looked_element === 5 ? "block" : "none" }}>
-        <h3 >アップロード済の鼻パーツ</h3>
+        <h3 >鼻パーツ</h3>
         {this.getAvailableOptions("nose")}
       </div>
 
       <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
-        <h3 >アップロード済の口パーツ</h3>
+        <h3 >口パーツ</h3>
         {this.getAvailableOptions("mouth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-        <h3 >アップロード済の洋服パーツ</h3>
+        <h3 >洋服パーツ</h3>
         {this.getAvailableOptions("cloth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
-        <h3 >アップロード済の輪郭パーツ</h3>
+        <h3 >輪郭パーツ</h3>
         {this.getAvailableOptions("face")}
       </div>
 
       <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
-        <h3 >アップロード済のアクセサリーパーツ</h3>
+        <h3 >アクセサリーパーツ</h3>
         {this.getAvailableAccessoriesOptions()}
       </div>
 
       <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
-        <h3>アップロード済の眼鏡パーツ</h3>
+        <h3>眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
 
     </div>
 
     </div>
-    <button class="btn savep two-btn"> 完了する </button>
-    <button class="btn savep two-btn right-btn"> 保存して中断する </button>
+    <button class="btn savep two-btn"> Proceed to Checkout </button>
 
     </div>
     </div>
@@ -953,9 +621,6 @@ const mapDispatchToProps = dispatch => {
     uploadIconParts: (artist_id, icon_part, imageFiles) => {
       dispatch(icons.uploadIconParts(artist_id, icon_part, imageFiles));
     },
-    removeIconParts: (artist_id, icon_part, removedFiles) => {
-      dispatch(icons.removeIconParts(artist_id, icon_part, removedFiles));
-    },
     uploadPairedParts: (artist_id, icon_part, lineFile, fillingFile) => {
       dispatch(icons.uploadPairedParts(artist_id, icon_part, lineFile, fillingFile));
     },
@@ -966,4 +631,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupIconMaker);
+export default connect(mapStateToProps, mapDispatchToProps)(Iconio);
