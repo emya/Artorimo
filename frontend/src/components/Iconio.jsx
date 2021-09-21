@@ -57,6 +57,7 @@ class Iconio extends Component {
     eyes: 1,
     eyebrows: 1,
     mouth: 1,
+    nose: 1,
     cloth: 1,
     face: 1,
     hair_classes: 5,
@@ -214,37 +215,28 @@ class Iconio extends Component {
              </div>];
   }
 
+  proceedCheckout = (e) => {
+    e.preventDefault();
+
+    this.props.orderIcon(
+      this.state.artist_id,
+      this.state.face, this.state.face_classes,
+      this.state.hair, this.state.hair_classes,
+      this.state.bang, this.state.bang_classes,
+      this.state.side, this.state.side_classes,
+      this.state.eyes, this.state.eyes_classes,
+      this.state.eyebrows, this.state.eyebrows_classes,
+      this.state.nose,
+      this.state.mouth, this.state.mouth_classes,
+      this.state.cloth, this.state.cloth_classes,
+    );
+  }
+
   render() {
-    const previewStyle = {
-      display: 'inline',
-      width: 50,
-      height: 50,
-    };
-
-    const previewPairedStyle = {
-      //display: 'inline',
-      position: 'relative',
-      top: 0,
-      left: 0,
-      width: 150,
-      height: 150,
-    };
-
-    const previewColoredStyle = {
-      //display: 'inline',
-      position: 'relative',
-      top: 0,
-      left: -150,
-      width: 150,
-      height: 150,
-      filter: "url(#filterHairColor6)",
-      WebkitFilter: "url(#filterHairColor6)"
-    };
-
     const accessories = this.state.accessories;
     const errors = this.state.errors;
-    const line_errors = this.state.line_errors;
-    const filling_errors = this.state.filling_errors;
+
+    if (this.props.icons && this.props.icons.icon_parts) {
 
     return (
   <div>
@@ -256,129 +248,129 @@ class Iconio extends Component {
       <h2>Iconio with Artist Name </h2>
       <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
-        <div class="icon-container-left">
-        {this.state.face > 0 && (
+
+      <div class="icon-container-left">
+        {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${this.state.face_classes})`, WebkitFilter: `url(#filterSkinColor${this.state.face_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/face${this.state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face${this.state.face}.png`}
           />
         )}
-        {this.state.face > 0 && (
+        {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFaceLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/face_line${this.state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face_line${this.state.face}.png`}
           />
         )}
 
         {/* Hair */}
-        {this.state.hair > 0 && (
+        {this.state.hair > 0 && this.props.icons.icon_parts.hair > 0 && (
           <img class="image1 imgHair"
                style={{filter: `url(#filterHairColor${this.state.hair_classes})`, WebkitFilter: `url(#filterHairColor${this.state.hair_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/hair${this.state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair${this.state.hair}.png`}
           />
         )}
-        {this.state.hair > 0 && (
+        {this.state.hair > 0 && this.props.icons.icon_parts.hair > 0 && (
           <img class="image1 imgHairLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/hair_line${this.state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair_line${this.state.hair}.png`}
           />
         )}
 
-        {this.state.bang > 0 && (
+        {this.state.bang > 0 && this.props.icons.icon_parts.bang > 0 && (
           <img class="image1 imgBang"
                style={{filter: `url(#filterHairColor${this.state.bang_classes})`, WebkitFilter: `url(#filterHairColor${this.state.bang_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/bang${this.state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang${this.state.bang}.png`}
           />
         )}
-        {this.state.bang > 0 && (
+        {this.state.bang > 0 && this.props.icons.icon_parts.bang > 0 && (
           <img class="image1 imgBangLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/bang_line${this.state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang_line${this.state.bang}.png`}
           />
         )}
 
-        {this.state.side > 0 && (
+        {this.state.side > 0 && this.props.icons.icon_parts.side > 0 && (
           <img class="image1 imgSide"
                style={{filter: `url(#filterHairColor${this.state.side_classes})`, WebkitFilter: `url(#filterHairColor${this.state.side_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/side${this.state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side${this.state.side}.png`}
           />
         )}
-        {this.state.side > 0 && (
+        {this.state.side > 0 && this.props.icons.icon_parts.side > 0 && (
           <img class="image1 imgSideLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/side_line${this.state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side_line${this.state.side}.png`}
           />
         )}
 
         {/* Eyes */}
-        {this.state.eyes > 0 && (
+        {this.state.eyes > 0 && this.props.icons.icon_parts.eyes > 0 && (
           <img class="image1 imgEyes"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/eyes_line${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes_line${this.state.eyes}.png`}
           />
         )}
-        {this.state.eyes > 0 && (
+        {this.state.eyes > 0 && this.props.icons.icon_parts.eyes > 0 && (
           <img class="image1 imgEyeballs"
                style={{filter: `url(#filterEyesColor${this.state.eyes_classes})`, WebkitFilter: `url(#filterEyesColor${this.state.eyes_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/eyes${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes${this.state.eyes}.png`}
           />
         )}
 
         {/* Eyebrow */}
-        {this.state.eyebrows > 0 && (
+        {this.state.eyebrows > 0 && this.props.icons.icon_parts.eyebrows > 0 && (
           <img class="image1 imgEyebrows"
                style={{filter: `url(#filterHairColor${this.state.eyebrows_classes})`, WebkitFilter: `url(#filterHairColor${this.state.eyebrows_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/eyebrows${this.state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows${this.state.eyebrows}.png`}
           />
         )}
-        {this.state.eyebrows > 0 && (
+        {this.state.eyebrows > 0 && this.props.icons.icon_parts.eyebrows > 0 && (
           <img class="image1 imgEyebrowsLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/eyebrows_line${this.state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows_line${this.state.eyebrows}.png`}
           />
         )}
 
         {/* Nose */}
-        {this.state.nose > 0 && (
+        {this.state.nose > 0 && this.props.icons.icon_parts.nose > 0 && (
           <img class="image1 imgNose"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/nose${this.state.nose}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/nose${this.state.nose}.png`}
           />
         )}
 
         {/* Mouth */}
-        {this.state.mouth > 0 && (
+        {this.state.mouth > 0 && this.props.icons.icon_parts.mouth > 0 && (
           <img class="image1 imgMouth"
                style={{filter: `url(#filterMouthColor${this.state.mouth_classes})`, WebkitFilter: `url(#filterMouthColor${this.state.mouth_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/mouth${this.state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth${this.state.mouth}.png`}
           />
         )}
-        {this.state.mouth > 0 && (
+        {this.state.mouth > 0 && this.props.icons.icon_parts.mouth > 0 && (
           <img class="image1 imgMouthLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/mouth_line${this.state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth_line${this.state.mouth}.png`}
           />
         )}
 
         {/* Cloth */}
-        {this.state.cloth > 0 && (
+        {this.state.cloth > 0 && this.props.icons.icon_parts.cloth > 0 && (
           <img class="image1 imgCloth"
                style={{filter: `url(#filterClothColor${this.state.cloth_classes})`, WebkitFilter: `url(#filterClothColor${this.state.cloth_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/cloth${this.state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth${this.state.cloth}.png`}
           />
         )}
-        {this.state.cloth > 0 && (
+        {this.state.cloth > 0 && this.props.icons.icon_parts.cloth > 0 && (
           <img class="image1 imgClothLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/cloth_line${this.state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth_line${this.state.cloth}.png`}
           />
         )}
 
         {/* Accessories */}
         {accessories.map(accessory => (
           <img class="image1 imgCloth"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/accessories${accessory}.png`}
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/accessories${accessory}.png`}
           />
         ))}
 
         {/* Glasses */}
-        {this.state.glasses > 0 && (
+        {this.state.glasses > 0 && this.props.icons.icon_parts.glasses > 0 && (
           <img class="image1 imgCloth"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/glasses${this.state.glasses}.png`}
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/glasses${this.state.glasses}.png`}
           />
         )}
-
       </div>
 
       <div class="icon-container-right">
@@ -599,14 +591,18 @@ class Iconio extends Component {
     </div>
 
     </div>
-    <button class="btn savep two-btn"> Proceed to Checkout </button>
+    <button class="btn savep two-btn" onClick={this.proceedCheckout}> Proceed to Checkout </button>
 
     </div>
     </div>
     { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
     <Filters />
   </div>
-    )
+    )} else {
+      return (
+    <div>
+      <Header />
+    </div>)}
   }
 }
 
@@ -618,14 +614,34 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadIconParts: (artist_id, icon_part, imageFiles) => {
-      dispatch(icons.uploadIconParts(artist_id, icon_part, imageFiles));
+    fetchIconParts: (artist_id) => {
+      dispatch(icons.fetchIconParts(artist_id));
     },
-    uploadPairedParts: (artist_id, icon_part, lineFile, fillingFile) => {
-      dispatch(icons.uploadPairedParts(artist_id, icon_part, lineFile, fillingFile));
+    orderIcon: (
+      artist_id, face, face_filter,
+      hair, hair_filter,
+      bang, bang_filter,
+      side, side_filter,
+      eyes, eyes_filter,
+      eyebrows, eyebrows_filter,
+      nose,
+      mouth, mouth_filter,
+      cloth, cloth_filter
+    ) => {
+      dispatch(icons.orderIcon(
+        artist_id, face, face_filter,
+        hair, hair_filter,
+        bang, bang_filter,
+        side, side_filter,
+        eyes, eyes_filter,
+        eyebrows, eyebrows_filter,
+        nose,
+        mouth, mouth_filter,
+        cloth, cloth_filter
+      ));
     },
     fetchIconParts: (artist_id) => {
-      dispatch(icons.fetchIconParts(artist_id, true));
+      dispatch(icons.fetchIconParts(artist_id));
     },
     logout: () => dispatch(auth.logout()),
   }

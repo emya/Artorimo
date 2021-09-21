@@ -122,8 +122,8 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/iconmaker/test" component={IconMakerTest} />
                     <StaffRoute exact path="/iconmaker/fortwo" component={IconMakerForTwo} />
                     <Route exact path="/iconio/sample/uploader" component={SetupIconMaker} />
-                    <StaffRoute exact path="/payment/paypal" component={PayPal} />
-                    <StaffRoute exact path="/payment/paypal/done" component={PayPalDone} />
+                    <StaffRoute exact path="/iconio/payment/paypal" component={PayPal} />
+                    <StaffRoute exact path="/iconio/payment/paypal/done" component={PayPalDone} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />

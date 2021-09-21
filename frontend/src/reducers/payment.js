@@ -7,7 +7,6 @@ export default function payment(state=initialState, action) {
 
   switch (action.type) {
     case 'GET_PAYPAL':
-      console.log(action.data);
       return {...state, paypal_form: action.data.form};
 
     default:
