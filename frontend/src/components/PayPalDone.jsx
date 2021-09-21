@@ -26,7 +26,6 @@ if (process.env.NODE_ENV === "production"){
 
 class PayPalDone extends Component {
   componentWillMount() {
-    console.log("props", this.props)
     if (this.props.icons.order) {
       this.props.fetchOrder(this.props.icons.order.id);
     }
@@ -36,8 +35,6 @@ class PayPalDone extends Component {
   saveToPng = (e) => {
     e.preventDefault();
     var node = document.getElementById('my-node');
-
-    console.log(node);
 
     /*
     html2canvas([document.getElementById('my-node')], {
@@ -61,10 +58,34 @@ class PayPalDone extends Component {
 
   render() {
 
-    const icon_state = this.props.icons.order;
+    //const icon_state = this.props.icons.order;
+    // This is the test data
+    // TODO: use the above icon_state
+    const icon_state = {
+        bang: 1,
+        bang_filter: 5,
+        cloth: 1,
+        cloth_filter: 1,
+        created_time: "2021-09-20T00:39:34.248804Z",
+        eyebrows: 1,
+        eyebrows_filter: 5,
+        eyes: 1,
+        eyes_filter: 1,
+        face: 1,
+        face_filter: 1,
+        hair: 1,
+        hair_filter: 5,
+        mouth: 1,
+        mouth_filter: 1,
+        nose: 1,
+        price: 8,
+        side: 1,
+        side_filter: 5,
+    }
+
     // This should be used once test is done
     //const artist_id = this.props.icons.order.artist.id;
-    const artist_id = "d9d5c4f7-8977-4181-a94a-cc811c15b4be";
+    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
     console.log("icon_state", icon_state);
 
@@ -74,7 +95,8 @@ class PayPalDone extends Component {
   <div class="wrapper clearfix">
     <button onClick={this.saveToPng}> Download </button>
 
-    {this.props.icons.order && this.props.icons.orderCompleted && (
+    {/* {this.props.icons.order && this.props.icons.orderCompleted && ( */}
+    {this.props && (
 
     <div class="parent" id="my-node">
       {icon_state.face > 0 && (
@@ -288,7 +310,6 @@ class PayPalDone extends Component {
 
 
     <div id="image">
-      <p>Image:</p>
     </div>
   </div>
   <Footer />

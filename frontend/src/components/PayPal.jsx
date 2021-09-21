@@ -47,7 +47,8 @@ class PayPal extends Component {
   }
 
   componentDidMount() {
-    this.props.getPaypal(this.props.icons.order.id);
+    //this.props.getPaypal(this.props.icons.order.id);
+    this.props.getPaypal("385b999abb7e4b929421f75584c40ceb");
   }
 
   getOrderTable() {
@@ -86,14 +87,39 @@ class PayPal extends Component {
   }
 
   render() {
+    {/*
     if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
         return <Redirect to="/iconmaker/test" />;
     }
+    */}
 
-    const icon_state = this.props.icons.order;
+    //const icon_state = this.props.icons.order;
+    // This is the test data
+    // TODO: use the above icon_state
+    const icon_state = {
+        bang: 1,
+        bang_filter: 5,
+        cloth: 1,
+        cloth_filter: 1,
+        created_time: "2021-09-20T00:39:34.248804Z",
+        eyebrows: 1,
+        eyebrows_filter: 5,
+        eyes: 1,
+        eyes_filter: 1,
+        face: 1,
+        face_filter: 1,
+        hair: 1,
+        hair_filter: 5,
+        mouth: 1,
+        mouth_filter: 1,
+        nose: 1,
+        price: 8,
+        side: 1,
+        side_filter: 5,
+    }
     // This should be used once test is done
     //const artist_id = this.props.icons.order.artist.id;
-    const artist_id = "0b86df2e-2ed7-48d0-a4e9-7f79d4cbaf35";
+    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
     return (
   <div>
@@ -230,8 +256,7 @@ class PayPal extends Component {
     </div>
     <Footer />
   </div>
-    )
-  }
+  )}
 }
 
 const mapStateToProps = state => {

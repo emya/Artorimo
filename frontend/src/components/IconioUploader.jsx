@@ -23,11 +23,11 @@ if (process.env.NODE_ENV === "production"){
 }
 
 
-class SetupIconMaker extends Component {
+class IconioUploader extends Component {
 
   componentDidMount() {
-    //this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
-    this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
+    //this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
+    this.props.fetchIconParts(this.props.user.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -69,7 +69,8 @@ class SetupIconMaker extends Component {
 
   state = {
     // Test id
-    artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    //artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    artist_id: this.props.user.id,
     selected_language: "jpn",
     mapping: {
       0: "hair",
@@ -96,11 +97,11 @@ class SetupIconMaker extends Component {
     mouth: 1,
     cloth: 1,
     face: 1,
-    hair_classes: 5,
-    bang_classes: 5,
-    side_classes: 5,
+    hair_classes: 1,
+    bang_classes: 1,
+    side_classes: 1,
     eyes_classes: 1,
-    eyebrows_classes: 5,
+    eyebrows_classes: 1,
     mouth_classes: 1,
     cloth_classes: 1,
     face_classes: 1,
@@ -234,7 +235,7 @@ class SetupIconMaker extends Component {
           </div>
         )
       }
-      content.push(<button style={{width:"68%"}} class="btn savep">
+      content.push(<button style={{width:"68%"}} class="btn savep" onClick={this.removeChosenOption} >
               {this.state.selected_language === "jpn" ? (
                 "選択したアイテムを削除"
                  ) : (
@@ -261,12 +262,12 @@ class SetupIconMaker extends Component {
         <div class="column">
           {this.state.accessories === [] ? (
             <button class="chosen"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
+                 onClick={this.removeChosenAccessory.bind(this, null)}
             > Unselected </button>
           )
           : (
             <button class="choice"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
+                 onClick={this.removeChosenAccessory.bind(this, null)}
             > 選択しない </button>
           )}
         </div>
@@ -278,13 +279,13 @@ class SetupIconMaker extends Component {
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   //onClick={this.removeChosenAccessory.bind(this, i)}
+                   onClick={this.removeChosenAccessory.bind(this, i)}
               />
             )
             : (
               <img class="choice"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   //onClick={this.chooseAccessory.bind(this, i)}
+                   onClick={this.chooseAccessory.bind(this, i)}
               />
             )}
             <div>
@@ -298,7 +299,7 @@ class SetupIconMaker extends Component {
           </div>
         )
       }
-      content.push(<button style={{width:"68%"}} class="btn savep">
+      content.push(<button style={{width:"68%"}} class="btn savep" onClick={this.removeChosenOption} >
               {this.state.selected_language === "jpn" ? (
                 "選択したアイテムを削除"
                  ) : (
@@ -858,7 +859,7 @@ class SetupIconMaker extends Component {
         {filling_errors.length > 0 && <p class="icon-error-heading">エラー: {filling_errors}</p>}
         {line_errors.length > 0 && <p class="icon-error-heading">エラー: {line_errors}</p>}
       </div>
-        <button style={{width:"65%"}} class="btn savep" >
+        <button style={{width:"65%"}} class="btn savep" onClick={this.uploadIconParts}>
           {/*Upload Parts of {this.state.mapping[this.state.looked_element]}*/}
           {this.state.selected_language === "jpn" ? (
             "アップロード"
@@ -931,7 +932,7 @@ class SetupIconMaker extends Component {
 
     </div>
     <button class="btn savep two-btn"> 完了する </button>
-    <button class="btn savep two-btn right-btn"> 保存して中断する </button>
+    <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
 
     </div>
     </div>
@@ -945,6 +946,7 @@ class SetupIconMaker extends Component {
 const mapStateToProps = state => {
   return {
     icons: state.icons,
+    user: state.auth.user,
   }
 }
 
@@ -966,4 +968,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupIconMaker);
+export default connect(mapStateToProps, mapDispatchToProps)(IconioUploader);

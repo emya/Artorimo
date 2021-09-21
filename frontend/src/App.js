@@ -38,6 +38,8 @@ import IconMaker from "./components/IconMaker";
 import IconMakerTest from "./components/IconMakerTest";
 import IconMakerForTwo from "./components/IconMakerForTwo";
 import SetupIconMaker from "./components/SetupIconMaker";
+import IconioUploader from "./components/IconioUploader";
+import Iconio from "./components/Iconio";
 import PayPal from "./components/PayPal";
 import PayPalDone from "./components/PayPalDone";
 import AdditionalItems from "./components/AdditionalItems";
@@ -109,6 +111,8 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio" component={MyPortfolio} />
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
+                    <PrivateRoute exact path="/iconio/uploader" component={IconioUploader} />
+                    <Route exact path="/iconio" component={Iconio} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />
@@ -117,9 +121,9 @@ class RootContainerComponent extends Component {
                     <Route exact path="/iconmaker" component={IconMaker} />
                     <StaffRoute exact path="/iconmaker/test" component={IconMakerTest} />
                     <StaffRoute exact path="/iconmaker/fortwo" component={IconMakerForTwo} />
-                    <Route exact path="/setup/iconmaker" component={SetupIconMaker} />
-                    <StaffRoute exact path="/payment/paypal" component={PayPal} />
-                    <StaffRoute exact path="/payment/paypal/done" component={PayPalDone} />
+                    <Route exact path="/iconio/sample/uploader" component={SetupIconMaker} />
+                    <StaffRoute exact path="/iconio/payment/paypal" component={PayPal} />
+                    <StaffRoute exact path="/iconio/payment/paypal/done" component={PayPalDone} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />
