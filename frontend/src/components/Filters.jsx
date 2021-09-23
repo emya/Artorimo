@@ -26,23 +26,60 @@ class Filters extends Component {
       <filter id="filterHairColor7" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 .976   0 0 0 0 .913   0 0 0 1 0"/>
       </filter>
+      <filter id="filterHairColor8" colorInterpolationFilters="sRGB">
+        //#a65d8c
+        <feColorMatrix type="matrix" values="0 0 0 0 0.651   0 0 0 0 .364   0 0 0 0 .549   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor9" colorInterpolationFilters="sRGB">
+        //#e3a1cb
+        <feColorMatrix type="matrix" values="0 0 0 0 0.890   0 0 0 0 .631   0 0 0 0 .796   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor10" colorInterpolationFilters="sRGB">
+        //#e092b1
+        <feColorMatrix type="matrix" values="0 0 0 0 0.878   0 0 0 0 .572   0 0 0 0 .694   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor11" colorInterpolationFilters="sRGB">
+        //#6e1a21
+        <feColorMatrix type="matrix" values="0 0 0 0 0.431   0 0 0 0 .102   0 0 0 0 .129   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor12" colorInterpolationFilters="sRGB">
+        //#70598f
+        <feColorMatrix type="matrix" values="0 0 0 0 0.439   0 0 0 0 .349   0 0 0 0 .560   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor13" colorInterpolationFilters="sRGB">
+        //#9672ad
+        <feColorMatrix type="matrix" values="0 0 0 0 0.588   0 0 0 0 .447   0 0 0 0 .678   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor14" colorInterpolationFilters="sRGB">
+        //#4f76b0
+        <feColorMatrix type="matrix" values="0 0 0 0 0.310   0 0 0 0 .462   0 0 0 0 .690   0 0 0 1 0"/>
+      </filter>
+      <filter id="filterHairColor15" colorInterpolationFilters="sRGB">
+        //#1c1e4f
+        <feColorMatrix type="matrix" values="0 0 0 0 0.110   0 0 0 0 .117   0 0 0 0 .310   0 0 0 1 0"/>
+      </filter>
+
 
       <filter id="filterSkinColor1" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 1 0"/>
       </filter>
       <filter id="filterSkinColor2" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 0.929   0 0 0 0 0.843   0 0 0 0 0.756   0 0 0 1 0"/>
+        //#ffeeeb
+        <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 0.933   0 0 0 0 0.921   0 0 0 1 0"/>
       </filter>
       <filter id="filterSkinColor3" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 0.913   0 0 0 0 0.788   0 0 0 0 0.694   0 0 0 1 0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.929   0 0 0 0 0.843   0 0 0 0 0.756   0 0 0 1 0"/>
       </filter>
       <filter id="filterSkinColor4" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 0.843   0 0 0 0 0.639   0 0 0 0 0.521  0 0 0 1 0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.913   0 0 0 0 0.788   0 0 0 0 0.694   0 0 0 1 0"/>
       </filter>
       <filter id="filterSkinColor5" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 0.772   0 0 0 0 0.521   0 0 0 0 0.309  0 0 0 1 0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.843   0 0 0 0 0.639   0 0 0 0 0.521  0 0 0 1 0"/>
       </filter>
       <filter id="filterSkinColor6" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 0.772   0 0 0 0 0.521   0 0 0 0 0.309  0 0 0 1 0"/>
+      </filter>
+      <filter id="filterSkinColor7" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.584   0 0 0 0 0.305   0 0 0 0 0.117  0 0 0 1 0"/>
       </filter>
 
