@@ -256,7 +256,7 @@ class PayPal extends Component {
         <h4>Total: {this.getTotal()}</h4>
         <div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />
 
-        <PayPalScriptProvider options={{ "client-id": "Ad07695kKQyyIjQ-qakFCLLVQvcX_5wcKGFwH_XrvdImZnvqYn9v1WCUjyTxESTMzve1XqDt8Jinr6bQ" }}>
+        <PayPalScriptProvider options={{ "client-id": "" }}>
             <PayPalButtons
                 style={{ layout: "horizontal" }}
                 /*
