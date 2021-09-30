@@ -9,9 +9,11 @@ from rest_framework.parsers import (
     MultiPartParser, FormParser, FileUploadParser, FormParser
 )
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.conf import settings
 from django.dispatch import receiver
@@ -406,10 +408,20 @@ class AskGoodsAPI(generics.GenericAPIView):
 
 
 class IconOrderViewSet(viewsets.ModelViewSet):
-    permission_classes = [BaseUserPermissions, ]
+    #permission_classes = [BaseUserPermissions, ]
     #parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = IconOrderSerializer
     queryset = IconOrder.objects.all()
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        print(request.data)
+        print(instance)
+
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
     def create(self, request):
         data = request.data
@@ -660,12 +672,13 @@ class PayPalAPI(generics.GenericAPIView):
             'item_name': f"Order {order.id}",
             'invoice': str(order.id),
             'currency_code': 'USD',
-            #'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-            'return_url': f"{host}/payment/paypal/done",
+            'notify_url': "https://ec2b-73-53-58-51.ngrok.io/api/webhooks/paypal/",
+            'return_url': f"{host}/iconio/payment/paypal/done",
             #'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
         }
 
         form = PayPalPaymentsForm(initial=paypal_dict)
+        print("form", form)
         return Response({"form": form.render()})
         """
         r = HttpResponse(form.render())
@@ -674,6 +687,61 @@ class PayPalAPI(generics.GenericAPIView):
         return HttpResponse(form.render())
         """
 
+from paypalrestsdk import notifications
+
+@method_decorator(csrf_exempt, name="dispatch")
+class ProcessWebhookView(generics.GenericAPIView):
+
+    def post(self, request):
+        print(request)
+
+        """
+        if "HTTP_PAYPAL_TRANSMISSION_ID" not in request.META:
+            return HttpResponseBadRequest()
+        """
+
+        auth_algo = request.META['HTTP_PAYPAL_AUTH_ALGO']
+        cert_url = request.META['HTTP_PAYPAL_CERT_URL']
+        transmission_id = request.META['HTTP_PAYPAL_TRANSMISSION_ID']
+        transmission_sig = request.META['HTTP_PAYPAL_TRANSMISSION_SIG']
+        transmission_time = request.META['HTTP_PAYPAL_TRANSMISSION_TIME']
+        webhook_id = settings.PAYPAL_WEBHOOK_ID
+        event_body = request.body.decode(request.encoding or "utf-8")
+
+        print({
+            "transmission_id": transmission_id,
+            "timestamp": transmission_time,
+            "webhook_id": webhook_id,
+            "event_body": event_body,
+            "cert_url": cert_url,
+            "actual_sig": transmission_sig,
+            "auth_algo": auth_algo,
+        }
+        )
+        valid = notifications.WebhookEvent.verify(
+            transmission_id=transmission_id,
+            timestamp=transmission_time,
+            webhook_id=webhook_id,
+            event_body=event_body,
+            cert_url=cert_url,
+            actual_sig=transmission_sig,
+            auth_algo=auth_algo,
+        )
+
+        print("valid", valid)
+
+        """
+        if not valid:
+            return HttpResponseBadRequest()
+        """
+
+        webhook_event = json.loads(event_body)
+
+        event_type = webhook_event["event_type"]
+
+        print(event_type)
+
+        return HttpResponse()
 
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)

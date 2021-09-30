@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import moment from 'moment';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import toast from "react-hot-toast";
 
 import Header from './Header';
 import Footer from './Footer';
@@ -25,6 +27,8 @@ if (process.env.NODE_ENV === "production"){
 class PayPal extends Component {
 
   state = {
+    //TODO: This is test id
+    order_id: "385b999abb7e4b929421f75584c40ceb",
     additional_items: null,
     prices: {
       0: 28,
@@ -85,6 +89,8 @@ class PayPal extends Component {
     }
     return total;
   }
+
+
 
   render() {
     {/*
@@ -249,6 +255,53 @@ class PayPal extends Component {
           </table>
         <h4>Total: {this.getTotal()}</h4>
         <div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />
+
+        <PayPalScriptProvider options={{ "client-id": "Ad07695kKQyyIjQ-qakFCLLVQvcX_5wcKGFwH_XrvdImZnvqYn9v1WCUjyTxESTMzve1XqDt8Jinr6bQ" }}>
+            <PayPalButtons
+                style={{ layout: "horizontal" }}
+                /*
+                onClick = {(data, actions) => {
+                  console.log("onClick");
+
+                  console.log(data);
+                  console.log(actions);
+                  // You must return a promise from onClick to do async validation
+                  var price = 5;
+                  var body = JSON.stringify({
+                    price
+                  })
+                  return fetch(`/api/order/icon/${this.state.order_id}/`, {
+                    method: 'PATCH',
+                    body,
+                    headers: {
+                      'content-type': 'application/json'
+                    }
+                  }).then(function(res) {
+                    return res.json();
+                  }).then(function(data) {
+                    console.log("data", data);
+                    // If there is a validation error, reject, otherwise resolve
+                    if (data.validationError) {
+                      document.querySelector('#error').classList.remove('hidden');
+                      return actions.reject();
+                    } else {
+                      return actions.resolve();
+                    }
+                  });
+                }}
+                */
+
+                onApprove={(data, actions) => {
+                  console.log("onApprove");
+
+                  return actions.order.capture().then(function (details) {
+                    console.log("Navigate to done");
+                    window.location("/iconio/payment/paypal/done");
+                    toast.success('Payment completed. Thank you, ' + details.payer.name.given_name)
+                  });
+                }}
+            />
+        </PayPalScriptProvider>
 
         <AdditionalItems parentCallback = {this.handleCallback} />
       </div>
