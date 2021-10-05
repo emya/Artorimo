@@ -517,7 +517,6 @@ class Iconio extends Component {
        {/* Nose/Accessory/Glasses */}
        <div class="color-pad" style={{ display: (this.state.looked_element === 5 || this.state.looked_element === 9 || this.state.looked_element === 10) ? "block" : "none" }}>
        </div>
-
        <div class="looked-element-pad">
          <button class={this.state.looked_element === 8 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(8)} >
            {this.state.selected_language === "jpn" ? ("輪郭") : ("Face")}
@@ -614,11 +613,10 @@ class Iconio extends Component {
         <h3>眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
-
     </div>
 
     </div>
-    <button class="btn savep two-btn" onClick={this.proceedCheckout}> Proceed to Checkout </button>
+    <button class="btn savep two-btn" onClick={this.proceedCheckout}>ダウンロードへ進む</button>
 
     </div>
     </div>
