@@ -236,6 +236,10 @@ class Iconio extends Component {
     const accessories = this.state.accessories;
     const errors = this.state.errors;
 
+    if (this.props.icons.isOrdered){
+       return <Redirect to="/iconio/payment/paypal" />;
+    }
+
     if (this.props.icons && this.props.icons.icon_parts) {
 
     return (

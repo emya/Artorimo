@@ -9,9 +9,11 @@ from rest_framework.parsers import (
     MultiPartParser, FormParser, FileUploadParser, FormParser
 )
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.conf import settings
 from django.dispatch import receiver
@@ -28,7 +30,7 @@ from decimal import Decimal
 from .models import (
     User, Profile, Portfolio,
     CommunityPost, CommunityReply,
-    IconOrder
+    IconOrder, PayPalWebhook
 )
 from .serializers import (
     UserSerializer,
@@ -39,6 +41,7 @@ from .serializers import (
     IconOrderSerializer,
     CommunityPostSerializer,
     CommunityReplySerializer,
+    PayPalWebhookSerializer,
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 from .tasks import send_email, send_bcc_email
@@ -406,10 +409,18 @@ class AskGoodsAPI(generics.GenericAPIView):
 
 
 class IconOrderViewSet(viewsets.ModelViewSet):
-    permission_classes = [BaseUserPermissions, ]
+    #permission_classes = [BaseUserPermissions, ]
     #parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = IconOrderSerializer
     queryset = IconOrder.objects.all()
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
     def create(self, request):
         data = request.data
@@ -649,7 +660,6 @@ class PayPalAPI(generics.GenericAPIView):
     def get(self, request):
         #order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
         order_id = request.GET.get("order_id")
-        print("order_id", order_id)
         order = get_object_or_404(IconOrder, id=order_id)
         #order = IconOrder.objects.create(artist=user, price=50.0)
         host = settings.SITE_URL
@@ -660,8 +670,8 @@ class PayPalAPI(generics.GenericAPIView):
             'item_name': f"Order {order.id}",
             'invoice': str(order.id),
             'currency_code': 'USD',
-            #'notify_url': f"http://{host}{reverse('paypal-ipn')}",
-            'return_url': f"{host}/payment/paypal/done",
+            'notify_url': "https://ec2b-73-53-58-51.ngrok.io/api/webhooks/paypal/",
+            'return_url': f"{host}/iconio/payment/paypal/done",
             #'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
         }
 
@@ -674,6 +684,88 @@ class PayPalAPI(generics.GenericAPIView):
         return HttpResponse(form.render())
         """
 
+from paypalrestsdk import notifications
+
+@method_decorator(csrf_exempt, name="dispatch")
+class ProcessWebhookView(generics.GenericAPIView):
+    serializer_class = PayPalWebhookSerializer
+
+    def post(self, request):
+
+        if "HTTP_PAYPAL_TRANSMISSION_ID" not in request.META:
+            return HttpResponseBadRequest()
+
+        auth_algo = request.META['HTTP_PAYPAL_AUTH_ALGO']
+        cert_url = request.META['HTTP_PAYPAL_CERT_URL']
+        transmission_id = request.META['HTTP_PAYPAL_TRANSMISSION_ID']
+        transmission_sig = request.META['HTTP_PAYPAL_TRANSMISSION_SIG']
+        transmission_time = request.META['HTTP_PAYPAL_TRANSMISSION_TIME']
+        webhook_id = settings.PAYPAL_WEBHOOK_ID
+        event_body = request.body.decode(request.encoding or "utf-8")
+
+        valid = notifications.WebhookEvent.verify(
+            transmission_id=transmission_id,
+            timestamp=transmission_time,
+            webhook_id=webhook_id,
+            event_body=event_body,
+            cert_url=cert_url,
+            actual_sig=transmission_sig,
+            auth_algo=auth_algo,
+        )
+
+        if not valid:
+            return HttpResponseBadRequest()
+
+        webhook_event = json.loads(event_body)
+
+        webhook_id = webhook_event["id"]
+        event_type = webhook_event["event_type"]
+        resource = webhook_event["resource"]
+
+        PAYMENT_CAPTURE_COMPLETED = "PAYMENT.CAPTURE.COMPLETED"
+        CHECKOUT_ORDER_APPROVED = "CHECKOUT.ORDER.APPROVED"
+
+        if event_type == PAYMENT_CAPTURE_COMPLETED:
+            order_id = resource.get("supplementary_data", {}).get("related_ids", {}).get("order_id", "")
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id = webhook_id,
+                paypal_order_id = order_id,
+                resource = resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+
+        elif event_type == CHECKOUT_ORDER_APPROVED:
+            order_id = resource["id"]
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id=webhook_id,
+                paypal_order_id=order_id,
+                resource=resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+            """
+            # TODO: Send receipt email
+            product_link = "https://learn.justdjango.com"
+            send_mail(
+                subject="Your access",
+                message=f"Thank you for purchasing my product. Here is the link: {product_link}",
+                from_email="your@email.com",
+                recipient_list=[customer_email]
+            )
+            """
+        else:
+            order_id = ""
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id=webhook_id,
+                paypal_order_id=order_id,
+                resource=resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+
+
+        return HttpResponse()
 
 class CustomPasswordResetView:
     @receiver(reset_password_token_created)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -127,6 +128,10 @@ class CommunityReply(models.Model):
 
 class IconOrder(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    paypal_order_id = models.CharField(max_length=25, blank=True)
+    # Status from frontend call
+    # 1: approved by frontend
+    paypal_status = models.IntegerField(default=0)
     artist = models.ForeignKey(User, on_delete=models.CASCADE)
     face = models.IntegerField()
     face_filter = models.IntegerField()
@@ -148,3 +153,10 @@ class IconOrder(models.Model):
     price = models.FloatField()
     status = models.CharField(max_length=100)
     created_time = models.DateTimeField(auto_now_add=True)
+
+class PayPalWebhook(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    event_type = models.CharField(max_length=50)
+    webhook_id = models.CharField(max_length=50)
+    paypal_order_id = models.CharField(max_length=25, blank=True)
+    resource = JSONField()
