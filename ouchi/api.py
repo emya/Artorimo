@@ -30,7 +30,7 @@ from decimal import Decimal
 from .models import (
     User, Profile, Portfolio,
     CommunityPost, CommunityReply,
-    IconOrder
+    IconOrder, PayPalWebhook
 )
 from .serializers import (
     UserSerializer,
@@ -41,6 +41,7 @@ from .serializers import (
     IconOrderSerializer,
     CommunityPostSerializer,
     CommunityReplySerializer,
+    PayPalWebhookSerializer,
 )
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 from .tasks import send_email, send_bcc_email
@@ -415,8 +416,6 @@ class IconOrderViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
-        print(request.data)
-        print(instance)
 
         serializer = self.serializer_class(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -661,7 +660,6 @@ class PayPalAPI(generics.GenericAPIView):
     def get(self, request):
         #order_id = "f66bdb6f83b04b02b70c56d84f9e5b43"
         order_id = request.GET.get("order_id")
-        print("order_id", order_id)
         order = get_object_or_404(IconOrder, id=order_id)
         #order = IconOrder.objects.create(artist=user, price=50.0)
         host = settings.SITE_URL
@@ -678,7 +676,6 @@ class PayPalAPI(generics.GenericAPIView):
         }
 
         form = PayPalPaymentsForm(initial=paypal_dict)
-        print("form", form)
         return Response({"form": form.render()})
         """
         r = HttpResponse(form.render())
@@ -691,14 +688,12 @@ from paypalrestsdk import notifications
 
 @method_decorator(csrf_exempt, name="dispatch")
 class ProcessWebhookView(generics.GenericAPIView):
+    serializer_class = PayPalWebhookSerializer
 
     def post(self, request):
-        print(request)
 
-        """
         if "HTTP_PAYPAL_TRANSMISSION_ID" not in request.META:
             return HttpResponseBadRequest()
-        """
 
         auth_algo = request.META['HTTP_PAYPAL_AUTH_ALGO']
         cert_url = request.META['HTTP_PAYPAL_CERT_URL']
@@ -708,16 +703,6 @@ class ProcessWebhookView(generics.GenericAPIView):
         webhook_id = settings.PAYPAL_WEBHOOK_ID
         event_body = request.body.decode(request.encoding or "utf-8")
 
-        print({
-            "transmission_id": transmission_id,
-            "timestamp": transmission_time,
-            "webhook_id": webhook_id,
-            "event_body": event_body,
-            "cert_url": cert_url,
-            "actual_sig": transmission_sig,
-            "auth_algo": auth_algo,
-        }
-        )
         valid = notifications.WebhookEvent.verify(
             transmission_id=transmission_id,
             timestamp=transmission_time,
@@ -728,18 +713,57 @@ class ProcessWebhookView(generics.GenericAPIView):
             auth_algo=auth_algo,
         )
 
-        print("valid", valid)
-
-        """
         if not valid:
             return HttpResponseBadRequest()
-        """
 
         webhook_event = json.loads(event_body)
 
+        webhook_id = webhook_event["id"]
         event_type = webhook_event["event_type"]
+        resource = webhook_event["resource"]
 
-        print(event_type)
+        PAYMENT_CAPTURE_COMPLETED = "PAYMENT.CAPTURE.COMPLETED"
+        CHECKOUT_ORDER_APPROVED = "CHECKOUT.ORDER.APPROVED"
+
+        if event_type == PAYMENT_CAPTURE_COMPLETED:
+            order_id = resource.get("supplementary_data", {}).get("related_ids", {}).get("order_id", "")
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id = webhook_id,
+                paypal_order_id = order_id,
+                resource = resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+
+        elif event_type == CHECKOUT_ORDER_APPROVED:
+            order_id = resource["id"]
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id=webhook_id,
+                paypal_order_id=order_id,
+                resource=resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+            """
+            # TODO: Send receipt email
+            product_link = "https://learn.justdjango.com"
+            send_mail(
+                subject="Your access",
+                message=f"Thank you for purchasing my product. Here is the link: {product_link}",
+                from_email="your@email.com",
+                recipient_list=[customer_email]
+            )
+            """
+        else:
+            order_id = ""
+            paypal_webhook = PayPalWebhook.objects.create(
+                event_type=event_type,
+                webhook_id=webhook_id,
+                paypal_order_id=order_id,
+                resource=resource
+            )
+            serializer = self.serializer_class(paypal_webhook)
+
 
         return HttpResponse()
 
