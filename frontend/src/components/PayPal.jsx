@@ -257,7 +257,7 @@ class PayPal extends Component {
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
-        <PayPalScriptProvider options={{ "client-id": "Ad07695kKQyyIjQ-qakFCLLVQvcX_5wcKGFwH_XrvdImZnvqYn9v1WCUjyTxESTMzve1XqDt8Jinr6bQ"}}>
+        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID}}>
             <PayPalButtons
                 order_id={this.state.order_id}
                 style={{ layout: "horizontal" }}
