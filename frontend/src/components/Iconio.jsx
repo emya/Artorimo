@@ -380,7 +380,7 @@ class Iconio extends Component {
 
       <div class="icon-container-right">
        <div class="color-pad" style={{ display: (this.state.looked_element === 0 || this.state.looked_element === 1 || this.state.looked_element === 2 || this.state.looked_element === 4)
-          ? "block" : "none", width: "100%"}}>
+          ? "block" : "none"}}>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter(1)} ></div>
          </div>
