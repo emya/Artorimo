@@ -114,26 +114,10 @@ class Iconio extends Component {
 
 
   getAvailableOptions = (optionName) => {
-    //console.log(this.props.icons.icon_parts);
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
 
-      if (this.state.unselectable_options.includes(optionName)) {
-        content.push(
-          <div class="column">
-            {this.state[optionName] === null ? (
-              <button class="chosen"
-                   onClick={this.changeOption.bind(this, optionName, null)}
-              > 非表示 </button>
-            )
-            : (
-              <button class="choice"
-                   onClick={this.changeOption.bind(this, optionName, null)}
-              > 選択しない </button>
-            )}
-          </div>
-        )
-      }
+
       let line = "";
       if (!this.state.line_only_elements.includes(optionName)){
         line = "_line";
@@ -156,6 +140,22 @@ class Iconio extends Component {
           </div>
         )
       }
+      if (this.state.unselectable_options.includes(optionName)) {
+        content.push(
+          <div class="wide-column">
+            {this.state[optionName] === null ? (
+              <button class="chosen"
+                   onClick={this.changeOption.bind(this, optionName, null)}
+              > 非表示 </button>
+            )
+            : (
+              <button class="choice"
+                   onClick={this.changeOption.bind(this, optionName, null)}
+              > 選択しない </button>
+            )}
+          </div>
+        )
+      }
       return content;
     }
     return [<div>
@@ -173,21 +173,6 @@ class Iconio extends Component {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
 
-      content.push(
-        <div class="column">
-          {this.state.accessories === [] ? (
-            <button class="chosen"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
-            > Unselected </button>
-          )
-          : (
-            <button class="choice"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
-            > 選択しない </button>
-          )}
-        </div>
-      )
-
       for (var i = 1; i <= this.props.icons.icon_parts[optionName]; i++) {
         content.push(
           <div class="column">
@@ -204,6 +189,22 @@ class Iconio extends Component {
           </div>
         )
       }
+
+      content.push(
+        <div class="wide-column">
+          {this.state.accessories === [] ? (
+            <button class="chosen"
+                 //onClick={this.removeChosenAccessory.bind(this, null)}
+            > Unselected </button>
+          )
+          : (
+            <button class="choice"
+                 //onClick={this.removeChosenAccessory.bind(this, null)}
+            > 選択しない </button>
+          )}
+        </div>
+      )
+
       return content;
     }
     return [<div>
@@ -379,7 +380,7 @@ class Iconio extends Component {
 
       <div class="icon-container-right">
        <div class="color-pad" style={{ display: (this.state.looked_element === 0 || this.state.looked_element === 1 || this.state.looked_element === 2 || this.state.looked_element === 4)
-          ? "block" : "none" }}>
+          ? "block" : "none"}}>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterHairColor1)", WebkitFilter: "url(#filterHairColor1)"}} onClick={() => this.changeColorFilter(1)} ></div>
          </div>
