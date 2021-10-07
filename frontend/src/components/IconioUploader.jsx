@@ -61,7 +61,6 @@ class IconioUploader extends Component {
         }
       }
       if (this.props.icons.isRemoved === true){
-        console.log("reload");
         window.location.reload(true);
       }
     }
@@ -316,6 +315,12 @@ class IconioUploader extends Component {
              </div>];
   }
 
+  cleanupIconParts = (e) => {
+    e.preventDefault();
+    this.props.cleanupIconParts(
+      this.state.artist_id,
+    );
+  }
 
   uploadIconParts = (e) => {
     e.preventDefault();
@@ -898,6 +903,7 @@ class IconioUploader extends Component {
       </div>
     </div>
 
+
     <div class="icon-uploaded-parts">
     <div class="uploader-two">
       <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
@@ -960,8 +966,15 @@ class IconioUploader extends Component {
     </div>
     <button class="btn savep two-btn"> 完了する </button>
     <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
+    <div>
+      <p>アップロード・削除したパーツの表示がおかしい場合はこちらをクリックしてください</p>
+      <button class="btn savep two-btn" onClick={this.cleanupIconParts}> パーツのクリーンアップ </button>
+      <p>直らない場合は‪<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご連絡ください</p>
 
     </div>
+
+    </div>
+
     </div>
     { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
     <Filters />
@@ -984,6 +997,9 @@ const mapDispatchToProps = dispatch => {
     },
     removeIconParts: (artist_id, icon_part, removedFiles) => {
       dispatch(icons.removeIconParts(artist_id, icon_part, removedFiles));
+    },
+    cleanupIconParts: (artist_id) => {
+      dispatch(icons.cleanupIconParts(artist_id));
     },
     uploadPairedParts: (artist_id, icon_part, lineFile, fillingFile) => {
       dispatch(icons.uploadPairedParts(artist_id, icon_part, lineFile, fillingFile));

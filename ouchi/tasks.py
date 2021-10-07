@@ -1,7 +1,12 @@
 from django.template.loader import render_to_string
 from django.conf import settings
+import os
 
 from .celery import app
+
+if os.getenv("ENV") == "STAGING":
+    from .celery_stg import app
+
 
 import logging
 logger = logging.getLogger("analyzer")

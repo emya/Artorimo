@@ -240,3 +240,39 @@ export const removeIconParts = (artist_id, icon_part, imageNumbers) => {
       })
   }
 }
+
+export const cleanupIconParts = (artist_id) => {
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    let headers = {"Content-Type": "application/json"};
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({
+      artist_id
+    })
+
+    return fetch('/api/icons/maker/cleanup/', {headers, body, method: "POST"})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: "CLEANUP_ICON", data: res.data });
+          return res.data;
+        } else {
+          dispatch({type: "CLEANUP_ICON_FAILURE", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}

@@ -18,6 +18,7 @@ from .api import (
     IconOrderViewSet,
     IconMakerAPI,
     IconMakerSetupAPI,
+    IconMakerCleanupAPI,
     PayPalAPI,
     ProcessWebhookView,
     AccountActivateAPI
@@ -45,6 +46,7 @@ urlpatterns = [
     url("^payment/paypal/$", PayPalAPI.as_view()),
     url("^webhooks/paypal/$", ProcessWebhookView.as_view()),
     url("^icons/maker/$", IconMakerAPI.as_view()),
+    url("^icons/maker/cleanup/$", IconMakerCleanupAPI.as_view()),
     url("^setup/icons/maker/$", IconMakerSetupAPI.as_view()),
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
     url(r'^activate/account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
