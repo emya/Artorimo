@@ -83,13 +83,14 @@
 .color-pad {
   display: block;
   margin-top: 30px;
-  height: 50px;
+  height: 100px;
   width: 100%;
 }
 
 .color-pad {
   @media (max-width: 767px) {
     margin-top: 97%;
+    display: block;
   }
 }
 
@@ -302,6 +303,16 @@
   float: left;
   margin-bottom: 30px;
   width: 33%;
+  // height: 300px;
+  //padding: 15px;
+}
+
+// TODO: Chiaki
+// Update this class :)
+.wide-column {
+  //float: left;
+  margin-bottom: 30px;
+  width: 50%;
   // height: 300px;
   //padding: 15px;
 }
