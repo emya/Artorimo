@@ -26,13 +26,14 @@ if (process.env.NODE_ENV === "production"){
 class Iconio extends Component {
 
   componentDidMount() {
-    //this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
-    this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
+    this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
+    //this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
   }
 
   state = {
     // Test id
-    artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    //artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
+    artist_id: "d9d5c4f7-8977-4181-a94a-cc811c15b4be",
     selected_language: "jpn",
     mapping: {
       0: "hair",
@@ -155,6 +156,13 @@ class Iconio extends Component {
             )}
           </div>
         )
+      } else {
+        content.push(
+          <div class="wide-column">
+            <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+          </div>
+        )
+
       }
       return content;
     }
