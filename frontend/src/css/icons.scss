@@ -6,10 +6,19 @@
 
 .parent {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 300px;
+  left: 45%;
   height: 500px;
   width: 500px;
+}
+
+.parent {
+  @media (max-width: 767px) {
+    top: 240px;
+    left: 12%;
+    height: 700px;
+    width: 700px;
+  }
 }
 
 .icon-container {
@@ -99,7 +108,7 @@
   // height: 100px;
   width: 100%;
   text-align: left;
-  margin: 20px 0 20px 0;
+  margin: 30px 0 30px 0;
 }
 
 .upload-memo-pad {
@@ -312,19 +321,42 @@
 .wide-column {
   //float: left;
   margin-bottom: 30px;
-  width: 50%;
+  width: 100%;
   // height: 300px;
   //padding: 15px;
 }
 
-.choice {
-  width: 150px;
-  border: 1px dotted gray;
+.unselect {
+  width: 33%;
+  margin: 20px auto!important;
+  height: 40px;
+  font-size: 1.5rem;
+  border-radius: 7px;
+  display: inline-block;
+  text-align: center;
+}
+
+.unselect {
+  @media (max-width: 767px) {
+    width: 60%;
+    margin: 20px auto!important;
+    height: 60px;
+    font-size: 2.4rem;
+  }
 }
 
 .chosen {
-  width: 150px;
+  width: 100%;
   border: 2px solid red;
+}
+
+.choice {
+  width: 100%;
+}
+
+.pleasetap {
+  margin-bottom: 30px;
+  display: inline-block;
 }
 
 
@@ -543,7 +575,7 @@ body {
 
 .uploader-one {
   @media (max-width: 767px) {
-    height: 930px;
+    height: 960px;
     padding: 10px;
     margin: 20px 20px 50px 20px;
   }
@@ -590,5 +622,28 @@ body {
   @media (max-width: 767px) {
     height: 100px;
     font-size: 2.4rem;
+  }
+}
+
+.download-screen {
+  width: 70%;
+  float: right;
+}
+
+.download-screen {
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+    padding: 0 3% 100px 3%;
+  }
+}
+
+.spacer {
+  height: 500px;
+}
+
+.spacer {
+  @media (max-width: 767px) {
+    height: 800px;
   }
 }

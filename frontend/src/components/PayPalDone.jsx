@@ -93,7 +93,11 @@ class PayPalDone extends Component {
   <div>
   <Header />
   <div class="wrapper clearfix">
-    <button onClick={this.saveToPng}> Download </button>
+  <SideMenu />
+  <div class="download-screen">
+    <h2>Thank You for Using Iconio!</h2>
+    <div class="spacer"></div>
+    <button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>
 
     {/* {this.props.icons.order && this.props.icons.orderCompleted && ( */}
     {this.props && (
@@ -310,6 +314,7 @@ class PayPalDone extends Component {
 
 
     <div id="image">
+    </div>
     </div>
   </div>
   <Footer />
