@@ -150,7 +150,7 @@ class Iconio extends Component {
               > 非表示 </button>
             )
             : (
-              <button class="choice"
+              <button class="unselect"
                    onClick={this.changeOption.bind(this, optionName, null)}
               > 選択しない </button>
             )}
@@ -206,7 +206,7 @@ class Iconio extends Component {
             > Unselected </button>
           )
           : (
-            <button class="choice"
+            <button class="unselect"
                  //onClick={this.removeChosenAccessory.bind(this, null)}
             > 選択しない </button>
           )}
@@ -626,6 +626,7 @@ class Iconio extends Component {
         <h3>眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
+      <div class="pleasetap">選択したいパーツをタップしてください。現在赤枠のパーツが選択されています</div>
     </div>
 
     </div>
