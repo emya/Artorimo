@@ -716,6 +716,9 @@ class IconioUploader extends Component {
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterClothColor7)", WebkitFilter: "url(#filterClothColor7)"}} onClick={() => this.changeColorFilter(7)} ></div>
          </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor8)", WebkitFilter: "url(#filterClothColor8)"}} onClick={() => this.changeColorFilter(8)} ></div>
+         </div>
        </div>
 
        {/* Face */}

@@ -478,6 +478,44 @@ class IconMakerAPI(generics.GenericAPIView):
 
         return Response(icon_parts)
 
+class IconioAPI(generics.GenericAPIView):
+    permission_classes = [BaseUserPermissions, ]
+
+    def get(self, request, token):
+        # For now, use fixed user id
+        #artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
+        artist_id = request.GET.get("artist_id")
+
+        prefix = f"icons/{artist_id}"
+
+        response = s3_client.list_objects(
+            Bucket=settings.AWS_BUCKET_NAME,
+            Prefix=prefix,
+        )
+
+        icon_parts = {
+            "hair": 0,
+            "bang": 0,
+            "side": 0,
+            "eyes": 0,
+            "eyebrows": 0,
+            "nose": 0,
+            "mouth": 0,
+            "cloth": 0,
+            "face": 0,
+            "accessories": 0,
+            "glasses": 0,
+        }
+        if "Contents" in response:
+            for content in response["Contents"]:
+                key = content['Key']
+                for part in icon_parts.keys():
+                    file_name = key.split("/")[-1]
+                    if file_name.startswith(part) and "_line" not in file_name:
+                        icon_parts[part] += 1
+
+        return Response(icon_parts)
+
 class IconMakerCleanupAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
 

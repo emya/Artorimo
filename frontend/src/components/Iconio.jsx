@@ -113,6 +113,20 @@ class Iconio extends Component {
     this.setState({ accessories: [...this.state.accessories, optionNumber] })
   }
 
+  removeAccessory = (optionNumber) => {
+    if (optionNumber === null){
+      this.setState({accessories: []});
+      return false;
+    }
+
+    var array = [...this.state.accessories]; // make a separate copy of the array
+    var index = array.indexOf(optionNumber)
+    if (index !== -1) {
+      array.splice(index, 1);
+      this.setState({accessories: array});
+    }
+  }
+
 
   getAvailableOptions = (optionName) => {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
@@ -141,11 +155,16 @@ class Iconio extends Component {
           </div>
         )
       }
+
+      content.push(
+        <div class="pleasetap">選択したいパーツをタップしてください。現在赤枠のパーツが選択されています</div>
+      )
+
       if (this.state.unselectable_options.includes(optionName)) {
         content.push(
           <div class="wide-column">
             {this.state[optionName] === null ? (
-              <button class="chosen"
+              <button class="chosen-button"
                    onClick={this.changeOption.bind(this, optionName, null)}
               > 非表示 </button>
             )
@@ -156,13 +175,6 @@ class Iconio extends Component {
             )}
           </div>
         )
-      } else {
-        content.push(
-          <div class="wide-column">
-            <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-          </div>
-        )
-
       }
       return content;
     }
@@ -187,11 +199,13 @@ class Iconio extends Component {
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   onClick={this.removeAccessory.bind(this, i)}
               />
             )
             : (
               <img class="choice"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   onClick={this.chooseAccessory.bind(this, i)}
               />
             )}
           </div>
@@ -199,15 +213,19 @@ class Iconio extends Component {
       }
 
       content.push(
+        <div class="pleasetap">選択したいパーツをタップしてください。現在赤枠のパーツが選択されています</div>
+      )
+
+      content.push(
         <div class="wide-column">
           {this.state.accessories === [] ? (
-            <button class="chosen"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
-            > Unselected </button>
+            <button class="chosen-button"
+                 onClick={this.removeAccessory.bind(this, null)}
+            > 非表示 </button>
           )
           : (
             <button class="unselect"
-                 //onClick={this.removeChosenAccessory.bind(this, null)}
+                 onClick={this.removeAccessory.bind(this, null)}
             > 選択しない </button>
           )}
         </div>
@@ -255,14 +273,13 @@ class Iconio extends Component {
   <div>
     <Header />
     <div class="wrapper-icon clearfix">
-    <SideMenu />
-      <div class="icon-uploader">
-      <div class="icon-container ">
+      <div class="iconio-uploader">
+      <div class="iconio-container ">
       <h2>Iconio with Artist Name </h2>
       <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
 
-      <div class="icon-container-left">
+      <div class="iconio-container-left">
         {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${this.state.face_classes})`, WebkitFilter: `url(#filterSkinColor${this.state.face_classes})`}}
@@ -373,7 +390,7 @@ class Iconio extends Component {
 
         {/* Accessories */}
         {accessories.map(accessory => (
-          <img class="image1 imgCloth"
+          <img class="image1 imgAccessories"
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/accessories${accessory}.png`}
           />
         ))}
@@ -386,7 +403,7 @@ class Iconio extends Component {
         )}
       </div>
 
-      <div class="icon-container-right">
+      <div class="iconio-container-right">
        <div class="color-pad" style={{ display: (this.state.looked_element === 0 || this.state.looked_element === 1 || this.state.looked_element === 2 || this.state.looked_element === 4)
           ? "block" : "none"}}>
          <div class="outer-circle">
@@ -499,6 +516,9 @@ class Iconio extends Component {
          </div>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterClothColor7)", WebkitFilter: "url(#filterClothColor7)"}} onClick={() => this.changeColorFilter(7)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor8)", WebkitFilter: "url(#filterClothColor8)"}} onClick={() => this.changeColorFilter(8)} ></div>
          </div>
        </div>
 
@@ -626,7 +646,6 @@ class Iconio extends Component {
         <h3>眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
-      <div class="pleasetap">選択したいパーツをタップしてください。現在赤枠のパーツが選択されています</div>
     </div>
 
     </div>

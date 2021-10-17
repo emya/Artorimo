@@ -22,9 +22,7 @@
 }
 
 .icon-container {
-  // height: 1000px;
   width: 100%;
-  // height: 800px;
   display: block;
   float: right;
 }
@@ -35,6 +33,64 @@
     height: auto;
     //height: 1200px;
     text-align: center;
+  }
+}
+
+// Iconio
+.iconio-container {
+  //width: 100%;
+  width: 767px;
+  text-align: center;
+  //display: block;
+  //float: right;
+}
+
+.iconio-container {
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+    //height: 1200px;
+    text-align: center;
+  }
+}
+
+.iconio-container-left {
+  // height: 500px;
+  //float: left;
+  //width: 383px;
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+
+.iconio-container-left {
+  @media (min-width: 767px) {
+    float: left;
+    width: 50%;
+  }
+}
+
+.iconio-container-right {
+  // height: 500px;
+  display: block;
+  //width: 383px;
+  position: relative;
+  z-index: 0;
+}
+
+.iconio-container-right {
+  @media (min-width: 767px) {
+    float: right;
+    width: 50%;
+  }
+}
+
+
+// Icon
+.icon-container-left {
+  @media (min-width: 767px) {
+    float: left;
+    width: 50%;
   }
 }
 
@@ -204,6 +260,8 @@
   width: 100%;
   float: right;
   text-align: center;
+  overflow : scroll;
+  height: 400px;
   // margin: 10px;
   // border: solid 1px black;
   // border-radius: 7px;
@@ -337,6 +395,25 @@
 }
 
 .unselect {
+  @media (max-width: 767px) {
+    width: 60%;
+    margin: 20px auto!important;
+    height: 60px;
+    font-size: 2.4rem;
+  }
+}
+
+.chosen-button {
+  width: 33%;
+  margin: 20px auto!important;
+  height: 40px;
+  font-size: 1.5rem;
+  border-radius: 7px;
+  display: inline-block;
+  text-align: center;
+}
+
+.chosen-button {
   @media (max-width: 767px) {
     width: 60%;
     margin: 20px auto!important;
