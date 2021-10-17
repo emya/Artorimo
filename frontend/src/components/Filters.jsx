@@ -139,6 +139,9 @@ class Filters extends Component {
       <filter id="filterClothColor7" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.223   0 0 0 0 0.145   0 0 0 0 0.133  0 0 0 1 0"/>
       </filter>
+      <filter id="filterClothColor8" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 1 0"/>
+      </filter>
     </defs>
   </svg>
     );
