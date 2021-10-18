@@ -1,3 +1,5 @@
+
+
 .wrapper-icon {
     //overflow: hidden;
     // min-height: 3500px;
@@ -20,6 +22,8 @@
     width: 700px;
   }
 }
+
+
 
 .icon-container {
   width: 100%;
@@ -358,6 +362,15 @@
   }
 }
 
+.parent-precheckout .image1 {
+  @media (max-width: 767px) {
+    width: 600px;
+    height: auto;
+    top: 230px;
+    left: 30%;
+    z-index: 1;
+  }
+}
 
 .function-buttons {
   margin-top: -100px;
@@ -723,4 +736,41 @@ body {
   @media (max-width: 767px) {
     height: 800px;
   }
+}
+
+.spacer-precheckout {
+  @media (max-width: 767px) {
+    height: 600px;
+  }
+}
+
+.checkout {
+  margin-bottom: 100px;
+}
+
+.checkout-list-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.checkout-list {
+  font-size: 24px;
+}
+
+.checkout-list-amt {
+  font-size: 24px;
+}
+
+.total, .total-amt {
+  font-size: 40px;
+}
+
+.checkout-item {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.checkout-item td {
+  font-size: 24px;
 }

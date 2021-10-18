@@ -50,10 +50,10 @@ class PayPal extends Component {
     this.setState({additional_items: childData})
   }
 
-  componentDidMount() {
-    //this.props.getPaypal(this.props.icons.order.id);
-    this.props.getPaypal("385b999abb7e4b929421f75584c40ceb");
-  }
+  // componentDidMount() {
+  //   //this.props.getPaypal(this.props.icons.order.id);
+  //   this.props.getPaypal("385b999abb7e4b929421f75584c40ceb");
+  // }
 
   getOrderTable() {
     let content = [];
@@ -62,8 +62,8 @@ class PayPal extends Component {
       for (const item of this.state.additional_items) {
         content.push(
           <tr>
-            <td> {this.state.item_names[item]} </td>
-            <td> $ {this.state.prices[item]} </td>
+            <td>{this.state.item_names[item]}</td>
+            <td> $ {this.state.prices[item]}</td>
           </tr>
          )
       }
@@ -71,11 +71,12 @@ class PayPal extends Component {
 
     content.unshift(
         <tr>
-          <td> Icon </td>
-          <td> $ 5 </td>
+          <td align="left"> Icon </td>
+          <td align="right"> $ 5 </td>
         </tr>
     )
 
+    console.log(content)
     return content;
   }
 
@@ -133,7 +134,7 @@ class PayPal extends Component {
     <Filters />
 
     <div class="wrapper clearfix">
-        <div class="parent">
+        <div class="parent-precheckout">
         {icon_state.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
@@ -249,11 +250,16 @@ class PayPal extends Component {
 
       <div class="profile">
         <h2>Checkout</h2>
+        <div class="spacer-precheckout"></div>
         <h3>Your Order</h3>
-          <table>
+        <div class="checkout">
+          <table class="checkout-item">
           {this.getOrderTable()}
           </table>
-        <h4>Total: {this.getTotal()}</h4>
+          <div class="checkout-list-wrapper"><div class="checkout-list">Subtotal:</div><div class="checkout-list-amt">{this.getTotal()}</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list">Shipping:</div><div class="checkout-list-amt">0</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list total">Total:</div><div class="checkout-list-amt total-amt">{this.getTotal()}</div></div>
+        </div>
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 

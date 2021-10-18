@@ -19,10 +19,6 @@ class Test extends Component {
     data: null
   }
 
-  handleCallback = (childData) =>{
-    console.log("childData", childData)
-    this.setState({data: childData})
-  }
 
   render() {
     console.log(this.state);
@@ -31,10 +27,6 @@ class Test extends Component {
   <div>
   <Header />
   <div class="wrapper clearfix">
-    <div class="profile">
-    </div>
-
-    <AdditionalItems parentCallback = {this.handleCallback} />
 
   </div>
   <Footer />

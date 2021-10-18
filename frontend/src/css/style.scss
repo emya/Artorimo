@@ -13,6 +13,12 @@ body {
   font-family: 'Lexend Deca', 'Hiragino Sans', sans-serif;
 }
 
+body {
+  @media (max-width: 767px) {
+    font-size: 18px;
+  }
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -727,6 +733,7 @@ input {
   display: flex;
   width: 100%;
   margin-top: 50px;
+  justify-content: center;
 }
 
 .popular-country {
@@ -1101,7 +1108,7 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   @media (max-width: 767px) {
     table-layout: fixed;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 16px;
     line-height: 15px;
   }}
 

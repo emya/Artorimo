@@ -69,23 +69,28 @@ class Landing extends Component {
       <div class="wrapper-service">
       <div class="service-box">
       <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/earth.png`} />
-      <div class="service-title">言語対応</div>
-      <p class="service-text">海外のクライアントに対し、弊社の日英バイリンガルがクライアントのニーズを適切に理解・サポートします。</p>
+      <div class="service-title">海外進出サポート</div>
+      <p class="service-text">日英バイリンガルがクライアントニーズを適切に理解・人脈を駆使して営業を行い、海外での活躍をサポートします。</p>
       </div>
       <div class="service-box">
       <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/meeting.png`} />
-      <div class="service-title">依頼内容・報酬交渉</div>
-      <p class="service-text">ケースバイケースである相場を把握し、個人間では行いづらい報酬交渉をクリエーターとクライアントの間に立って行います。</p>
+      <div class="service-title">進行・報酬交渉</div>
+      <p class="service-text">個人間では行いづらい報酬交渉をクリエーターとクライアントの間に立って行います。</p>
+      </div>
+      <div class="service-box">
+      <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/card.png`} />
+        <div class="service-title">報酬の管理</div>
+        <p class="service-text">クリエーターが作業する前にクライアントからの仮入金管理とその保管を行い、お金のトラブルを防ぎます。</p>
+        </div>
+      <div class="service-box">
+      <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/artist.png`} />
+      <div class="service-title">Iconio</div>
+      <p class="service-text">弊社が運営するアイコンメーカーです。一度制作いただければアーティスト様は半永久的に自動収入を得られます。(coming soon!)</p>
       </div>
       <div class="service-box">
       <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/group.png`} />
       <div class="service-title">コミュニティ提供</div>
-      <p class="service-text">クリエイターによる絵のフィードバックや悩み相談まで、フリーランス同士が交流できる会員専用ページを用意しています。（coming soon!）</p>
-      </div>
-      <div class="service-box">
-      <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/card.png`} />
-      <div class="service-title">報酬の管理</div>
-      <p class="service-text">クリエーターが作業する前にクライアントからの仮入金管理とその保管を行い、お金のトラブルを防ぎます。</p>
+      <p class="service-text">クリエイターによる絵のフィードバックや悩み相談まで、フリーランス同士が交流できる会員専用ページを用意しています。</p>
       </div>
       </div>
     </section>
@@ -94,12 +99,12 @@ class Landing extends Component {
       <h2 class="heading s">直近のサポート例</h2>
       <table class="table-data">
         <tr class="table-heading-upcoming">
-          <td>依頼内容</td>
-          <td>報酬</td>
+          <td><div class="bold">依頼内容</div></td>
+          <td><div class="bold">報酬</div></td>
         </tr>
         <tr>
-          <td>Instagramアイコン作成</td>
-          <td>20,000円</td>
+          <td>海外アーティストMV制作</td>
+          <td>500,000円</td>
         </tr>
         <tr>
           <td>コスメパッケージ用イラスト</td>
@@ -107,7 +112,7 @@ class Landing extends Component {
         </tr>
         <tr>
           <td>海外音楽レーベルのジャケット</td>
-          <td>55,000円</td>
+          <td>100,000円</td>
         </tr>
         <tr>
           <td>アパレル用イラスト</td>
@@ -119,7 +124,7 @@ class Landing extends Component {
         </tr>
         <tr>
         <td>海外個展への出展</td>
-        <td>N/A</td>
+        <td>200,000円～</td>
         </tr>
       </table>
       <br/>
@@ -127,7 +132,7 @@ class Landing extends Component {
       <h3>依頼カテゴリー例</h3>
       <div class="popular-country">
         <div class="popular-country-example">
-          <p class="country-name">SNSアイコン</p>
+          <p class="country-name">アパレル・グッズイラスト</p>
           <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/sns.png`} />
         </div>
         <div class="popular-country-example">
@@ -135,11 +140,11 @@ class Landing extends Component {
           <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/magazine.png`} />
         </div>
         <div class="popular-country-example">
-          <p class="country-name">ヘッダー</p>
+          <p class="country-name">音楽レーベルジャケット</p>
           <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/header.png`} />
         </div>
         <div class="popular-country-example">
-          <p class="country-name">似顔絵</p>
+          <p class="country-name">海外個展への出展</p>
           <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/portrait.png`} />
         </div>
       </div>
