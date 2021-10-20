@@ -42,6 +42,7 @@ import IconioUploader from "./components/IconioUploader";
 import Iconio from "./components/Iconio";
 import PayPal from "./components/PayPal";
 import PayPalDone from "./components/PayPalDone";
+import IconioDownload from "./components/IconioDownload";
 import AdditionalItems from "./components/AdditionalItems";
 import Test from "./components/Test";
 
@@ -122,8 +123,9 @@ class RootContainerComponent extends Component {
                     <StaffRoute exact path="/iconmaker/test" component={IconMakerTest} />
                     <StaffRoute exact path="/iconmaker/fortwo" component={IconMakerForTwo} />
                     <Route exact path="/iconio/sample/uploader" component={SetupIconMaker} />
-                    <StaffRoute exact path="/iconio/payment/paypal" component={PayPal} />
-                    <StaffRoute exact path="/iconio/payment/paypal/done" component={PayPalDone} />
+                    <Route exact path="/iconio/payment/paypal" component={PayPal} />
+                    <Route exact path="/iconio/payment/paypal/done" component={PayPalDone} />
+                    <Route exact path="/iconio/download/:token" component={IconioDownload} />
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />

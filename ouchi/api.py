@@ -436,6 +436,7 @@ class IconOrderViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
+
 class IconMakerAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
 
@@ -515,6 +516,24 @@ class IconioAPI(generics.GenericAPIView):
                         icon_parts[part] += 1
 
         return Response(icon_parts)
+
+class IconioDownloadAPI(generics.GenericAPIView):
+    serializer_class = IconOrderSerializer
+    permission_classes = [BaseUserPermissions, ]
+
+    def get(self, request):
+        print("get")
+        oidb64 = request.GET.get('token')
+        order_id = force_text(urlsafe_base64_decode(oidb64))
+        print("order_id", order_id)
+        try:
+            icon_order = IconOrder.objects.get(id=order_id)
+        except(IconOrder.DoesNotExist):
+            return Response({"token": "The token is invalid."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.serializer_class(icon_order)
+        return Response(serializer.data)
+
 
 class IconMakerCleanupAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
@@ -875,7 +894,7 @@ class ProcessWebhookView(generics.GenericAPIView):
             )
             serializer = self.serializer_class(paypal_webhook)
             """
-            # TODO: Send receipt email
+            # TODO: Send receipt email with download link
             product_link = "https://learn.justdjango.com"
             send_mail(
                 subject="Your access",
