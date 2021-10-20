@@ -52,6 +52,40 @@ export const orderIcon = (
   }
 }
 
+export const fetchOrderForDownload = downloadToken => {
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    let headers = {"Content-Type": "application/json"};
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let params = `?token=${downloadToken}`;
+
+    return fetch(`/api/icons/download/${params}`, {headers, })
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: "FETCH_ORDER_FOR_DOWNLOAD", data: res.data });
+          return res.data;
+        } else {
+          dispatch({type: "FETCH_ORDER_FOR_DOWNLOAD_FAILURE", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
 export const fetchOrder = order_id => {
   return (dispatch, getState) => {
     const token = getState().auth.token;

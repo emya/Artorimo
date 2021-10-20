@@ -4,6 +4,7 @@ const initialState = {
   //{text: "Write code!"}
   isOrdered: null,
   isRemoved: null,
+  isDownloadReady: null,
   orderCompleted: null
 };
 
@@ -16,6 +17,12 @@ export default function payment(state=initialState, action) {
 
     case 'FETCH_ORDER':
       return {...state, order: action.data, orderCompleted: true};
+
+    case 'FETCH_ORDER_FOR_DOWNLOAD':
+      return {...state, order: action.data, isDownloadReady: true};
+
+    case 'FETCH_ORDER_FOR_DOWNLOAD_FAILURE':
+      return {...state, order: action.data, isDownloadReady: false};
 
     case 'GET_ICON_PARTS':
       return {...state, icon_parts: action.data};
