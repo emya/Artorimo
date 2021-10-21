@@ -272,6 +272,7 @@ class Iconio extends Component {
     return (
   <div>
     <Header />
+    <div class="icon-maker">
     <div class="wrapper-icon clearfix">
       <div class="iconio-uploader">
       <div class="iconio-container ">
@@ -585,7 +586,6 @@ class Iconio extends Component {
            {this.state.selected_language === "jpn" ? ("眼鏡") : ("Glasses")}
          </button>
        </div>
-
       </div>
       </div>
     </div>
@@ -647,10 +647,17 @@ class Iconio extends Component {
         {this.getAvailableOptions("glasses")}
       </div>
     </div>
-
+    </div>
+    </div>
+    </div>
+    <div class="uploader-three">
+    <div class="usage-policy">
+      <div class="usage-policy-sign">個人利用可</div>
+      <div class="usage-policy-sign">非商用利用可</div>
+      <div class="usage-policy-sign">商用利用可</div>
+      <div class="usage-policy-sign">加工可</div>
     </div>
     <button class="btn savep two-btn" onClick={this.proceedCheckout}>ダウンロードへ進む</button>
-
     </div>
     </div>
     { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
