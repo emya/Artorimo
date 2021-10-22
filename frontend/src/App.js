@@ -44,6 +44,7 @@ import PayPal from "./components/PayPal";
 import PayPalDone from "./components/PayPalDone";
 import IconioDownload from "./components/IconioDownload";
 import AdditionalItems from "./components/AdditionalItems";
+import IconioArtistLanding from "./components/IconioArtistLanding";
 import Test from "./components/Test";
 
 import {auth} from "./actions";
@@ -103,6 +104,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                     <Route exact path="/test" component={Test} />
+                    <Route exact path="/iconio/creators/top" component={IconioArtistLanding} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <Route exact path="/activate/account/:uidb64/:activeToken" component={ActivateAccount} />
