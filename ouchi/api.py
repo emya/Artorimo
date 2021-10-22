@@ -428,7 +428,7 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         artist_id = data.pop('artist_id')
         # For testing
         # TODO: Remove later
-        artist_id = settings.TEST_ARTIST_ID
+        # artist_id = settings.TEST_ARTIST_ID
         artist = User.objects.get(pk=artist_id)
 
         icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)

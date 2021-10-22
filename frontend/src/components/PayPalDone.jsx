@@ -27,6 +27,7 @@ if (process.env.NODE_ENV === "production"){
 class PayPalDone extends Component {
   componentWillMount() {
     if (this.props.icons.order) {
+      console.log(this.props.icons.order);
       this.props.fetchOrder(this.props.icons.order.id);
     }
     //this.props.fetchOrder("53a647c19b0b42dcb395b1bc0c943bb5");
@@ -87,7 +88,7 @@ class PayPalDone extends Component {
     //const artist_id = this.props.icons.order.artist.id;
     const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
-    console.log("icon_state", icon_state);
+    console.log("props", this.props);
 
     return (
   <div>
