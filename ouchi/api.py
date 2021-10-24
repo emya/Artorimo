@@ -423,12 +423,25 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
 
+    def retrieve(self, request, pk):
+        print("retrive", pk)
+        paypal_status = request.GET.get('paypal_status')
+        queryset = IconOrder.objects.all()
+        order = get_object_or_404(queryset, pk=pk)
+        if paypal_status:
+            print(order.paypal_status)
+            print(paypal_status)
+            if int(order.paypal_status) != int(paypal_status):
+                return Response("The order is not approved yet", status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.serializer_class(order)
+        return Response(serializer.data)
+
     def create(self, request):
         data = request.data
         artist_id = data.pop('artist_id')
         # For testing
         # TODO: Remove later
-        artist_id = settings.TEST_ARTIST_ID
+        # artist_id = settings.TEST_ARTIST_ID
         artist = User.objects.get(pk=artist_id)
 
         icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)

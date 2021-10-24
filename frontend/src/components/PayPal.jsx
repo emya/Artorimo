@@ -16,7 +16,8 @@ import {payment, icons, auth} from "../actions";
 
 import { keys_prod } from '../keys_prod.js';
 import { keys_stg } from '../keys.js';
-import '../css/style.scss';
+//import '../css/style.scss';
+import '../css/icons.scss';
 
 var keys = keys_stg;
 if (process.env.NODE_ENV === "production"){
@@ -46,9 +47,11 @@ class PayPal extends Component {
     }
   }
 
+  /* TODO: Enable this when add item is on
   handleCallback = (childData) => {
     this.setState({additional_items: childData})
   }
+  */
 
   // componentDidMount() {
   //   //this.props.getPaypal(this.props.icons.order.id);
@@ -91,18 +94,59 @@ class PayPal extends Component {
     return total;
   }
 
+  onApproveOrder = async(data, actions) => {
+    console.log("onApprove");
+    console.log("Navigate to done", this.props);
+    console.log("data", data);
+    console.log("actions", actions);
+    //this.props.history.push("/iconio/payment/paypal/done");
+    var order_id = this.props.icons.order.id;
+    localStorage.setItem('approved_order_id', order_id)
+
+    const details = await actions.order.capture();
+
+    console.log(details, typeof(details))
+
+    var paypal_order_id = details.id;
+    var paypal_status = 1;
+    var payer_email = details.payer.email_address;
+    var body = JSON.stringify({
+      paypal_order_id, paypal_status
+    })
+
+    return fetch(`/api/order/icon/${order_id}/`, {
+      method: 'PATCH',
+      body,
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(function(res) {
+      console.log("res", res);
+      if (res.status == 200){
+        window.location.href = '/iconio/payment/paypal/done';
+      }
+
+      return res.json();
+    }).then(function(data) {
+      console.log("data", data);
+      // If there is a validation error, reject, otherwise resolve
+    });
+  }
 
 
   render() {
-    {/*
     if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
-        return <Redirect to="/iconmaker/test" />;
+        return <Redirect to="/iconio" />;
     }
-    */}
 
-    //const icon_state = this.props.icons.order;
+    console.log("props", this.props.icons)
+
+    const icon_state = this.props.icons.order;
+    console.log(icon_state);
+
     // This is the test data
     // TODO: use the above icon_state
+    /*
     const icon_state = {
         bang: 1,
         bang_filter: 5,
@@ -124,9 +168,11 @@ class PayPal extends Component {
         side: 1,
         side_filter: 5,
     }
+    */
     // This should be used once test is done
-    //const artist_id = this.props.icons.order.artist.id;
-    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    const artist_id = this.props.icons.order.artist.id;
+    const order_id = this.props.icons.order.id;
+    // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
     return (
   <div>
@@ -147,7 +193,7 @@ class PayPal extends Component {
           />
         )}
 
-        // Hair
+        {/* Hair */}
         {icon_state.hair > 0 && (
           <img class="image1 imgHair"
                style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
@@ -182,7 +228,7 @@ class PayPal extends Component {
           />
         )}
 
-        // Eyes
+        {/* Eyes */}
         {icon_state.eyes > 0 && (
           <img class="image1 imgEyes"
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyes_line${icon_state.eyes}.png`}
@@ -195,7 +241,7 @@ class PayPal extends Component {
           />
         )}
 
-        // Eyebrow
+        {/* Eyebrow */}
         {icon_state.eyebrows > 0 && (
           <img class="image1 imgEyebrows"
                style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
@@ -208,14 +254,14 @@ class PayPal extends Component {
           />
         )}
 
-        // Nose
+        {/* Nose */}
         {icon_state.nose > 0 && (
           <img class="image1 imgNose"
                src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/nose${icon_state.nose}.png`}
           />
         )}
 
-        // Mouth
+        {/* Mouth */}
         {icon_state.mouth > 0 && (
           <img class="image1 imgMouth"
                style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
@@ -228,7 +274,7 @@ class PayPal extends Component {
           />
         )}
 
-        // Cloth
+        {/* Cloth */}
         {icon_state.cloth > 0 && (
           <img class="image1 imgCloth"
                style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
@@ -263,9 +309,9 @@ class PayPal extends Component {
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
-        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID}}>
+        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "disable-funding": "credit"}}>
             <PayPalButtons
-                order_id={this.state.order_id}
+                order_id={order_id}
                 style={{ layout: "horizontal" }}
                 onClick = {(data, actions) => {
                   console.log("onClick");
@@ -273,6 +319,8 @@ class PayPal extends Component {
                   console.log(data);
                   console.log(actions);
                 }}
+
+                onApprove={(data, actions) => this.onApproveOrder(data, actions)}
                 /*
                 onClick = {(data, actions) => {
                   console.log("onClick");
@@ -305,6 +353,7 @@ class PayPal extends Component {
                 }}
                 */
 
+                /*
                 onApprove={(data, actions) => {
                   console.log("onApprove");
                   console.log("Navigate to done", this.props);
@@ -312,43 +361,43 @@ class PayPal extends Component {
                   console.log("actions", actions);
                   //this.props.history.push("/iconio/payment/paypal/done");
 
-                  return actions.order.capture().then(function (details) {
-                    console.log(details);
-                    // TODO: This has to be getting from props
-                    var order_id = "385b999abb7e4b929421f75584c40ceb";
-                    console.log(order_id);
+                  const order = actions.order.capture();
 
-                    var paypal_order_id = details.id;
-                    var paypal_status = 1;
-                    var payer_email = details.payer.email_address;
-                    var body = JSON.stringify({
-                      paypal_order_id, paypal_status
-                    })
-                    return fetch(`/api/order/icon/${order_id}/`, {
-                      method: 'PATCH',
-                      body,
-                      headers: {
-                        'content-type': 'application/json'
-                      }
-                    }).then(function(res) {
-                      console.log("res", res);
-                      if (res.status == 200){
-                        window.location.href = '/iconio/payment/paypal/done';
-                      }
+                  //console.log(order, typeof(order));
+                  //const details = order.value;
 
-                      return res.json();
-                    }).then(function(data) {
-                      console.log("data", data);
-                      // If there is a validation error, reject, otherwise resolve
-                    });
+                  console.log(order, typeof(order))
 
-                    toast.success('Payment completed. Thank you, ' + details.payer.name.given_name)
+                  var paypal_order_id = details.id;
+                  var paypal_status = 1;
+                  var payer_email = details.payer.email_address;
+                  var body = JSON.stringify({
+                    paypal_order_id, paypal_status
+                  })
+                  return fetch(`/api/order/icon/${order_id}/`, {
+                    method: 'PATCH',
+                    body,
+                    headers: {
+                      'content-type': 'application/json'
+                    }
+                  }).then(function(res) {
+                    console.log("res", res);
+                    if (res.status == 200){
+                      window.location.href = '/iconio/payment/paypal/done';
+                    }
+
+                    return res.json();
+                  }).then(function(data) {
+                    console.log("data", data);
+                    // If there is a validation error, reject, otherwise resolve
                   });
+
                 }}
+                */
             />
         </PayPalScriptProvider>
 
-        <AdditionalItems parentCallback = {this.handleCallback} />
+        {/* <AdditionalItems parentCallback = {this.handleCallback} /> */}
       </div>
 
     </div>

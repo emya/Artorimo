@@ -26,14 +26,14 @@ if (process.env.NODE_ENV === "production"){
 class Iconio extends Component {
 
   componentDidMount() {
-    this.props.fetchIconParts("d9d5c4f7-8977-4181-a94a-cc811c15b4be");
+    this.props.fetchIconParts(this.state.artist_id);
     //this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
   }
 
   state = {
     // Test id
-    //artist_id: "0707d4f7-cecf-480b-845e-11bbff0a45e0",
-    artist_id: "d9d5c4f7-8977-4181-a94a-cc811c15b4be",
+    artist_id: "a5fb49f8-227d-49f8-96fb-404cced6805b",
+    //artist_id: "d9d5c4f7-8977-4181-a94a-cc811c15b4be",
     selected_language: "jpn",
     mapping: {
       0: "hair",
@@ -165,12 +165,12 @@ class Iconio extends Component {
           <div class="wide-column">
             {this.state[optionName] === null ? (
               <button class="chosen-button"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, 0)}
               > 非表示 </button>
             )
             : (
               <button class="unselect"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, 0)}
               > 選択しない </button>
             )}
           </div>
@@ -262,6 +262,8 @@ class Iconio extends Component {
   render() {
     const accessories = this.state.accessories;
     const errors = this.state.errors;
+
+    console.log(localStorage);
 
     if (this.props.icons.isOrdered){
        return <Redirect to="/iconio/payment/paypal" />;

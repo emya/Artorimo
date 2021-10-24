@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production"){
 
 class IconioDownload extends Component {
   componentDidMount() {
-    this.props.fetchOrder(this.props.match.params.token);
+    //this.props.fetchOrder(this.props.match.params.token);
     //this.props.fetchOrder("53a647c19b0b42dcb395b1bc0c943bb5");
   }
 
@@ -97,8 +97,8 @@ class IconioDownload extends Component {
     <div class="spacer"></div>
     <button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>
 
-    {/* {this.props.icons.order && this.props.icons.orderCompleted && ( */}
-    {this.props && this.props.icons.isDownloadReady && (
+    {/*this.props && this.props.icons.isDownloadReady && ( */}
+    {this.props && (
 
     <div class="parent" id="my-node">
       {icon_state.face > 0 && (
