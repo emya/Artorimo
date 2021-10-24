@@ -5,7 +5,8 @@ const initialState = {
   isOrdered: null,
   isRemoved: null,
   isDownloadReady: null,
-  orderCompleted: null
+  orderCompleted: null,
+  orderApproved: null
 };
 
 export default function payment(state=initialState, action) {
@@ -17,6 +18,13 @@ export default function payment(state=initialState, action) {
 
     case 'FETCH_ORDER':
       return {...state, order: action.data, orderCompleted: true};
+
+    case 'FETCH_APPROVED_ORDER':
+      console.log("FETCH_APPROVED_ORDER");
+      return {...state, order: action.data, orderApproved: true};
+
+    case 'FETCH_APPROVED_ORDER_FAILURE':
+      return {...state, order: action.data, orderApproved: false};
 
     case 'FETCH_ORDER_FOR_DOWNLOAD':
       return {...state, order: action.data, isDownloadReady: true};

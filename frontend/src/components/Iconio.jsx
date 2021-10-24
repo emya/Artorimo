@@ -165,12 +165,12 @@ class Iconio extends Component {
           <div class="wide-column">
             {this.state[optionName] === null ? (
               <button class="chosen-button"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, 0)}
               > 非表示 </button>
             )
             : (
               <button class="unselect"
-                   onClick={this.changeOption.bind(this, optionName, null)}
+                   onClick={this.changeOption.bind(this, optionName, 0)}
               > 選択しない </button>
             )}
           </div>
@@ -262,6 +262,8 @@ class Iconio extends Component {
   render() {
     const accessories = this.state.accessories;
     const errors = this.state.errors;
+
+    console.log(localStorage);
 
     if (this.props.icons.isOrdered){
        return <Redirect to="/iconio/payment/paypal" />;

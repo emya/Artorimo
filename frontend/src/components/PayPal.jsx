@@ -100,12 +100,13 @@ class PayPal extends Component {
     console.log("data", data);
     console.log("actions", actions);
     //this.props.history.push("/iconio/payment/paypal/done");
+    var order_id = this.props.icons.order.id;
+    localStorage.setItem('approved_order_id', order_id)
 
     const details = await actions.order.capture();
 
     console.log(details, typeof(details))
 
-    var order_id = this.props.icons.order.id;
     var paypal_order_id = details.id;
     var paypal_status = 1;
     var payer_email = details.payer.email_address;
@@ -308,7 +309,7 @@ class PayPal extends Component {
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
-        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID}}>
+        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "disable-funding": "credit"}}>
             <PayPalButtons
                 order_id={order_id}
                 style={{ layout: "horizontal" }}
