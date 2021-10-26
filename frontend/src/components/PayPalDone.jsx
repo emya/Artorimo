@@ -99,7 +99,7 @@ class PayPalDone extends Component {
   <div>
   <Header />
   <div class="wrapper clearfix">
-  <SideMenu />
+
   <div class="download-screen">
     <h2>Thank You for Using Iconio!</h2>
     <div class="spacer"></div>

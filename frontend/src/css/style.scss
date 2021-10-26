@@ -297,7 +297,7 @@ input {
 
 .catchcopy.clearfix {
   @media (max-width: 767px) {
-    height: 250px;
+    height: 500px;
   }}
 
 
@@ -325,10 +325,10 @@ input {
 .catch2 {
   @media (max-width: 767px) {
     margin: auto;
-    width: 100%;
+    // width: 100%;
     padding: 0 10px;
     bottom:  50px;
-    left: 0;
+    left: 350px;
   }}
 
   .catch h1, .catch2 h1 {
@@ -478,6 +478,7 @@ input {
 .how-container-mobile {
   @media (min-width: 767px) {
     display: none;
+    margin-bottom: 30px;
   }}
 
 .lp-how-mobile {
@@ -661,13 +662,13 @@ input {
 .service {
   background-color: white;
   width: 100%;
-  height: 600px;
+  height: auto;
   padding: 60px 100px;
 }
 
 .service {
   @media (max-width: 767px) {
-    height: 1500px;
+    height: auto;
     padding: 30px 7%;
   }}
 
@@ -2625,6 +2626,35 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
 
 // iconio landing
 
-.lobody.iconio-lp > section {
+.lpbody.iconio-lp > section {
   padding: 60px 100px;
+}
+
+.wrapper-merit {
+  // display: flex;
+}
+
+.merit-box {
+  display: inline-block;
+  width: 30%;
+  margin-bottom: 50px;
+}
+
+.merit-box {
+ @media (max-width: 767px) {
+   width: 100%;
+ }
+}
+
+.catch-iconio {
+  width: 70%;
+  margin: 15% auto 20%;
+  height: auto;
+}
+
+.catch-iconio {
+ @media (max-width: 767px) {
+   height: 350px;
+   width: 85%;
+ }
 }
