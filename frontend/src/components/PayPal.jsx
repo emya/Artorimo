@@ -96,7 +96,7 @@ class PayPal extends Component {
 
     content.unshift(
         <tr>
-          <td align="left"> Icon </td>
+          <td align="left"> アイコンダウンロード </td>
           <td align="right"> $ 5 </td>
         </tr>
     )
@@ -157,18 +157,17 @@ class PayPal extends Component {
 
 
   render() {
-    if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
-        return <Redirect to="/iconio" />;
-    }
+    // if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
+    //     return <Redirect to="/iconio" />;
+    // }
 
     console.log("props", this.props.icons)
 
-    const icon_state = this.props.icons.order;
-    console.log(icon_state);
+    // const icon_state = this.props.icons.order;
 
     // This is the test data
     // TODO: use the above icon_state
-    /*
+
     const icon_state = {
         bang: 1,
         bang_filter: 5,
@@ -190,7 +189,7 @@ class PayPal extends Component {
         side: 1,
         side_filter: 5,
     }
-    */
+
     // This should be used once test is done
     const artist_id = this.props.icons.order.artist.id;
     const order_id = this.props.icons.order.id;
@@ -320,14 +319,14 @@ class PayPal extends Component {
       <div class="profile">
         <h2>Checkout</h2>
         <div class="spacer-precheckout"></div>
-        <h3>Your Order</h3>
+        <h3>ご注文内容</h3>
         <div class="checkout">
           <table class="checkout-item">
           {this.getOrderTable()}
           </table>
-          <div class="checkout-list-wrapper"><div class="checkout-list">Subtotal:</div><div class="checkout-list-amt">{this.getTotal()}</div></div>
-          <div class="checkout-list-wrapper"><div class="checkout-list">Shipping:</div><div class="checkout-list-amt">0</div></div>
-          <div class="checkout-list-wrapper"><div class="checkout-list total">Total:</div><div class="checkout-list-amt total-amt">{this.getTotal()}</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list">小計:</div><div class="checkout-list-amt">{this.getTotal()}</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list">送料:</div><div class="checkout-list-amt">0</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list total">合計:</div><div class="checkout-list-amt total-amt">{this.getTotal()}</div></div>
         </div>
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}

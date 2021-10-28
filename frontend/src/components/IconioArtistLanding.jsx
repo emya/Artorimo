@@ -32,15 +32,11 @@ class IconioArtistLanding extends Component {
   <div>
   <Header />
   <header>
-    <div class="catchcopy clearfix">
-
-
-        <div class="catch-english">
-          <h1 class="site-title2">イラストレーターのみなさん、<span class="bold">Iconio</span>でアイコンメーカーを作って安定収入を得ませんか？</h1>
-          <p>Iconioは、「個人からアイコン作成の依頼が来るが、メールのやり取りも含め、手が回っていない」、<br/>「制作に時間がかかる割に単価が安い」といったアーティスト様からの声を反映して生まれました。</p>
+        <div class="catch-iconio">
+          <h1 class="catch-iconio-heading">イラストレーターのみなさん、<span class="bold">Iconio</span>で<br/>アイコンメーカーを作って安定収入を得ませんか？</h1>
+          <p>「個人からアイコン作成の依頼が来るが、メールのやり取りも含め、<br/>手が回っていない」、「制作に時間がかかる割に単価が安い」<br/>といったアーティスト様からの声を反映して生まれたサービスです。</p>
           <a class="button" href="/register"> 始める</a>
         </div>
-    </div>
   </header>
 
   <div class="menu">
@@ -52,22 +48,22 @@ class IconioArtistLanding extends Component {
   <div class="lpbody iconio-lp">
     <section class="iconio-description">
       <h2>Iconioのメリット</h2>
-      <div class="wrapper-service">
-        <div class="service-box">
+      <div class="wrapper-merit">
+        <div class="merit-box">
         <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/money.png`} />
         <div class="service-title">安定収入</div>
         <p class="service-text">アイコンのダウンロード毎に売上が発生。一度アイコンメーカーを作れば半永久的な自動収入になります。投げ銭システムやプリントオプションも実装予定。</p>
         </div>
       </div>
-      <div class="wrapper-service">
-        <div class="service-box">
+      <div class="wrapper-merit">
+        <div class="merit-box">
         <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/worldwide.png`} />
         <div class="service-title">海外での認知度向上</div>
         <p class="service-text">弊社が国内外へアイコンメーカーのマーケティングを行い、海外展開のお手伝いをします。月額使用料・初期費用無料です！</p>
         </div>
       </div>
-      <div class="wrapper-service">
-      <div class="service-box">
+      <div class="wrapper-merit">
+      <div class="merit-box">
         <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/friends.png`} />
       <div class="service-title">ファンサービス</div>
       <p class="service-text">これまで時間が取れなかった方も、アイコンメーカーを通してより多くのファンの方に作品を楽しんでいただけます。</p>
