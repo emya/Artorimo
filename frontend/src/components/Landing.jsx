@@ -60,7 +60,7 @@ class Landing extends Component {
           <p class="how-4">クリエーターへ報酬を入金</p>
         </div>
       </div>
-      <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">無料会員登録</a>
+      <a class="button" href="/register">無料会員登録</a>
     </section>
 
 

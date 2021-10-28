@@ -17,7 +17,7 @@ import SideMenu from './SideMenu';
 import Filters from './Filters';
 import { keys_prod } from '../keys_prod.js';
 import { keys_stg } from '../keys.js';
-import '../css/style.scss';
+import '../css/icons.scss';
 
 var keys = keys_stg;
 if (process.env.NODE_ENV === "production"){
@@ -32,7 +32,7 @@ class IconioDownload extends Component {
 
   saveToPng = (e) => {
     e.preventDefault();
-    var node = document.getElementById('my-node');
+    var node = document.getElementById('my-iconio');
 
     /*
     html2canvas([document.getElementById('my-node')], {
@@ -48,9 +48,9 @@ class IconioDownload extends Component {
     });
     */
 
-    htmlToImage.toPng(document.getElementById('my-node'))
+    htmlToImage.toPng(document.getElementById('my-iconio'))
       .then(function (dataUrl) {
-        download(dataUrl, 'my-node.png');
+        download(dataUrl, 'my-iconio.png');
     });
   }
 
@@ -86,6 +86,7 @@ class IconioDownload extends Component {
     const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
     console.log("icon_state", this.props);
+    console.log(keys.Access_Control_Allow_Origin)
 
     return (
   <div>
@@ -100,11 +101,12 @@ class IconioDownload extends Component {
     {/*this.props && this.props.icons.isDownloadReady && ( */}
     {this.props && (
 
-    <div class="parent" id="my-node">
+    <div class="download-parent" id="my-iconio">
       {icon_state.face > 0 && (
         <img class="image1 imgFace"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/face${icon_state.face}.png`}
              style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -128,6 +130,7 @@ class IconioDownload extends Component {
         <img class="image1 imgHair"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/hair${icon_state.hair}.png`}
              style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -151,6 +154,7 @@ class IconioDownload extends Component {
         <img class="image1 imgBang"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/bang${icon_state.bang}.png`}
              style={{filter: `url(#filterHairColor${icon_state.bang_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.bang_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -174,6 +178,7 @@ class IconioDownload extends Component {
         <img class="image1 imgSide"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/side${icon_state.side}.png`}
              style={{filter: `url(#filterHairColor${icon_state.side_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.side_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -208,6 +213,7 @@ class IconioDownload extends Component {
         <img class="image1 imgEyeballs"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyes${icon_state.eyes}.png`}
              style={{filter: `url(#filterEyesColor${icon_state.eyes_filter})`, WebkitFilter: `url(#filterEyesColor${icon_state.eyes_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -221,6 +227,7 @@ class IconioDownload extends Component {
         <img class="image1 imgEyebrows"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyebrows${icon_state.eyebrows}.png`}
              style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -252,6 +259,7 @@ class IconioDownload extends Component {
         <img class="image1 imgMouth"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/mouth${icon_state.mouth}.png`}
              style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
+             crossorigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -274,7 +282,7 @@ class IconioDownload extends Component {
       {/* Cloth */}
       {icon_state.cloth > 0 && (
         <img class="image1 imgCloth"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/cloth${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${artist_id}/cloth${icon_state.cloth}.png`}
              style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
              source={{
                header: {
@@ -285,7 +293,7 @@ class IconioDownload extends Component {
       )}
       {icon_state.cloth > 0 && (
         <img class="image1 imgClothLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/cloth_line${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${artist_id}/cloth_line${icon_state.cloth}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
