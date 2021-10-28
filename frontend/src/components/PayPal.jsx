@@ -333,7 +333,7 @@ class PayPal extends Component {
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
         <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
-        <p class="agree">I Agree with <a href="/privacy-policy" >Terms and Conditions</a></p>
+        <p class="agree">I Agree with <a href="/user-guide" > the User Guide </a></p>
 
         {this.state.agree_check_error && (
           <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
