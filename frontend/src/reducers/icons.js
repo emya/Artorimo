@@ -6,7 +6,8 @@ const initialState = {
   isRemoved: null,
   isDownloadReady: null,
   orderCompleted: null,
-  orderApproved: null
+  orderApproved: null,
+  uploadCompleted: null,
 };
 
 export default function payment(state=initialState, action) {
@@ -20,11 +21,16 @@ export default function payment(state=initialState, action) {
       return {...state, order: action.data, orderCompleted: true};
 
     case 'FETCH_APPROVED_ORDER':
-      console.log("FETCH_APPROVED_ORDER");
       return {...state, order: action.data, orderApproved: true};
 
     case 'FETCH_APPROVED_ORDER_FAILURE':
       return {...state, order: action.data, orderApproved: false};
+
+    case 'COMPLETE_ICON_UPLOAD':
+      return {...state, order: action.data, uploadCompleted: true};
+
+    case 'COMPLETE_ICON_UPLOAD_FAILURE':
+      return {...state, order: action.data, uploadCompleted: false};
 
     case 'FETCH_ORDER_FOR_DOWNLOAD':
       return {...state, order: action.data, isDownloadReady: true};

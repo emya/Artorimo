@@ -22,6 +22,10 @@ import AskHelp from "./components/AskHelp";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import IconioArtistGuide from "./components/IconioArtistGuide";
+import IconioUserGuide from "./components/IconioUserGuide";
+import IconioUploadCompleted from "./components/IconioUploadCompleted";
+import IconioUploadFailed from "./components/IconioUploadFailed";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import ActivateAccount from "./components/ActivateAccount";
@@ -103,6 +107,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                    <Route exact path="/user-guide" component={IconioUserGuide} />
                     <Route exact path="/test" component={Test} />
                     <Route exact path="/iconio/creators/top" component={IconioArtistLanding} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
@@ -115,6 +120,11 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myportfolio/edit" component={MyPortfolioEdit} />
                     <PrivateRoute exact path="/ask/help" component={AskHelp} />
                     <PrivateRoute exact path="/iconio/uploader" component={IconioUploader} />
+
+                    <PrivateRoute exact path="/artist-guide" component={IconioArtistGuide} />
+                    <PrivateRoute exact path="/iconio/upload/completed" component={IconioUploadCompleted} />
+                    <PrivateRoute exact path="/iconio/upload/failed" component={IconioUploadFailed} />
+
                     <Route exact path="/iconio" component={Iconio} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />

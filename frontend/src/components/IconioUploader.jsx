@@ -355,6 +355,7 @@ class IconioUploader extends Component {
     }
   }
 
+
   validateUpload = () => {
     // we are going to store errors for all fields
     // in a signle array
@@ -906,7 +907,6 @@ class IconioUploader extends Component {
       </div>
     </div>
 
-
     <div class="icon-uploaded-parts">
     <div class="uploader-two">
       <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
@@ -967,7 +967,7 @@ class IconioUploader extends Component {
     </div>
 
     </div>
-    <button class="btn savep two-btn"> 完了する </button>
+    <a class="btn savep two-btn" href="/artist-guide"> 同意書を確認し完了する </a>
     <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
     <div>
       <p>アップロード・削除したパーツの表示がおかしい場合はこちらをクリックしてください</p>

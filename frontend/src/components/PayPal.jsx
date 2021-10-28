@@ -44,9 +44,31 @@ class PayPal extends Component {
       2: "Tote Bag",
       3: "Sticker",
       4: "Post card"
-    }
+    },
+    isAgreed: false,
+    agree_check_error: null,
   }
 
+  handleAgreementCheck = (e) => {
+    this.setState({
+      isAgreed: e.target.checked
+    })
+  }
+
+  onClickCheck = () => {
+    console.log("onClickCheck!");
+
+    const errors = [];
+
+    if (!this.state.isAgreed) {
+      errors.push("Please read and agree to the Terms");
+      this.setState({agree_check_error: "Please read and agree to the Terms"})
+    } else {
+      this.setState({agree_check_error: null})
+    }
+
+    return errors;
+  }
   /* TODO: Enable this when add item is on
   handleCallback = (childData) => {
     this.setState({additional_items: childData})
@@ -169,10 +191,10 @@ class PayPal extends Component {
     }
 
     // This should be used once test is done
-    // const artist_id = this.props.icons.order.artist.id;
-    // const order_id = this.props.icons.order.id;
-    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
-    const order_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    const artist_id = this.props.icons.order.artist.id;
+    const order_id = this.props.icons.order.id;
+    // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    const agree_check_error = this.state.agree_check_error;
 
     return (
   <div>
@@ -309,6 +331,13 @@ class PayPal extends Component {
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
+        <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
+        <p class="agree">I Agree with <a href="/user-guide" > the User Guide </a></p>
+
+        {this.state.agree_check_error && (
+          <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
+        )}
+
         <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "disable-funding": "credit"}}>
             <PayPalButtons
                 order_id={order_id}
@@ -318,7 +347,42 @@ class PayPal extends Component {
 
                   console.log(data);
                   console.log(actions);
+                  var errors = this.onClickCheck();
+                  var isInvalid = errors.length > 0;
+                  if (isInvalid) {
+                    console.log("invalid");
+                    return actions.reject();
+                  }
                 }}
+
+                /*
+                onInit = {(data, actions) => {
+                  // Disable the buttons
+                  console.log("onInit", actions);
+                  if (this.state.isAgreed) {
+                    actions.enable();
+                    console.log("enabled");
+                  } else{
+                    actions.disable();
+                    console.log("disabled");
+                  }
+
+
+                  // Listen for changes to the checkbox
+                  document.querySelector('#terms')
+                    .addEventListener('change', function(event) {
+                      // Enable or disable the button when it is checked or unchecked
+                      console.log(event)
+                      if (event.target.checked)  {
+                        console.log("enable");
+                        actions.enable();
+                      } else  {
+                        console.log("disable");
+                        actions.disable();
+                      }
+                  });
+                }}
+                */
 
                 onApprove={(data, actions) => this.onApproveOrder(data, actions)}
                 /*
