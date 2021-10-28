@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+  <head>
+    <meta charsset="UTF-8">
+    <title>Transaction Status</title>
+    <style>
+      .email-background {
+        border-radius: 7px;
+        margin:10px auto;
+        padding: 30px;
+        width: 90%;
+      }
+
+      .email-header {
+        background-color: #6e7071;
+      }
+
+      .logo-link {
+        width: 50%;
+        height: auto;
+        font-size: 1.5em;
+        color: white;
+        padding: 20px;
+      }
+
+      .email-body {
+        padding: 20px;
+      }
+
+      .email-greeting {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 40px;
+      }
+
+      .email-closing {
+        font-weight: bold;
+      }
+
+      .btn {
+        background-color: #0abab5;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="email-background">
+      <div class="email-header">
+        <div class="logo-link">Iconio Upload</div>
+      </div>
+
+      <div class="email-body">
+        <div class="email-greeting">
+          {{user.last_name}} {{user.first_name}} completed Iconio upload
+        </div>
+
+        <p>
+          email: {{email}}<br/><br/>
+        </p>
+
+      </div>
+    </div>
+  </body>
+</html>
