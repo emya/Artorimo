@@ -7,7 +7,7 @@ from rest_framework.utils import html
 from .models import (
     User, Profile, Portfolio,
     CommunityPost, CommunityReply,
-    IconOrder, PayPalWebhook
+    IconOrder, PayPalWebhook, IconUpload
 )
 from django.conf import settings
 
@@ -129,6 +129,13 @@ class IconOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = IconOrder
+        fields = '__all__'
+
+class IconUploadSerializer(serializers.ModelSerializer):
+    artist = UserSerializer(read_only=True)
+
+    class Meta:
+        model = IconUpload
         fields = '__all__'
 
 class PayPalWebhookSerializer(serializers.ModelSerializer):

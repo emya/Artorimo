@@ -154,6 +154,18 @@ class IconOrder(models.Model):
     status = models.CharField(max_length=100)
     created_time = models.DateTimeField(auto_now_add=True)
 
+class IconUpload(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    artist = models.ForeignKey(User, on_delete=models.CASCADE)
+    version = models.IntegerField()
+    is_current_version = models.BooleanField()
+    # 0: Personal
+    # 1: Commercial
+    # 2: Non-commercial
+    # 3: Retouch
+    use_range = models.CharField(max_length=25)
+    created_time = models.DateTimeField(auto_now_add=True)
+
 class PayPalWebhook(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     event_type = models.CharField(max_length=50)

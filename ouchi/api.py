@@ -30,7 +30,8 @@ from decimal import Decimal
 from .models import (
     User, Profile, Portfolio,
     CommunityPost, CommunityReply,
-    IconOrder, PayPalWebhook
+    IconOrder, IconUpload,
+    PayPalWebhook
 )
 from .serializers import (
     UserSerializer,
@@ -39,6 +40,7 @@ from .serializers import (
     ProfileSerializer,
     PortfolioSerializer,
     IconOrderSerializer,
+    IconUploadSerializer,
     CommunityPostSerializer,
     CommunityReplySerializer,
     PayPalWebhookSerializer,
@@ -62,6 +64,22 @@ line_only_elements = ["nose", "accessories", "glasses"]
 
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
+
+    def post_for_chiaki(self, request, *args, **kwargs):
+        data = request.data
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        user.is_activated = True
+        user.save()
+        Profile.objects.create(user=user)
+        Portfolio.objects.create(user=user)
+        _, token = AuthToken.objects.create(user)
+
+        return Response({
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": token
+        })
 
     def post(self, request, *args, **kwargs):
         logger.info("Logger: Register")
@@ -424,13 +442,10 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk):
-        print("retrive", pk)
         paypal_status = request.GET.get('paypal_status')
         queryset = IconOrder.objects.all()
         order = get_object_or_404(queryset, pk=pk)
         if paypal_status:
-            print(order.paypal_status)
-            print(paypal_status)
             if int(order.paypal_status) != int(paypal_status):
                 return Response("The order is not approved yet", status=status.HTTP_400_BAD_REQUEST)
         serializer = self.serializer_class(order)
@@ -448,6 +463,56 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(icon_order)
 
         return Response(serializer.data)
+
+class IconUploadViewSet(generics.GenericAPIView):
+    serializer_class = IconUploadSerializer
+    permission_classes = [BaseUserPermissions, ]
+
+    def post(self, request):
+        artist_id = request.data.get("artist_id")
+        use_range = request.data.get("use_range")
+        artist = User.objects.get(pk=artist_id)
+        icon_uoloads = IconUpload.objects.filter(artist=artist)
+
+        if icon_uoloads.count() == 0:
+            # Create new one
+            # TODO: use_range
+            icon_uoload = IconUpload.objects.create(artist=artist, version=0, is_current_version=True, use_range=use_range)
+            serializer = self.serializer_class(icon_uoload)
+
+            return Response(serializer.data)
+        else:
+            current_version_upload = icon_uoloads.filter(is_current_version=True)[0]
+            current_version = current_version_upload.version
+            current_use_range = current_version_upload.use_range
+
+            created_time = current_version_upload.created_time
+
+            from django.utils import timezone
+            timeNow = timezone.localtime(timezone.now())
+
+            diff = timeNow - created_time
+
+            days, hours = diff.days, diff.seconds // 3600
+
+            if (days > 0 or hours > 8):
+                icon_uoload = IconUpload.objects.create(artist=artist, version=current_version+1, is_current_version=True,
+                                                            use_range=current_use_range)
+                current_version_upload.is_current_version = False
+                current_version_upload.save()
+                serializer = self.serializer_class(icon_uoload)
+
+                # Notify Ohchee Team
+                html_message = render_to_string('email-iconio-upload.html',
+                                                {'user': artist, 'email': artist.email})
+
+                send_email.delay("[Action Required] Iconio upload completed", "Iconio Upload", html_message,
+                                 [settings.EMAIL_HOST_USER])
+
+                return Response(serializer.data)
+
+            else:
+                return Response("Upload was done within a day", status=status.HTTP_400_BAD_REQUEST)
 
 
 class IconMakerAPI(generics.GenericAPIView):
