@@ -1196,13 +1196,18 @@ footer a:link,footer a:visited,footer a:hover,footer a:active {
   display: inline-block;
   text-align: left;
   width: auto;
+  // margin-top: 10px;
+  line-height: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
 }
 
 #terms {
   width: 20px;
   height: 20px;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .topbar-contents {

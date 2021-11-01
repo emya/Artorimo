@@ -967,7 +967,7 @@ class IconioUploader extends Component {
     </div>
 
     </div>
-    <a class="btn savep two-btn" href="/artist-guide"> 同意書を確認し完了する </a>
+    <a class="btn savep two-btn" href="/artist-guide"> 完了する </a>
     <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
     <div>
       <p>アップロード・削除したパーツの表示がおかしい場合はこちらをクリックしてください</p>
