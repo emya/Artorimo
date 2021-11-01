@@ -71,35 +71,38 @@ class IconioArtistGuide extends Component {
 
     const { pageNumber, numPages } = this.state;
     return (
-    <div>
+    <div class="policy-wrapper">
       <iframe
         src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
-        style={{width: "100%", height: "800px"}}
+        style={{width: "100%", height: "75vmin"}}
+        class="policy-doc"
         source={{
           header: {
             'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
           }
         }}
       />
-      <div>
-        <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
-        <p class="agree">I Agree with the Terms and Conditions</p>
+      <div class="sign-area">
+        <div>
+          <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
+          <p class="agree">利用規約に同意します</p>
+        </div>
+        <div class="use-wrapper">
+          <p class="use-header">利用許可</p>
+          <input type="checkbox" id="terms" checked={this.state.personal_use} onChange={this.handleUseCheck.bind(this, "personal_use")} />
+          <p class="agree">個人 (推奨)</p>
+          <input type="checkbox" id="terms" checked={this.state.commercial_use} onChange={this.handleUseCheck.bind(this, "commercial_use")} />
+          <p class="agree">商用</p>
+          <input type="checkbox" id="terms" checked={this.state.noncommercial_use} onChange={this.handleUseCheck.bind(this, "noncommercial_use")} />
+          <p class="agree">非商用</p>
+          <input type="checkbox" id="terms" checked={this.state.retouch_use} onChange={this.handleUseCheck.bind(this, "retouch_use")} />
+          <p class="agree">加工</p>
+        </div>
+        {this.state.agree_check_error && (
+            <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
+        )}
+        <button class="btn savep two-btn" onClick={this.iconUploadComplete}> 完了する </button>
       </div>
-      <div>
-        <h4> The use </h4>
-        <input type="checkbox" id="terms" checked={this.state.personal_use} onChange={this.handleUseCheck.bind(this, "personal_use")} />
-        <p class="agree">Personal Use (Recommended)</p>
-        <input type="checkbox" id="terms" checked={this.state.commercial_use} onChange={this.handleUseCheck.bind(this, "commercial_use")} />
-        <p class="agree">Commercial Use</p>
-        <input type="checkbox" id="terms" checked={this.state.noncommercial_use} onChange={this.handleUseCheck.bind(this, "noncommercial_use")} />
-        <p class="agree">Non-Commercial Use</p>
-        <input type="checkbox" id="terms" checked={this.state.retouch_use} onChange={this.handleUseCheck.bind(this, "retouch_use")} />
-        <p class="agree">Retouch</p>
-      </div>
-      {this.state.agree_check_error && (
-          <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
-      )}
-      <button class="btn savep two-btn" onClick={this.iconUploadComplete}> 完了する </button>
     </div>
     )
   }
