@@ -83,9 +83,6 @@ class IconioDownload extends Component {
     //const artist_id = this.props.icons.order.artist.id;
     const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
-    console.log("icon_state", this.props);
-    console.log(keys.Access_Control_Allow_Origin)
-
     return (
   <div>
   <Header />
