@@ -17,7 +17,7 @@ import SideMenu from './SideMenu';
 import Filters from './Filters';
 import { keys_prod } from '../keys_prod.js';
 import { keys_stg } from '../keys.js';
-import '../css/style.scss';
+import '../css/icons.scss';
 
 var keys = keys_stg;
 if (process.env.NODE_ENV === "production"){
@@ -56,13 +56,36 @@ class PayPalDone extends Component {
 
     htmlToImage.toPng(document.getElementById('my-iconio'))
       .then(function (dataUrl) {
-        download(dataUrl, 'my-iconio.png');
+        var link = document.createElement('a');
+        link.style.cssText = 'position:absolute;top:0;left:0;width:500px;height:500px;padding:0;';
+
+        link.download = 'my-image-name.jpeg';
+        link.href = dataUrl;
+        link.click();
     });
+
+    /*
+    htmlToImage.toCanvas(document.getElementById('my-iconio'))
+      .then(function (canvas) {
+        document.body.appendChild(canvas);
+    });
+    */
+
+    /*
+    htmlToImage.toPng(document.getElementById('my-iconio'))
+      .then(function (dataUrl) {
+        console.log(dataUrl);
+        var img = new Image();
+        img.height = 500;
+        img.width = 500;
+        img.src = dataUrl;
+        document.body.appendChild(img);
+        //download(dataUrl, 'my-iconio.png');
+    });
+    */
   }
 
   render() {
-    console.log("props", this.props);
-
     const icon_state = this.props.icons.order;
     // This is the test data
     // TODO: use the above icon_state
@@ -94,7 +117,6 @@ class PayPalDone extends Component {
     // const artist_id = this.props.icons.order.artist.id;
     // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
-
     return (
   <div>
   <Header />
@@ -114,9 +136,9 @@ class PayPalDone extends Component {
 
     {this.props.icons.order && this.props.icons.orderApproved && (
 
-    <div class="parent" id="my-iconio">
+    <div id="my-iconio">
       {icon_state.face > 0 && (
-        <img class="image1 imgFace"
+        <img class="download-image1 imgFace"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face${icon_state.face}.png`}
              style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
              source={{
@@ -127,7 +149,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.face > 0 && (
-        <img class="image1 imgFaceLine"
+        <img class="download-image1 imgFaceLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face_line${icon_state.face}.png`}
              source={{
                header: {
@@ -139,7 +161,7 @@ class PayPalDone extends Component {
 
       {/* Hair */}
       {icon_state.hair > 0 && (
-        <img class="image1 imgHair"
+        <img class="download-image1 imgHair"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair${icon_state.hair}.png`}
              style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
              source={{
@@ -150,7 +172,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.hair > 0 && (
-        <img class="image1 imgHairLine"
+        <img class="download-image1 imgHairLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair_line${icon_state.hair}.png`}
              source={{
                header: {
@@ -162,7 +184,7 @@ class PayPalDone extends Component {
 
       {/* Bang */}
       {icon_state.bang > 0 && (
-        <img class="image1 imgBang"
+        <img class="download-image1 imgBang"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang${icon_state.bang}.png`}
              style={{filter: `url(#filterHairColor${icon_state.bang_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.bang_filter})`}}
              source={{
@@ -173,7 +195,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.bang > 0 && (
-        <img class="image1 imgBangLine"
+        <img class="download-image1 imgBangLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang_line${icon_state.bang}.png`}
              source={{
                header: {
@@ -185,7 +207,7 @@ class PayPalDone extends Component {
 
       {/* Side */}
       {icon_state.side > 0 && (
-        <img class="image1 imgSide"
+        <img class="download-image1 imgSide"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side${icon_state.side}.png`}
              style={{filter: `url(#filterHairColor${icon_state.side_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.side_filter})`}}
              source={{
@@ -196,7 +218,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.side > 0 && (
-        <img class="image1 imgSideLine"
+        <img class="download-image1 imgSideLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side_line${icon_state.side}.png`}
              source={{
                header: {
@@ -209,7 +231,7 @@ class PayPalDone extends Component {
 
       {/* Eyes */}
       {icon_state.eyes > 0 && (
-        <img class="image1 imgEyes"
+        <img class="download-image1 imgEyes"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes_line${icon_state.eyes}.png`}
              source={{
                header: {
@@ -219,7 +241,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.eyes > 0 && (
-        <img class="image1 imgEyeballs"
+        <img class="download-image1 imgEyeballs"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes${icon_state.eyes}.png`}
              style={{filter: `url(#filterEyesColor${icon_state.eyes_filter})`, WebkitFilter: `url(#filterEyesColor${icon_state.eyes_filter})`}}
              source={{
@@ -232,7 +254,7 @@ class PayPalDone extends Component {
 
       {/* Eyebrow */}
       {icon_state.eyebrows > 0 && (
-        <img class="image1 imgEyebrows"
+        <img class="download-image1 imgEyebrows"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows${icon_state.eyebrows}.png`}
              style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
              source={{
@@ -243,7 +265,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.eyebrows > 0 && (
-        <img class="image1 imgEyebrowsLine"
+        <img class="download-image1 imgEyebrowsLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows_line${icon_state.eyebrows}.png`}
              source={{
                header: {
@@ -256,14 +278,14 @@ class PayPalDone extends Component {
 
       {/* Nose */}
       {icon_state.nose > 0 && (
-        <img class="image1 imgNose"
+        <img class="download-image1 imgNose"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/nose${icon_state.nose}.png`}
         />
       )}
 
       {/* Mouth */}
       {icon_state.mouth > 0 && (
-        <img class="image1 imgMouth"
+        <img class="download-image1 imgMouth"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth${icon_state.mouth}.png`}
              style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
              source={{
@@ -274,7 +296,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.mouth > 0 && (
-        <img class="image1 imgMouthLine"
+        <img class="download-image1 imgMouthLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth_line${icon_state.mouth}.png`}
              source={{
                header: {
@@ -287,7 +309,7 @@ class PayPalDone extends Component {
 
       {/* Cloth */}
       {icon_state.cloth > 0 && (
-        <img class="image1 imgCloth"
+        <img class="download-image1 imgCloth"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth${icon_state.cloth}.png`}
              style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
              source={{
@@ -298,7 +320,7 @@ class PayPalDone extends Component {
         />
       )}
       {icon_state.cloth > 0 && (
-        <img class="image1 imgClothLine"
+        <img class="download-image1 imgClothLine"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth_line${icon_state.cloth}.png`}
              source={{
                header: {
@@ -310,7 +332,7 @@ class PayPalDone extends Component {
 
       {/* Accessories */}
       {icon_state.accessories > 0 && (
-        <img class="image1 imgAccessories"
+        <img class="download-image1 imgAccessories"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/accessories${icon_state.accessories}.png`}
              source={{
                header: {
@@ -320,15 +342,22 @@ class PayPalDone extends Component {
         />
       )}
 
+      <img class="download-image1 imgBackGround"
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+          source={{
+               header: {
+                'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
+      />
+
 
     </div>
     ) }
 
-
-    <div id="image">
-    </div>
     </div>
   </div>
+  <Filters />
   <Footer />
   </div>
     )
