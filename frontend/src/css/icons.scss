@@ -14,13 +14,7 @@
   width: 500px;
 }
 
-#my-iconio {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 500px;
-  width: 500px;
-}
+
 
 .parent, .download-parent {
   @media (max-width: 767px) {
@@ -370,6 +364,37 @@
   }
 }
 
+.download-image1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  //left: 15%;
+  //width: 84%;
+  height: 400px;
+  width: 400px;
+}
+
+.download-image1 {
+  @media (max-width: 767px) {
+    position: absolute;
+    top: 0;
+    //width: 85%;
+    left: 0;
+    height: 400px;
+    width: 400px;
+  }
+}
+
+#my-iconio {
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  height: 500px;
+  width: 500px;
+  padding: 0;
+  margin: 0;
+}
+
 .parent-precheckout .image1 {
   @media (max-width: 767px) {
     width: 600px;
@@ -455,6 +480,7 @@
 .pleasetap {
   margin-bottom: 30px;
   display: inline-block;
+  width: 100%;
 }
 
 
@@ -541,6 +567,9 @@ body {
   z-index: 1;
 }
 
+.imgSample {
+  z-index: 1;
+}
 .imgFace {
   z-index: -35;
 }
@@ -594,6 +623,9 @@ body {
 }
 .imgAccessories {
   z-index: -1;
+}
+.imgBackGround {
+  z-index: -37;
 }
 
 
@@ -711,12 +743,13 @@ body {
 
 .icon-maker {
   display: block;
-  float: right;
-  width: 70%;
+  //float: right;
+  //width: 70%;
   // height: 2000px;
   background-color: #EEEEEE;
   text-align: center;
-  padding-bottom: 70px;
+  //padding-bottom: 70px;
+  padding-top: 10px;
   z-index: -1000;
 }
 
@@ -724,7 +757,7 @@ body {
   @media (max-width: 767px) {
     width: 100%;
     height: auto;
-    padding: 0 3% 100px 3%;
+    padding: 10px 3% 100px 3%;
   }
 }
 

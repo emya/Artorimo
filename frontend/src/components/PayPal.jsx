@@ -157,17 +157,17 @@ class PayPal extends Component {
 
 
   render() {
-    // if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
-    //     return <Redirect to="/iconio" />;
-    // }
+    if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
+      return <Redirect to="/iconio" />;
+    }
 
     console.log("props", this.props.icons)
 
-    // const icon_state = this.props.icons.order;
+    const icon_state = this.props.icons.order;
 
     // This is the test data
     // TODO: use the above icon_state
-
+    {/*
     const icon_state = {
         bang: 1,
         bang_filter: 5,
@@ -190,19 +190,32 @@ class PayPal extends Component {
         side_filter: 5,
     }
 
+    // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    */}
+
     // This should be used once test is done
     const artist_id = this.props.icons.order.artist.id;
     const order_id = this.props.icons.order.id;
-    // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
     const agree_check_error = this.state.agree_check_error;
 
     return (
   <div>
     <Header />
-    <Filters />
 
-    <div class="wrapper clearfix">
-        <div class="parent-precheckout">
+    <div class="icon-maker">
+    <div class="wrapper-icon clearfix">
+      <div class="iconio-uploader">
+      <div class="iconio-container ">
+      <h2>Iconio with Artist Name </h2>
+
+      <div class="uploader-one clearfix">
+
+      <div class="iconio-container-left">
+    {/*<div class="wrapper clearfix">
+        <div class="parent-precheckout">*/}
+        <img class="image1 imgSample"
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/sample.png`}
+        />
         {icon_state.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
@@ -316,7 +329,8 @@ class PayPal extends Component {
         )}
       </div>
 
-      <div class="profile">
+      {/*<div class="profile">*/}
+      <div class="iconio-container-right">
         <h2>Checkout</h2>
         <div class="spacer-precheckout"></div>
         <h3>ご注文内容</h3>
@@ -324,9 +338,9 @@ class PayPal extends Component {
           <table class="checkout-item">
           {this.getOrderTable()}
           </table>
-          <div class="checkout-list-wrapper"><div class="checkout-list">小計:</div><div class="checkout-list-amt">{this.getTotal()}</div></div>
-          <div class="checkout-list-wrapper"><div class="checkout-list">送料:</div><div class="checkout-list-amt">0</div></div>
-          <div class="checkout-list-wrapper"><div class="checkout-list total">合計:</div><div class="checkout-list-amt total-amt">{this.getTotal()}</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list">小計:</div><div class="checkout-list-amt">${this.getTotal()}</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list">送料:</div><div class="checkout-list-amt">$0</div></div>
+          <div class="checkout-list-wrapper"><div class="checkout-list total">合計:</div><div class="checkout-list-amt total-amt">${this.getTotal()}</div></div>
         </div>
 
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
@@ -465,6 +479,11 @@ class PayPal extends Component {
       </div>
 
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <Filters />
     <Footer />
   </div>
   )}

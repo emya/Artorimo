@@ -125,19 +125,21 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/iconio/upload/completed" component={IconioUploadCompleted} />
                     <PrivateRoute exact path="/iconio/upload/failed" component={IconioUploadFailed} />
 
-                    <Route exact path="/iconio" component={Iconio} />
+                    <StaffRoute exact path="/iconio" component={Iconio} />
+                    <StaffRoute exact path="/iconio/payment/paypal" component={PayPal} />
+                    <StaffRoute exact path="/iconio/payment/paypal/done" component={PayPalDone} />
+                    <StaffRoute exact path="/iconio/download/:token" component={IconioDownload} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />
                     <StaffRoute exact path="/send/emails" component={SendEmails} />
                     <StaffRoute exact path="/send/emagazines" component={SendEmailMagazines} />
+
                     <Route exact path="/iconmaker" component={IconMaker} />
                     <StaffRoute exact path="/iconmaker/test" component={IconMakerTest} />
                     <StaffRoute exact path="/iconmaker/fortwo" component={IconMakerForTwo} />
                     <Route exact path="/iconio/sample/uploader" component={SetupIconMaker} />
-                    <Route exact path="/iconio/payment/paypal" component={PayPal} />
-                    <Route exact path="/iconio/payment/paypal/done" component={PayPalDone} />
-                    <Route exact path="/iconio/download/:token" component={IconioDownload} />
+
                     <PrivateRoute exact path="/community" component={CommunityCategories} />
                     <PrivateRoute exact path="/community/posts/:category" component={CommunityPosts} />
                     <PrivateRoute exact path="/community/make/post" component={MakeCommunityPost} />

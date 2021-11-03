@@ -283,6 +283,9 @@ class Iconio extends Component {
       {/*<div class="parent">*/}
 
       <div class="iconio-container-left">
+        <img class="image1 imgSample"
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/sample.png`}
+        />
         {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${this.state.face_classes})`, WebkitFilter: `url(#filterSkinColor${this.state.face_classes})`}}
@@ -404,6 +407,10 @@ class Iconio extends Component {
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/glasses${this.state.glasses}.png`}
           />
         )}
+
+        <img class="image1 imgBackGround"
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+        />
       </div>
 
       <div class="iconio-container-right">
@@ -595,57 +602,46 @@ class Iconio extends Component {
     <div class="icon-uploaded-parts">
     <div class="uploader-two">
       <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
-        <h3 >髪パーツ</h3>
         {this.getAvailableOptions("hair")}
       </div>
 
       <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
-        <h3 >前髪パーツ</h3>
         {this.getAvailableOptions("bang")}
       </div>
 
       <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
-        <h3 >サイドヘアパーツ</h3>
         {this.getAvailableOptions("side")}
       </div>
 
       <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
-        <h3 >目パーツ</h3>
         {this.getAvailableOptions("eyes")}
       </div>
 
       <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
-        <h3 >眉パーツ</h3>
         {this.getAvailableOptions("eyebrows")}
       </div>
 
       <div style={{ display: this.state.looked_element === 5 ? "block" : "none" }}>
-        <h3 >鼻パーツ</h3>
         {this.getAvailableOptions("nose")}
       </div>
 
       <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
-        <h3 >口パーツ</h3>
         {this.getAvailableOptions("mouth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
-        <h3 >洋服パーツ</h3>
         {this.getAvailableOptions("cloth")}
       </div>
 
       <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
-        <h3 >輪郭パーツ</h3>
         {this.getAvailableOptions("face")}
       </div>
 
       <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
-        <h3 >アクセサリーパーツ</h3>
         {this.getAvailableAccessoriesOptions()}
       </div>
 
       <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
-        <h3>眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
     </div>
