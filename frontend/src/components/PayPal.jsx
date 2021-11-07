@@ -157,17 +157,17 @@ class PayPal extends Component {
 
 
   render() {
-    if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
-      return <Redirect to="/iconio" />;
-    }
+    // if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
+    //   return <Redirect to="/iconio" />;
+    // }
 
     console.log("props", this.props.icons)
 
-    const icon_state = this.props.icons.order;
+    // const icon_state = this.props.icons.order;
 
     // This is the test data
     // TODO: use the above icon_state
-    {/*
+
     const icon_state = {
         bang: 1,
         bang_filter: 5,
@@ -190,12 +190,13 @@ class PayPal extends Component {
         side_filter: 5,
     }
 
-    // const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
-    */}
+    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    const order_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+
 
     // This should be used once test is done
-    const artist_id = this.props.icons.order.artist.id;
-    const order_id = this.props.icons.order.id;
+    // const artist_id = this.props.icons.order.artist.id;
+    // const order_id = this.props.icons.order.id;
     const agree_check_error = this.state.agree_check_error;
 
     return (
@@ -208,7 +209,7 @@ class PayPal extends Component {
       <div class="iconio-container ">
       <h2>Iconio with Artist Name </h2>
 
-      <div class="uploader-one clearfix">
+      <div class="uploader-one clearfix paypal-icon">
 
       <div class="iconio-container-left">
     {/*<div class="wrapper clearfix">
@@ -331,7 +332,6 @@ class PayPal extends Component {
 
       {/*<div class="profile">*/}
       <div class="iconio-container-right">
-        <h2>Checkout</h2>
         <div class="spacer-precheckout"></div>
         <h3>ご注文内容</h3>
         <div class="checkout">
@@ -346,7 +346,7 @@ class PayPal extends Component {
         {/*<div dangerouslySetInnerHTML={{__html: this.props.payment.paypal_form}} />*/}
 
         <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
-        <p class="agree">I Agree with <a href="/user-guide" > the User Guide </a></p>
+        <p class="agree"><a href="/user-guide" >利用規約</a>に同意します</p>
 
         {this.state.agree_check_error && (
           <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>

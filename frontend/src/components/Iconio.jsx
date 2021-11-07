@@ -245,18 +245,18 @@ class Iconio extends Component {
   proceedCheckout = (e) => {
     e.preventDefault();
 
-    this.props.orderIcon(
-      this.state.artist_id,
-      this.state.face, this.state.face_classes,
-      this.state.hair, this.state.hair_classes,
-      this.state.bang, this.state.bang_classes,
-      this.state.side, this.state.side_classes,
-      this.state.eyes, this.state.eyes_classes,
-      this.state.eyebrows, this.state.eyebrows_classes,
-      this.state.nose,
-      this.state.mouth, this.state.mouth_classes,
-      this.state.cloth, this.state.cloth_classes,
-    );
+    // this.props.orderIcon(
+    //   this.state.artist_id,
+    //   this.state.face, this.state.face_classes,
+    //   this.state.hair, this.state.hair_classes,
+    //   this.state.bang, this.state.bang_classes,
+    //   this.state.side, this.state.side_classes,
+    //   this.state.eyes, this.state.eyes_classes,
+    //   this.state.eyebrows, this.state.eyebrows_classes,
+    //   this.state.nose,
+    //   this.state.mouth, this.state.mouth_classes,
+    //   this.state.cloth, this.state.cloth_classes,
+    // );
   }
 
   render() {

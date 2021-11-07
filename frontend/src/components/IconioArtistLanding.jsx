@@ -46,6 +46,10 @@ class IconioArtistLanding extends Component {
   </div>
 
   <div class="lpbody iconio-lp">
+    <section class="iconio-description iconio-examples">
+      <div class="icon-example"></div>
+      <div class="icon-example"></div>
+    </section>
     <section class="iconio-description">
       <h2>Iconioのメリット</h2>
       <div class="wrapper-merit">
@@ -71,10 +75,10 @@ class IconioArtistLanding extends Component {
       </div>
       <a class="button" href="/register"> 始める</a>
     </section>
-    <section class="iconio-artist">
+    {/*<section class="iconio-artist">
       <h2>Pickup! アーティスト</h2>
       (artist list exactly like client landing)
-    </section>
+    </section>*/}
 
   </div>
   <Footer />
