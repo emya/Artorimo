@@ -473,6 +473,7 @@ input {
 .how-container {
   @media (max-width: 767px) {
     display: none;
+    width: 100%;
   }}
 
 .how-container-mobile {
@@ -496,6 +497,10 @@ input {
   flex-flow: column;
   text-align: left;
   // display: inline;
+}
+
+.fixer {
+  color: white;
 }
 
 .how-1, .how-2, .how-3, .how-4 {

@@ -60,6 +60,7 @@ class Landing extends Component {
           <p class="how-4">クリエーターへ報酬を入金</p>
         </div>
       </div>
+      <p class="fixer">.</p>
       <a class="button" href="/register">無料会員登録</a>
     </section>
 
