@@ -584,7 +584,6 @@ class IconMakerAPI(generics.GenericAPIView):
             icon_parts["artist_id"] = artist_id
             icon_parts["version"] = version
 
-        print(icon_parts)
         return Response(icon_parts)
 
 class IconioAPI(generics.GenericAPIView):
@@ -630,10 +629,8 @@ class IconioDownloadAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
 
     def get(self, request):
-        print("get")
         oidb64 = request.GET.get('token')
         order_id = force_text(urlsafe_base64_decode(oidb64))
-        print("order_id", order_id)
         try:
             icon_order = IconOrder.objects.get(id=order_id)
         except(IconOrder.DoesNotExist):
