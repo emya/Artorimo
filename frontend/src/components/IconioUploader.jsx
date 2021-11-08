@@ -467,7 +467,7 @@ class IconioUploader extends Component {
     <div class="wrapper-icon clearfix">
     <SideMenu />
       <div class="icon-uploader">
-      <div class="icon-container ">
+
       <h2>Iconio Uploader</h2>
       <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
@@ -904,7 +904,6 @@ class IconioUploader extends Component {
           )}
         </button>
       </div>
-      </div>
     </div>
 
     <div class="icon-uploaded-parts">
@@ -967,20 +966,18 @@ class IconioUploader extends Component {
     </div>
 
     </div>
-    <a class="btn savep two-btn" href="/artist-guide"> 完了する </a>
-    <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
-    <div>
-      <p>アップロード・削除したパーツの表示がおかしい場合はこちらをクリックしてください</p>
-      <button class="btn savep two-btn" onClick={this.cleanupIconParts}> パーツのクリーンアップ </button>
-      <p>直らない場合は‪<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご連絡ください</p>
+
+      { /*<p>アップロード・削除したパーツの表示がおかしい場合は下記をクリック</p>
+      <button class="btn savep two-btn" onClick={this.cleanupIconParts}> パーツのクリーンアップ </button>*/}
+      <p class="finish-message">完了をクリックすると弊社による公開作業ののちにURLが発行されます</p>
+      <a class="btn savep two-btn" href="/artist-guide"> 完了する </a>
+      <a class="btn savep two-btn right-btn" href="/myportfolio"> 保存して中断する </a>
 
     </div>
 
     </div>
-
-    </div>
-    { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
     <Filters />
+    { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
   </div>
     )
   }

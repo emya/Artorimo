@@ -60,6 +60,7 @@ class Landing extends Component {
           <p class="how-4">クリエーターへ報酬を入金</p>
         </div>
       </div>
+      <p class="fixer">.</p>
       <a class="button" href="/register">無料会員登録</a>
     </section>
 
@@ -85,7 +86,7 @@ class Landing extends Component {
       <div class="service-box">
       <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/artist.png`} />
       <div class="service-title">Iconio</div>
-      <p class="service-text">弊社が運営するアイコンメーカーです。一度制作いただければアーティスト様は半永久的に自動収入を得られます。(coming soon!)</p>
+      <p class="service-text">弊社が運営する<a href="https://ohcheestudio.com/iconio">アイコンメーカー</a>です。一度制作いただければアーティスト様は半永久的に自動収入を得られます。</p>
       </div>
       <div class="service-box">
       <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/group.png`} />
