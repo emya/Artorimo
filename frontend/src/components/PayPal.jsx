@@ -29,7 +29,7 @@ class PayPal extends Component {
 
   state = {
     //TODO: This is test id
-    order_id: "385b999abb7e4b929421f75584c40ceb",
+    // order_id: "385b999abb7e4b929421f75584c40ceb",
     additional_items: null,
     prices: {
       0: 28,
@@ -56,8 +56,6 @@ class PayPal extends Component {
   }
 
   onClickCheck = () => {
-    console.log("onClickCheck!");
-
     const errors = [];
 
     if (!this.state.isAgreed) {
@@ -101,7 +99,6 @@ class PayPal extends Component {
         </tr>
     )
 
-    console.log(content)
     return content;
   }
 
@@ -117,17 +114,11 @@ class PayPal extends Component {
   }
 
   onApproveOrder = async(data, actions) => {
-    console.log("onApprove");
-    console.log("Navigate to done", this.props);
-    console.log("data", data);
-    console.log("actions", actions);
     //this.props.history.push("/iconio/payment/paypal/done");
     var order_id = this.props.icons.order.id;
     localStorage.setItem('approved_order_id', order_id)
 
     const details = await actions.order.capture();
-
-    console.log(details, typeof(details))
 
     var paypal_order_id = details.id;
     var paypal_status = 1;
@@ -143,14 +134,12 @@ class PayPal extends Component {
         'content-type': 'application/json'
       }
     }).then(function(res) {
-      console.log("res", res);
       if (res.status == 200){
         window.location.href = '/iconio/payment/paypal/done';
       }
 
       return res.json();
     }).then(function(data) {
-      console.log("data", data);
       // If there is a validation error, reject, otherwise resolve
     });
   }
@@ -158,10 +147,13 @@ class PayPal extends Component {
 
   render() {
     if (this.props.icons === null || this.props.icons.isOrdered == null || this.props.icons.order === null){
-      return <Redirect to="/iconio" />;
-    }
+      var looking_artist_name = localStorage.getItem('looking_artist_name');
+      if (looking_artist_name){
+          return <Redirect to={`/iconio/${looking_artist_name}`} />;
+      }
 
-    console.log("props", this.props.icons)
+      return <Redirect to="/iconio/creators/top" />;
+    }
 
     const icon_state = this.props.icons.order;
 
@@ -195,6 +187,7 @@ class PayPal extends Component {
 
     // This should be used once test is done
     const artist_id = this.props.icons.order.artist.id;
+    const version = this.props.icons.order.iconio_version;
     const order_id = this.props.icons.order.id;
     const agree_check_error = this.state.agree_check_error;
 
@@ -219,12 +212,12 @@ class PayPal extends Component {
         {icon_state.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/face${icon_state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/face${icon_state.face}.png`}
           />
         )}
         {icon_state.face > 0 && (
           <img class="image1 imgFaceLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/face_line${icon_state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/face_line${icon_state.face}.png`}
           />
         )}
 
@@ -232,47 +225,47 @@ class PayPal extends Component {
         {icon_state.hair > 0 && (
           <img class="image1 imgHair"
                style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/hair${icon_state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/hair${icon_state.hair}.png`}
           />
         )}
         {icon_state.hair > 0 && (
           <img class="image1 imgHairLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/hair_line${icon_state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/hair_line${icon_state.hair}.png`}
           />
         )}
         {icon_state.bang > 0 && (
           <img class="image1 imgBang"
                style={{filter: `url(#filterHairColor${icon_state.bang_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.bang_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/bang${icon_state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/bang${icon_state.bang}.png`}
           />
         )}
         {icon_state.bang > 0 && (
           <img class="image1 imgBangLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/bang_line${icon_state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/bang_line${icon_state.bang}.png`}
           />
         )}
         {icon_state.side > 0 && (
           <img class="image1 imgSide"
                style={{filter: `url(#filterHairColor${icon_state.side_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.side_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/side${icon_state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/side${icon_state.side}.png`}
           />
         )}
         {icon_state.side > 0 && (
           <img class="image1 imgSideLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/side_line${icon_state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/side_line${icon_state.side}.png`}
           />
         )}
 
         {/* Eyes */}
         {icon_state.eyes > 0 && (
           <img class="image1 imgEyes"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyes_line${icon_state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyes_line${icon_state.eyes}.png`}
           />
         )}
         {icon_state.eyes > 0 && (
           <img class="image1 imgEyeballs"
                style={{filter: `url(#filterEyesColor${icon_state.eyes_filter})`, WebkitFilter: `url(#filterEyesColor${icon_state.eyes_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyes${icon_state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyes${icon_state.eyes}.png`}
           />
         )}
 
@@ -280,19 +273,19 @@ class PayPal extends Component {
         {icon_state.eyebrows > 0 && (
           <img class="image1 imgEyebrows"
                style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyebrows${icon_state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyebrows${icon_state.eyebrows}.png`}
           />
         )}
         {icon_state.eyebrows > 0 && (
           <img class="image1 imgEyebrowsLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/eyebrows_line${icon_state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyebrows_line${icon_state.eyebrows}.png`}
           />
         )}
 
         {/* Nose */}
         {icon_state.nose > 0 && (
           <img class="image1 imgNose"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/nose${icon_state.nose}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/nose${icon_state.nose}.png`}
           />
         )}
 
@@ -300,12 +293,12 @@ class PayPal extends Component {
         {icon_state.mouth > 0 && (
           <img class="image1 imgMouth"
                style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/mouth${icon_state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/mouth${icon_state.mouth}.png`}
           />
         )}
         {icon_state.mouth > 0 && (
           <img class="image1 imgMouthLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/mouth_line${icon_state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/mouth_line${icon_state.mouth}.png`}
           />
         )}
 
@@ -313,18 +306,18 @@ class PayPal extends Component {
         {icon_state.cloth > 0 && (
           <img class="image1 imgCloth"
                style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/cloth${icon_state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/cloth${icon_state.cloth}.png`}
           />
         )}
         {icon_state.cloth > 0 && (
           <img class="image1 imgClothLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/cloth_line${icon_state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/cloth_line${icon_state.cloth}.png`}
           />
         )}
 
         {icon_state.accessories > 0 && (
           <img class="image1 imgAccessories"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/accessories${icon_state.accessories}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/accessories${icon_state.accessories}.png`}
           />
         )}
       </div>
@@ -352,51 +345,28 @@ class PayPal extends Component {
           <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
         )}
 
-        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "disable-funding": "credit"}}>
+        <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "currency": "USD", "disable-funding": "credit"}}>
             <PayPalButtons
                 order_id={order_id}
                 style={{ layout: "horizontal" }}
                 onClick = {(data, actions) => {
-                  console.log("onClick");
-
-                  console.log(data);
-                  console.log(actions);
                   var errors = this.onClickCheck();
                   var isInvalid = errors.length > 0;
                   if (isInvalid) {
-                    console.log("invalid");
                     return actions.reject();
                   }
                 }}
 
-                /*
-                onInit = {(data, actions) => {
-                  // Disable the buttons
-                  console.log("onInit", actions);
-                  if (this.state.isAgreed) {
-                    actions.enable();
-                    console.log("enabled");
-                  } else{
-                    actions.disable();
-                    console.log("disabled");
-                  }
-
-
-                  // Listen for changes to the checkbox
-                  document.querySelector('#terms')
-                    .addEventListener('change', function(event) {
-                      // Enable or disable the button when it is checked or unchecked
-                      console.log(event)
-                      if (event.target.checked)  {
-                        console.log("enable");
-                        actions.enable();
-                      } else  {
-                        console.log("disable");
-                        actions.disable();
+                createOrder = {(data, actions) => {
+                  // Set up the transaction
+                  return actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: '5.0'
                       }
-                  });
+                    }]
+                  })
                 }}
-                */
 
                 onApprove={(data, actions) => this.onApproveOrder(data, actions)}
                 /*

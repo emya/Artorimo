@@ -7,6 +7,7 @@ const initialState = {
   isDownloadReady: null,
   orderCompleted: null,
   orderApproved: null,
+  fetchFailed: null,
   uploadCompleted: null,
 };
 
@@ -40,6 +41,10 @@ export default function payment(state=initialState, action) {
 
     case 'GET_ICON_PARTS':
       return {...state, icon_parts: action.data};
+
+    case 'GET_ICON_PARTS_FAILURE':
+      return {...state, icon_parts: action.data, fetchFailed: true};
+
 
     case 'REMOVED_ICON':
       return update(state, {

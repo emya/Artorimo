@@ -459,7 +459,7 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         # artist_id = settings.TEST_ARTIST_ID
         artist = User.objects.get(pk=artist_id)
 
-        icon_order = IconOrder.objects.create(artist=artist, price=8.0, status="created", **data)
+        icon_order = IconOrder.objects.create(artist=artist, price=5.0, status="created", **data)
         serializer = self.serializer_class(icon_order)
 
         return Response(serializer.data)
@@ -522,12 +522,36 @@ class IconMakerAPI(generics.GenericAPIView):
         # For now, use fixed user id
         #artist_id = request.GET.get("artist_id", "d9d5c4f7-8977-4181-a94a-cc811c15b4be")
         artist_id = request.GET.get("artist_id")
+        artist_name = request.GET.get("artist_name")
         is_setup = request.GET.get("is_setup")
 
         if is_setup == "true":
             prefix = f"uploaded_icons/{artist_id}"
         else:
-            prefix = f"icons/{artist_id}"
+            if artist_name:
+                try:
+                    artist = User.objects.get(iconio_name=artist_name)
+                except(User.DoesNotExist):
+                    return Response({"Not found": "The artist does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+                artist_id = artist.id
+            else:
+                try:
+                    artist = User.objects.get(id=artist_id)
+                except(User.DoesNotExist):
+                    return Response({"Not found": "The artist does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+            try:
+                icon_upload = IconUpload.objects.get(artist=artist, is_current_version=True)
+                version = icon_upload.version
+                use_range_str = icon_upload.use_range
+            except(IconUpload.DoesNotExist):
+                use_range_str = "0"
+                version = 0
+
+            prefix = f"icons/{artist_id}/{version}/"
+            use_range = use_range_str.split(",")
 
         response = s3_client.list_objects(
             Bucket=settings.AWS_BUCKET_NAME,
@@ -555,6 +579,12 @@ class IconMakerAPI(generics.GenericAPIView):
                     if file_name.startswith(part) and "_line" not in file_name:
                         icon_parts[part] += 1
 
+        if is_setup != "true":
+            icon_parts["use_range"] = use_range
+            icon_parts["artist_id"] = artist_id
+            icon_parts["version"] = version
+
+        print(icon_parts)
         return Response(icon_parts)
 
 class IconioAPI(generics.GenericAPIView):

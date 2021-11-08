@@ -28,7 +28,6 @@ class PayPalDone extends Component {
   componentWillMount() {
 
     var approved_order_id = localStorage.getItem('approved_order_id');
-    console.log("approved_order_id", approved_order_id);
 
     if (approved_order_id) {
       this.props.fetchApprovedOrder(approved_order_id);
@@ -87,6 +86,7 @@ class PayPalDone extends Component {
 
   render() {
     const icon_state = this.props.icons.order;
+
     // This is the test data
     // TODO: use the above icon_state
     /*
@@ -139,7 +139,7 @@ class PayPalDone extends Component {
     <div id="my-iconio">
       {icon_state.face > 0 && (
         <img class="download-image1 imgFace"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face${icon_state.face}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/face${icon_state.face}.png`}
              style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
              source={{
                header: {
@@ -150,7 +150,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.face > 0 && (
         <img class="download-image1 imgFaceLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face_line${icon_state.face}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/face_line${icon_state.face}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -162,7 +162,7 @@ class PayPalDone extends Component {
       {/* Hair */}
       {icon_state.hair > 0 && (
         <img class="download-image1 imgHair"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair${icon_state.hair}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/hair${icon_state.hair}.png`}
              style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
              source={{
                header: {
@@ -173,7 +173,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.hair > 0 && (
         <img class="download-image1 imgHairLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair_line${icon_state.hair}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/hair_line${icon_state.hair}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -185,7 +185,7 @@ class PayPalDone extends Component {
       {/* Bang */}
       {icon_state.bang > 0 && (
         <img class="download-image1 imgBang"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang${icon_state.bang}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/bang${icon_state.bang}.png`}
              style={{filter: `url(#filterHairColor${icon_state.bang_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.bang_filter})`}}
              source={{
                header: {
@@ -196,7 +196,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.bang > 0 && (
         <img class="download-image1 imgBangLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang_line${icon_state.bang}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/bang_line${icon_state.bang}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -208,7 +208,7 @@ class PayPalDone extends Component {
       {/* Side */}
       {icon_state.side > 0 && (
         <img class="download-image1 imgSide"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side${icon_state.side}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/side${icon_state.side}.png`}
              style={{filter: `url(#filterHairColor${icon_state.side_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.side_filter})`}}
              source={{
                header: {
@@ -219,7 +219,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.side > 0 && (
         <img class="download-image1 imgSideLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side_line${icon_state.side}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/side_line${icon_state.side}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -232,7 +232,7 @@ class PayPalDone extends Component {
       {/* Eyes */}
       {icon_state.eyes > 0 && (
         <img class="download-image1 imgEyes"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes_line${icon_state.eyes}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyes_line${icon_state.eyes}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -242,7 +242,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.eyes > 0 && (
         <img class="download-image1 imgEyeballs"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes${icon_state.eyes}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyes${icon_state.eyes}.png`}
              style={{filter: `url(#filterEyesColor${icon_state.eyes_filter})`, WebkitFilter: `url(#filterEyesColor${icon_state.eyes_filter})`}}
              source={{
                header: {
@@ -255,7 +255,7 @@ class PayPalDone extends Component {
       {/* Eyebrow */}
       {icon_state.eyebrows > 0 && (
         <img class="download-image1 imgEyebrows"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows${icon_state.eyebrows}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyebrows${icon_state.eyebrows}.png`}
              style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
              source={{
                header: {
@@ -266,7 +266,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.eyebrows > 0 && (
         <img class="download-image1 imgEyebrowsLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows_line${icon_state.eyebrows}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyebrows_line${icon_state.eyebrows}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -279,14 +279,14 @@ class PayPalDone extends Component {
       {/* Nose */}
       {icon_state.nose > 0 && (
         <img class="download-image1 imgNose"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/nose${icon_state.nose}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/nose${icon_state.nose}.png`}
         />
       )}
 
       {/* Mouth */}
       {icon_state.mouth > 0 && (
         <img class="download-image1 imgMouth"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth${icon_state.mouth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/mouth${icon_state.mouth}.png`}
              style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
              source={{
                header: {
@@ -297,7 +297,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.mouth > 0 && (
         <img class="download-image1 imgMouthLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth_line${icon_state.mouth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/mouth_line${icon_state.mouth}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -310,7 +310,7 @@ class PayPalDone extends Component {
       {/* Cloth */}
       {icon_state.cloth > 0 && (
         <img class="download-image1 imgCloth"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/cloth${icon_state.cloth}.png`}
              style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
              source={{
                header: {
@@ -321,7 +321,7 @@ class PayPalDone extends Component {
       )}
       {icon_state.cloth > 0 && (
         <img class="download-image1 imgClothLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth_line${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/cloth_line${icon_state.cloth}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -333,7 +333,7 @@ class PayPalDone extends Component {
       {/* Accessories */}
       {icon_state.accessories > 0 && (
         <img class="download-image1 imgAccessories"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/accessories${icon_state.accessories}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/accessories${icon_state.accessories}.png`}
              source={{
                header: {
                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
