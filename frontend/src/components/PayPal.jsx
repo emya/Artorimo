@@ -182,8 +182,8 @@ class PayPal extends Component {
         side_filter: 5,
     }
 
-    const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
-    const order_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    //const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
+    //const order_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
 
     // This should be used once test is done
