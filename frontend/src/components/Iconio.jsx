@@ -133,6 +133,7 @@ class Iconio extends Component {
   getAvailableOptions = (optionName) => {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       const artist_id = this.props.icons.icon_parts.artist_id;
+      const version = this.props.icons.icon_parts.version;
 
       let content = [];
       let line = "";
@@ -144,13 +145,13 @@ class Iconio extends Component {
           <div class="column">
             {this.state[optionName] === i ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )}
@@ -193,6 +194,7 @@ class Iconio extends Component {
     const optionName = "accessories"
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       const artist_id = this.props.icons.icon_parts.artist_id;
+      const version = this.props.icons.icon_parts.version;
       let content = [];
 
       for (var i = 1; i <= this.props.icons.icon_parts[optionName]; i++) {
@@ -200,13 +202,13 @@ class Iconio extends Component {
           <div class="column">
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${i}.png`}
                    onClick={this.removeAccessory.bind(this, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${i}.png`}
                    onClick={this.chooseAccessory.bind(this, i)}
               />
             )}

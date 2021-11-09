@@ -58,7 +58,7 @@ class PayPalDone extends Component {
         var link = document.createElement('a');
         link.style.cssText = 'position:absolute;top:0;left:0;width:500px;height:500px;padding:0;';
 
-        link.download = 'my-image-name.jpeg';
+        link.download = 'my-iconio.png';
         link.href = dataUrl;
         link.click();
     });
@@ -136,7 +136,9 @@ class PayPalDone extends Component {
 
     {this.props.icons.order && this.props.icons.orderApproved && (
 
+  <div id="my-iconio-parent">
     <div id="my-iconio">
+      <Filters />
       {icon_state.face > 0 && (
         <img class="download-image1 imgFace"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/face${icon_state.face}.png`}
@@ -350,8 +352,7 @@ class PayPalDone extends Component {
                }
              }}
       />
-
-
+      </div>
     </div>
     ) }
 

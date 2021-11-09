@@ -95,7 +95,9 @@ class IconioDownload extends Component {
     {/*this.props && this.props.icons.isDownloadReady && ( */}
     {this.props && (
 
-    <div class="download-parent" id="my-iconio">
+    <div id="my-iconio-parent">
+      <div id="my-iconio">
+      <Filters />
       {icon_state.face > 0 && (
         <img class="download-image1 imgFace"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/face${icon_state.face}.png`}
@@ -316,7 +318,7 @@ class IconioDownload extends Component {
                }
              }}
       />
-
+      </div>
     </div>
     ) }
 
