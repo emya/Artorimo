@@ -53,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254, null=True, blank=True)
+    iconio_name = models.CharField(max_length=254, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -133,6 +134,7 @@ class IconOrder(models.Model):
     # 1: approved by frontend
     paypal_status = models.IntegerField(default=0)
     artist = models.ForeignKey(User, on_delete=models.CASCADE)
+    iconio_version = models.IntegerField()
     face = models.IntegerField()
     face_filter = models.IntegerField()
     hair = models.IntegerField()

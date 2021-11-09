@@ -22,6 +22,7 @@ import AskHelp from "./components/AskHelp";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import HowToUseIconio from "./components/HowToUseIconio";
 import IconioArtistGuide from "./components/IconioArtistGuide";
 import IconioUserGuide from "./components/IconioUserGuide";
 import IconioUploadCompleted from "./components/IconioUploadCompleted";
@@ -107,9 +108,10 @@ class RootContainerComponent extends Component {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                    <Route exact path="/iconio/creators/guide" component={HowToUseIconio} />
+
                     <Route exact path="/user-guide" component={IconioUserGuide} />
                     <Route exact path="/test" component={Test} />
-                    <Route exact path="/iconio/creators/top" component={IconioArtistLanding} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <Route exact path="/activate/account/:uidb64/:activeToken" component={ActivateAccount} />
@@ -125,10 +127,13 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/iconio/upload/completed" component={IconioUploadCompleted} />
                     <PrivateRoute exact path="/iconio/upload/failed" component={IconioUploadFailed} />
 
+                    <Route exact path="/iconio/creators/top" component={IconioArtistLanding} />
+                    <Route exact path="/iconio/:artist_name" component={Iconio} />
+                    <Route exact path="/iconio/payment/paypal" component={PayPal} />
+                    <Route exact path="/iconio/payment/paypal/done" component={PayPalDone} />
+                    <Route exact path="/iconio/download/:token" component={IconioDownload} />
+
                     <StaffRoute exact path="/iconio" component={Iconio} />
-                    <StaffRoute exact path="/iconio/payment/paypal" component={PayPal} />
-                    <StaffRoute exact path="/iconio/payment/paypal/done" component={PayPalDone} />
-                    <StaffRoute exact path="/iconio/download/:token" component={IconioDownload} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
                     <StaffRoute exact path="/profile/:userId" component={Profile} />
                     <StaffRoute exact path="/all/users" component={Users} />

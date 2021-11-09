@@ -26,7 +26,9 @@ if (process.env.NODE_ENV === "production"){
 class Iconio extends Component {
 
   componentDidMount() {
-    this.props.fetchIconParts(this.state.artist_id);
+    this.props.fetchIconPartsByName(this.props.match.params.artist_name);
+
+    //this.props.fetchIconParts(this.state.artist_id);
     //this.props.fetchIconParts("0707d4f7-cecf-480b-845e-11bbff0a45e0");
   }
 
@@ -130,9 +132,10 @@ class Iconio extends Component {
 
   getAvailableOptions = (optionName) => {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
+      const artist_id = this.props.icons.icon_parts.artist_id;
+      const version = this.props.icons.icon_parts.version;
+
       let content = [];
-
-
       let line = "";
       if (!this.state.line_only_elements.includes(optionName)){
         line = "_line";
@@ -142,13 +145,13 @@ class Iconio extends Component {
           <div class="column">
             {this.state[optionName] === i ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${line}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${line}${i}.png`}
                    onClick={this.changeOption.bind(this, optionName, i)}
               />
             )}
@@ -188,9 +191,10 @@ class Iconio extends Component {
   }
 
   getAvailableAccessoriesOptions = () => {
-    //console.log(this.props.icons.icon_parts);
     const optionName = "accessories"
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
+      const artist_id = this.props.icons.icon_parts.artist_id;
+      const version = this.props.icons.icon_parts.version;
       let content = [];
 
       for (var i = 1; i <= this.props.icons.icon_parts[optionName]; i++) {
@@ -198,13 +202,13 @@ class Iconio extends Component {
           <div class="column">
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${i}.png`}
                    onClick={this.removeAccessory.bind(this, i)}
               />
             )
             : (
               <img class="choice"
-                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/${optionName}${i}.png`}
+                   src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/${optionName}${i}.png`}
                    onClick={this.chooseAccessory.bind(this, i)}
               />
             )}
@@ -242,34 +246,41 @@ class Iconio extends Component {
              </div>];
   }
 
-  proceedCheckout = (e) => {
+  proceedCheckout = (artist_id, iconio_version, e) => {
     e.preventDefault();
 
-    // this.props.orderIcon(
-    //   this.state.artist_id,
-    //   this.state.face, this.state.face_classes,
-    //   this.state.hair, this.state.hair_classes,
-    //   this.state.bang, this.state.bang_classes,
-    //   this.state.side, this.state.side_classes,
-    //   this.state.eyes, this.state.eyes_classes,
-    //   this.state.eyebrows, this.state.eyebrows_classes,
-    //   this.state.nose,
-    //   this.state.mouth, this.state.mouth_classes,
-    //   this.state.cloth, this.state.cloth_classes,
-    // );
+    this.props.orderIcon(
+      artist_id, iconio_version,
+      this.state.face, this.state.face_classes,
+      this.state.hair, this.state.hair_classes,
+      this.state.bang, this.state.bang_classes,
+      this.state.side, this.state.side_classes,
+      this.state.eyes, this.state.eyes_classes,
+      this.state.eyebrows, this.state.eyebrows_classes,
+      this.state.nose,
+      this.state.mouth, this.state.mouth_classes,
+      this.state.cloth, this.state.cloth_classes,
+    );
   }
 
   render() {
     const accessories = this.state.accessories;
     const errors = this.state.errors;
 
-    console.log(localStorage);
+    localStorage.setItem('looking_artist_name', this.props.match.params.artist_name)
 
     if (this.props.icons.isOrdered){
        return <Redirect to="/iconio/payment/paypal" />;
     }
 
+    if (this.props.icons.fetchFailed){
+       return <Redirect to="/iconio/creators/top" />;
+    }
+
     if (this.props.icons && this.props.icons.icon_parts) {
+
+    const artist_id = this.props.icons.icon_parts.artist_id;
+    const version = this.props.icons.icon_parts.version;
 
     return (
   <div>
@@ -289,12 +300,12 @@ class Iconio extends Component {
         {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFace"
                style={{filter: `url(#filterSkinColor${this.state.face_classes})`, WebkitFilter: `url(#filterSkinColor${this.state.face_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face${this.state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/face${this.state.face}.png`}
           />
         )}
         {this.state.face > 0 && this.props.icons.icon_parts.face > 0 && (
           <img class="image1 imgFaceLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/face_line${this.state.face}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/face_line${this.state.face}.png`}
           />
         )}
 
@@ -302,49 +313,49 @@ class Iconio extends Component {
         {this.state.hair > 0 && this.props.icons.icon_parts.hair > 0 && (
           <img class="image1 imgHair"
                style={{filter: `url(#filterHairColor${this.state.hair_classes})`, WebkitFilter: `url(#filterHairColor${this.state.hair_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair${this.state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/hair${this.state.hair}.png`}
           />
         )}
         {this.state.hair > 0 && this.props.icons.icon_parts.hair > 0 && (
           <img class="image1 imgHairLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/hair_line${this.state.hair}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/hair_line${this.state.hair}.png`}
           />
         )}
 
         {this.state.bang > 0 && this.props.icons.icon_parts.bang > 0 && (
           <img class="image1 imgBang"
                style={{filter: `url(#filterHairColor${this.state.bang_classes})`, WebkitFilter: `url(#filterHairColor${this.state.bang_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang${this.state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/bang${this.state.bang}.png`}
           />
         )}
         {this.state.bang > 0 && this.props.icons.icon_parts.bang > 0 && (
           <img class="image1 imgBangLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/bang_line${this.state.bang}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/bang_line${this.state.bang}.png`}
           />
         )}
 
         {this.state.side > 0 && this.props.icons.icon_parts.side > 0 && (
           <img class="image1 imgSide"
                style={{filter: `url(#filterHairColor${this.state.side_classes})`, WebkitFilter: `url(#filterHairColor${this.state.side_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side${this.state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/side${this.state.side}.png`}
           />
         )}
         {this.state.side > 0 && this.props.icons.icon_parts.side > 0 && (
           <img class="image1 imgSideLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/side_line${this.state.side}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/side_line${this.state.side}.png`}
           />
         )}
 
         {/* Eyes */}
         {this.state.eyes > 0 && this.props.icons.icon_parts.eyes > 0 && (
           <img class="image1 imgEyes"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes_line${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyes_line${this.state.eyes}.png`}
           />
         )}
         {this.state.eyes > 0 && this.props.icons.icon_parts.eyes > 0 && (
           <img class="image1 imgEyeballs"
                style={{filter: `url(#filterEyesColor${this.state.eyes_classes})`, WebkitFilter: `url(#filterEyesColor${this.state.eyes_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyes${this.state.eyes}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyes${this.state.eyes}.png`}
           />
         )}
 
@@ -352,19 +363,19 @@ class Iconio extends Component {
         {this.state.eyebrows > 0 && this.props.icons.icon_parts.eyebrows > 0 && (
           <img class="image1 imgEyebrows"
                style={{filter: `url(#filterHairColor${this.state.eyebrows_classes})`, WebkitFilter: `url(#filterHairColor${this.state.eyebrows_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows${this.state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyebrows${this.state.eyebrows}.png`}
           />
         )}
         {this.state.eyebrows > 0 && this.props.icons.icon_parts.eyebrows > 0 && (
           <img class="image1 imgEyebrowsLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/eyebrows_line${this.state.eyebrows}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/eyebrows_line${this.state.eyebrows}.png`}
           />
         )}
 
         {/* Nose */}
         {this.state.nose > 0 && this.props.icons.icon_parts.nose > 0 && (
           <img class="image1 imgNose"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/nose${this.state.nose}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/nose${this.state.nose}.png`}
           />
         )}
 
@@ -372,12 +383,12 @@ class Iconio extends Component {
         {this.state.mouth > 0 && this.props.icons.icon_parts.mouth > 0 && (
           <img class="image1 imgMouth"
                style={{filter: `url(#filterMouthColor${this.state.mouth_classes})`, WebkitFilter: `url(#filterMouthColor${this.state.mouth_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth${this.state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/mouth${this.state.mouth}.png`}
           />
         )}
         {this.state.mouth > 0 && this.props.icons.icon_parts.mouth > 0 && (
           <img class="image1 imgMouthLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/mouth_line${this.state.mouth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/mouth_line${this.state.mouth}.png`}
           />
         )}
 
@@ -385,26 +396,26 @@ class Iconio extends Component {
         {this.state.cloth > 0 && this.props.icons.icon_parts.cloth > 0 && (
           <img class="image1 imgCloth"
                style={{filter: `url(#filterClothColor${this.state.cloth_classes})`, WebkitFilter: `url(#filterClothColor${this.state.cloth_classes})`}}
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth${this.state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/cloth${this.state.cloth}.png`}
           />
         )}
         {this.state.cloth > 0 && this.props.icons.icon_parts.cloth > 0 && (
           <img class="image1 imgClothLine"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/cloth_line${this.state.cloth}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/cloth_line${this.state.cloth}.png`}
           />
         )}
 
         {/* Accessories */}
         {accessories.map(accessory => (
           <img class="image1 imgAccessories"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/accessories${accessory}.png`}
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/accessories${accessory}.png`}
           />
         ))}
 
         {/* Glasses */}
         {this.state.glasses > 0 && this.props.icons.icon_parts.glasses > 0 && (
           <img class="image1 imgCloth"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${this.state.artist_id}/glasses${this.state.glasses}.png`}
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/glasses${this.state.glasses}.png`}
           />
         )}
 
@@ -650,12 +661,20 @@ class Iconio extends Component {
     </div>
     <div class="uploader-three">
     <div class="usage-policy">
-      <div class="usage-policy-sign">個人利用可</div>
-      <div class="usage-policy-sign">非商用利用可</div>
-      <div class="usage-policy-sign">商用利用可</div>
-      <div class="usage-policy-sign">加工可</div>
+      {this.props.icons.icon_parts.use_range && this.props.icons.icon_parts.use_range.includes("0") && (
+        <div class="usage-policy-sign">個人利用可</div>
+      )}
+      {this.props.icons.icon_parts.use_range && this.props.icons.icon_parts.use_range.includes("1") && (
+        <div class="usage-policy-sign">商用利用可</div>
+      )}
+      {this.props.icons.icon_parts.use_range && this.props.icons.icon_parts.use_range.includes("2") && (
+        <div class="usage-policy-sign">非商用利用可</div>
+      )}
+      {this.props.icons.icon_parts.use_range && this.props.icons.icon_parts.use_range.includes("3") && (
+        <div class="usage-policy-sign">加工可</div>
+      )}
     </div>
-    <button class="btn savep two-btn" onClick={this.proceedCheckout}>ダウンロードへ進む</button>
+    <button class="btn savep two-btn" onClick={this.proceedCheckout.bind(this, artist_id, version)}>ダウンロードへ進む</button>
     </div>
     </div>
     { /*<button class="form-send-btn btn" onClick={this.proceedCheckout}>Proceed to Checkout</button> */}
@@ -680,8 +699,12 @@ const mapDispatchToProps = dispatch => {
     fetchIconParts: (artist_id) => {
       dispatch(icons.fetchIconParts(artist_id));
     },
+    fetchIconPartsByName: (artist_name) => {
+      dispatch(icons.fetchIconPartsByName(artist_name));
+    },
     orderIcon: (
-      artist_id, face, face_filter,
+      artist_id, iconio_version,
+      face, face_filter,
       hair, hair_filter,
       bang, bang_filter,
       side, side_filter,
@@ -692,7 +715,8 @@ const mapDispatchToProps = dispatch => {
       cloth, cloth_filter
     ) => {
       dispatch(icons.orderIcon(
-        artist_id, face, face_filter,
+        artist_id, iconio_version,
+        face, face_filter,
         hair, hair_filter,
         bang, bang_filter,
         side, side_filter,

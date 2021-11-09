@@ -359,8 +359,8 @@
   left: 0;
   //left: 15%;
   //width: 84%;
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
 }
 
 .download-image1 {
@@ -369,15 +369,18 @@
     top: 0;
     //width: 85%;
     left: 0;
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
   }
 }
 
-#my-iconio {
+#my-iconio-parent {
   position: absolute;
-  top: 100px;
-  left: 10px;
+  top: 250px;
+  left: 100px;
+}
+
+#my-iconio {
   height: 500px;
   width: 500px;
   padding: 0;

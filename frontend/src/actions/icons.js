@@ -1,5 +1,6 @@
 export const orderIcon = (
-  artist_id, face, face_filter,
+  artist_id, iconio_version,
+  face, face_filter,
   hair, hair_filter,
   bang, bang_filter,
   side, side_filter,
@@ -18,7 +19,8 @@ export const orderIcon = (
     }
 
     let body = JSON.stringify({
-      artist_id, face, face_filter,
+      artist_id, iconio_version,
+      face, face_filter,
       hair, hair_filter,
       bang, bang_filter,
       side, side_filter,
@@ -179,6 +181,41 @@ export const fetchIconParts = (artist_id, is_setup = false) => {
           dispatch({type: "GET_ICON_PARTS", data: res.data });
           return res.data;
         } else {
+          dispatch({type: "GET_ICON_PARTS_FAILURE", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+export const fetchIconPartsByName = (artist_name, is_setup = false) => {
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    let headers = {"Content-Type": "application/json"};
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let params = `?artist_name=${artist_name}&is_setup=${is_setup}`;
+
+    return fetch(`/api/icons/maker/${params}`, {headers, })
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: "GET_ICON_PARTS", data: res.data });
+          return res.data;
+        } else {
+          console.log("GET_ICON_PARTS_FAILURE");
           dispatch({type: "GET_ICON_PARTS_FAILURE", data: res.data});
           throw res.data;
         }
