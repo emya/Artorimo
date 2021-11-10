@@ -40,19 +40,16 @@ class IconioArtistLanding extends Component {
   </header>
 
   <div class="menu">
-    <a href="/about">アイコンメーカーを作る</a>
+    <a href="/register">アイコンメーカーを作る</a>
     <a href="/iconio/creators/guide">使い方</a>
+    <a href="/about">会社情報</a>
     <a href="/contact-us">お問い合わせ</a>
   </div>
 
   <div class="lpbody iconio-lp">
     <section class="iconio-description iconio-examples">
-      <div class="icon-example">
-        <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/iconio-example1.jpg`} />
-      </div>
-      <div class="icon-example">
-        <img class="service-icon" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/iconio-example2.jpg`} />
-      </div>
+        <img class="icon-example-image" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/iconio-example1.jpg`} />
+        <img class="icon-example-image" src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/iconio-example2.jpg`} />
     </section>
     <section class="iconio-description">
       <h2>Iconioのメリット</h2>
