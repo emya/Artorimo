@@ -53,15 +53,20 @@ class PayPalDone extends Component {
     });
     */
 
-    htmlToImage.toPng(document.getElementById('my-iconio'))
+
+    //htmlToImage.toPng(document.getElementById('my-iconio'), { allowTaint : true, useCORS: true, useCorsEverywhereProxy: true, cache: false })
+    htmlToImage.toPng(document.getElementById('my-iconio'), { cacheBust: true, fetchRequestInit: {cache: 'no-cache'} })
       .then(function (dataUrl) {
+        //console.log(dataUrl);
+
         var link = document.createElement('a');
         link.style.cssText = 'position:absolute;top:0;left:0;width:500px;height:500px;padding:0;';
-
+        link.crossOrigin = "anonymous";
         link.download = 'my-iconio.png';
         link.href = dataUrl;
         link.click();
     });
+
 
     /*
     htmlToImage.toCanvas(document.getElementById('my-iconio'))
@@ -124,6 +129,7 @@ class PayPalDone extends Component {
 
   <div class="download-screen">
     <h2>Thank You for Using Iconio!</h2>
+
     <div class="spacer"></div>
     <button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>
     {this.props.icons.order && !this.props.icons.orderApproved && (
@@ -135,6 +141,7 @@ class PayPalDone extends Component {
     )}
 
     {this.props.icons.order && this.props.icons.orderApproved && (
+
 
   <div id="my-iconio-parent">
     <div id="my-iconio">
@@ -353,6 +360,8 @@ class PayPalDone extends Component {
              }}
       />
       </div>
+
+
     </div>
     ) }
 

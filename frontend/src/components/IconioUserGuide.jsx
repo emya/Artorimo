@@ -28,7 +28,7 @@ class IconioUserGuide extends Component {
     return (
       <iframe
         src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
-        style={{width: "100%", height: "800px"}}
+        style={{width: "100%", height: "800px", webkitOverflowScrolling: "touch", overflowY: "scroll"}}
         source={{
           header: {
             'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`

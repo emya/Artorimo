@@ -477,8 +477,15 @@ class IconUploadViewSet(generics.GenericAPIView):
         if icon_uoloads.count() == 0:
             # Create new one
             # TODO: use_range
-            icon_uoload = IconUpload.objects.create(artist=artist, version=0, is_current_version=True, use_range=use_range)
+            icon_uoload = IconUpload.objects.create(artist=artist, version=1, is_current_version=True, use_range=use_range)
             serializer = self.serializer_class(icon_uoload)
+
+            # Notify OS staff
+            html_message = render_to_string('email-iconio-upload.html',
+                                            {'user': artist, 'email': artist.email})
+
+            send_email.delay("[Action Required] Iconio upload completed", "Iconio Upload", html_message,
+                             [settings.EMAIL_HOST_USER])
 
             return Response(serializer.data)
         else:
@@ -638,7 +645,6 @@ class IconioDownloadAPI(generics.GenericAPIView):
 
         serializer = self.serializer_class(icon_order)
         return Response(serializer.data)
-
 
 class IconMakerCleanupAPI(generics.GenericAPIView):
     permission_classes = [BaseUserPermissions, ]
