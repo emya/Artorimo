@@ -199,7 +199,7 @@ class IconioUploader extends Component {
             : (
               <button class="choice"
                    onClick={this.changeOption.bind(this, optionName, null)}
-              > 選択しない </button>
+              >パーツを非表示にする</button>
             )}
           </div>
         )
@@ -267,7 +267,7 @@ class IconioUploader extends Component {
           : (
             <button class="choice"
                  onClick={this.removeChosenAccessory.bind(this, null)}
-            > 選択しない </button>
+            >パーツを非表示にする</button>
           )}
         </div>
       )
