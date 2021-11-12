@@ -26,15 +26,18 @@ class IconioUserGuide extends Component {
 
     const { pageNumber, numPages } = this.state;
     return (
-      <iframe
-        src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
-        style={{width: "100%", height: "800px", webkitOverflowScrolling: "touch", overflowY: "scroll"}}
-        source={{
-          header: {
-            'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
-          }
-        }}
-      />
+  <div class="scroll-wrapper">
+    <iframe
+      src={`https://docs.google.com/viewer?url=https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf&embedded=true`}
+      style={{width: "100%", height: "800px", webkitOverflowScrolling: "touch", overflowY: "scroll"}}
+      source={{
+        header: {
+          'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+        }
+      }}
+    />
+  </div>
+
     )
   }
 }

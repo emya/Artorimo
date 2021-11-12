@@ -74,7 +74,7 @@ class IconioArtistGuide extends Component {
     <div class="policy-wrapper">
       <div class="scroll-wrapper">
         <iframe
-          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
+          src={`https://docs.google.com/viewer?url=https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf&embedded=true`}
           //class="policy-doc"
           source={{
             header: {

@@ -166,7 +166,7 @@ class Iconio extends Component {
       if (this.state.unselectable_options.includes(optionName)) {
         content.push(
           <div class="wide-column">
-            {this.state[optionName] === null ? (
+            {this.state[optionName] === 0 ? (
               <button class="chosen-button"
                    onClick={this.changeOption.bind(this, optionName, 0)}
               > 非表示 </button>

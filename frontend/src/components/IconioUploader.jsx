@@ -190,7 +190,7 @@ class IconioUploader extends Component {
 
       if (this.state.unselectable_options.includes(optionName)) {
         content.push(
-          <div class="column">
+          <div class="wide-column">
             {this.state[optionName] === null ? (
               <button class="chosen"
                    onClick={this.changeOption.bind(this, optionName, null)}
@@ -258,11 +258,11 @@ class IconioUploader extends Component {
       let content = [];
 
       content.push(
-        <div class="column">
+        <div class="wide-column">
           {this.state.accessories === [] ? (
             <button class="chosen"
                  onClick={this.removeChosenAccessory.bind(this, null)}
-            > Unselected </button>
+            > 非表示 </button>
           )
           : (
             <button class="choice"
