@@ -25,16 +25,12 @@ state = {
       <h3 class="next"></h3>
       <div class="next-step">
         <ol>
-          <li><span class="todo">パーツのアップロードの完了作業は一日一回</span>
+          <li><span class="todo">パーツアップロードの完了作業は一日一回までとなっております。</span>
             <ul>
-              <li>　パーツのアップロードの完了作業は一日一回以上はできません。時間をおいて再度行ってください。
-                    完了ボタンを押す前にアップロードされたパーツはそのまま保存されておりますので、ご安心ください。
+              <li>申し訳ございませんが、24時間後に再度完了ボタンを押してください。完了ボタンを押す前にアップロードされたパーツはそのまま保存されていますので、ご安心ください。
               </li>
-            </ul>
-          </li>
-          <li><span class="todo">時間をおいてもアップロード完了できない</span>
-            <ul>
-              <li> <a href="mailto:ohcheestudio@gmail.com">弊社まで</a>ご連絡ください</li>
+              <li>時間をおいてもアップロード完了できない場合は<a href="mailto:ohcheestudio@gmail.com">ohcheestudio@gmail.com</a>までご連絡ください。
+              </li>
             </ul>
           </li>
         </ol>
