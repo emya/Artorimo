@@ -72,16 +72,17 @@ class IconioArtistGuide extends Component {
     const { pageNumber, numPages } = this.state;
     return (
     <div class="policy-wrapper">
-      <iframe
-        src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
-        style={{width: "100%", height: "75vmin"}}
-        class="policy-doc"
-        source={{
-          header: {
-            'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
-          }
-        }}
-      />
+      <div class="scroll-wrapper">
+        <iframe
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/Iconio_User_Guide.pdf`}
+          //class="policy-doc"
+          source={{
+            header: {
+              'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+            }
+          }}
+        />
+      </div>
       <div class="sign-area">
         <div>
           <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />

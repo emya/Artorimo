@@ -26,15 +26,16 @@ class HowToUseIconio extends Component {
 
     const { pageNumber, numPages } = this.state;
     return (
+    <div class="scroll-wrapper">
       <iframe
         src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/HowToUseIconio.pdf`}
-        style={{width: "100%", height: "800px"}}
         source={{
           header: {
             'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
           }
         }}
       />
+    </div>
     )
   }
 }
