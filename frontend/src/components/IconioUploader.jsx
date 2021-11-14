@@ -188,22 +188,6 @@ class IconioUploader extends Component {
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
 
-      if (this.state.unselectable_options.includes(optionName)) {
-        content.push(
-          <div class="wide-column">
-            {this.state[optionName] === null ? (
-              <button class="chosen"
-                   onClick={this.changeOption.bind(this, optionName, null)}
-              > 非表示 </button>
-            )
-            : (
-              <button class="choice"
-                   onClick={this.changeOption.bind(this, optionName, null)}
-              >パーツを非表示にする</button>
-            )}
-          </div>
-        )
-      }
       let line = "";
       if (!this.state.line_only_elements.includes(optionName)){
         line = "_line";
@@ -240,6 +224,13 @@ class IconioUploader extends Component {
                  ) : (
                 "Remove selected item(s)"
               )}</button>)
+      if (this.state.unselectable_options.includes(optionName)) {
+        content.push(
+          <button style={{width:"68%"}} class="btn savep"
+                  onClick={this.changeOption.bind(this, optionName, null)}
+          > パーツを非表示にする </button>
+        )
+      }
       return content;
     }
     return [<div>
@@ -254,23 +245,9 @@ class IconioUploader extends Component {
   getAvailableAccessoriesOptions = () => {
     //console.log(this.props.icons.icon_parts);
     const optionName = "accessories"
+
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
-
-      content.push(
-        <div class="wide-column">
-          {this.state.accessories === [] ? (
-            <button class="chosen"
-                 onClick={this.removeChosenAccessory.bind(this, null)}
-            > 非表示 </button>
-          )
-          : (
-            <button class="choice"
-                 onClick={this.removeChosenAccessory.bind(this, null)}
-            >パーツを非表示にする</button>
-          )}
-        </div>
-      )
 
       for (var i = 1; i <= this.props.icons.icon_parts[optionName]; i++) {
         content.push(
@@ -304,6 +281,11 @@ class IconioUploader extends Component {
                  ) : (
                 "Remove selected item(s)"
               )}</button>)
+      content.push(
+            <button style={{width:"68%"}} class="btn savep"
+                 onClick={this.removeChosenAccessory.bind(this, null)}>
+            パーツを非表示にする</button>)
+
       return content;
     }
     return [<div>
