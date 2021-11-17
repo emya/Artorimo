@@ -24,27 +24,10 @@ if (process.env.NODE_ENV === "production"){
   keys = keys_prod;
 }
 
-class IconioDownload extends Component {
+class IconioScreenshot extends Component {
   componentDidMount() {
     //this.props.fetchOrder(this.props.match.params.token);
     //this.props.fetchOrder("53a647c19b0b42dcb395b1bc0c943bb5");
-    this.props.generateOrder("53a647c19b0b42dcb395b1bc0c943bb5");
-  }
-
-  saveToPng = (e) => {
-    e.preventDefault();
-    var node = document.getElementById('my-iconio');
-
-    htmlToImage.toPng(document.getElementById('my-iconio'))
-      .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.style.cssText = 'position:absolute;top:0;left:0;width:500px;height:500px;padding:0;';
-
-        link.download = 'my-iconio.png';
-        link.href = dataUrl;
-        link.click();
-    });
-
   }
 
   render() {
@@ -85,10 +68,7 @@ class IconioDownload extends Component {
   <div class="download-screen">
     <h2>Thank You for Using Iconio!</h2>
     <div class="spacer"></div>
-    <button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>
-
     {/*this.props && this.props.icons.isDownloadReady && ( */}
-    {this.props && (
 
     <div id="my-iconio-parent">
       <div id="my-iconio">
@@ -315,8 +295,6 @@ class IconioDownload extends Component {
       />
       </div>
     </div>
-    ) }
-
 
     <div id="image">
     </div>
@@ -340,11 +318,8 @@ const mapDispatchToProps = dispatch => {
     fetchOrder: (token) => {
       dispatch(icons.fetchOrderForDownload(token));
     },
-    generateOrder: (order_id) => {
-      dispatch(icons.generateIconio(order_id));
-    },
     logout: () => dispatch(auth.logout()),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IconioDownload);
+export default connect(mapStateToProps, mapDispatchToProps)(IconioScreenshot);

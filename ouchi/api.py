@@ -1,5 +1,6 @@
 import json
 import sys
+import os
 from rest_framework import (
     status, viewsets, permissions, generics,
     parsers, renderers, views
@@ -910,6 +911,20 @@ class IconMakerSetupAPI(generics.GenericAPIView):
                 icon_parts["updated_value"] += 1
 
         return Response(icon_parts)
+
+class IconGeneratorAPI(generics.GenericAPIView):
+    def post(self, request):
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--window-size=1920x1080")
+        chrome_driver = "/usr/local/bin/chromedriver"
+        driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
+        driver.get("http://localhost:8000/iconio/screenshot/order_id")
+        img = driver.find_element_by_id('my-iconio').screenshot_as_png
+        upload_to_s3(img, f'icon_orders/screenshot.png')
+        return Response()
 
 
 from paypal.standard.forms import PayPalPaymentsForm
