@@ -73,6 +73,7 @@ class AboutUs extends Component {
           <br/><br/>オウチスタジオも、そんな各国間のギャップを取り去るサービスのひとつとして、ユーザーの皆様と一緒に成長していきたいと思っています。</p>
 
 
+          {/*
           <h3>Our Team</h3>
 
 
@@ -90,6 +91,7 @@ class AboutUs extends Component {
             <p class="member-title">Cofounder & CTO</p>
             <p>香川県出身。東京大学大学院でコンピュータ科学の修士号を取得後、渡米しソフトウェアエンジニアとして主にスタートアップの会社に勤務。テニス、旅行が趣味。</p>
           </div>
+          */}
         </div>
       )}
 
@@ -131,6 +133,7 @@ class AboutUs extends Component {
           <br/><br/>Ohchee Studio strives to become a service that can eliminate such gaps between countries, and grow together with talented artists.</p>
 
 
+         {/*
           <h3>Our Team</h3>
 
 
@@ -148,6 +151,7 @@ class AboutUs extends Component {
             <p class="member-title">Cofounder & CTO</p>
             <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>
           </div>
+          */}
         </div>
       )}
 
