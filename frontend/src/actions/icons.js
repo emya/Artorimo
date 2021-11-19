@@ -382,6 +382,42 @@ export const completeIconUpload = (artist_id, use_range) => {
   }
 }
 
+export const generateIconio = (order_id) => {
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    let headers = {"Content-Type": "application/json"};
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({
+      order_id
+    })
+
+    return fetch('/api/icons/generator/', {headers, body, method: "POST"})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({type: "COMPLETE_ICON_UPLOAD", data: res.data });
+          return res.data;
+        } else {
+          dispatch({type: "COMPLETE_ICON_UPLOAD_FAILURE", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
 export const cleanupIconParts = (artist_id) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;

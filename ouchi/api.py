@@ -1,5 +1,6 @@
 import json
 import sys
+import os
 from rest_framework import (
     status, viewsets, permissions, generics,
     parsers, renderers, views
@@ -439,6 +440,16 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+        if request.data.get("paypal_status") == 1:
+            print(serializer.data)
+            order_id = serializer.data['id']
+            file_path = f'icon_orders/my-iconio-{order_id}.png'
+            if not is_s3_object_exists(file_path):
+                img = generate_iconio(order_id)
+                upload_to_s3(img, file_path)
+                serializer.data['s3_path'] = file_path
+
         return Response(serializer.data)
 
     def retrieve(self, request, pk):
@@ -911,6 +922,30 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
         return Response(icon_parts)
 
+class IconGeneratorAPI(generics.GenericAPIView):
+    def post(self, request):
+        data = request.data
+        order_id = data['order_id']
+        file_path = f'icon_orders/my-iconio-{order_id}.png'
+
+        response = {"s3_path": file_path}
+        if not is_s3_object_exists(file_path):
+            img = generate_iconio(order_id)
+            upload_to_s3(img, file_path)
+        return Response(response)
+
+def generate_iconio(order_id):
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920x1080")
+    chrome_driver = "/usr/local/bin/chromedriver"
+    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
+    driver.get(f"http://localhost:8000/iconio/screenshot/{order_id}")
+    img = driver.find_element_by_id('my-iconio').screenshot_as_png
+    return img
+
 
 from paypal.standard.forms import PayPalPaymentsForm
 
@@ -1125,6 +1160,21 @@ def upload_to_s3(image, key):
     )
 
     client.put_object(Bucket=settings.AWS_BUCKET_NAME, Key=key, Body=image)
+
+def is_s3_object_exists(key):
+    from botocore.errorfactory import ClientError
+    client = boto3.client(
+        "s3",
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name=settings.AWS_REGION
+    )
+    try:
+        client.head_object(Bucket=settings.AWS_BUCKET_NAME, Key=key)
+    except ClientError:
+        # Not found
+        return False
+    return True
 
 class AccountActivateAPI(generics.GenericAPIView):
     serializer_class = LoginUserSerializer

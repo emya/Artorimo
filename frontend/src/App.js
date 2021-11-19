@@ -27,6 +27,7 @@ import IconioArtistGuide from "./components/IconioArtistGuide";
 import IconioUserGuide from "./components/IconioUserGuide";
 import IconioUploadCompleted from "./components/IconioUploadCompleted";
 import IconioUploadFailed from "./components/IconioUploadFailed";
+import IconioScreenshot from "./components/IconioScreenshot";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import ActivateAccount from "./components/ActivateAccount";
@@ -132,6 +133,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/iconio/payment/paypal" component={PayPal} />
                     <Route exact path="/iconio/payment/paypal/done" component={PayPalDone} />
                     <Route exact path="/iconio/download/:token" component={IconioDownload} />
+                    <Route exact path="/iconio/screenshot/:order_id" component={IconioScreenshot} />
 
                     <StaffRoute exact path="/iconio" component={Iconio} />
                     <StaffRoute exact path="/staff/top" component={StaffLanding} />
