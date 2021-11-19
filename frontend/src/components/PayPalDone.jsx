@@ -5,6 +5,8 @@ import {Link, Redirect} from 'react-router-dom';
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toSvg } from 'html-to-image';
 
+import AWS from 'aws-sdk';
+
 import html2canvas from 'html2canvas';
 
 import download from 'downloadjs';
@@ -23,6 +25,11 @@ var keys = keys_stg;
 if (process.env.NODE_ENV === "production"){
   keys = keys_prod;
 }
+AWS.config.update({
+  accessKeyId: keys.AWS_ACCESS_KEY_ID,
+  secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
+  region: 'us-west-2'
+});
 
 class PayPalDone extends Component {
   componentWillMount() {
@@ -34,6 +41,26 @@ class PayPalDone extends Component {
     }
     //this.props.fetchOrder("53a647c19b0b42dcb395b1bc0c943bb5");
   }
+
+  downloadImage = (order_id) => {
+      let bucket = keys.AWS_BUCKET;
+      console.log(bucket);
+      console.log(order_id);
+      let s3 = new AWS.S3({ params: { Bucket: bucket }})
+      let key = `icon_orders/my-iconio-${order_id}.png`
+      let params = {Bucket: bucket, Key: key}
+      s3.getObject(params, (err, data) => {
+        if (err){
+          console.log(err)
+        }
+
+        let blob=new Blob([data.Body], {type: data.ContentType});
+        let link=document.createElement('a');
+        link.href=window.URL.createObjectURL(blob);
+        link.download='my-iconio.png';
+        link.click();
+      })
+    }
 
   saveToPng = (e) => {
     e.preventDefault();
@@ -131,7 +158,7 @@ class PayPalDone extends Component {
     <h2>Thank You for Using Iconio!</h2>
 
     <div class="spacer"></div>
-    <button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>
+    {/*<button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>*/}
     {this.props.icons.order && !this.props.icons.orderApproved && (
        <div class="parent">
           <p>The order is not apporved, or is expired.
@@ -145,6 +172,11 @@ class PayPalDone extends Component {
 
   <div id="my-iconio-parent">
     <div id="my-iconio">
+      <img
+         src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icon_orders/my-iconio-${icon_state.id}.png`}
+      />
+      <button class="btn savep two-btn" onClick={this.downloadImage.bind(this, icon_state.id)}> ダウンロード </button>
+      {/*
       <Filters />
       {icon_state.face > 0 && (
         <img class="download-image1 imgFace"
@@ -168,7 +200,6 @@ class PayPalDone extends Component {
         />
       )}
 
-      {/* Hair */}
       {icon_state.hair > 0 && (
         <img class="download-image1 imgHair"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/hair${icon_state.hair}.png`}
@@ -191,7 +222,6 @@ class PayPalDone extends Component {
         />
       )}
 
-      {/* Bang */}
       {icon_state.bang > 0 && (
         <img class="download-image1 imgBang"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/bang${icon_state.bang}.png`}
@@ -214,7 +244,6 @@ class PayPalDone extends Component {
         />
       )}
 
-      {/* Side */}
       {icon_state.side > 0 && (
         <img class="download-image1 imgSide"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/side${icon_state.side}.png`}
@@ -238,7 +267,6 @@ class PayPalDone extends Component {
       )}
 
 
-      {/* Eyes */}
       {icon_state.eyes > 0 && (
         <img class="download-image1 imgEyes"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyes_line${icon_state.eyes}.png`}
@@ -261,7 +289,6 @@ class PayPalDone extends Component {
         />
       )}
 
-      {/* Eyebrow */}
       {icon_state.eyebrows > 0 && (
         <img class="download-image1 imgEyebrows"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyebrows${icon_state.eyebrows}.png`}
@@ -285,14 +312,12 @@ class PayPalDone extends Component {
       )}
 
 
-      {/* Nose */}
       {icon_state.nose > 0 && (
         <img class="download-image1 imgNose"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/nose${icon_state.nose}.png`}
         />
       )}
 
-      {/* Mouth */}
       {icon_state.mouth > 0 && (
         <img class="download-image1 imgMouth"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/mouth${icon_state.mouth}.png`}
@@ -316,7 +341,6 @@ class PayPalDone extends Component {
       )}
 
 
-      {/* Cloth */}
       {icon_state.cloth > 0 && (
         <img class="download-image1 imgCloth"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/cloth${icon_state.cloth}.png`}
@@ -339,7 +363,6 @@ class PayPalDone extends Component {
         />
       )}
 
-      {/* Accessories */}
       {icon_state.accessories > 0 && (
         <img class="download-image1 imgAccessories"
              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/accessories${icon_state.accessories}.png`}
@@ -359,6 +382,7 @@ class PayPalDone extends Component {
                }
              }}
       />
+      */}
       </div>
 
 

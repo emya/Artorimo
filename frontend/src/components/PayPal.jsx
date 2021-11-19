@@ -155,11 +155,12 @@ class PayPal extends Component {
       return <Redirect to="/iconio/creators/top" />;
     }
 
-    // const icon_state = this.props.icons.order;
+    const icon_state = this.props.icons.order;
 
     // This is the test data
     // TODO: use the above icon_state
 
+    /*
     const icon_state = {
         bang: 1,
         bang_filter: 5,
@@ -185,6 +186,7 @@ class PayPal extends Component {
     //const artist_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
     //const order_id = "0707d4f7-cecf-480b-845e-11bbff0a45e0";
 
+    */
 
     // This should be used once test is done
     const artist_id = this.props.icons.order.artist.id;
