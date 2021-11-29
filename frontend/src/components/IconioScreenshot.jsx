@@ -35,10 +35,8 @@ class IconioScreenshot extends Component {
     return (
 
   <div>
-  <Header />
   <div class="wrapper clearfix">
   <div class="download-screen">
-    <h2>Thank You for Using Iconio!</h2>
     <div class="spacer"></div>
     {this.props.icons.order && (
 
@@ -47,9 +45,9 @@ class IconioScreenshot extends Component {
       <Filters />
       {icon_state.face > 0 && (
         <img class="download-image1 imgFace"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face${icon_state.face}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/face${icon_state.face}.png`}
              style={{filter: `url(#filterSkinColor${icon_state.face_filter})`, WebkitFilter: `url(#filterSkinColor${icon_state.face_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -59,7 +57,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.face > 0 && (
         <img class="download-image1 imgFaceLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/face_line${icon_state.face}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/face_line${icon_state.face}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -71,9 +69,9 @@ class IconioScreenshot extends Component {
       {/* Hair */}
       {icon_state.hair > 0 && (
         <img class="download-image1 imgHair"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair${icon_state.hair}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/hair${icon_state.hair}.png`}
              style={{filter: `url(#filterHairColor${icon_state.hair_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.hair_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -83,7 +81,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.hair > 0 && (
         <img class="download-image1 imgHairLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/hair_line${icon_state.hair}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/hair_line${icon_state.hair}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -95,9 +93,9 @@ class IconioScreenshot extends Component {
       {/* Bang */}
       {icon_state.bang > 0 && (
         <img class="download-image1 imgBang"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang${icon_state.bang}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/bang${icon_state.bang}.png`}
              style={{filter: `url(#filterHairColor${icon_state.bang_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.bang_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -107,7 +105,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.bang > 0 && (
         <img class="download-image1 imgBangLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/bang_line${icon_state.bang}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/bang_line${icon_state.bang}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -119,9 +117,9 @@ class IconioScreenshot extends Component {
       {/* Side */}
       {icon_state.side > 0 && (
         <img class="download-image1 imgSide"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side${icon_state.side}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/side${icon_state.side}.png`}
              style={{filter: `url(#filterHairColor${icon_state.side_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.side_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -131,7 +129,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.side > 0 && (
         <img class="download-image1 imgSideLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/side_line${icon_state.side}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/side_line${icon_state.side}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -144,7 +142,7 @@ class IconioScreenshot extends Component {
       {/* Eyes */}
       {icon_state.eyes > 0 && (
         <img class="download-image1 imgEyes"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes_line${icon_state.eyes}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyes_line${icon_state.eyes}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -154,9 +152,9 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.eyes > 0 && (
         <img class="download-image1 imgEyeballs"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyes${icon_state.eyes}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyes${icon_state.eyes}.png`}
              style={{filter: `url(#filterEyesColor${icon_state.eyes_filter})`, WebkitFilter: `url(#filterEyesColor${icon_state.eyes_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -168,9 +166,9 @@ class IconioScreenshot extends Component {
       {/* Eyebrow */}
       {icon_state.eyebrows > 0 && (
         <img class="download-image1 imgEyebrows"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows${icon_state.eyebrows}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyebrows${icon_state.eyebrows}.png`}
              style={{filter: `url(#filterHairColor${icon_state.eyebrows_filter})`, WebkitFilter: `url(#filterHairColor${icon_state.eyebrows_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -180,7 +178,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.eyebrows > 0 && (
         <img class="download-image1 imgEyebrowsLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/eyebrows_line${icon_state.eyebrows}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/eyebrows_line${icon_state.eyebrows}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -193,16 +191,16 @@ class IconioScreenshot extends Component {
       {/* Nose */}
       {icon_state.nose > 0 && (
         <img class="download-image1 imgNose"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/nose${icon_state.nose}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/nose${icon_state.nose}.png`}
         />
       )}
 
       {/* Mouth */}
       {icon_state.mouth > 0 && (
         <img class="download-image1 imgMouth"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth${icon_state.mouth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/mouth${icon_state.mouth}.png`}
              style={{filter: `url(#filterMouthColor${icon_state.mouth_filter})`, WebkitFilter: `url(#filterMouthColor${icon_state.mouth_filter})`}}
-             crossorigin="anonymous"
+             crossOrigin="anonymous"
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -212,7 +210,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.mouth > 0 && (
         <img class="download-image1 imgMouthLine"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/mouth_line${icon_state.mouth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/mouth_line${icon_state.mouth}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -225,7 +223,7 @@ class IconioScreenshot extends Component {
       {/* Cloth */}
       {icon_state.cloth > 0 && (
         <img class="download-image1 imgCloth"
-             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/cloth${icon_state.cloth}.png`}
              style={{filter: `url(#filterClothColor${icon_state.cloth_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.cloth_filter})`}}
              source={{
                header: {
@@ -236,7 +234,7 @@ class IconioScreenshot extends Component {
       )}
       {icon_state.cloth > 0 && (
         <img class="download-image1 imgClothLine"
-             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${icon_state.artist.id}/cloth_line${icon_state.cloth}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3.us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/cloth_line${icon_state.cloth}.png`}
              source={{
                header: {
                  'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -246,9 +244,9 @@ class IconioScreenshot extends Component {
       )}
 
       {/* Accessories */}
-      {icon_state.accessories > 0 && (
+      {icon_state.accessories !== "" && icon_state.accessories.split(",").map(accessory =>
         <img class="download-image1 imgAccessories"
-             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/accessories${icon_state.accessories}.png`}
+             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${icon_state.artist.id}/${icon_state.iconio_version}/accessories${accessory}.png`}
              source={{
                header: {
                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -259,6 +257,7 @@ class IconioScreenshot extends Component {
 
       <img class="download-image1 imgBackGround"
           src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+          style={{filter: `url(#filterClothColor${icon_state.background_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.background_filter})`}}
           source={{
                header: {
                 'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
@@ -273,7 +272,6 @@ class IconioScreenshot extends Component {
     </div>
   </div>
   <Filters />
-  <Footer />
   </div>
     )
   }
@@ -288,7 +286,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchOrder: (order_id) => {
-      dispatch(icons.fetchApprovedOrder(order_id));
+      dispatch(icons.fetchOrder(order_id));
     },
     logout: () => dispatch(auth.logout()),
   }

@@ -63,28 +63,35 @@
 <div class="logo-link">OhcheeStudio</div>
 </div>
 <div class="email-body">
-<div class="email-greeting">Thank you for shopping with Iconio. <br /> Here is your receipt.</div>
+<div class="email-greeting">いつもIconioをご利用ありがとうございます。 <br /> ご購入内容の詳細は以下のとおりです。
+</div>
 <br>
-<hr />{{Date}}
- <br /> Order: {{ order_id }} <br /> <br />
+<hr /> 購入日時: {{date}}
+ <br /> 購入番号: {{ order_id }} <br /> <br />
 
  <hr>
  <table style="border: none;" cellspacing="5" cellpadding="5">
    <tr style="border: none;">
-     <td style="border: none;">Icon</td>
+     <td style="border: none;">アイコン</td>
      <td style="border: none;">$5</td>
     </tr>
     <tr>
-     <td style="border: none;"><span style="font-weight:bold">Total</span></td>
+     <td style="border: none;"><span style="font-weight:bold">合計</span></td>
      <td style="border: none;"><span style="font-weight:bold">$5</span></td>
     </tr>
  </table>
  <hr>
 
  <br>
+    <p> ご購入頂いたアイコンは次のリンクよりダウンロードできます。 {{download_link}}
+    </p>
+    <p>
+        上記のリンクの有効期限が切れることがありますので、お早めにダウンロードしてください。
+    </p>
+ <br>
   <p>
     <br><br><br>
-    If you have any questions, please contact us.
+    ご質問等ございましたら、以下のメールアドレスまでお気軽にご連絡ください。
     <br><br>
     ohcheestudio@gmail.com<br><br>
     <span class="email-closing">Team OhcheeStudio</span>

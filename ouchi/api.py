@@ -436,19 +436,27 @@ class IconOrderViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
+        logger.info(request.data)
 
         serializer = self.serializer_class(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
         if request.data.get("paypal_status") == 1:
-            print(serializer.data)
+            logger.info(serializer.data)
             order_id = serializer.data['id']
             file_path = f'icon_orders/my-iconio-{order_id}.png'
             if not is_s3_object_exists(file_path):
                 img = generate_iconio(order_id)
                 upload_to_s3(img, file_path)
                 serializer.data['s3_path'] = file_path
+
+            # Notify OS staff
+            html_message = render_to_string('email-iconio-purchase.html',
+                                            {'order_id': order_id, 's3_path': file_path})
+
+            send_email.delay("[Notification] Iconio purchase completed", "Iconio purchase", html_message,
+                             [settings.EMAIL_HOST_USER])
 
         return Response(serializer.data)
 
@@ -648,9 +656,9 @@ class IconioDownloadAPI(generics.GenericAPIView):
 
     def get(self, request):
         oidb64 = request.GET.get('token')
-        order_id = force_text(urlsafe_base64_decode(oidb64))
+        paypal_order_id = force_text(urlsafe_base64_decode(oidb64))
         try:
-            icon_order = IconOrder.objects.get(id=order_id)
+            icon_order = IconOrder.objects.get(paypal_order_id=paypal_order_id)
         except(IconOrder.DoesNotExist):
             return Response({"token": "The token is invalid."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -937,13 +945,30 @@ class IconGeneratorAPI(generics.GenericAPIView):
 def generate_iconio(order_id):
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.by import By
+
     chrome_options = Options()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--window-size=1920x1080")
-    chrome_driver = "/usr/local/bin/chromedriver"
+    chrome_options.add_argument("--window-size=6000x5000")
+    #chrome_options.add_argument("--window-size=1920x1080")
+    chrome_options.add_argument("--ignore-certificate-errors")
+    chrome_driver = settings.CHROME_DRIVER_PATH
     driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
-    driver.get(f"http://localhost:8000/iconio/screenshot/{order_id}")
-    img = driver.find_element_by_id('my-iconio').screenshot_as_png
+    driver.get(f"{settings.SITE_URL}/iconio/screenshot/{order_id}/")
+    try:
+        element = WebDriverWait(driver, 1.5).until(
+            EC.presence_of_element_located((By.ID, "my-iconio"))
+        )
+        img = driver.find_element_by_id('my-iconio').screenshot_as_png
+    finally:
+        driver.quit()
+
+    #driver.get(f"{settings.SITE_URL}/iconio/screenshot/{order_id}/")
+    #driver.execute_script("document.body.style.zoom = '120%'")
     return img
 
 
@@ -965,7 +990,7 @@ class PayPalAPI(generics.GenericAPIView):
             'item_name': f"Order {order.id}",
             'invoice': str(order.id),
             'currency_code': 'USD',
-            'notify_url': "https://ec2b-73-53-58-51.ngrok.io/api/webhooks/paypal/",
+            'notify_url': "https://ad81-73-53-58-51.ngrok.io/api/webhooks/paypal/",
             'return_url': f"{host}/iconio/payment/paypal/done",
             #'cancel_return': f"http://{host}{reverse('payment_cancelled')}",
         }
@@ -986,6 +1011,7 @@ class ProcessWebhookView(generics.GenericAPIView):
     serializer_class = PayPalWebhookSerializer
 
     def post(self, request):
+        logger.info(f"Paypal webhook: request META {request.META}")
 
         if "HTTP_PAYPAL_TRANSMISSION_ID" not in request.META:
             return HttpResponseBadRequest()
@@ -1008,8 +1034,11 @@ class ProcessWebhookView(generics.GenericAPIView):
             auth_algo=auth_algo,
         )
 
+        logger.info(f"Paypal webhook: is_valid {valid}")
+        """
         if not valid:
             return HttpResponseBadRequest()
+        """
 
         webhook_event = json.loads(event_body)
 
@@ -1039,16 +1068,21 @@ class ProcessWebhookView(generics.GenericAPIView):
                 resource=resource
             )
             serializer = self.serializer_class(paypal_webhook)
-            """
             # TODO: Send receipt email with download link
-            product_link = "https://learn.justdjango.com"
-            send_mail(
-                subject="Your access",
-                message=f"Thank you for purchasing my product. Here is the link: {product_link}",
-                from_email="your@email.com",
-                recipient_list=[customer_email]
-            )
-            """
+            download_token = urlsafe_base64_encode(force_bytes(order_id))
+            download_link = f"{settings.SITE_URL}/iconio/download/{download_token}"
+
+            # Notify an user
+            from datetime import datetime
+            date = datetime.today().strftime('%Y-%m-%d')
+            html_message = render_to_string('email-iconio-receipt.html',
+                                            {'date': date, 'order_id': order_id, 'download_link': download_link})
+
+            # TODO: retrieve this from webhook event
+            customer_email = settings.EMAIL_HOST_USER
+            send_email.delay("Iconio 購入のお知らせ", "Iconio", html_message,
+                             [customer_email])
+
         else:
             order_id = ""
             paypal_webhook = PayPalWebhook.objects.create(
