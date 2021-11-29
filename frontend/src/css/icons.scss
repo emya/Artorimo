@@ -359,8 +359,8 @@
   left: 0;
   //left: 15%;
   //width: 84%;
-  height: 500px;
-  width: 500px;
+  height: 1000px;
+  width: 1000px;
 }
 
 .download-image1 {
@@ -369,8 +369,8 @@
     top: 0;
     //width: 85%;
     left: 0;
-    height: 500px;
-    width: 500px;
+    height: 1000px;
+    width: 1000px;
   }
 }
 
@@ -381,6 +381,13 @@
 }
 
 #my-iconio {
+  height: 1000px;
+  width: 1000px;
+  padding: 0;
+  margin: 0;
+}
+
+#my-made-iconio {
   height: 500px;
   width: 500px;
   padding: 0;

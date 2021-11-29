@@ -9,6 +9,8 @@ export const orderIcon = (
   nose,
   mouth, mouth_filter,
   cloth, cloth_filter,
+  accessories,
+  background_filter
 ) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
@@ -29,6 +31,8 @@ export const orderIcon = (
       nose,
       mouth, mouth_filter,
       cloth, cloth_filter,
+      accessories,
+      background_filter
     });
 
     return fetch("/api/order/icon/", {headers, body, method: "POST"})
@@ -215,7 +219,6 @@ export const fetchIconPartsByName = (artist_name, is_setup = false) => {
           dispatch({type: "GET_ICON_PARTS", data: res.data });
           return res.data;
         } else {
-          console.log("GET_ICON_PARTS_FAILURE");
           dispatch({type: "GET_ICON_PARTS_FAILURE", data: res.data});
           throw res.data;
         }

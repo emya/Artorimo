@@ -152,6 +152,8 @@ class IconOrder(models.Model):
     mouth_filter = models.IntegerField()
     cloth = models.IntegerField()
     cloth_filter = models.IntegerField()
+    accessories = models.CharField(max_length=25, blank=True)
+    background_filter = models.IntegerField()
     price = models.FloatField()
     status = models.CharField(max_length=100)
     created_time = models.DateTimeField(auto_now_add=True)

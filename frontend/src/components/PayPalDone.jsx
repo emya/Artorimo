@@ -44,8 +44,6 @@ class PayPalDone extends Component {
 
   downloadImage = (order_id) => {
       let bucket = keys.AWS_BUCKET;
-      console.log(bucket);
-      console.log(order_id);
       let s3 = new AWS.S3({ params: { Bucket: bucket }})
       let key = `icon_orders/my-iconio-${order_id}.png`
       let params = {Bucket: bucket, Key: key}
@@ -155,14 +153,15 @@ class PayPalDone extends Component {
   <div class="wrapper clearfix">
 
   <div class="download-screen">
-    <h2>Thank You for Using Iconio!</h2>
+    <h2 style={{textAlign: "left"}}>Iconio</h2>
 
     <div class="spacer"></div>
     {/*<button class="btn savep two-btn" onClick={this.saveToPng}> ダウンロード </button>*/}
     {this.props.icons.order && !this.props.icons.orderApproved && (
        <div class="parent">
-          <p>The order is not apporved, or is expired.
-          Please contact OhcheeStudio
+          <p>
+            ご注文のIconioの画像がうまく表示されない等の問題がありましたら、
+            <a href="mailto:ohcheestudio@gmail.com">OhcheeStudio</a>までご連絡ください
           </p>
        </div>
     )}
@@ -171,11 +170,18 @@ class PayPalDone extends Component {
 
 
   <div id="my-iconio-parent">
-    <div id="my-iconio">
+    <div id="my-made-iconio">
       <img
          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icon_orders/my-iconio-${icon_state.id}.png`}
+         width="500px"
+         height="500px"
       />
       <button class="btn savep two-btn" onClick={this.downloadImage.bind(this, icon_state.id)}> ダウンロード </button>
+      <p>
+        ダウンロードできない、画像がうまく表示されない等の問題がありましたら、
+        <a href="mailto:ohcheestudio@gmail.com">OhcheeStudio</a>までご連絡ください
+      </p>
+
       {/*
       <Filters />
       {icon_state.face > 0 && (
@@ -392,7 +398,6 @@ class PayPalDone extends Component {
     </div>
   </div>
   <Filters />
-  <Footer />
   </div>
     )
   }

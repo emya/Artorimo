@@ -47,6 +47,7 @@ class PayPal extends Component {
     },
     isAgreed: false,
     agree_check_error: null,
+    preprocessed_error: null,
   }
 
   handleAgreementCheck = (e) => {
@@ -111,6 +112,41 @@ class PayPal extends Component {
       }
     }
     return total;
+  }
+
+  onInitialPaypalClick = async(data, actions) => {
+    var errors = this.onClickCheck();
+    var isInvalid = errors.length > 0;
+    if (isInvalid) {
+      return actions.reject();
+    }
+
+    var order_id = this.props.icons.order.id;
+    var body = JSON.stringify({
+      order_id
+    })
+
+    let result = await fetch("/api/icons/generator/", {
+      method: 'POST',
+      body,
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(function(res) {
+      if (res.status == 200){
+      }
+
+      if (res.status < 200 || res.status > 299) {
+        return false;
+      }
+
+      return res.json();
+    });
+
+    if (result === false){
+      this.setState({preprocessed_error: "Something happens during ordering Iconio. Please try again later"});
+      return actions.reject();
+    }
   }
 
   onApproveOrder = async(data, actions) => {
@@ -194,6 +230,7 @@ class PayPal extends Component {
     const order_id = this.props.icons.order.id;
 
     const agree_check_error = this.state.agree_check_error;
+    const preprocessed_error = this.state.preprocessed_error;
 
     return (
   <div>
@@ -319,9 +356,19 @@ class PayPal extends Component {
           />
         )}
 
-        {icon_state.accessories > 0 && (
+        <img class="image1 imgBackGround"
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+          style={{filter: `url(#filterClothColor${icon_state.background_filter})`, WebkitFilter: `url(#filterClothColor${icon_state.background_filter})`}}
+          source={{
+               header: {
+                'Access-Control-Allow-Origin': `${keys.Access_Control_Allow_Origin}`
+               }
+             }}
+        />
+
+        {icon_state.accessories !== "" && icon_state.accessories.split(",").map(accessory =>
           <img class="image1 imgAccessories"
-               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/accessories${icon_state.accessories}.png`}
+               src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/icons/${artist_id}/${version}/accessories${accessory}.png`}
           />
         )}
       </div>
@@ -348,17 +395,39 @@ class PayPal extends Component {
           <p class="start-error" style={{color:"red"}}> {this.state.agree_check_error} </p>
         )}
 
+        {this.state.preprocessed_error && (
+          <p class="start-error" style={{color:"red"}}> {this.state.preprocessed_error} </p>
+        )}
+
         <PayPalScriptProvider options={{ "client-id": keys.PAYPAL_CLIENT_ID, "currency": "USD", "disable-funding": "credit"}}>
             <PayPalButtons
                 order_id={order_id}
                 style={{ layout: "horizontal" }}
+                onClick={(data, actions) => this.onInitialPaypalClick(data, actions)}
+                /*
                 onClick = {(data, actions) => {
                   var errors = this.onClickCheck();
                   var isInvalid = errors.length > 0;
                   if (isInvalid) {
                     return actions.reject();
                   }
+                  var preprocessed = this.onPaypalClick();
+
+                  preprocessed.then(function(result) {
+                     // here you can use the result of promiseB
+                     console.log(result)
+                     if (result === false){
+                       errors = "Something wrong";
+                       console.log("Something wrong")
+                       return actions.reject();
+                     }
+                  });
+
+                  console.log(errors);
+
                 }}
+                */
+
 
                 createOrder = {(data, actions) => {
                   // Set up the transaction

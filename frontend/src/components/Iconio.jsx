@@ -49,10 +49,12 @@ class Iconio extends Component {
       8: "face",
       9: "accessories",
       10: "glasses",
+      11: "background",
     },
     removedFiles: [],
     unselectable_options: ["bang", "side", "cloth", "accessories", "glasses"],
     line_only_elements: ["nose", "accessories", "glasses"],
+    filling_only_elements: ["background"],
     looked_element: 8,
     hair: 1,
     bang: 1,
@@ -71,6 +73,7 @@ class Iconio extends Component {
     mouth_classes: 1,
     cloth_classes: 1,
     face_classes: 1,
+    background_classes: 1,
 
     accessories: [],
     glasses: 0,
@@ -249,6 +252,8 @@ class Iconio extends Component {
   proceedCheckout = (artist_id, iconio_version, e) => {
     e.preventDefault();
 
+    var accessories = this.state.accessories.join(",");
+
     this.props.orderIcon(
       artist_id, iconio_version,
       this.state.face, this.state.face_classes,
@@ -260,6 +265,7 @@ class Iconio extends Component {
       this.state.nose,
       this.state.mouth, this.state.mouth_classes,
       this.state.cloth, this.state.cloth_classes,
+      accessories, this.state.background_classes
     );
   }
 
@@ -289,7 +295,7 @@ class Iconio extends Component {
     <div class="wrapper-icon clearfix">
       <div class="iconio-uploader">
       <div class="iconio-container ">
-      <h2>Iconio with Artist Name </h2>
+      <h2>Iconio</h2>
       <div class="uploader-one clearfix">
       {/*<div class="parent">*/}
 
@@ -421,6 +427,7 @@ class Iconio extends Component {
 
         <img class="image1 imgBackGround"
           src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+          style={{filter: `url(#filterClothColor${this.state.background_classes})`, WebkitFilter: `url(#filterClothColor${this.state.background_classes})`}}
         />
       </div>
 
@@ -543,6 +550,34 @@ class Iconio extends Component {
          </div>
        </div>
 
+       {/* Background */}
+       <div class="color-pad" style={{ display: this.state.looked_element === 11 ? "block" : "none" }}>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor1)", WebkitFilter: "url(#filterClothColor1)"}} onClick={() => this.changeColorFilter(1)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor2)", WebkitFilter: "url(#filterClothColor2)"}} onClick={() => this.changeColorFilter(2)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor3)", WebkitFilter: "url(#filterClothColor3)"}} onClick={() => this.changeColorFilter(3)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor4)", WebkitFilter: "url(#filterClothColor4)"}} onClick={() => this.changeColorFilter(4)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor5)", WebkitFilter: "url(#filterClothColor5)"}} onClick={() => this.changeColorFilter(5)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor6)", WebkitFilter: "url(#filterClothColor6)"}} onClick={() => this.changeColorFilter(6)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor7)", WebkitFilter: "url(#filterClothColor7)"}} onClick={() => this.changeColorFilter(7)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterClothColor8)", WebkitFilter: "url(#filterClothColor8)"}} onClick={() => this.changeColorFilter(8)} ></div>
+         </div>
+       </div>
+
        {/* Face */}
        <div class="color-pad" style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
          <div class="outer-circle">
@@ -605,6 +640,9 @@ class Iconio extends Component {
          <button class={this.state.looked_element === 10 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(10)} >
            {this.state.selected_language === "jpn" ? ("眼鏡") : ("Glasses")}
          </button>
+         <button class={this.state.looked_element === 11 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(11)} >
+           {this.state.selected_language === "jpn" ? ("背景") : ("Background")}
+         </button>
        </div>
       </div>
       </div>
@@ -654,6 +692,10 @@ class Iconio extends Component {
 
       <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
         {this.getAvailableOptions("glasses")}
+      </div>
+
+      <div style={{ display: this.state.looked_element === 11 ? "block" : "none" }}>
+        <p>お好きな色を選択してください</p>
       </div>
     </div>
     </div>
@@ -712,7 +754,9 @@ const mapDispatchToProps = dispatch => {
       eyebrows, eyebrows_filter,
       nose,
       mouth, mouth_filter,
-      cloth, cloth_filter
+      cloth, cloth_filter,
+      accessories,
+      background_classes,
     ) => {
       dispatch(icons.orderIcon(
         artist_id, iconio_version,
@@ -724,7 +768,9 @@ const mapDispatchToProps = dispatch => {
         eyebrows, eyebrows_filter,
         nose,
         mouth, mouth_filter,
-        cloth, cloth_filter
+        cloth, cloth_filter,
+        accessories,
+        background_classes
       ));
     },
     fetchIconParts: (artist_id) => {

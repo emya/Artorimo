@@ -119,7 +119,7 @@ class Filters extends Component {
       </filter>
 
       <filter id="filterClothColor1" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 0.960   0 0 0 0 0.827   0 0 0 0 0.819  0 0 0 1 0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 1 0"/>
       </filter>
       <filter id="filterClothColor2" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.827   0 0 0 0 0.866   0 0 0 0 0.905  0 0 0 1 0"/>
@@ -140,7 +140,7 @@ class Filters extends Component {
         <feColorMatrix type="matrix" values="0 0 0 0 0.223   0 0 0 0 0.145   0 0 0 0 0.133  0 0 0 1 0"/>
       </filter>
       <filter id="filterClothColor8" colorInterpolationFilters="sRGB">
-        <feColorMatrix type="matrix" values="0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 0 1.0   0 0 0 1 0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.960   0 0 0 0 0.827   0 0 0 0 0.819  0 0 0 1 0"/>
       </filter>
     </defs>
   </svg>
