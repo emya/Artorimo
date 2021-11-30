@@ -524,6 +524,12 @@ class PayPal extends Component {
       </div>
       
       <p>日本のクレジットカードのご使用方法</p>
+      <img
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal1.png`}
+      />
+      <img
+          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal2.png`}
+      />
 
     </div>
     </div>
