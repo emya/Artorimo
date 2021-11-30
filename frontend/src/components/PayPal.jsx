@@ -517,8 +517,13 @@ class PayPal extends Component {
             />
         </PayPalScriptProvider>
 
+
+
+
         {/* <AdditionalItems parentCallback = {this.handleCallback} /> */}
       </div>
+      
+      <p>日本のクレジットカードのご使用方法</p>
 
     </div>
     </div>
