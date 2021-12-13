@@ -144,7 +144,7 @@ class PayPal extends Component {
     });
 
     if (result === false){
-      this.setState({preprocessed_error: "Something happens during ordering Iconio. Please try again later"});
+      this.setState({preprocessed_error: "Iconio準備がうまくいきませんでした。再度お試しください。"});
       return actions.reject();
     }
   }
@@ -240,7 +240,7 @@ class PayPal extends Component {
     <div class="wrapper-icon clearfix">
       <div class="iconio-uploader">
       <div class="iconio-container ">
-      <h2>Iconio with Artist Name </h2>
+      <h2>Iconio</h2>
 
       <div class="uploader-one clearfix paypal-icon">
 
@@ -522,14 +522,18 @@ class PayPal extends Component {
 
         {/* <AdditionalItems parentCallback = {this.handleCallback} /> */}
       </div>
-      
-      <p>日本のクレジットカードのご使用方法</p>
-      <img
-          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal1.png`}
-      />
-      <img
-          src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal2.png`}
-      />
+
+      <div class="paypal-instruction">
+        <h3>日本のクレジットカードのご使用方法</h3>
+        <img
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal1.png`}
+            width="70%"
+        />
+        <img
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/paypal2.png`}
+            width="70%"
+        />
+      </div>
 
     </div>
     </div>
