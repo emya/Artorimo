@@ -298,13 +298,20 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
-        data = request.data.copy()
-        img = data.pop('image')
+        data = {}
+        img = None
+        for k, v in request.data.items():
+            logger.info(f"Profile: key {k}")
+            if k == 'image':
+                img = v
+            else:
+                data[k] = v
         is_upload_image = False
 
         if img:
-            image = img[0]
-            if isinstance(image, InMemoryUploadedFile):
+            #image = img[0]
+            image = img
+            if isinstance(image, InMemoryUploadedFile) or isinstance(image, TemporaryUploadedFile) :
                 data['image'] = image.name
                 is_upload_image = True
 
@@ -1078,9 +1085,9 @@ class ProcessWebhookView(generics.GenericAPIView):
             html_message = render_to_string('email-iconio-receipt.html',
                                             {'date': date, 'order_id': order_id, 'download_link': download_link})
 
-            # TODO: retrieve this from webhook event
-            customer_email = settings.EMAIL_HOST_USER
-            send_email.delay("Iconio 購入のお知らせ", "Iconio", html_message,
+            customer_email = resource.get("payer", {}).get("email_address")
+            if customer_email:
+                send_email.delay("Iconio 購入のお知らせ", "Iconio", html_message,
                              [customer_email])
 
         else:
