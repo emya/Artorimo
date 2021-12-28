@@ -434,6 +434,19 @@ class AskGoodsAPI(generics.GenericAPIView):
         send_email.delay("[Action Required] Sale of Goods", "Sale of Goods", html_message, [settings.EMAIL_HOST_USER])
         return Response({})
 
+class AskIconioAPI(generics.GenericAPIView):
+
+    def post(self, request):
+        user = request.user
+        email = user.email
+
+        # Notify Ohchee Team
+        html_message = render_to_string('email-iconio-yes.html',
+                                        {'user': user, 'email': email})
+
+        send_email.delay("[Action Required] Want to join Iconio", "Iconio", html_message, [settings.EMAIL_HOST_USER])
+        return Response({})
+
 
 class IconOrderViewSet(viewsets.ModelViewSet):
     #permission_classes = [BaseUserPermissions, ]
@@ -485,7 +498,7 @@ class IconOrderViewSet(viewsets.ModelViewSet):
         # artist_id = settings.TEST_ARTIST_ID
         artist = User.objects.get(pk=artist_id)
 
-        icon_order = IconOrder.objects.create(artist=artist, price=5.0, status="created", **data)
+        icon_order = IconOrder.objects.create(artist=artist, price=2.99, status="created", **data)
         serializer = self.serializer_class(icon_order)
 
         return Response(serializer.data)
@@ -603,6 +616,8 @@ class IconMakerAPI(generics.GenericAPIView):
             "face": 0,
             "accessories": 0,
             "glasses": 0,
+            "onface": 0,
+            "effects": 0,
         }
         if "Contents" in response:
             for content in response["Contents"]:
@@ -646,6 +661,8 @@ class IconioAPI(generics.GenericAPIView):
             "face": 0,
             "accessories": 0,
             "glasses": 0,
+            "onface": 0,
+            "effects": 0,
         }
         if "Contents" in response:
             for content in response["Contents"]:
@@ -763,7 +780,7 @@ class IconMakerSetupAPI(generics.GenericAPIView):
 
     def post(self, request):
         # Upload new images
-        line_only_elements = ["nose", "accessories", "glasses"]
+        line_only_elements = ["nose", "accessories", "glasses", "onface", "effects"]
         data = request.data
         artist_id = data['artist_id']
         icon_part = data['icon_part']

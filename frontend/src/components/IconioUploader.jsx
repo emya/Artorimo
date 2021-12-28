@@ -36,7 +36,7 @@ class IconioUploader extends Component {
         for (var key in this.props.icons.icon_parts) {
           if (this.props.icons.icon_parts.hasOwnProperty(key)) {
             if (this.props.icons.icon_parts[key] === 0){
-              if (key === "accessories") {
+              if (key === "accessories" || key === "onface" || key === "effects") {
                 this.setState({
                   [key]: []
                 })
@@ -47,7 +47,7 @@ class IconioUploader extends Component {
               }
 
             }else{
-              if (key === "accessories") {
+              if (key === "accessories" || key === "onface" || key === "effects") {
                 this.setState({
                   [key]: []
                 })
@@ -83,10 +83,12 @@ class IconioUploader extends Component {
       8: "face",
       9: "accessories",
       10: "glasses",
+      11: "onface",
+      12: "effects"
     },
     removedFiles: [],
-    unselectable_options: ["bang", "side", "cloth", "accessories", "glasses"],
-    line_only_elements: ["nose", "accessories", "glasses"],
+    unselectable_options: ["bang", "side", "cloth", "accessories", "glasses", "onface", "effects"],
+    line_only_elements: ["nose", "accessories", "glasses", "onface", "effects"],
     looked_element: 8,
     hair: 1,
     bang: 1,
@@ -96,6 +98,7 @@ class IconioUploader extends Component {
     mouth: 1,
     cloth: 1,
     face: 1,
+    nose: 1,
     hair_classes: 1,
     bang_classes: 1,
     side_classes: 1,
@@ -106,7 +109,9 @@ class IconioUploader extends Component {
     face_classes: 1,
 
     accessories: [],
+    onface: [],
     glasses: 0,
+    effects: [],
 
     // imageFiles to upload
     imageFiles: [],
@@ -144,21 +149,23 @@ class IconioUploader extends Component {
     })
   }
 
-  chooseAccessory = (optionNumber) => {
-    this.setState({ accessories: [...this.state.accessories, optionNumber] })
+  chooseAccessory = (optionName, optionNumber) => {
+    let accessories = this.state[optionName];
+    console.log("chooseAccessory", accessories, optionName, [...accessories, optionNumber]);
+    this.setState({ [optionName]: [...accessories, optionNumber] })
   }
 
-  removeChosenAccessory = (optionNumber) => {
+  removeChosenAccessory = (optionName, optionNumber) => {
     if (optionNumber === null){
-      this.setState({accessories: []});
+      this.setState({[optionName]: []});
       return false;
     }
 
-    let accessories = [...this.state.accessories]; // make a separate copy of the array
+    let accessories = [...this.state[optionName]]; // make a separate copy of the array
     let index = accessories.indexOf(optionNumber)
     if (index !== -1) {
       accessories.splice(index, 1);
-      this.setState({accessories: accessories});
+      this.setState({[optionName]: accessories});
     }
   }
 
@@ -242,9 +249,9 @@ class IconioUploader extends Component {
              </div>];
   }
 
-  getAvailableAccessoriesOptions = () => {
+  getAvailableAccessoriesOptions = (optionName) => {
     //console.log(this.props.icons.icon_parts);
-    const optionName = "accessories"
+    //const optionName = "accessories"
 
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
       let content = [];
@@ -255,13 +262,13 @@ class IconioUploader extends Component {
             {this.state[optionName].includes(i) ? (
               <img class="chosen"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   onClick={this.removeChosenAccessory.bind(this, i)}
+                   onClick={this.removeChosenAccessory.bind(this, optionName, i)}
               />
             )
             : (
               <img class="choice"
                    src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/${optionName}${i}.png`}
-                   onClick={this.chooseAccessory.bind(this, i)}
+                   onClick={this.chooseAccessory.bind(this, optionName, i)}
               />
             )}
             <div>
@@ -283,7 +290,7 @@ class IconioUploader extends Component {
               )}</button>)
       content.push(
             <button style={{width:"68%"}} class="btn savep"
-                 onClick={this.removeChosenAccessory.bind(this, null)}>
+                 onClick={this.removeChosenAccessory.bind(this, optionName, null)}>
             パーツを非表示にする</button>)
 
       return content;
@@ -439,6 +446,8 @@ class IconioUploader extends Component {
     };
 
     const accessories = this.state.accessories;
+    const onface = this.state.onface;
+    const effects = this.state.effects;
     const errors = this.state.errors;
     const line_errors = this.state.line_errors;
     const filling_errors = this.state.filling_errors;
@@ -563,13 +572,6 @@ class IconioUploader extends Component {
         )}
 
         {/* Accessories */}
-        {/*this.state.accessories > 0 && (
-          <img class="image1 imgCloth"
-            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/accessories${this.state.accessories}.png`}
-          />
-        )*/}
-
-        {/* Accessories */}
         {accessories.map(accessory => (
           <img class="image1 imgCloth"
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/accessories${accessory}.png`}
@@ -583,6 +585,19 @@ class IconioUploader extends Component {
           />
         )}
 
+        {/* Onface */}
+        {onface.map(of => (
+          <img class="image1 imgOnface"
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/onface${of}.png`}
+          />
+        ))}
+
+        {/* Effects */}
+        {effects.map(effect => (
+          <img class="image1 imgEffects"
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/effects${effect}.png`}
+          />
+        ))}
       </div>
 
       <div class="icon-container-right">
@@ -767,6 +782,12 @@ class IconioUploader extends Component {
          <button class={this.state.looked_element === 10 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(10)} >
            {this.state.selected_language === "jpn" ? ("眼鏡") : ("Glasses")}
          </button>
+         <button class={this.state.looked_element === 11 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(11)} >
+           {this.state.selected_language === "jpn" ? ("その他顔") : ("Other Face")}
+         </button>
+         <button class={this.state.looked_element === 12 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(12)} >
+           {this.state.selected_language === "jpn" ? ("効果") : ("Effects")}
+         </button>
        </div>
 
 
@@ -937,7 +958,7 @@ class IconioUploader extends Component {
 
       <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
         <h3 >アップロード済のアクセサリーパーツ</h3>
-        {this.getAvailableAccessoriesOptions()}
+        {this.getAvailableAccessoriesOptions("accessories")}
       </div>
 
       <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
@@ -945,6 +966,15 @@ class IconioUploader extends Component {
         {this.getAvailableOptions("glasses")}
       </div>
 
+      <div style={{ display: this.state.looked_element === 11 ? "block" : "none" }}>
+        <h3>アップロード済の顔アクセサリパーツ</h3>
+        {this.getAvailableAccessoriesOptions("onface")}
+      </div>
+
+      <div style={{ display: this.state.looked_element === 12 ? "block" : "none" }}>
+        <h3>アップロード済の効果パーツ</h3>
+        {this.getAvailableAccessoriesOptions("effects")}
+      </div>
     </div>
 
     </div>

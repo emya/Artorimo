@@ -96,7 +96,7 @@ class PayPal extends Component {
     content.unshift(
         <tr>
           <td align="left"> アイコンダウンロード </td>
-          <td align="right"> $ 5 </td>
+          <td align="right"> $ 2.99 </td>
         </tr>
     )
 
@@ -104,7 +104,7 @@ class PayPal extends Component {
   }
 
   getTotal() {
-    let total = 5;
+    let total = 2.99;
 
     if (this.state.additional_items) {
       for (const item of this.state.additional_items) {
@@ -434,7 +434,7 @@ class PayPal extends Component {
                   return actions.order.create({
                     purchase_units: [{
                       amount: {
-                        value: '5.0'
+                        value: '2.99'
                       }
                     }]
                   })
