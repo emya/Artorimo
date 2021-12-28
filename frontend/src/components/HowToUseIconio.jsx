@@ -28,7 +28,7 @@ class HowToUseIconio extends Component {
     return (
     <div class="scroll-wrapper">
     <iframe
-      src={`https://docs.google.com/viewer?url=https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/HowToUseIconio.pdf&embedded=true`}
+      src={`https://docs.google.com/viewer?url=https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/HowToUseIconio_v3.pdf&embedded=true`}
       style={{width: "100%", height: "800px", webkitOverflowScrolling: "touch", overflowY: "scroll"}}
       source={{
         header: {

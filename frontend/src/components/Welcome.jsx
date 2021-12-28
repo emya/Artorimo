@@ -11,6 +11,7 @@ import '../css/style.scss';
 class Welcome extends Component {
 state = {
     isGoodsChecked: false,
+    isIconioChecked: false,
     errors: [],
   }
 
@@ -22,9 +23,20 @@ state = {
     }
   }
 
-  notifyGoodsAnswer = () => {
+  handleIconioAnswerChange = (e) => {
+    const checked = e.target.checked;
+    const name = e.target.value;
+    if (checked) {
+      this.setState({isIconioChecked: name});
+    }
+  }
+
+  notifyAnswer = () => {
     if (this.state.isGoodsChecked === "1"){
       this.props.askGoods();
+    }
+    if (this.state.isIconioChecked === "1"){
+      this.props.askIconio();
     }
     return false;
   }
@@ -56,24 +68,40 @@ state = {
           </li>
         </ol>
         <div class="shop-survey">
+          <p><span class="bold">※半永久的な自動収入が得られるアイコンメーカーIconioにご興味はおありですか？</span></p>
+          <div class="yesno">
+            {this.state.isIconioChecked === "1" ?
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleIconioAnswerChange} value="1" checked />) :
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleIconioAnswerChange} value="1" />)
+            }
+            <p class="yesno-yes">はい</p>
+          </div>
+          <div class="yesno">
+            {this.state.isIconioChecked === "0" ?
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleIconioAnswerChange} value="0" checked />) :
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleIconioAnswerChange} value="0" />)
+            }
+            <p class="yesno-yes">いいえ</p>
+          </div>
+
           <p><span class="bold">※海外向けグッズ販売にご興味はおありですか？</span></p>
-            <div class="yesno">
-              {this.state.isGoodsChecked === "1" ?
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" checked />) :
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" />)
-              }
-              <p class="yesno-yes">はい</p>
-            </div>
-            <div class="yesno">
-              {this.state.isGoodsChecked === "0" ?
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" checked />) :
-                (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" />)
-              }
-              <p class="yesno-yes">いいえ</p>
-            </div>
+          <div class="yesno">
+            {this.state.isGoodsChecked === "1" ?
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" checked />) :
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="1" />)
+            }
+            <p class="yesno-yes">はい</p>
+          </div>
+          <div class="yesno">
+            {this.state.isGoodsChecked === "0" ?
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" checked />) :
+              (<input type="checkbox" class="yesnocheckbox" onChange={this.handleGoodsAnswerChange} value="0" />)
+            }
+            <p class="yesno-yes">いいえ</p>
+          </div>
         </div>
       </div>
-      <a class="btn savep" href="/myportfolio/edit" onClick={this.notifyGoodsAnswer}>ポートフォリオページへ</a>
+      <a class="btn savep" href="/myportfolio/edit" onClick={this.notifyAnswer}>ポートフォリオページへ</a>
     </div>
   </div>
   <Footer />
@@ -103,6 +131,11 @@ const mapDispatchToProps = dispatch => {
     askGoods: ()  => {
       return dispatch(
         contact.askGoods()
+      );
+    },
+    askIconio: ()  => {
+      return dispatch(
+        contact.askIconio()
       );
     },
   };

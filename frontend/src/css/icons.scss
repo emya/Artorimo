@@ -631,7 +631,12 @@ body {
 .imgBackGround {
   z-index: -37;
 }
-
+.imgOnface {
+  z-index: -27;
+}
+.imgEffects {
+  z-index: -1;
+}
 
 // Second person
 .imgFaceBehind {
