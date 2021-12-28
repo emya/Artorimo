@@ -151,7 +151,6 @@ class IconioUploader extends Component {
 
   chooseAccessory = (optionName, optionNumber) => {
     let accessories = this.state[optionName];
-    console.log("chooseAccessory", accessories, optionName, [...accessories, optionNumber]);
     this.setState({ [optionName]: [...accessories, optionNumber] })
   }
 
