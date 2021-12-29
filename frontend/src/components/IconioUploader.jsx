@@ -83,8 +83,9 @@ class IconioUploader extends Component {
       8: "face",
       9: "accessories",
       10: "glasses",
-      11: "onface",
-      12: "effects"
+      11: "background",
+      12: "onface",
+      13: "effects"
     },
     removedFiles: [],
     unselectable_options: ["bang", "side", "cloth", "accessories", "glasses", "onface", "effects"],
@@ -99,6 +100,7 @@ class IconioUploader extends Component {
     cloth: 1,
     face: 1,
     nose: 1,
+    background: 0,
     hair_classes: 1,
     bang_classes: 1,
     side_classes: 1,
@@ -107,6 +109,7 @@ class IconioUploader extends Component {
     mouth_classes: 1,
     cloth_classes: 1,
     face_classes: 1,
+    background_classes: 1,
 
     accessories: [],
     onface: [],
@@ -190,13 +193,35 @@ class IconioUploader extends Component {
   }
 
   getAvailableOptions = (optionName) => {
-    //console.log(this.props.icons.icon_parts);
+    const content = [];
     if (this.props.icons && this.props.icons.icon_parts && this.props.icons.icon_parts[optionName]){
-      let content = [];
 
       let line = "";
       if (!this.state.line_only_elements.includes(optionName)){
         line = "_line";
+      }
+      if (optionName === "background") {
+        if (this.state.background === 0){
+          content.push(
+            <div class="column">
+              <img class="chosen"
+                 src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+                 onClick={this.changeOption.bind(this, optionName, 0)}
+              />
+              <span>デフォルトでは無地の背景です</span>
+            </div>
+          )
+        }else{
+          content.push(
+            <div class="column">
+              <img class="choice"
+                 src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+                 onClick={this.changeOption.bind(this, optionName, 0)}
+              />
+              <span>デフォルトの無地の背景です</span>
+            </div>
+          )
+        }
       }
       for (var i = 1; i <= this.props.icons.icon_parts[optionName]; i++) {
         content.push(
@@ -239,13 +264,28 @@ class IconioUploader extends Component {
       }
       return content;
     }
-    return [<div>
-             {this.state.selected_language === "jpn" ? (
-                "アップロードされたアイテムはありません"
-                 ) : (
-                "No parts uploaded"
-              )}
-             </div>];
+
+    if (optionName === "background") {
+     content.push(
+       <div class="column">
+         <img class="chosen"
+              src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+              onClick={this.changeOption.bind(this, optionName, 0)}
+         />
+         <span>デフォルトでは無地の背景です</span>
+
+       </div>
+     )
+    } else{
+      content.push(<div>
+      {this.state.selected_language === "jpn" ? (
+         "アップロードされたアイテムはありません"
+          ) : (
+         "No parts uploaded"
+       )}
+      </div>)
+    }
+    return content;
   }
 
   getAvailableAccessoriesOptions = (optionName) => {
@@ -597,6 +637,26 @@ class IconioUploader extends Component {
             src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/effects${effect}.png`}
           />
         ))}
+
+        {/* Background */}
+        {this.state.background === 0 && (
+          <img class="image1 imgBackGround"
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/img/background.jpg`}
+            style={{filter: `url(#filterClothColor${this.state.background_classes})`, WebkitFilter: `url(#filterClothColor${this.state.background_classes})`}}
+          />
+        )}
+
+        {this.state.background > 0 && (
+          <img class="image1 imgBackGround"
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/background${this.state.background}.png`}
+            style={{filter: `url(#filterClothColor${this.state.background_classes})`, WebkitFilter: `url(#filterClothColor${this.state.background_classes})`}}
+          />
+        )}
+        {this.state.background > 0 && (
+          <img class="image1 imgBackGroundLine"
+            src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/uploaded_icons/${this.state.artist_id}/background_line${this.state.background}.png`}
+          />
+        )}
       </div>
 
       <div class="icon-container-right">
@@ -691,7 +751,7 @@ class IconioUploader extends Component {
 
 
        {/* Cloth */}
-       <div class="color-pad" style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
+       <div class="color-pad" style={{ display: (this.state.looked_element === 7 || this.state.looked_element === 11 ) ? "block" : "none" }}>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterClothColor1)", WebkitFilter: "url(#filterClothColor1)"}} onClick={() => this.changeColorFilter(1)} ></div>
          </div>
@@ -725,6 +785,9 @@ class IconioUploader extends Component {
          </div>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterSkinColor2)", WebkitFilter: "url(#filterSkinColor2)"}} onClick={() => this.changeColorFilter(2)} ></div>
+         </div>
+         <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterSkinColor8)", WebkitFilter: "url(#filterSkinColor8)"}} onClick={() => this.changeColorFilter(8)} ></div>
          </div>
          <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterSkinColor3)", WebkitFilter: "url(#filterSkinColor3)"}} onClick={() => this.changeColorFilter(3)} ></div>
@@ -781,11 +844,14 @@ class IconioUploader extends Component {
          <button class={this.state.looked_element === 10 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(10)} >
            {this.state.selected_language === "jpn" ? ("眼鏡") : ("Glasses")}
          </button>
-         <button class={this.state.looked_element === 11 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(11)} >
+         <button class={this.state.looked_element === 12 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(12)} >
            {this.state.selected_language === "jpn" ? ("その他顔") : ("Other Face")}
          </button>
-         <button class={this.state.looked_element === 12 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(12)} >
+         <button class={this.state.looked_element === 13 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(13)} >
            {this.state.selected_language === "jpn" ? ("効果") : ("Effects")}
+         </button>
+         <button class={this.state.looked_element === 11 ? "chosen-looked-element-button" : "looked-element-button"} onClick={() => this.changeLookedElement(11)} >
+           {this.state.selected_language === "jpn" ? ("背景") : ("BackGround")}
          </button>
        </div>
 
@@ -910,67 +976,72 @@ class IconioUploader extends Component {
 
     <div class="icon-uploaded-parts">
     <div class="uploader-two">
-      <div style={{ display: this.state.looked_element === 0 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 0 ? "inline-block" : "none" }}>
         <h3 >アップロード済の髪パーツ</h3>
         {this.getAvailableOptions("hair")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 1 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 1 ? "inline-block" : "none" }}>
         <h3 >アップロード済の前髪パーツ</h3>
         {this.getAvailableOptions("bang")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 2 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 2 ? "inline-block" : "none" }}>
         <h3 >アップロード済のサイドヘアパーツ</h3>
         {this.getAvailableOptions("side")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 3 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 3 ? "inline-block" : "none" }}>
         <h3 >アップロード済の目パーツ</h3>
         {this.getAvailableOptions("eyes")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 4 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 4 ? "inline-block" : "none" }}>
         <h3 >アップロード済の眉パーツ</h3>
         {this.getAvailableOptions("eyebrows")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 5 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 5 ? "inline-block" : "none" }}>
         <h3 >アップロード済の鼻パーツ</h3>
         {this.getAvailableOptions("nose")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 6 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 6 ? "inline-block" : "none" }}>
         <h3 >アップロード済の口パーツ</h3>
         {this.getAvailableOptions("mouth")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 7 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 7 ? "inline-block" : "none" }}>
         <h3 >アップロード済の洋服パーツ</h3>
         {this.getAvailableOptions("cloth")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 8 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 8 ? "inline-block" : "none" }}>
         <h3 >アップロード済の輪郭パーツ</h3>
         {this.getAvailableOptions("face")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 9 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 9 ? "inline-block" : "none" }}>
         <h3 >アップロード済のアクセサリーパーツ</h3>
         {this.getAvailableAccessoriesOptions("accessories")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 10 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 10 ? "inline-block" : "none" }}>
         <h3>アップロード済の眼鏡パーツ</h3>
         {this.getAvailableOptions("glasses")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 11 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 11 ? "inline-block" : "none" }}>
+        <h3>アップロード済の背景</h3>
+        {this.getAvailableOptions("background")}
+      </div>
+
+      <div style={{ display: this.state.looked_element === 12 ? "inline-block" : "none" }}>
         <h3>アップロード済の顔アクセサリパーツ</h3>
         {this.getAvailableAccessoriesOptions("onface")}
       </div>
 
-      <div style={{ display: this.state.looked_element === 12 ? "block" : "none" }}>
+      <div style={{ display: this.state.looked_element === 13 ? "inline-block" : "none" }}>
         <h3>アップロード済の効果パーツ</h3>
         {this.getAvailableAccessoriesOptions("effects")}
       </div>

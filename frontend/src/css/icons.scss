@@ -574,65 +574,71 @@ body {
   z-index: 1;
   opacity: 0.5;
 }
+
+
+
+.imgBackGround {
+  z-index: -43;
+}
+.imgBackGroundLine {
+  z-index: -41;
+}
 .imgFace {
-  z-index: -35;
+  z-index: -39;
 }
 .imgFaceLine {
+  z-index: -37;
+}
+.imgCloth {
+  z-index: -35;
+}
+.imgClothLine {
   z-index: -33;
 }
-.imgHair {
+.imgMouth {
+  z-index: -31;
+}
+.imgMouthLine {
+  z-index: -29;
+}
+.imgNose {
   z-index: -27;
 }
-.imgHairLine {
+.imgEyeballs {
   z-index: -25;
 }
-.imgBang {
+.imgEyes {
+  z-index: -23;
+}
+.imgOnface {
+  z-index: -21;
+}
+.imgEyebrows {
+  z-index: -19;
+}
+.imgEyebrowsLine {
+  z-index: -17;
+}
+.imgHair {
   z-index: -15;
 }
-.imgBangLine {
+.imgHairLine {
   z-index: -13;
 }
 .imgSide {
-  z-index: -23;
-}
-.imgSideLine {
-  z-index: -21;
-}
-.imgEyes {
-  z-index: -17;
-}
-.imgEyeballs {
-  z-index: -19;
-}
-.imgEyebrows {
-  z-index: -27;
-}
-.imgEyebrowsLine {
-  z-index: -25;
-}
-.imgNose {
   z-index: -11;
 }
-.imgMouth {
+.imgSideLine {
   z-index: -9;
 }
-.imgMouthLine {
+.imgBang {
   z-index: -7;
 }
-.imgCloth {
-  z-index: -31;
-}
-.imgClothLine {
-  z-index: -29;
+.imgBangLine {
+  z-index: -5;
 }
 .imgAccessories {
-  z-index: -1;
-}
-.imgBackGround {
-  z-index: -37;
-}
-.imgOnface {
-  z-index: -27;
+  z-index: -3;
 }
 .imgEffects {
   z-index: -1;

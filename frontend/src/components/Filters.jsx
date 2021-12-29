@@ -82,6 +82,10 @@ class Filters extends Component {
       <filter id="filterSkinColor7" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.584   0 0 0 0 0.305   0 0 0 0 0.117  0 0 0 1 0"/>
       </filter>
+      <filter id="filterSkinColor8" colorInterpolationFilters="sRGB">
+        //fdefe3
+        <feColorMatrix type="matrix" values="0 0 0 0 0.992   0 0 0 0 0.937   0 0 0 0 0.890  0 0 0 1 0"/>
+      </filter>
 
       <filter id="filterEyesColor1" colorInterpolationFilters="sRGB">
         <feColorMatrix type="matrix" values="0 0 0 0 0.686   0 0 0 0 0.686   0 0 0 0 0.466  0 0 0 1 0"/>
