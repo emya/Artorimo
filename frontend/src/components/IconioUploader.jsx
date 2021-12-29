@@ -89,7 +89,7 @@ class IconioUploader extends Component {
     },
     removedFiles: [],
     unselectable_options: ["bang", "side", "cloth", "accessories", "glasses", "onface", "effects"],
-    line_only_elements: ["nose", "accessories", "glasses", "onface", "effects", "background"],
+    line_only_elements: ["nose", "accessories", "glasses", "onface", "effects"],
     looked_element: 8,
     hair: 1,
     bang: 1,
@@ -369,8 +369,6 @@ class IconioUploader extends Component {
         return;
       }
 
-      console.log(this.state.fillingFile);
-
       this.props.uploadPairedParts(
         this.state.artist_id,
         this.state.mapping[this.state.looked_element],
@@ -441,8 +439,6 @@ class IconioUploader extends Component {
   }
 
   onDropFilling = (imageFiles) => {
-    console.log(imageFiles);
-
     this.setState({ filling_errors: [] });
     this.setState({ errors: [] });
 
