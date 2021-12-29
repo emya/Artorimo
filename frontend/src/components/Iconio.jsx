@@ -587,6 +587,9 @@ class Iconio extends Component {
            <div class="inner-circle" style={{filter: "url(#filterSkinColor2)", WebkitFilter: "url(#filterSkinColor2)"}} onClick={() => this.changeColorFilter(2)} ></div>
          </div>
          <div class="outer-circle">
+           <div class="inner-circle" style={{filter: "url(#filterSkinColor8)", WebkitFilter: "url(#filterSkinColor8)"}} onClick={() => this.changeColorFilter(8)} ></div>
+         </div>
+         <div class="outer-circle">
            <div class="inner-circle" style={{filter: "url(#filterSkinColor3)", WebkitFilter: "url(#filterSkinColor3)"}} onClick={() => this.changeColorFilter(3)} ></div>
          </div>
          <div class="outer-circle">
